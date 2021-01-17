@@ -5,6 +5,7 @@
 *.war
 *.ear
 target/
+*/target
 
 # eclipse
 .settings/
@@ -17,7 +18,8 @@ logs/
 *.iml
 
 *velocity.log*
-
+*/node_modules
+*/package-lock.json
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###

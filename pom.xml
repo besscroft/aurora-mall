@@ -14,7 +14,9 @@
     <description>极光商城</description>
 
     <modules>
-        <module>gateway</module>
+        <module>mall-gateway</module>
+        <module>mall-auth</module>
+        <module>mall-common</module>
     </modules>
 
     <parent>
