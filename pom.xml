@@ -39,6 +39,8 @@
         <lombok.version>1.18.16</lombok.version>
         <knife4j.version>2.0.4</knife4j.version>
         <spring-data-commons.version>2.3.5.RELEASE</spring-data-commons.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
+        <knife4j.version>2.0.8</knife4j.version>
     </properties>
 
     <dependencyManagement>
@@ -111,6 +113,16 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-commons</artifactId>
                 <version>${spring-data-commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-aggregation-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
