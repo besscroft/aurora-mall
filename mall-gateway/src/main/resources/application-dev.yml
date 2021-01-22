@@ -1,0 +1,19 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: password
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      routes:
+        # 认证中心的路由
+        - id: mall-auth
+          uri: lb://mall-auth
+          predicates:
+            - Path=/mall-auth/**
+          filters:
+            - JwtToken
+            - PermissionAuth
+            - RewritePath=/mall-auth/(?<segment>.*), /$\{segment}
