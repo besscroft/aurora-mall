@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/aurora-mall/user/login',
+    url: '/mall-auth/bms/auth/login',
     method: 'post',
     data
   })
@@ -10,7 +10,7 @@ export function login(data) {
 
 export function getInfo(token) {
   return request({
-    url: '/aurora-mall/user/info',
+    url: '/mall-auth/bms/auth/info',
     method: 'get',
     params: { token }
   })
@@ -18,7 +18,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/aurora-mall/user/logout',
+    url: '/mall-auth/bms/auth/logout',
     method: 'post'
   })
 }

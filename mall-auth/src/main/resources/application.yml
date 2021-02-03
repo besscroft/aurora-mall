@@ -5,7 +5,7 @@ spring:
   application:
     name: mall-auth
   profiles:
-    active: @spring.active@
+    active: '@spring.active@'
   cloud:
     nacos:
       discovery:

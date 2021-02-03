@@ -1,8 +1,12 @@
 spring:
   redis:
-    host: localhost
+    #数据库索引
+    database: 0
+    host: 127.0.0.1
     port: 6379
     password: password
+    #连接超时时间
+    timeout: 5000
   main:
     allow-bean-definition-overriding: true
   cloud:
@@ -14,6 +18,4 @@ spring:
           predicates:
             - Path=/mall-auth/**
           filters:
-            - JwtToken
-            - PermissionAuth
-            - RewritePath=/mall-auth/(?<segment>.*), /$\{segment}
+            - StripPrefix=1
