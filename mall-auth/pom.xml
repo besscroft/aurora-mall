@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>aurora-mall</artifactId>
-        <groupId>com.besscroft.aurora</groupId>
+        <groupId>com.besscroft.aurora.mall</groupId>
         <version>1.0</version>
     </parent>
 
-    <groupId>com.besscroft.aurora</groupId>
+    <groupId>com.besscroft.aurora.mall</groupId>
     <artifactId>mall-auth</artifactId>
     <version>1.0</version>
     <name>mall-auth</name>
@@ -22,7 +22,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.besscroft.aurora</groupId>
+            <groupId>com.besscroft.aurora.mall</groupId>
             <artifactId>mall-common</artifactId>
             <version>1.0</version>
         </dependency>
@@ -41,6 +41,10 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -63,6 +67,14 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
@@ -76,10 +88,6 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -116,6 +124,28 @@
     </dependencyManagement>
 
     <build>
+        <!--
+            注意：此处maven filter 可能会对 keystore 文件造成污染(被修改)
+            https://stackoverflow.com/questions/1052700/java-io-ioexception-invalid-keystore-format
+            https://stackoverflow.com/questions/26071429/ssl-java-java-io-ioexception-invalid-keystore-format/59312913#59312913
+         -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.jks</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.jks</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -131,5 +161,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

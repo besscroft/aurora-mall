@@ -1,20 +1,21 @@
-package com.besscroft.aurora.mall.auth.mapper;
+package com.besscroft.aurora.mall.admin.mapper;
 
 import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 /**
- * 后台用户登录mapper
+ * 权限管理模块用户Mapper接口
  *
  * @Author Besscroft
- * @Date 2021/1/23 12:58
+ * @Date 2021/2/18 10:49
  */
 public interface BmsAuthUserMapper {
 
     /**
-     * 根据username获取管理系统用户信息
+     * 查询管理系统用户
+     *
+     * @param username 用户名
+     * @return 管理系统用户
      */
     BmsAuthUser selectBmsAuthUserByUsername(@Param("username") String username);
 

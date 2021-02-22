@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 后台用户管理Service
+ * 用户系统请求服务
  *
  * @Author Besscroft
- * @Date 2021/1/23 14:53
+ * @Date 2021/2/17 21:17
  */
-@FeignClient("mall-admin")
-public interface BmsAuthUserService {
+@FeignClient("mall-User")
+public interface UmsAuthUserService {
 
-    @GetMapping("/bms/user/loadByUsername")
+    @GetMapping("/user/loadByUsername")
     UserDto loadUserByUsername(@RequestParam String username);
 }
