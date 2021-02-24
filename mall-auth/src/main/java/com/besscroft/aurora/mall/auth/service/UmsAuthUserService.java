@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Author Besscroft
  * @Date 2021/2/17 21:17
  */
-@FeignClient("mall-User")
+@FeignClient("mall-user")
 public interface UmsAuthUserService {
 
     @GetMapping("/user/loadByUsername")

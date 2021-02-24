@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
  * @Author Besscroft
  * @Date 2021/2/18 10:49
  */
-public interface BmsAuthUserMapper {
+public interface BmsAuthUserMapper extends BaseMapper<BmsAuthUser> {
 
     /**
      * 查询管理系统用户

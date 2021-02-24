@@ -9,6 +9,9 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
@@ -16,20 +19,41 @@ import springfox.documentation.annotations.ApiIgnore;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
+ * 参考文档：https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/provider/endpoint/TokenEndpoint.html
+ *
+ * https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide
+ *
+ * 这里也算是对TokenEndpoint包装了一层Controller
  * @Author Besscroft
  * @Date 2021/1/23 13:55
  */
 @Slf4j
 @Api(tags = "商城认证中心接口")
 @RestController
-@RequestMapping("/bms/auth")
+@RequestMapping("/auth")
 public class BmsAuthController {
 
     @Autowired
     private TokenEndpoint tokenEndpoint;
+
+    private Set<HttpMethod> allowedRequestMethods = new HashSet<HttpMethod>(Arrays.asList(HttpMethod.POST));
+
+    @RequestMapping(value = "/oauth/token", method=RequestMethod.GET)
+    public AjaxResult getAccessToken(
+            Principal principal, @RequestParam Map<String, String> parameters)
+            throws HttpRequestMethodNotSupportedException {
+
+        if (!allowedRequestMethods.contains(HttpMethod.GET)) {
+            throw new HttpRequestMethodNotSupportedException("GET");
+        }
+        return postAccessToken(principal, parameters);
+    }
 
     @ApiOperation("OAuth2认证生成token")
     @ApiImplicitParams({
@@ -40,12 +64,16 @@ public class BmsAuthController {
             @ApiImplicitParam(name = "username", value = "登录用户名"),
             @ApiImplicitParam(name = "password", value = "登录密码")
     })
-    @PostMapping("/token")
+    @RequestMapping(value = "/oauth/token", method=RequestMethod.POST)
     public AjaxResult postAccessToken(
             @ApiIgnore Principal principal,
             @ApiIgnore @RequestParam Map<String, String> parameters
     ) throws HttpRequestMethodNotSupportedException {
         log.info("请求到了，parameters:{}",parameters);
+        if (!(principal instanceof Authentication)) {
+            throw new InsufficientAuthenticationException(
+                    "There is no client authentication. Try adding an appropriate authentication filter.");
+        }
         OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
         Oauth2Token oauth2Token = Oauth2Token.builder()
                 .token(oAuth2AccessToken.getValue())

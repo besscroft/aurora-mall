@@ -1,15 +1,13 @@
 package com.besscroft.aurora.mall.auth.config;
 
-import com.besscroft.aurora.mall.auth.domain.User;
+import com.besscroft.aurora.mall.auth.component.JwtTokenEnhancer;
 import com.besscroft.aurora.mall.auth.service.impl.UserDetailsServiceImpl;
-import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -22,9 +20,7 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 
 import java.security.KeyPair;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 认证中心授权服务配置
@@ -42,6 +38,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private final AuthenticationManager authenticationManager;
 
     private final UserDetailsServiceImpl userDetailsService;
+
+    private final JwtTokenEnhancer jwtTokenEnhancer;
 
     /**
      * 配置客户端详情
@@ -72,7 +70,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         List<TokenEnhancer> tokenEnhancers = new ArrayList<>();
-        tokenEnhancers.add(jwtTokenEnhancer());
+        tokenEnhancers.add(jwtTokenEnhancer);
         tokenEnhancers.add(jwtAccessTokenConverter());
         tokenEnhancerChain.setTokenEnhancers(tokenEnhancers); // 配置JWT的内容增强器
         endpoints.authenticationManager(authenticationManager)
@@ -85,21 +83,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.allowFormAuthenticationForClients();
-    }
-
-    /**
-     * JWT内容增强
-     */
-    @Bean
-    public TokenEnhancer jwtTokenEnhancer() {
-        return (accessToken, authentication) -> {
-            Map<String, Object> map = new HashMap<>(2);
-            User user = (User) authentication.getUserAuthentication().getPrincipal();
-            map.put(AuthConstants.JWT_USER_ID_KEY, user.getId());
-            map.put(AuthConstants.JWT_CLIENT_ID_KEY, user.getClientId());
-            ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(map);
-            return accessToken;
-        };
     }
 
     /**

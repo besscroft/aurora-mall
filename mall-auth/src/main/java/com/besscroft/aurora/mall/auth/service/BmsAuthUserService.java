@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient("mall-admin")
 public interface BmsAuthUserService {
 
-    @GetMapping("/bms/user/loadByUsername")
+    @GetMapping("/user/loadByUsername")
     UserDto loadUserByUsername(@RequestParam String username);
 }

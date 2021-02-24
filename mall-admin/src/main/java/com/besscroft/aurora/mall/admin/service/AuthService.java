@@ -16,7 +16,7 @@ import java.util.Map;
 @FeignClient("mall-auth")
 public interface AuthService {
 
-    @PostMapping(value = "/bms/auth/token")
+    @PostMapping(value = "/oauth/token")
     AjaxResult getAccessToken(@RequestParam Map<String, String> parameters);
 
 }

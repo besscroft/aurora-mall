@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.controller;
 
+import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
 import com.besscroft.aurora.mall.admin.dto.BmsUserLoginParam;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.domain.Oauth2Token;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Api(tags = "管理系统用户接口")
 @RestController
-@RequestMapping("/bms/user")
+@RequestMapping("/user")
 public class BmsUserController {
 
     @Autowired
@@ -28,10 +29,10 @@ public class BmsUserController {
     @ApiOperation(value = "登录并返回token")
     @PostMapping(value = "/login")
     public AjaxResult login(@Validated @RequestBody BmsUserLoginParam bmsUserLoginParam) {
-        log.info("请求进来了,打印:{}",bmsUserLoginParam);
-        Oauth2Token token = userService.login(bmsUserLoginParam.getUsername(), bmsUserLoginParam.getPassword());
-        log.info("请求进来了,打印:{}",token);
-        return AjaxResult.success(token);
+        log.info("请求进来了,打印bmsUserLoginParam:{}",bmsUserLoginParam);
+        AjaxResult login = userService.login(bmsUserLoginParam.getUsername(), bmsUserLoginParam.getPassword());
+        log.info("请求进来了,AjaxResult:{}",login);
+        return login;
     }
 
     @ApiOperation("根据用户名获取用户信息")
@@ -39,6 +40,17 @@ public class BmsUserController {
     public UserDto loadByUsername(@RequestParam String username) {
         UserDto userDto = userService.loadUserByUsername(username);
         return userDto;
+    }
+
+    @ApiOperation(value = "超级管理员添加后台管理系统用户接口")
+    @PostMapping("/register")
+    public AjaxResult register(@Validated @RequestBody BmsAdminParam bmsAdminParam) {
+        boolean b = userService.register(bmsAdminParam);
+        if (b) {
+            return AjaxResult.success("添加管理平台用户成功!");
+        } else {
+            return AjaxResult.error("添加管理平台用户失败!");
+        }
     }
 
 }

@@ -1,7 +1,10 @@
 package com.besscroft.aurora.mall.admin.service;
 
+import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
 import com.besscroft.aurora.mall.common.domain.Oauth2Token;
 import com.besscroft.aurora.mall.common.domain.UserDto;
+import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
+import com.besscroft.aurora.mall.common.result.AjaxResult;
 
 /**
  * @Author Besscroft
@@ -15,7 +18,7 @@ public interface UserService {
      * @param password
      * @return
      */
-    Oauth2Token login(String username, String password);
+    AjaxResult login(String username, String password);
 
     /**
      * 获取用户信息
@@ -23,5 +26,7 @@ public interface UserService {
      * @return
      */
     UserDto loadUserByUsername(String username);
+
+    boolean register(BmsAdminParam bmsAdminParam);
 
 }
