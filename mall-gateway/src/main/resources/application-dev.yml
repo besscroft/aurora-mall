@@ -1,4 +1,9 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://localhost:8000/mall-auth/publicKey/get' #配置RSA的公钥访问地址
   redis:
     #数据库索引
     database: 0
@@ -11,11 +16,60 @@ spring:
     allow-bean-definition-overriding: true
   cloud:
     gateway:
+      # 跨域
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowCredentials: true
+#            allowedOrigins: "*"
+#            allowedMethods: "*"
+#            allowedHeaders: "*"
       routes:
         # 认证中心的路由
+        # 路由 ID
         - id: mall-auth
+          # 请求地址
           uri: lb://mall-auth
+          # 断言（判断条件）
           predicates:
             - Path=/mall-auth/**
+          # 过滤器
           filters:
+            # 去掉前缀
             - StripPrefix=1
+            # 重写路径，也相当于去掉前缀了
+            # - RewritePath=/mall-auth/(?<segment>.*), /$\{segment}
+        # 后台管理系统的路由
+        # 路由 ID
+        - id: mall-admin
+          # 请求地址
+          uri: lb://mall-admin
+          # 断言（判断条件）
+          predicates:
+            - Path=/mall-admin/**
+          # 过滤器
+          filters:
+            # 去掉前缀
+            - StripPrefix=1
+            # 重写路径，也相当于去掉前缀了
+            # - RewritePath=/mall-auth/(?<segment>.*), /$\{segment}
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+          lower-case-service-id: true #使用小写服务名，默认是大写
+whitelist:
+    urls: #配置白名单路径
+      - "/doc.html"
+      - "/swagger-resources/**"
+      - "/swagger/**"
+      - "/**/v2/api-docs"
+      - "/**/*.js"
+      - "/**/*.css"
+      - "/**/*.png"
+      - "/**/*.ico"
+      - "/webjars/springfox-swagger-ui/**"
+      - "/actuator/**"
+      - "/mall-auth/auth/token"
+      - "/mall-auth/PublicKey/get"
+      - "/mall-admin/user/login"
+      - "/mall-admin/user/register"
