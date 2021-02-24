@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 17/02/2021 21:15:35
+ Date: 24/02/2021 21:40:19
 */
 
 SET NAMES utf8mb4;
@@ -189,7 +189,7 @@ DROP TABLE IF EXISTS `bms_auth_user`;
 CREATE TABLE `bms_auth_user`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户id',
   `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
   `icon` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
   `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
   `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机',
@@ -199,12 +199,12 @@ CREATE TABLE `bms_auth_user`  (
   `login_time` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
   `status` int(1) NULL DEFAULT 1 COMMENT '帐号启用状态：0->禁用；1->启用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块用户表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1364566447866515458 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$.E1FokumK5GIXWgKlg.Hc.i/0/2.qdAwYFL1zc5QHdyzpXOr38RZO', NULL, 'admin@qq.com', '110', 'admin', '管理员', '2021-01-22 17:09:14', '2021-01-22 17:09:17', 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', '', 'admin@qq.com', NULL, '管理员', '管理员', '2021-02-24 21:22:48', NULL, 1);
 
 -- ----------------------------
 -- Table structure for bms_auth_user_role_relation
@@ -738,7 +738,7 @@ DROP TABLE IF EXISTS `bms_user_info`;
 CREATE TABLE `bms_user_info`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
   `nickname` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `phone` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号码',
   `status` int(1) NULL DEFAULT NULL COMMENT '帐号启用状态:0->禁用；1->启用',
@@ -821,7 +821,7 @@ CREATE TABLE `ums_car`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车模块购物车表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车模块购物车表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ums_car
@@ -848,7 +848,7 @@ CREATE TABLE `ums_car_item`  (
   `product_sn` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品编码',
   `product_attr` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品销售属性:[{\"key\":\"颜色\",\"value\":\"蓝色\"},{\"key\":\"尺寸\",\"value\":\"24英寸\"}]',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车模块购物车子表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车模块购物车子表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ums_car_item
