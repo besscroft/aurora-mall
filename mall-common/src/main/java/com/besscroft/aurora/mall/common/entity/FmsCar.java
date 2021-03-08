@@ -1,8 +1,9 @@
 package com.besscroft.aurora.mall.common.entity;
 
-import com.besscroft.aurora.mall.common.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.io.Serializable;
 
 /**
  * 购物车模块购物车对象 fms_car
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @Author Besscroft
  * @Date 2021/1/22 21:35
  */
-public class FmsCar extends BaseEntity {
+public class FmsCar implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -2,7 +2,8 @@ package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.digest.BCrypt;
+import cn.hutool.json.JSONUtil;
+import com.besscroft.aurora.mall.admin.dto.BmsAdminInfoParam;
 import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
 import com.besscroft.aurora.mall.admin.mapper.BmsAuthRoleMapper;
 import com.besscroft.aurora.mall.admin.mapper.BmsAuthUserMapper;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +45,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BmsAuthRoleMapper bmsAuthRoleMapper;
 
+    @Autowired
+    private HttpServletRequest request;
+
     @Override
     public AjaxResult login(String username, String password) {
         if(StrUtil.isEmpty(username)||StrUtil.isEmpty(password)){
@@ -55,6 +60,7 @@ public class UserServiceImpl implements UserService {
         params.put("username",username);
         params.put("password",password);
         AjaxResult accessToken = authService.getAccessToken(params);
+        log.info("accessToken:{}",accessToken);
         return accessToken;
     }
 
@@ -88,6 +94,22 @@ public class UserServiceImpl implements UserService {
         // 更新到数据库
         int insert = bmsAuthUserMapper.insert(bmsAuthUser);
         return insert > 0;
+    }
+
+    @Override
+    public BmsAuthUser getCurrentAdmin() {
+        String header = request.getHeader(AuthConstants.USER_TOKEN_HEADER);
+        if(StrUtil.isEmpty(header)){
+            log.error("暂未登录或token已经过期");
+        }
+        UserDto userDto = JSONUtil.toBean(header, UserDto.class);
+        BmsAuthUser bmsAuthUser = bmsAuthUserMapper.selectById(userDto.getId());
+        return bmsAuthUser;
+    }
+
+    @Override
+    public BmsAdminInfoParam getInfo(Long id) {
+        return bmsAuthUserMapper.getInfo(id);
     }
 
 }

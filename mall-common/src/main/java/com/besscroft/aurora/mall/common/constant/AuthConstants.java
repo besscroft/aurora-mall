@@ -21,7 +21,7 @@ public interface AuthConstants {
     /**
      * JWT令牌前缀
      */
-    String JWT_TOKEN_PREFIX = "Aurora ";
+    String JWT_TOKEN_PREFIX = "Bearer ";
 
     /**
      * JWT存储权限前缀

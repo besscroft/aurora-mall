@@ -1,11 +1,13 @@
 package com.besscroft.aurora.mall.admin.controller;
 
+import com.besscroft.aurora.mall.admin.dto.BmsAdminInfoParam;
 import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
 import com.besscroft.aurora.mall.admin.dto.BmsUserLoginParam;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.domain.Oauth2Token;
 import com.besscroft.aurora.mall.common.domain.UserDto;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
+import com.besscroft.aurora.mall.common.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +32,9 @@ public class BmsUserController {
     @PostMapping(value = "/login")
     public AjaxResult login(@Validated @RequestBody BmsUserLoginParam bmsUserLoginParam) {
         log.info("请求进来了,打印bmsUserLoginParam:{}",bmsUserLoginParam);
-        AjaxResult login = userService.login(bmsUserLoginParam.getUsername(), bmsUserLoginParam.getPassword());
-        log.info("请求进来了,AjaxResult:{}",login);
-        return login;
+        AjaxResult result = userService.login(bmsUserLoginParam.getUsername(), bmsUserLoginParam.getPassword());
+        log.info("请求进来了,oauth2Token:{}",result);
+        return AjaxResult.success(result);
     }
 
     @ApiOperation("根据用户名获取用户信息")
@@ -51,6 +53,15 @@ public class BmsUserController {
         } else {
             return AjaxResult.error("添加管理平台用户失败!");
         }
+    }
+
+    @ApiOperation(value = "获取当前后台系统登录用户的一些信息")
+    @GetMapping("/info")
+    public AjaxResult getInfo() {
+        BmsAdminInfoParam bmsAdminInfoParam = new BmsAdminInfoParam();
+        bmsAdminInfoParam.setNickName("admin");
+        bmsAdminInfoParam.setIcon("https://www.52bess.com/uploads/avatar.png");
+        return AjaxResult.success(bmsAdminInfoParam);
     }
 
 }

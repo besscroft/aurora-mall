@@ -3,6 +3,7 @@ package com.besscroft.aurora.mall.auth.controller;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.domain.Oauth2Token;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
+import com.besscroft.aurora.mall.common.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -44,7 +45,7 @@ public class BmsAuthController {
 
     private Set<HttpMethod> allowedRequestMethods = new HashSet<HttpMethod>(Arrays.asList(HttpMethod.POST));
 
-    @RequestMapping(value = "/oauth/token", method=RequestMethod.GET)
+    @GetMapping("/oauth/token")
     public AjaxResult getAccessToken(
             Principal principal, @RequestParam Map<String, String> parameters)
             throws HttpRequestMethodNotSupportedException {
@@ -64,7 +65,7 @@ public class BmsAuthController {
             @ApiImplicitParam(name = "username", value = "登录用户名"),
             @ApiImplicitParam(name = "password", value = "登录密码")
     })
-    @RequestMapping(value = "/oauth/token", method=RequestMethod.POST)
+    @PostMapping("/oauth/token")
     public AjaxResult postAccessToken(
             @ApiIgnore Principal principal,
             @ApiIgnore @RequestParam Map<String, String> parameters

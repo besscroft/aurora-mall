@@ -1,8 +1,9 @@
 package com.besscroft.aurora.mall.common.entity;
 
-import com.besscroft.aurora.mall.common.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.io.Serializable;
 
 /**
  * 商品管理模块商品分类对象 bms_product_sort
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @Author Besscroft
  * @Date 2021/1/22 21:22
  */
-public class BmsProductSort extends BaseEntity {
+public class BmsProductSort implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
