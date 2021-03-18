@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Api(tags = "公钥获取接口")
 @RestController
-@RequestMapping("/PublicKey")
+@RequestMapping("/publicKey")
 public class PublicKeyController {
 
     @Autowired

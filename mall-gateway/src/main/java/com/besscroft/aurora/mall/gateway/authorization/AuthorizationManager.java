@@ -73,15 +73,15 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         }
 
         // 从Redis获取资源角色关系列表（即角色能访问的对应接口）
-        Map<Object, Object> permissionRoles = redisTemplate.opsForHash().entries(AuthConstants.PERMISSION_RULES_KEY);
-        Iterator<Object> iterator = permissionRoles.keySet().iterator();
+        Map<Object, Object> roleResourceMap = redisTemplate.opsForHash().entries(AuthConstants.PERMISSION_RULES_KEY);
+        Iterator<Object> iterator = roleResourceMap.keySet().iterator();
 
         // 接口需要的角色权限集合authorities统计
         List<String> authorities = new ArrayList<>();
         while (iterator.hasNext()) {
             String pattern = (String) iterator.next();
             if (pathMatcher.match(pattern, path)) {
-                authorities.addAll(Convert.toList(String.class, permissionRoles.get(pattern)));
+                authorities.addAll(Convert.toList(String.class, roleResourceMap.get(pattern)));
             }
         }
         authorities = authorities.stream().map(i -> i = AuthConstants.JWT_TOKEN_PREFIX + i).collect(Collectors.toList());

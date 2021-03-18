@@ -4,15 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.besscroft.aurora.mall.admin.mapper.BmsAuthRoleMapper">
 
-    <resultMap type="com.besscroft.aurora.mall.common.entity.BmsAuthRole" id="BmsAuthRoleResult">
-        <result property="id"    column="id"    />
-        <result property="name"    column="name"    />
-        <result property="description"    column="description"    />
-        <result property="adminCount"    column="admin_count"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="status"    column="status"    />
-        <result property="sort"    column="sort"    />
+    <resultMap id="BmsAuthRoleMap" type="com.besscroft.aurora.mall.common.entity.BmsAuthRole">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="admin_count" property="adminCount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
     </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, description, admin_count, create_time, status, sort
+    </sql>
 
     <sql id="selectBmsAuthRoleVo">
         select id, name, description, admin_count, create_time, status, sort from bms_auth_role
@@ -22,7 +26,12 @@
         select r.id, r.name, r.description, r.admin_count, r.create_time, r.status, r.sort from bms_auth_role r
     </sql>
 
-    <select id="selectBmsAuthRoleListByAdminId" parameterType="Long" resultMap="BmsAuthRoleResult" resultSets="java.util.List">
+    <select id="selectAll" resultSets="java.util.List" resultMap="BmsAuthRoleMap">
+        select <include refid="Base_Column_List"/>
+        from bms_auth_role
+    </select>
+
+    <select id="selectBmsAuthRoleListByAdminId" parameterType="Long" resultMap="BmsAuthRoleMap" resultSets="java.util.List">
         <include refid="selectBmsAuthRoleVo2"/>
         inner join bms_auth_user_role_relation re on r.id = re.role_id
         where re.admin_id = #{adminId}
