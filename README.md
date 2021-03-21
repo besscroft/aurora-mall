@@ -50,6 +50,14 @@ aurora-mall 是一个微服务商城项目，我做这个项目的目的就是�
 | idea         | 2020.3.1  | https://www.jetbrains.com/idea/     |
 | nodejs   | v12.20.1 | https://nodejs.org/zh-cn/             |
 
+### 行为准则
+
+我们有一份 [行为准则](https://github.com/besscroft/aurora-mall/blob/main/CODE_OF_CONDUCT.md)，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
+
+### 代码贡献
+
+我们有一份 [开源代码贡献小册](https://github.com/besscroft/aurora-mall/blob/main/fork-and-push.md) ，如果你还不会，可以看一下大概的思路，如果你已经会了，那么更好。
+
 ### 在线开发
 
 你可以使用 Gitpod 进行在线开发：
