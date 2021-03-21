@@ -70,6 +70,6 @@ whitelist:
       - "/webjars/springfox-swagger-ui/**"
       - "/actuator/**"
       - "/mall-auth/auth/token"
-      - "/mall-auth/PublicKey/get"
+      - "/mall-auth/publicKey/get"
       - "/mall-admin/user/login"
       - "/mall-admin/user/register"

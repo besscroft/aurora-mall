@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.besscroft.aurora.mall.admin.mapper.BmsRoleResourceRelationMapper">
+
+    <resultMap id="BmsRoleResourceRelationMap" type="com.besscroft.aurora.mall.common.model.BmsRoleResourceRelation">
+        <result column="id" property="id"/>
+        <result column="role_id" property="roleId"/>
+        <result column="resource_id" property="resourceId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, role_id, resource_id
+    </sql>
+
+    <select id="selectAll" resultSets="java.util.List" resultMap="BmsRoleResourceRelationMap">
+        select <include refid="Base_Column_List"/>
+        from bms_auth_role_resource_relation
+    </select>
+
+</mapper>

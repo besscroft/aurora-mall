@@ -1,8 +1,9 @@
 package com.besscroft.aurora.mall.common.entity;
 
-import com.besscroft.aurora.mall.common.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.io.Serializable;
 
 /**
  * 营销管理模块极光币对象 bms_market_bit
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @Author Besscroft
  * @Date 2021/1/22 20:48
  */
-public class BmsMarketBit extends BaseEntity {
+public class BmsMarketBit implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

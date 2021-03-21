@@ -18,12 +18,16 @@ import java.util.Map;
  */
 @Api(tags = "公钥获取接口")
 @RestController
-@RequestMapping("/PublicKey")
+@RequestMapping("/publicKey")
 public class PublicKeyController {
 
     @Autowired
     private KeyPair keyPair;
 
+    /**
+     * https://spring.io/guides/tutorials/spring-boot-oauth2/#_social_login_authserver
+     * @return
+     */
     @GetMapping("/get")
     public Map<String, Object> loadPublicKey() {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();

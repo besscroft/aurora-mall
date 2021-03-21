@@ -4,14 +4,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @Author Besscroft
  * @Date 2021/2/4 19:03
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Builder
-@ApiModel
 public class Oauth2Token {
 
     @ApiModelProperty("访问令牌")

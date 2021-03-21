@@ -1,10 +1,10 @@
 package com.besscroft.aurora.mall.common.entity;
 
-import com.besscroft.aurora.mall.common.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,7 +14,7 @@ import java.util.Date;
  * @Author Besscroft
  * @Date 2021/1/22 20:49
  */
-public class BmsMarketCoupon extends BaseEntity {
+public class BmsMarketCoupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

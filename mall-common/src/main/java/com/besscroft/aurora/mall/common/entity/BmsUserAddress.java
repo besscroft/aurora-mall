@@ -1,8 +1,9 @@
 package com.besscroft.aurora.mall.common.entity;
 
-import com.besscroft.aurora.mall.common.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.io.Serializable;
 
 /**
  * 会员管理模块会员用户地址管理对象 bms_user_address
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @Author Besscroft
  * @Date 2021/1/22 21:27
  */
-public class BmsUserAddress extends BaseEntity {
+public class BmsUserAddress implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

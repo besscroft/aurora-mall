@@ -21,7 +21,7 @@ public interface AuthConstants {
     /**
      * JWT令牌前缀
      */
-    String JWT_TOKEN_PREFIX = "Aurora ";
+    String JWT_TOKEN_PREFIX = "Bearer ";
 
     /**
      * JWT存储权限前缀
@@ -41,7 +41,7 @@ public interface AuthConstants {
     /**
      * Redis缓存权限规则key
      */
-    String PERMISSION_RULES_KEY = "auth:permission:rules";
+    String PERMISSION_RULES_KEY = "auth:roleResourceMap";
 
     /**
      * 后台管理client_id

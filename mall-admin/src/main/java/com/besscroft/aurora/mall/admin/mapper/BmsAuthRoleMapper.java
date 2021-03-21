@@ -15,7 +15,13 @@ import java.util.List;
 public interface BmsAuthRoleMapper extends BaseMapper<BmsAuthRole> {
 
     /**
-     * 获取管理系统用户所有的角色
+     * 获取所有角色
+     * @return
+     */
+    List<BmsAuthRole> selectAll();
+
+    /**
+     * 根据adminId获取用户所有的角色
      * @param adminId
      * @return
      */
