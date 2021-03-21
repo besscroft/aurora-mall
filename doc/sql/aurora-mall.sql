@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 24/02/2021 21:40:19
+ Date: 21/03/2021 17:08:27
 */
 
 SET NAMES utf8mb4;
@@ -91,12 +91,15 @@ CREATE TABLE `bms_auth_resource`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `category_id` bigint(20) NULL DEFAULT NULL COMMENT '资源类别ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_resource
 -- ----------------------------
-INSERT INTO `bms_auth_resource` VALUES (1, '添加用户', NULL, '新增后台管理系统的用户', '2021-01-25 13:34:04', NULL);
+INSERT INTO `bms_auth_resource` VALUES (1, '添加用户', '/user/register', '新增后台管理系统的用户', '2021-01-25 13:34:04', NULL);
+INSERT INTO `bms_auth_resource` VALUES (2, '删除用户', '/user/delUser', '删除后台管理系统的用户', '2021-03-17 14:32:33', NULL);
+INSERT INTO `bms_auth_resource` VALUES (3, '查询用户', '/user/info', '管理系统用户登陆后查询个人信息', '2021-03-17 15:32:20', NULL);
+INSERT INTO `bms_auth_resource` VALUES (4, '修改用户', '/user/update', '更新后台管理系统用户信息', '2021-03-21 13:42:59', NULL);
 
 -- ----------------------------
 -- Table structure for bms_auth_resource_sort
@@ -128,12 +131,13 @@ CREATE TABLE `bms_auth_role`  (
   `status` int(1) NULL DEFAULT 0 COMMENT '启用状态：0->禁用；1->启用',
   `sort` int(11) NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role
 -- ----------------------------
-INSERT INTO `bms_auth_role` VALUES (1, '超级管理员', '超级管理员', 1, '2021-01-25 13:31:45', 1, 0);
+INSERT INTO `bms_auth_role` VALUES (1, '超级管理员', '超级管理员，拥有所有的权限', 1, '2021-01-25 13:31:45', 1, 0);
+INSERT INTO `bms_auth_role` VALUES (2, '测试员', '测试账号权限', 2, '2021-03-21 13:41:37', 1, 0);
 
 -- ----------------------------
 -- Table structure for bms_auth_role_menu_relation
@@ -175,12 +179,16 @@ CREATE TABLE `bms_auth_role_resource_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `resource_id` bigint(20) NULL DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_resource_relation
 -- ----------------------------
 INSERT INTO `bms_auth_role_resource_relation` VALUES (1, 1, 1);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (2, 1, 2);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (3, 1, 3);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (4, 1, 4);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (5, 2, 3);
 
 -- ----------------------------
 -- Table structure for bms_auth_user
@@ -199,12 +207,13 @@ CREATE TABLE `bms_auth_user`  (
   `login_time` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
   `status` int(1) NULL DEFAULT 1 COMMENT '帐号启用状态：0->禁用；1->启用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1364566447866515458 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块用户表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
 INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', '', 'admin@qq.com', NULL, '管理员', '管理员', '2021-02-24 21:22:48', NULL, 1);
+INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', NULL, NULL, NULL, '测试员', '测试员', '2021-03-21 13:42:10', NULL, 1);
 
 -- ----------------------------
 -- Table structure for bms_auth_user_role_relation
@@ -215,12 +224,13 @@ CREATE TABLE `bms_auth_user_role_relation`  (
   `admin_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块用户角色关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块用户角色关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_user_role_relation
 -- ----------------------------
 INSERT INTO `bms_auth_user_role_relation` VALUES (1, 1, 1);
+INSERT INTO `bms_auth_user_role_relation` VALUES (2, 2, 2);
 
 -- ----------------------------
 -- Table structure for bms_market_ad
