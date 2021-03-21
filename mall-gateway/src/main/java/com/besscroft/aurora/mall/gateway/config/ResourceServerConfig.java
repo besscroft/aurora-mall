@@ -41,11 +41,11 @@ import java.nio.charset.Charset;
 @EnableWebFluxSecurity
 public class ResourceServerConfig {
 
-    private AuthorizationManager authorizationManager;
+    private final AuthorizationManager authorizationManager;
 
-    private IgnoreUrlsConfig ignoreUrlsConfig;
+    private final IgnoreUrlsConfig ignoreUrlsConfig;
 
-    private IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
+    private final IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {

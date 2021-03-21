@@ -55,8 +55,8 @@ public class ResourceServiceImpl implements ResourceService {
             List<String> roleNames = authRoleList.stream().filter(item ->
                     roleIds.contains(item.getId())
             ).map(item ->
-//                    item.getId() + "_" + item.getName()
-                            item.getName()
+                    // 格式:ROLE_{roleId}
+                    AuthConstants.AUTHORITY_PREFIX + item.getId() + "_" + item.getName()
             ).collect(Collectors.toList());
             // key为访问路径/资源路径，value为角色
             RoleResourceMap.put("/" + applicationName + resource.getUrl(), roleNames);

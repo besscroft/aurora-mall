@@ -24,6 +24,10 @@ public class PublicKeyController {
     @Autowired
     private KeyPair keyPair;
 
+    /**
+     * https://spring.io/guides/tutorials/spring-boot-oauth2/#_social_login_authserver
+     * @return
+     */
     @GetMapping("/get")
     public Map<String, Object> loadPublicKey() {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();

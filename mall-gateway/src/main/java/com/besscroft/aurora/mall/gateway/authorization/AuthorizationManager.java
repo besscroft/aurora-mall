@@ -77,20 +77,25 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         Iterator<Object> iterator = roleResourceMap.keySet().iterator();
 
         // 接口需要的角色权限集合authorities统计
-        List<String> authorities = new ArrayList<>();
+        Set<String> authorities = new HashSet<>();
         while (iterator.hasNext()) {
             String pattern = (String) iterator.next();
             if (pathMatcher.match(pattern, path)) {
                 authorities.addAll(Convert.toList(String.class, roleResourceMap.get(pattern)));
             }
         }
-        authorities = authorities.stream().map(i -> i = AuthConstants.JWT_TOKEN_PREFIX + i).collect(Collectors.toList());
 
         return mono
                 .filter(Authentication::isAuthenticated)
                 .flatMapIterable(Authentication::getAuthorities)
                 .map(GrantedAuthority::getAuthority)
-                .any(authorities::contains)
+                .any(roleId -> {
+                    // roleId是请求用户的角色(格式:ROLE_{roleId})，authorities是请求资源所需要角色的集合
+                    log.info("访问路径：{}", path);
+                    log.info("用户角色信息：{}", roleId);
+                    log.info("资源需要权限authorities：{}", authorities);
+                    return authorities.contains(roleId);
+                })
                 .map(AuthorizationDecision::new)
                 .defaultIfEmpty(new AuthorizationDecision(false));
     }
