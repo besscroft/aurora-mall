@@ -1,10 +1,12 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.admin.dto.BmsAdminInfoParam;
 import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
 import com.besscroft.aurora.mall.common.domain.UserDto;
+import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
 import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
+
+import java.util.List;
 
 /**
  * @Author Besscroft
@@ -41,9 +43,10 @@ public interface UserService {
     BmsAuthUser getCurrentAdmin();
 
     /**
-     * 获取当前登录用户的一些信息
+     * 获取用户对应的角色列表
+     * @param adminId
      * @return
      */
-    BmsAdminInfoParam getInfo(Long id);
+    List<BmsAuthRole> getRoleList(Long adminId);
 
 }

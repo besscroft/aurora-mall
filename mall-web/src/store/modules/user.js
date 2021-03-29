@@ -1,12 +1,12 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    roles: []
   }
 }
 
@@ -24,6 +24,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_ROLES: (state, roles) => {
+    state.roles = roles
   }
 }
 
@@ -33,9 +36,10 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        console.log(response.data.access_token)
-        commit('SET_TOKEN', response.data.access_token)
-        setToken(response.data.access_token)
+        const { data } = JSON.parse(JSON.stringify(response))
+        console.log(data)
+        commit('SET_TOKEN', data.access_token)
+        setToken(data.access_token)
         resolve()
       }).catch(error => {
         reject(error)
@@ -47,16 +51,16 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
-        const { data } = response
+        const data = response.data
         console.log(data)
-        if (!data) {
+        if (data.roles && data.roles.length > 0) {
+          commit("SET_ROLES", data.roles)
+        } else {
           reject('Verification failed, please Login again.')
         }
 
-        const { nickName, icon } = data
-
-        commit('SET_NAME', nickName)
-        commit('SET_AVATAR', icon)
+        commit('SET_NAME', data.username)
+        commit('SET_AVATAR', data.icon)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -69,7 +73,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         removeToken() // must remove  token  first
-        resetRouter()
         commit('RESET_STATE')
         resolve()
       }).catch(error => {
@@ -83,6 +86,15 @@ const actions = {
     return new Promise(resolve => {
       removeToken() // must remove  token  first
       commit('RESET_STATE')
+      resolve()
+    })
+  },
+
+  // 前端 登出
+  FedLogOut({ commit }) {
+    return new Promise(resolve => {
+      commit('SET_TOKEN', '')
+      removeToken()
       resolve()
     })
   }

@@ -1,7 +1,6 @@
 package com.besscroft.aurora.mall.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.besscroft.aurora.mall.admin.dto.BmsAdminInfoParam;
 import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,11 +19,5 @@ public interface BmsAuthUserMapper extends BaseMapper<BmsAuthUser> {
      * @return 管理系统用户
      */
     BmsAuthUser selectBmsAuthUserByUsername(@Param("username") String username);
-
-    /**
-     * 获取当前登录用户的一些信息
-     * @return
-     */
-    BmsAdminInfoParam getInfo(Long id);
 
 }

@@ -23,7 +23,15 @@
     </sql>
 
     <sql id="selectBmsAuthRoleVo2">
-        select r.id, r.name, r.description, r.admin_count, r.create_time, r.status, r.sort from bms_auth_role r
+        select
+               r.id,
+               r.name,
+               r.description,
+               r.admin_count,
+               r.create_time,
+               r.status,
+               r.sort
+        from bms_auth_role r
     </sql>
 
     <select id="selectAll" resultSets="java.util.List" resultMap="BmsAuthRoleMap">

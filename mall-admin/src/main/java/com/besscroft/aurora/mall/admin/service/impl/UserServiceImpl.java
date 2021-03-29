@@ -3,7 +3,6 @@ package com.besscroft.aurora.mall.admin.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
-import com.besscroft.aurora.mall.admin.dto.BmsAdminInfoParam;
 import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
 import com.besscroft.aurora.mall.admin.mapper.BmsAuthRoleMapper;
 import com.besscroft.aurora.mall.admin.mapper.BmsAuthUserMapper;
@@ -108,8 +107,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public BmsAdminInfoParam getInfo(Long id) {
-        return bmsAuthUserMapper.getInfo(id);
+    public List<BmsAuthRole> getRoleList(Long adminId) {
+        return bmsAuthRoleMapper.selectBmsAuthRoleListByAdminId(adminId);
     }
 
 }
