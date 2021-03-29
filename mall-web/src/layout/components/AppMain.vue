@@ -1,7 +1,10 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-                <router-view :key="key" />
+<!--      <router-view :key="key" />-->
+      <keep-alive :include="cachedViews">
+        <router-view></router-view>
+      </keep-alive>
     </transition>
   </section>
 </template>
@@ -12,10 +15,10 @@ export default {
   computed: {
     cachedViews() {
       return this.$store.state.tagsView.cachedViews
-    },
-    key() {
-      return this.$route.path
     }
+    // key() {
+    //   return this.$route.path
+    // }
   }
 }
 </script>
@@ -38,6 +41,17 @@ export default {
 .el-popup-parent--hidden {
   .fixed-header {
     padding-right: 15px;
+  }
+}
+
+.hasTagsView {
+  .app-main {
+    /* 84 = navbar + tags-view = 50 + 34 */
+    min-height: calc(100vh - 84px);
+  }
+
+  .fixed-header+.app-main {
+    padding-top: 84px;
   }
 }
 </style>

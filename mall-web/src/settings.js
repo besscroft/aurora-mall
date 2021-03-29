@@ -12,5 +12,11 @@ module.exports = {
    * @type {boolean} true | false
    * @description 是否在边栏中显示徽标
    */
-  sidebarLogo: false
+  sidebarLogo: false,
+
+  /**
+   * @type {boolean} true | false
+   * @description 是否开启标签栏缓存
+   */
+  tagsView: true
 }

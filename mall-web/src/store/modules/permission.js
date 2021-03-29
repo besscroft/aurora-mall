@@ -27,7 +27,6 @@ const permission = {
         const sidebarRoutes = filterAsyncRouter(menus)
         const rewriteRoutes = filterAsyncRouter(menus, true)
         rewriteRoutes.push({ path: '*', redirect: '/404', hidden: true })
-        console.log(sidebarRoutes)
         commit('SET_ROUTERS', rewriteRoutes)
         commit('SET_SIDEBAR_ROUTERS', sidebarRoutes)
         resolve(rewriteRoutes)
