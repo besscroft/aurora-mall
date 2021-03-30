@@ -12,7 +12,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'product',
+  name: 'authRole',
   computed: {
     ...mapGetters([
       'name'

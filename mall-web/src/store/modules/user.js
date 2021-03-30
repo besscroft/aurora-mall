@@ -73,6 +73,8 @@ const actions = {
       logout(state.token).then(() => {
         removeToken() // must remove  token  first
         commit('RESET_STATE')
+        commit('SET_TOKEN', '')
+        commit('SET_ROLES', [])
         resolve()
       }).catch(error => {
         reject(error)

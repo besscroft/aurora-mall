@@ -107,4 +107,10 @@ public class UserController {
         return AjaxResult.success(data);
     }
 
+    @ApiOperation("后台管理系统登出功能")
+    @GetMapping(value = "/logout")
+    public AjaxResult logout() {
+        return AjaxResult.success();
+    }
+
 }

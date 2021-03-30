@@ -43,7 +43,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: (resolve) => require(['@/views/dashboard/index'], resolve),
-      meta: { title: '首页', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard', affix: true }
     }]
   }
 ]
