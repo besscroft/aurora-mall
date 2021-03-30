@@ -17,10 +17,10 @@
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">Close</li>
-      <li @click="closeOthersTags">Close Others</li>
-      <li @click="closeAllTags(selectedTag)">Close All</li>
+      <li @click="refreshSelectedTag(selectedTag)">刷新页面</li>
+      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭当前</li>
+      <li @click="closeOthersTags">关闭其他</li>
+      <li @click="closeAllTags(selectedTag)">关闭所有</li>
     </ul>
   </div>
 </template>
@@ -28,6 +28,7 @@
 <script>
 import ScrollPane from './ScrollPane'
 import path from 'path'
+
 export default {
   components: { ScrollPane },
   data() {
@@ -175,11 +176,13 @@ export default {
       const offsetWidth = this.$el.offsetWidth // container width
       const maxLeft = offsetWidth - menuMinWidth // left boundary
       const left = e.clientX - offsetLeft + 15 // 15: margin right
+
       if (left > maxLeft) {
         this.left = maxLeft
       } else {
         this.left = left
       }
+
       this.top = e.clientY
       this.visible = true
       this.selectedTag = tag

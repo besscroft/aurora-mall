@@ -73,3 +73,4 @@ whitelist:
       - "/mall-auth/publicKey/get"
       - "/mall-admin/user/login"
       - "/mall-admin/user/register"
+      - "/mall-admin/user/logout"

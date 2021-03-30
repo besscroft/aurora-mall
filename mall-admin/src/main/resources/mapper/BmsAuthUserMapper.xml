@@ -18,11 +18,6 @@
         <result column="status" property="status"/>
     </resultMap>
 
-    <resultMap id="BmsAdminInfoParamMap" type="com.besscroft.aurora.mall.admin.dto.BmsAdminInfoParam">
-        <result property="icon" column="icon"/>
-        <result property="nickName" column="nick_name"/>
-    </resultMap>
-
     <sql id="selectBmsAuthUserVo">
         select id, username, password, icon, email, phone, nick_name, note, create_time, login_time, status from bms_auth_user
     </sql>
@@ -30,11 +25,6 @@
     <select id="selectBmsAuthUserByUsername" parameterType="String" resultMap="BmsAuthUserMap">
         <include refid="selectBmsAuthUserVo"/>
         where username = #{username}
-    </select>
-
-    <select id="getInfo" parameterType="Long" resultMap="BmsAdminInfoParamMap">
-        select icon, nick_name from bms_auth_user
-        where id = #{id}
     </select>
 
 </mapper>

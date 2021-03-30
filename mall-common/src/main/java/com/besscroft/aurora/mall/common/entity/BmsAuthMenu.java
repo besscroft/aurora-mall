@@ -5,7 +5,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 权限管理模块菜单对象 bms_auth_menu
@@ -42,11 +44,20 @@ public class BmsAuthMenu implements Serializable {
     /** 前端名称 */
     private String name;
 
+    /** 路由地址 */
+    private String path;
+
     /** 前端图标 */
     private String icon;
 
     /** 显示状态：0->不显示；1->显示 */
     private Integer hidden;
+
+    /** 组件路径 */
+    private String component;
+
+    /** 子菜单 **/
+    private List<BmsAuthMenu> children = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -112,6 +123,14 @@ public class BmsAuthMenu implements Serializable {
         this.name = name;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public String getIcon() {
         return icon;
     }
@@ -128,6 +147,22 @@ public class BmsAuthMenu implements Serializable {
         this.hidden = hidden;
     }
 
+    public List<BmsAuthMenu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<BmsAuthMenu> children) {
+        this.children = children;
+    }
+
+    public String getComponent() {
+        return component;
+    }
+
+    public void setComponent(String component) {
+        this.component = component;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -139,8 +174,11 @@ public class BmsAuthMenu implements Serializable {
                 .append("level", getLevel())
                 .append("sort", getSort())
                 .append("name", getName())
+                .append("path", getPath())
                 .append("icon", getIcon())
                 .append("hidden", getHidden())
+                .append("children", getChildren())
+                .append("component", getComponent())
                 .toString();
     }
 }
