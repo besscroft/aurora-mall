@@ -3,6 +3,7 @@ package com.besscroft.aurora.mall.admin.service;
 import com.besscroft.aurora.mall.common.entity.BmsAuthMenu;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Besscroft
@@ -15,6 +16,13 @@ public interface MenuService {
      * @param adminId 用户id
      * @return
      */
-    List<BmsAuthMenu> getTreeListById(Long adminId);
+    Map<String, Object> getTreeListById(Long adminId);
+
+    /**
+     * 获取当前用户管理系统菜单
+     * @param adminId
+     * @return
+     */
+    List<BmsAuthMenu> getMenuListById(Long adminId);
 
 }
