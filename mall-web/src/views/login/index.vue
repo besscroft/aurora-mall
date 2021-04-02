@@ -3,7 +3,8 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">极光商城管理平台</h3>
+        <h4>欢迎登录</h4>
       </div>
 
       <el-form-item prop="username">
@@ -44,8 +45,9 @@
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div class="tips">
+        <span>超级管理员</span>
         <span style="margin-right:20px;">username: admin</span>
-        <span> password: ******</span>
+        <span> password: 666666</span>
       </div>
 
     </el-form>
@@ -178,10 +180,12 @@ $dark_gray:#889aa4;
 $light_gray:#eee;
 
 .login-container {
-  min-height: 100%;
   width: 100%;
-  background-color: $bg;
-  overflow: hidden;
+  height: 100%;
+  background-image: url("https://ae01.alicdn.com/kf/He743295647a04d579369e5c4d49d041fa.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
 
   .login-form {
     position: relative;

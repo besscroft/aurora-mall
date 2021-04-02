@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <el-card class="box-card" shadow="hover">
-      <span>接口文档</span>
+      <span>订单列表</span>
       <i style="float: right; padding: 3px 0" class="el-icon-user-solid"></i>
     </el-card>
 
@@ -12,7 +12,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'systemDoc',
+  name: 'orderList',
   computed: {
     ...mapGetters([
       'name'

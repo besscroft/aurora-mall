@@ -1,8 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.common.domain.Oauth2Token;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
-import com.besscroft.aurora.mall.common.result.CommonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -8,9 +8,9 @@ import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
 import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
 import com.besscroft.aurora.mall.common.model.BmsRoleResourceRelation;
-import com.besscroft.aurora.mall.common.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class ResourceServiceImpl implements ResourceService {
     private BmsRoleResourceRelationMapper bmsRoleResourceRelationMapper;
 
     @Autowired
-    private RedisService redisService;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Value("${spring.application.name}")
     private String applicationName;
@@ -61,8 +61,8 @@ public class ResourceServiceImpl implements ResourceService {
             // key为访问路径/资源路径，value为角色
             RoleResourceMap.put("/" + applicationName + resource.getUrl(), roleNames);
         }
-        redisService.del(AuthConstants.PERMISSION_RULES_KEY);
-        redisService.hSetAll(AuthConstants.PERMISSION_RULES_KEY, RoleResourceMap);
+        redisTemplate.delete(AuthConstants.PERMISSION_RULES_KEY);
+        redisTemplate.opsForHash().putAll(AuthConstants.PERMISSION_RULES_KEY, RoleResourceMap);
         return RoleResourceMap;
     }
 

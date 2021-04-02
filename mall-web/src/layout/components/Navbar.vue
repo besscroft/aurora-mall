@@ -19,6 +19,9 @@
           <a target="_blank" href="https://github.com/besscroft/aurora-mall">
             <el-dropdown-item>Github</el-dropdown-item>
           </a>
+          <a target="_blank" href="http://localhost:8000/doc.html#/home">
+            <el-dropdown-item>接口文档</el-dropdown-item>
+          </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">Log Out</span>
           </el-dropdown-item>

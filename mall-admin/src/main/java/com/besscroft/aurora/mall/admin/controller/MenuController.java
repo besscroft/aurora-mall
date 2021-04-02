@@ -31,12 +31,12 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    @ApiOperation(value = "获取当前用户管理系统菜单动态路由")
-    @GetMapping(value = "/getRouter")
+    @ApiOperation(value = "获取当前用户管理系统菜单")
+    @GetMapping(value = "/getMenu")
     public AjaxResult getRouter() {
         BmsAuthUser currentAdmin = userService.getCurrentAdmin();
-        List<BmsAuthMenu> list = menuService.getTreeListById(currentAdmin.getId());
-        log.info("路由：{}",list);
+        List<BmsAuthMenu> list = menuService.getMenuListById(currentAdmin.getId());
+        log.info("菜单：{}",list);
         return AjaxResult.success(list);
     }
 

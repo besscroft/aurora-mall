@@ -19,7 +19,7 @@ export default {
     }
   },
   watch: {
-    $route() {
+    $route(route) {
       if (route.path.startsWith('/redirect/')) {
         return
       }
