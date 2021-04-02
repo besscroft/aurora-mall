@@ -43,18 +43,18 @@ public class BmsAuthController {
     @Autowired
     private TokenEndpoint tokenEndpoint;
 
-    private Set<HttpMethod> allowedRequestMethods = new HashSet<HttpMethod>(Arrays.asList(HttpMethod.POST));
+    private Set<HttpMethod> allowedRequestMethods = new HashSet<>(Arrays.asList(HttpMethod.POST));
 
-    @GetMapping("/oauth/token")
-    public AjaxResult getAccessToken(
-            Principal principal, @RequestParam Map<String, String> parameters)
-            throws HttpRequestMethodNotSupportedException {
-
-        if (!allowedRequestMethods.contains(HttpMethod.GET)) {
-            throw new HttpRequestMethodNotSupportedException("GET");
-        }
-        return postAccessToken(principal, parameters);
-    }
+//    @GetMapping("/oauth/token")
+//    public AjaxResult getAccessToken(
+//            Principal principal, @RequestParam Map<String, String> parameters)
+//            throws HttpRequestMethodNotSupportedException {
+//
+//        if (!allowedRequestMethods.contains(HttpMethod.GET)) {
+//            throw new HttpRequestMethodNotSupportedException("GET");
+//        }
+//        return postAccessToken(principal, parameters);
+//    }
 
     @ApiOperation("OAuth2认证生成token")
     @ApiImplicitParams({

@@ -1,10 +1,6 @@
 <template>
-  <div class="dashboard-container">
-    <el-card class="box-card" shadow="hover">
-      <span>接口文档</span>
-      <i style="float: right; padding: 3px 0" class="el-icon-user-solid"></i>
-    </el-card>
-
+  <div>
+    <iframe src="http://localhost:8000/swagger-ui/index.html" frameborder="0"></iframe>
   </div>
 </template>
 
@@ -17,18 +13,26 @@ export default {
     ...mapGetters([
       'name'
     ])
+  },
+  mounted(){
+    let that = this
+    window.onresize = () => {
+      let ifdoc = that.$refs.main_page_iframe.contentDocument
+      let cHeight = Math.max(ifdoc.body.clientHeight, ifdoc.documentElement.clientHeight)
+      let sHeight = Math.max(ifdoc.body.scrollHeight, ifdoc.documentElement.scrollHeight)
+      that.$refs.main_page_iframe.style.height = Math.max(cHeight, sHeight) + 'px'
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
+html,body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  height: 100%;
 }
+iframe { width: 100%; height: calc(100vh - 75px); }
 </style>
