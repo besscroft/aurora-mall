@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.besscroft.aurora.mall.admin.mapper.BmsAuthMenuMapper;
 import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.common.entity.BmsAuthMenu;
@@ -90,6 +91,11 @@ public class MenuServiceImpl implements MenuService {
             }
         }
         return menuList;
+    }
+
+    @Override
+    public List<BmsAuthMenu> getMenuAllList() {
+        return bmsAuthMenuMapper.selectList(new QueryWrapper<BmsAuthMenu>());
     }
 
 }

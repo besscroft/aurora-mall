@@ -25,4 +25,10 @@ public interface MenuService {
      */
     List<BmsAuthMenu> getMenuListById(Long adminId);
 
+    /**
+     * 获取所有系统菜单
+     * @return
+     */
+    List<BmsAuthMenu> getMenuAllList();
+
 }

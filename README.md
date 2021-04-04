@@ -8,6 +8,8 @@ aurora-mall 是一个微服务商城项目，我做这个项目的目的就是�
 
 ### 预览地址
 
+预计每周末更新预览版本
+
 https://mall.aurora.besscroft.com/
 
 > 服务器有点拉跨，求大佬放过~~~

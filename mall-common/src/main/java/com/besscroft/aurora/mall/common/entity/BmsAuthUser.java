@@ -52,6 +52,9 @@ public class BmsAuthUser implements Serializable {
     /** 帐号启用状态：0->禁用；1->启用 */
     private Integer status;
 
+    /** 假删除：0->删除状态；1->可用状态 */
+    private Integer del;
+
     public Long getId() {
         return id;
     }
@@ -140,6 +143,14 @@ public class BmsAuthUser implements Serializable {
         this.status = status;
     }
 
+    public Integer getDel() {
+        return del;
+    }
+
+    public void setDel(Integer del) {
+        this.del = del;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -154,6 +165,7 @@ public class BmsAuthUser implements Serializable {
                 .append("createTime", getCreateTime())
                 .append("loginTime", getLoginTime())
                 .append("status", getStatus())
+                .append("del", getDel())
                 .toString();
     }
 

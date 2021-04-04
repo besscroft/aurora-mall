@@ -13,6 +13,7 @@ import com.besscroft.aurora.mall.common.domain.UserDto;
 import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
 import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean setLoginTime(Date loginTime, Long id) {
+        return bmsAuthUserMapper.updateLoginTime(loginTime, id) > 0;
+    }
+
+    @Override
     public UserDto loadUserByUsername(String username) {
         BmsAuthUser bmsAuthUser = bmsAuthUserMapper.selectBmsAuthUserByUsername(username);
         if (bmsAuthUser != null) {
@@ -80,7 +87,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean register(BmsAdminParam bmsAdminParam) {
         BmsAuthUser bmsAuthUser = new BmsAuthUser();
         BeanUtils.copyProperties(bmsAdminParam, bmsAuthUser);
@@ -109,6 +116,64 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<BmsAuthRole> getRoleList(Long adminId) {
         return bmsAuthRoleMapper.selectBmsAuthRoleListByAdminId(adminId);
+    }
+
+    @Override
+    public List<BmsAuthUser> getUserPageList(Integer pageNum, Integer pageSize, String keyword) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BmsAuthUser> users = bmsAuthUserMapper.selectUserListByPage(keyword);
+        users.forEach(user -> {
+            user.setPassword("");
+        });
+        return users;
+    }
+
+    @Override
+    public BmsAuthUser getUserById(Long id) {
+        return bmsAuthUserMapper.selectById(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateUser(BmsAuthUser bmsAuthUser) {
+        return bmsAuthUserMapper.updateUser(bmsAuthUser) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean changeSwitch(boolean flag, Long id) {
+        Integer status = 0;
+        if (flag == true) {
+            status = 1;
+        } else {
+            status = 0;
+        }
+        return bmsAuthUserMapper.changeSwitch(status, id) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean delUser(Long id) {
+        return bmsAuthUserMapper.delUser(id) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean addUser(BmsAuthUser bmsAuthUser) {
+        // 设置用户注册的时间
+        bmsAuthUser.setCreateTime(new Date());
+        // 设置用户登录时间与注册时间一致
+        bmsAuthUser.setLoginTime(new Date());
+        // 加密密码
+        bmsAuthUser.setPassword(new BCryptPasswordEncoder().encode(bmsAuthUser.getPassword()));
+        // 设置删除状态
+        bmsAuthUser.setDel(1);
+        return bmsAuthUserMapper.insertUser(bmsAuthUser) > 0;
+    }
+
+    @Override
+    public List<BmsAuthUser> getUserAllList() {
+        return bmsAuthUserMapper.getAllList();
     }
 
 }
