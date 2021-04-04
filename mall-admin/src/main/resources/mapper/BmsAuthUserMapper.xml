@@ -24,7 +24,76 @@
 
     <select id="selectBmsAuthUserByUsername" parameterType="String" resultMap="BmsAuthUserMap">
         <include refid="selectBmsAuthUserVo"/>
-        where username = #{username}
+        where username = #{username} and del = '1'
+    </select>
+
+    <select id="selectUserListByPage" resultSets="java.util.List" resultMap="BmsAuthUserMap">
+        <include refid="selectBmsAuthUserVo" />
+        where del = '1'
+        <if test="keyword != null">
+            and username like CONCAT('%',#{keyword},'%')
+        </if>
+        order by id
+<!--        <if test="pageNum != null and pageSize != null">-->
+<!--            limit #{pageNum}, #{pageSize}-->
+<!--        </if>-->
+    </select>
+
+    <update id="updateLoginTime">
+        update bms_auth_user
+        set login_time = #{loginTime}
+        where id = #{id}
+    </update>
+
+    <update id="updateUser">
+        update bms_auth_user
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName},
+            </if>
+            <if test="note != null">
+                note = #{note},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id} and del = '1'
+    </update>
+
+    <update id="changeSwitch">
+        update bms_auth_user
+        set status = #{status}
+        where id = #{id} and del = '1'
+    </update>
+
+    <update id="delUser">
+        update bms_auth_user
+        set del = '0'
+        where id = #{id}
+    </update>
+
+    <insert id="insertUser">
+        insert into bms_auth_user
+        (username, password, icon, email, phone, nick_name, note, create_time, login_time, status, del)
+        values
+        (#{username}, #{password}, #{icon}, #{email}, #{phone}, #{nickName}, #{note}, #{createTime}, #{loginTime}, #{status}, #{del})
+    </insert>
+
+    <select id="getAllList" resultSets="java.util.List" resultMap="BmsAuthUserMap">
+        <include refid="selectBmsAuthUserVo"/>
     </select>
 
 </mapper>
