@@ -7,9 +7,11 @@ import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.common.entity.BmsAuthMenu;
 import com.besscroft.aurora.mall.common.model.MetaVo;
 import com.besscroft.aurora.mall.common.model.RouterVo;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -96,6 +98,54 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<BmsAuthMenu> getMenuAllList() {
         return bmsAuthMenuMapper.selectList(new QueryWrapper<BmsAuthMenu>());
+    }
+
+    @Override
+    public List<BmsAuthMenu> getParentMenu() {
+        return bmsAuthMenuMapper.getParentMenu();
+    }
+
+    @Override
+    public List<BmsAuthMenu> getMenuPageList(Integer pageNum, Integer pageSize, String keyword) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BmsAuthMenu> menus = bmsAuthMenuMapper.selectMenuListByPage(keyword);
+        return menus;
+    }
+
+    @Override
+    public BmsAuthMenu getMenuById(Long id) {
+        return bmsAuthMenuMapper.selectMenuById(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateMenu(BmsAuthMenu bmsAuthMenu) {
+        return bmsAuthMenuMapper.updateMenu(bmsAuthMenu) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean changeSwitch(boolean hidden, Long id, Long adminId) {
+        if (hidden) {
+            int i = bmsAuthMenuMapper.changeSwitch(0, id);
+            if (i>0) {
+                redisTemplate.boundHashOps("admin").delete("user:tree:" + adminId);
+                return true;
+            }
+        }
+        return bmsAuthMenuMapper.changeSwitch(1, id) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean delMenu(Long id) {
+        return bmsAuthMenuMapper.delMenu(id) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean addMenu(BmsAuthMenu bmsAuthMenu) {
+        return bmsAuthMenuMapper.addMenu(bmsAuthMenu) > 0;
     }
 
 }

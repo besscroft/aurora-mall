@@ -59,6 +59,8 @@ mybatis:
   typeAliasesPackage: com.besscroft.aurora.mall.common.entity
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/*Mapper.xml
+  configuration:
+    cache-enabled: false
 
 # PageHelper分页插件
 pagehelper:
