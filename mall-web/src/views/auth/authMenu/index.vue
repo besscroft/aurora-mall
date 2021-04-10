@@ -42,7 +42,7 @@
         <el-table-column label="菜单名称" align="center" prop="title" width="150"/>
         <el-table-column label="前端图标" align="center" prop="icon">
           <template slot-scope="scope">
-            <img :src="scope.row.icon" class="image" style="width: 3.125rem;height: 3.125rem;" />
+            <i :class="scope.row.icon"></i>
           </template>
         </el-table-column>
         <el-table-column label="父菜单名称" align="center" prop="parentTitle" />
@@ -139,7 +139,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Message } from 'element-ui'
-import { addMenu, changeSwitch, delMenu, getMenu, listMenu, updateMenu, getParentMenu } from "@/api/menu";
+import { addMenu, changeSwitch, delMenu, getMenu, listMenu, updateMenu, getParentMenu } from "@/api/auth/menu";
 
 const defaultAdminMenu = {
   // 查询参数
@@ -311,7 +311,7 @@ export default {
     // 当前页数处理
     handleCurrentChange(event) {
       console.log('handleCurrentChange:' + event)
-      this.listQuery.pageNum = (event - 1) * this.listQuery.pageSize
+      this.listQuery.pageNum = event
       this.getList()
     }
   }

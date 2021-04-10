@@ -17,6 +17,7 @@ import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +49,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private HttpServletRequest request;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
     @Override
     public AjaxResult login(String username, String password) {
         if(StrUtil.isEmpty(username)||StrUtil.isEmpty(password)){
@@ -62,6 +66,12 @@ public class UserServiceImpl implements UserService {
         AjaxResult accessToken = authService.getAccessToken(params);
         log.info("accessToken:{}",accessToken);
         return accessToken;
+    }
+
+    @Override
+    public boolean logout(Long adminId) {
+        redisTemplate.boundHashOps("admin").delete("user:tree:" + adminId);
+        return true;
     }
 
     @Override

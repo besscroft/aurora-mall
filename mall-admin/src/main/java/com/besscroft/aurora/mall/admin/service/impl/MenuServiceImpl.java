@@ -145,6 +145,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addMenu(BmsAuthMenu bmsAuthMenu) {
+        bmsAuthMenu.setCreateTime(new Date());
         return bmsAuthMenuMapper.addMenu(bmsAuthMenu) > 0;
     }
 

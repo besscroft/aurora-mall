@@ -8,15 +8,14 @@ import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
 import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
 import com.besscroft.aurora.mall.common.model.BmsRoleResourceRelation;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -64,6 +63,37 @@ public class ResourceServiceImpl implements ResourceService {
         redisTemplate.delete(AuthConstants.PERMISSION_RULES_KEY);
         redisTemplate.opsForHash().putAll(AuthConstants.PERMISSION_RULES_KEY, RoleResourceMap);
         return RoleResourceMap;
+    }
+
+    @Override
+    public List<BmsAuthResource> getResourcePageList(Integer pageNum, Integer pageSize, String keyword) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BmsAuthResource> resources = bmsAuthResourceMapper.selectResourceListByPage(keyword);
+        return resources;
+    }
+
+    @Override
+    public BmsAuthResource getResourceById(Long id) {
+        return bmsAuthResourceMapper.selectById(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean addResource(BmsAuthResource bmsAuthResource) {
+        bmsAuthResource.setCreateTime(new Date());
+        return bmsAuthResourceMapper.insertResource(bmsAuthResource) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateResource(BmsAuthResource bmsAuthResource) {
+        return bmsAuthResourceMapper.updateResource(bmsAuthResource) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean delResource(Long id) {
+        return bmsAuthResourceMapper.deleteById(id) > 0;
     }
 
 }

@@ -131,7 +131,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { listUser, getUser, updateUser, addUser, delUser, exportUser, changeSwitch } from '@/api/user'
+import { listUser, getUser, updateUser, addUser, delUser, exportUser, changeSwitch } from '@/api/auth/user'
 import { Message } from 'element-ui'
 
 const defaultAdminUser = {
@@ -295,7 +295,7 @@ export default {
     // 当前页数处理
     handleCurrentChange(event) {
       console.log('handleCurrentChange:' + event)
-      this.listQuery.pageNum = (event - 1) * this.listQuery.pageSize
+      this.listQuery.pageNum = event
       this.getList()
     }
   }
