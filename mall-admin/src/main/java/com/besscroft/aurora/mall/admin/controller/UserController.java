@@ -85,7 +85,9 @@ public class UserController {
     @ApiOperation("后台管理系统登出功能")
     @PostMapping(value = "/logout")
     public AjaxResult logout() {
-        return AjaxResult.success();
+        BmsAuthUser currentAdmin = userService.getCurrentAdmin();
+        boolean b = userService.logout(currentAdmin.getId());
+        return AjaxResult.success("成功退出登录啦！");
     }
 
     @ApiOperation("查询权限管理模块用户列表")

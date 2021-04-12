@@ -22,41 +22,34 @@ https://mall.aurora.besscroft.com/
 
 ### 后端技术
 
-| 技术        | 说明                                       | 官网                                           |
-| ----------- | ------------------------------------------ | ---------------------------------------------- |
-| Spring Cloud | Spring Cloud 致力于提供微服务开发的一站式解决方案。 | https://spring.io/projects/spring-cloud |
-| Spring Cloud Alibaba | Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案。 | https://github.com/alibaba/spring-cloud-alibaba/blob/master/README-zh.md |
-| MyBatis     | ORM框架                                    | http://www.mybatis.org/mybatis-3/zh/index.html |
-| MyBatis-Plus   | MyBatis 最好的搭档                                 | https://baomidou.com/ |
-| PageHelper  | MyBatis物理分页插件                        | http://git.oschina.net/free/Mybatis_PageHelper |
-| Swagger2    | 文档生产工具                               | https://swagger.io/                            |
-| Docker      | 应用容器引擎                               | https://www.docker.com/                        |
-| Druid       | 数据库连接池                               | https://github.com/alibaba/druid               |
-| JWT         | JWT登录支持                                | https://github.com/jwtk/jjwt                   |
-| Log4j       | 日志收集                                   | https://github.com/apache/logging-log4j2       |
-| Portainer   | 可视化Docker容器管理                       | https://github.com/portainer/portainer         |
-| Jenkins     | 自动化部署工具                             | https://github.com/jenkinsci/jenkins           |
+* [Spring Cloud](https://spring.io/projects/spring-cloud) && [Spring Cloud Alibaba](https://spring.io/projects/spring-cloud-alibaba) && [Spring Cloud Security](https://spring.io/projects/spring-cloud-security)
+* [MyBatis](https://mybatis.org/mybatis-3/zh/index.html) && [MyBatis-Plus](https://baomidou.com/) && [PageHelper](https://pagehelper.github.io/) && [Druid](https://github.com/alibaba/druid)
+* [guava](https://github.com/google/guava) && [HuTool](https://www.hutool.cn/docs/#/) && [lombok](https://projectlombok.org/) && [spring-data-commons](https://github.com/spring-projects/spring-data-commons) && [commons-lang3](https://commons.apache.org/proper/commons-lang/)
+* [knife4j](https://doc.xiaominfo.com/knife4j/)
+* [nacos](https://nacos.io/zh-cn/docs/what-is-nacos.html) && redis && mysql
+* [nimbus-jose-jwt](https://bitbucket.org/connect2id/nimbus-jose-jwt/src/master/) && [jwt](https://github.com/jwtk/jjwt)
+
+### 部署/运维
+
+* [Docker](https://www.docker.com/)
+* [Portainer](https://github.com/portainer/portainer)
+* [Jenkins](https://github.com/jenkinsci/jenkins)
 
 ### 前端技术
 
-| 技术     | 说明                  | 官网                           |
-| -------- | --------------------- | ------------------------------ |
-| Vue      | 前端框架              | https://vuejs.org/             |
-| Element  | 前端UI框架            | https://element.eleme.io/      |
-| Axios    | 前端HTTP框架          | https://github.com/axios/axios |
-| ECharts           | 一个使用 JavaScript 实现的开源可视化库 | https://echarts.apache.org/zh/index.html                |
-| vue-element-admin | A magical vue admin                    | https://panjiachen.github.io/vue-element-admin-site/zh/ |
+* [Vue](https://vuejs.org/)
+* [element-ui](https://element.eleme.io/)
+* [Axios](https://github.com/axios/axios)
+* [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/)
 
 
 ## 环境搭建
 
 ### 开发环境
 
-| 工具          | 版本号  | 下载                                                         |
-| ------------- | ------- | ------------------------------------------------------------ |
-| JDK           | 1.8     | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html |
-| idea         | 2020.3.1  | https://www.jetbrains.com/idea/     |
-| nodejs   | v12.20.1 | https://nodejs.org/zh-cn/             |
+* JDK 1.8
+* Idea 2020.3.1
+* [nodejs](https://nodejs.org/dist/latest-v12.x/) v12.20.1
 
 ### 行为准则
 
@@ -98,13 +91,11 @@ npm install --registry=https://registry.npm.taobao.org
 npm run dev
 ```
 
-#### 本项目的参考的项目（致谢）
+#### 本项目的参考的项目（学到了不少思想）
 
 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-[eladmin](https://github.com/elunez/eladmin)
 [mall](https://github.com/macrozheng/mall)
 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)
-[Guns 快速开发平台](https://www.stylefeng.cn/)
 
 #### 联系我
 

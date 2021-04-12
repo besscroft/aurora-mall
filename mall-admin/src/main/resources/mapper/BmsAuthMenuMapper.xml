@@ -69,6 +69,12 @@
         order by m.sort
     </select>
 
+    <select id="getParentMenu" resultSets="java.util.List" resultMap="BmsAuthMenuMap">
+        select <include refid="Base_Column_List"/>
+        from bms_auth_menu
+        where parent_id = 0
+    </select>
+
     <select id="getChildListById" resultSets="java.util.List" resultMap="BmsAuthMenuMap">
         select
             m.id,
@@ -91,5 +97,75 @@
         where u.id = #{adminId} and m.hidden = 0 and m.parent_id = #{parentId}
         order by m.sort
     </select>
+
+    <select id="selectMenuListByPage" resultSets="java.util.List" resultMap="BmsAuthMenuMap">
+        select <include refid="Base_Column_List" />
+        from bms_auth_menu
+        <if test="keyword != null">
+            and username like CONCAT('%',#{keyword},'%')
+        </if>
+        order by id
+    </select>
+
+    <select id="selectMenuById" resultMap="BmsAuthMenuMap">
+        select <include refid="Base_Column_List" />
+        from bms_auth_menu
+        where id = #{id}
+    </select>
+
+    <update id="updateMenu">
+        update bms_auth_menu
+        <set>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="parentTitle != null">
+                parent_title = #{parentTitle},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="path != null">
+                path = #{path},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="hidden != null">
+                hidden = #{hidden},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="changeSwitch">
+        update bms_auth_menu
+        set hidden = #{hidden}
+        where id = #{id}
+    </update>
+
+    <delete id="delMenu">
+        delete from bms_auth_menu
+        where id = #{id}
+    </delete>
+
+    <insert id="addMenu">
+        insert into bms_auth_menu
+        (parent_id, create_time, title, parent_title, level, sort, name, path, icon, hidden)
+        values
+        (#{parentId}, #{createTime}, #{title}, #{parentTitle}, #{level}, #{sort}, #{name}, #{path}, #{icon}, #{hidden})
+    </insert>
 
 </mapper>

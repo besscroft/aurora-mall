@@ -38,6 +38,9 @@ public class BmsAuthRole implements Serializable {
     /** 排序 */
     private Long sort;
 
+    /** 假删除：0->删除状态；1->可用状态 */
+    private Integer del;
+
     public Long getId() {
         return id;
     }
@@ -94,6 +97,14 @@ public class BmsAuthRole implements Serializable {
         this.sort = sort;
     }
 
+    public Integer getDel() {
+        return del;
+    }
+
+    public void setDel(Integer del) {
+        this.del = del;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -104,6 +115,7 @@ public class BmsAuthRole implements Serializable {
                 .append("createTime", getCreateTime())
                 .append("status", getStatus())
                 .append("sort", getSort())
+                .append("del", getDel())
                 .toString();
     }
 

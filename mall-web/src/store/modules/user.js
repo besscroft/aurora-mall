@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo } from '@/api/auth/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const getDefaultState = () => {

@@ -24,6 +24,13 @@ public interface UserService {
     AjaxResult login(String username, String password);
 
     /**
+     * 系统用户退出登录处理
+     * @param adminId
+     * @return
+     */
+    boolean logout(Long adminId);
+
+    /**
      * 登录成功后设置登录时间
      * @param loginTime
      * @return

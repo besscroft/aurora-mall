@@ -19,4 +19,25 @@ public interface BmsAuthResourceMapper extends BaseMapper<BmsAuthResource> {
      */
     List<BmsAuthResource> selectAll();
 
+    /**
+     * 分页查询资源列表
+     * @param keyword
+     * @return
+     */
+    List<BmsAuthResource> selectResourceListByPage(String keyword);
+
+    /**
+     * 新增资源
+     * @param bmsAuthResource
+     * @return
+     */
+    int insertResource(BmsAuthResource bmsAuthResource);
+
+    /**
+     * 更新资源
+     * @param bmsAuthResource
+     * @return
+     */
+    int updateResource(BmsAuthResource bmsAuthResource);
+
 }

@@ -37,7 +37,7 @@
     </el-card>
 
     <el-card class="box-card" style="margin-top: 30px" shadow="never">
-      <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
+      <el-table v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="用户名" align="center" prop="username" width="150"/>
         <el-table-column label="头像" align="center" prop="icon">
@@ -131,7 +131,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { listUser, getUser, updateUser, addUser, delUser, exportUser, changeSwitch } from '@/api/user'
+import { listUser, getUser, updateUser, addUser, delUser, exportUser, changeSwitch } from '@/api/auth/user'
 import { Message } from 'element-ui'
 
 const defaultAdminUser = {
@@ -172,7 +172,7 @@ export default {
       // 总条数
       total: 0,
       // 权限管理模块用户表格数据
-      userList: [],
+      dataList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -208,7 +208,7 @@ export default {
             user.status = false
           }
         });
-        this.userList = data;
+        this.dataList = data;
         this.total = response.data.total;
         this.loading = false;
       });
@@ -295,7 +295,7 @@ export default {
     // 当前页数处理
     handleCurrentChange(event) {
       console.log('handleCurrentChange:' + event)
-      this.listQuery.pageNum = (event - 1) * this.listQuery.pageSize
+      this.listQuery.pageNum = event
       this.getList()
     }
   }

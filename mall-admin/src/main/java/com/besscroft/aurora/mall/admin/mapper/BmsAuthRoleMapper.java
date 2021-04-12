@@ -27,4 +27,48 @@ public interface BmsAuthRoleMapper extends BaseMapper<BmsAuthRole> {
      */
     List<BmsAuthRole> selectBmsAuthRoleListByAdminId(@Param("adminId") Long adminId);
 
+    /**
+     * 查询角色列表
+     * @param keyword
+     * @return
+     */
+    List<BmsAuthRole> selectRoleListByPage(String keyword);
+
+    /**
+     * 根据id查询角色详细信息
+     * @param id
+     * @return
+     */
+    BmsAuthRole selectRoleById(Long id);
+
+    /**
+     * 插入一条新角色数据
+     * @param bmsAuthRole
+     * @return
+     */
+    int insertRole(BmsAuthRole bmsAuthRole);
+
+    /**
+     * 更新角色数据
+     * @param bmsAuthRole
+     * @return
+     */
+    int updateRole(BmsAuthRole bmsAuthRole);
+
+    /**
+     * 根据id删除角色（假删除）
+     * @param id
+     * @return
+     */
+    int deleteRoleById(Long id);
+
+    /**
+     * 角色可用状态变更
+     * @param status
+     * @param id
+     * @return
+     */
+    int changeSwitch(@Param("status") Integer status,
+                     @Param("id") Long id);
+
 }

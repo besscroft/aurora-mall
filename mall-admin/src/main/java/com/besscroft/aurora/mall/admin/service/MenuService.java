@@ -31,4 +31,53 @@ public interface MenuService {
      */
     List<BmsAuthMenu> getMenuAllList();
 
+    /**
+     * 获取所有父菜单
+     * @return
+     */
+    List<BmsAuthMenu> getParentMenu();
+
+    /**
+     * 分页查询菜单
+     * @return
+     */
+    List<BmsAuthMenu> getMenuPageList(Integer pageNum, Integer pageSize, String keyword);
+
+    /**
+     * 根据id获取菜单详细信息
+     * @param id
+     * @return
+     */
+    BmsAuthMenu getMenuById(Long id);
+
+    /**
+     * 更新菜单信息
+     * @param bmsAuthMenu
+     * @return
+     */
+    boolean updateMenu(BmsAuthMenu bmsAuthMenu);
+
+    /**
+     * 修改菜单显示状态
+     * @param hidden
+     * @param id
+     * @param adminId
+     * @return
+     */
+    boolean changeSwitch(boolean hidden, Long id, Long adminId);
+
+    /**
+     * 根据id删除菜单
+     * @param id
+     * @return
+     */
+    boolean delMenu(Long id);
+
+    /**
+     * 新增菜单
+     * @param bmsAuthMenu
+     * @return
+     */
+    boolean addMenu(BmsAuthMenu bmsAuthMenu);
+
 }
