@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 17/01/2021 15:13:34
+ Date: 12/04/2021 15:13:22
 */
 
 SET NAMES utf8mb4;
@@ -40,13 +40,11 @@ CREATE TABLE `config_info`  (
   `c_schema` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of config_info
 -- ----------------------------
-INSERT INTO `config_info` VALUES (2, 'mall-gateway-dev', 'DEFAULT_GROUP', 'spring:\n  redis:\n    host: localhost\n    port: 6379\n    password: password\n  main:\n    allow-bean-definition-overriding: true\n  cloud:\n    gateway:\n      routes:\n        # 认证中心的路由\n        - id: mall-auth\n          uri: lb://mall-auth\n          predicates:\n            - Path=/mall-auth/**\n          filters:\n            - JwtToken\n            - PermissionAuth\n            - RewritePath=/mall-auth/(?<segment>.*), /$\\{segment}', 'bd3a7a58752744bd99d22b7685c5a526', '2021-01-17 06:13:58', '2021-01-17 06:17:47', NULL, '0:0:0:0:0:0:0:1', '', '', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (5, 'mall-auth-dev', 'DEFAULT_GROUP', 'spring:\n  redis:\n    host: localhost\n    port: 6379\n    password: password\n  main:\n    allow-bean-definition-overriding: true', 'c84309326fef68f60116b4c588f5f873', '2021-01-17 06:27:33', '2021-01-17 06:27:59', NULL, '0:0:0:0:0:0:0:1', '', '', '', '', '', 'yaml', '');
 
 -- ----------------------------
 -- Table structure for config_info_aggr
@@ -185,7 +183,7 @@ CREATE TABLE `his_config_info`  (
   INDEX `idx_gmt_create`(`gmt_create`) USING BTREE,
   INDEX `idx_gmt_modified`(`gmt_modified`) USING BTREE,
   INDEX `idx_did`(`data_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of his_config_info
