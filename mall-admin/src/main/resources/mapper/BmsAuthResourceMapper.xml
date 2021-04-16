@@ -60,4 +60,22 @@
         where id = #{id}
     </update>
 
+    <select id="selectResourceTreeById" resultSets="java.util.List" resultType="long">
+        select resource_id
+        from bms_auth_role_resource_relation
+        where role_id = #{id}
+    </select>
+
+    <delete id="deleteRoleResourceRelation">
+        delete from bms_auth_role_resource_relation
+        where role_id = #{id}
+    </delete>
+
+    <insert id="insertRoleResourceRelation">
+        insert into bms_auth_role_resource_relation
+        (role_id, resource_id)
+        values
+        (#{roleId}, #{resourceId})
+    </insert>
+
 </mapper>

@@ -110,4 +110,16 @@
         where id = #{id}
     </update>
 
+    <delete id="deleteUserRoleRelationById">
+        delete from deleteUserRoleRelationById
+        where admin_id = #{userId}
+    </delete>
+
+    <insert id="insertUserRoleRelation">
+        insert into bms_auth_user_role_relation
+        (admin_id, role_id)
+        values
+        (#{userId}, #{roleId})
+    </insert>
+
 </mapper>

@@ -115,4 +115,33 @@ public class MenuController {
         return AjaxResult.error("添加失败！");
     }
 
+    @ApiOperation("根据角色id获取菜单树")
+    @ApiImplicitParam(name = "id", value = "角色id", required = true, dataType = "Long")
+    @GetMapping("/getMenuTreeById/{id}")
+    public AjaxResult getMenuTreeById(@PathVariable("id") Long id) {
+        List<Long> tree = menuService.getMenuTreeById(id);
+        return AjaxResult.success(tree);
+    }
+
+    @ApiOperation("获取所有菜单的菜单树")
+    @GetMapping("/getAllMenuTree")
+    public AjaxResult getAllMenuTree() {
+        List<BmsAuthMenu> tree = menuService.getAllMenuTree();
+        return AjaxResult.success(tree);
+    }
+
+    @ApiOperation("更新菜单树")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "data", value = "菜单树数据",required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
+    })
+    @PutMapping("/updateMenuTree")
+    public AjaxResult updateMenuTree(@RequestBody List<Long> data, @RequestParam Long id) {
+        boolean b = menuService.updateMenuTree(data, id);
+        if (b) {
+            return AjaxResult.success("更新成功！");
+        }
+        return AjaxResult.error("哎呀，更新失败了呢！");
+    }
+
 }

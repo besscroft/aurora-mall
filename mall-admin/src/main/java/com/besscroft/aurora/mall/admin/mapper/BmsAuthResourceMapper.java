@@ -2,6 +2,7 @@ package com.besscroft.aurora.mall.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -39,5 +40,22 @@ public interface BmsAuthResourceMapper extends BaseMapper<BmsAuthResource> {
      * @return
      */
     int updateResource(BmsAuthResource bmsAuthResource);
+
+    /**
+     * 根据角色id获取资源树数组
+     * @param id
+     * @return
+     */
+    List<Long> selectResourceTreeById(Long id);
+
+    /**
+     * 根据角色id删除角色资源关系
+     * @param id
+     * @return
+     */
+    int deleteRoleResourceRelation(Long id);
+
+    int insertRoleResourceRelation(@Param("resourceId") Long resourceId,
+                                   @Param("roleId") Long roleId);
 
 }

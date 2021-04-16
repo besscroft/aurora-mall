@@ -61,4 +61,20 @@ public class RoleServiceImpl implements RoleService {
         return bmsAuthRoleMapper.changeSwitch(0, id) > 0;
     }
 
+    @Override
+    public List<BmsAuthRole> getRoleAll() {
+        return bmsAuthRoleMapper.selectAll();
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateRoleById(Long userId, Long roleId) {
+        // 先删除原有的
+        int i = bmsAuthRoleMapper.deleteUserRoleRelationById(userId);
+        if (i > 0) {
+            return bmsAuthRoleMapper.insertUserRoleRelation(userId, roleId) > 0;
+        }
+        return false;
+    }
+
 }

@@ -42,6 +42,13 @@ public interface BmsAuthMenuMapper extends BaseMapper<BmsAuthMenu> {
                                        @Param("parentId") Long parentId);
 
     /**
+     * 根据父菜单id获取所有的子菜单
+     * @param parentId
+     * @return
+     */
+    List<BmsAuthMenu> getChildList(Long parentId);
+
+    /**
      * 分页查询菜单
      * @param keyword
      * @return
@@ -84,5 +91,22 @@ public interface BmsAuthMenuMapper extends BaseMapper<BmsAuthMenu> {
      * @return
      */
     int addMenu(BmsAuthMenu bmsAuthMenu);
+
+    /**
+     * 根据角色id查询已绑定的菜单数组
+     * @param id
+     * @return
+     */
+    List<Long> selectMenuTreeById(Long id);
+
+    /**
+     * 根据角色id删除角色菜单关系
+     * @param id
+     * @return
+     */
+    int deleteRoleMenuRelation(Long id);
+
+    int insertRoleMenuRelation(@Param("menuId") Long menuId,
+                               @Param("roleId") Long roleId);
 
 }

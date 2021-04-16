@@ -1,11 +1,15 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.besscroft.aurora.mall.admin.dto.BmsResourceParam;
 import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceMapper;
+import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceSortMapper;
 import com.besscroft.aurora.mall.admin.mapper.BmsAuthRoleMapper;
 import com.besscroft.aurora.mall.admin.mapper.BmsRoleResourceRelationMapper;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
+import com.besscroft.aurora.mall.common.entity.BmsAuthResourceSort;
 import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
 import com.besscroft.aurora.mall.common.model.BmsRoleResourceRelation;
 import com.github.pagehelper.PageHelper;
@@ -33,6 +37,9 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
     private BmsRoleResourceRelationMapper bmsRoleResourceRelationMapper;
+
+    @Autowired
+    private BmsAuthResourceSortMapper bmsAuthResourceSortMapper;
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -94,6 +101,39 @@ public class ResourceServiceImpl implements ResourceService {
     @Transactional(rollbackFor = Exception.class)
     public boolean delResource(Long id) {
         return bmsAuthResourceMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<BmsResourceParam> getAllResourceTree() {
+        List<BmsResourceParam> list = new ArrayList<>();
+        List<BmsAuthResourceSort> resourceSorts = bmsAuthResourceSortMapper.selectList(new QueryWrapper<>());
+        resourceSorts.forEach(r -> {
+            BmsResourceParam bmsResourceParam = new BmsResourceParam();
+            QueryWrapper<BmsAuthResource> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("category_id",r.getId());
+            List<BmsAuthResource> resources = bmsAuthResourceMapper.selectList(queryWrapper);
+            bmsResourceParam.setName(r.getCategoryName());
+            bmsResourceParam.setDisabled(true);
+            bmsResourceParam.setChildren(resources);
+            list.add(bmsResourceParam);
+        });
+        return list;
+    }
+
+    @Override
+    public List<Long> getResourceTreeById(Long id) {
+        List<Long> longs = bmsAuthResourceMapper.selectResourceTreeById(id);
+        return longs;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateResourceTree(List<Long> data, Long id) {
+        bmsAuthResourceMapper.deleteRoleResourceRelation(id);
+        data.forEach(d -> {
+            bmsAuthResourceMapper.insertRoleResourceRelation(d, id);
+        });
+        return true;
     }
 
 }

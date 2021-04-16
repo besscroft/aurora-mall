@@ -54,8 +54,20 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right" width="100">
+        <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right" width="150">
           <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="text"
+              icon="el-icon-edit"
+              @click="handleBindMenu(scope.row)"
+            >菜单绑定</el-button>
+            <el-button
+              size="mini"
+              type="text"
+              icon="el-icon-edit"
+              @click="handleBindResource(scope.row)"
+            >资源绑定</el-button>
             <el-button
               size="mini"
               type="text"
@@ -107,6 +119,50 @@
       </div>
     </el-dialog>
 
+    <!-- 绑定菜单对话框 -->
+    <el-dialog
+      :title="title"
+      :visible.sync="menuDialogVisible"
+      width="30%"
+      center>
+      <el-tree
+        :data="menuTree"
+        show-checkbox
+        :default-expanded-keys="defaultMenuTree"
+        :default-checked-keys="defaultMenuTree"
+        node-key="id"
+        ref="tree"
+        highlight-current
+        :props="menuProps">
+      </el-tree>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="menuDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitMenu">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 绑定资源对话框 -->
+    <el-dialog
+      :title="title"
+      :visible.sync="resourceDialogVisible"
+      width="30%"
+      center>
+      <el-tree
+        :data="resourceTree"
+        show-checkbox
+        :default-expanded-keys="defaultResourceTree"
+        :default-checked-keys="defaultResourceTree"
+        node-key="id"
+        ref="tree"
+        highlight-current
+        :props="resourceProps">
+      </el-tree>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="resourceDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitResource">确 定</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -114,6 +170,8 @@
 import { mapGetters } from 'vuex'
 import { Message } from 'element-ui'
 import { listRole, getRole, addRole, updateRole, delRole, exportRole, changeSwitch } from '@/api/auth/role'
+import { getMenuTreeById, getAllMenuTree, updateMenuTree } from '@/api/auth/menu'
+import { getAllResourceTree, getResourceTreeById, updateResourceTree } from '@/api/auth/resource'
 
 const defaultAdminRole = {
   // 查询参数
@@ -162,7 +220,31 @@ export default {
         // 分页参数（条）
         pageSize: 10,
         keyword: null
-      }
+      },
+      // 绑定菜单对话框控制
+      menuDialogVisible: false,
+      // 绑定资源对话框控制
+      resourceDialogVisible: false,
+      // 菜单树数据
+      menuTree: [],
+      // 资源树数据
+      resourceTree: [],
+      // 默认勾选菜单树数据
+      defaultMenuTree: [],
+      // 默认勾选资源树数据
+      defaultResourceTree: [],
+      // 指定菜单树默认值
+      menuProps: {
+        children: 'children',
+        label: 'title'
+      },
+      // 指定资源默认值
+      resourceProps: {
+        children: 'children',
+        label: 'name'
+      },
+      // 被操作的角色id
+      roleId: 0
     };
   },
   created() {
@@ -272,6 +354,48 @@ export default {
       console.log('handleCurrentChange:' + event)
       this.listQuery.pageNum = event
       this.getList()
+    },
+    /** 菜单绑定 */
+    handleBindMenu(row) {
+      getAllMenuTree().then(response => {
+        this.defaultMenuTree = [];
+        this.menuDialogVisible = true;
+        this.menuTree = response.data;
+        this.title = "菜单绑定";
+        getMenuTreeById(row.id).then(response => {
+          this.roleId = row.id;
+          this.defaultMenuTree = response.data;
+        });
+      });
+    },
+    /** 资源绑定 */
+    handleBindResource(row) {
+      getAllResourceTree().then(response => {
+        this.defaultResourceTree = [];
+        this.resourceDialogVisible = true;
+        this.resourceTree = response.data;
+        this.title = "资源绑定";
+        getResourceTreeById(row.id).then(response => {
+          this.roleId = row.id;
+          this.defaultResourceTree = response.data;
+        });
+      });
+    },
+    /** 菜单绑定提交 */
+    submitMenu() {
+      const menuTreeData = this.$refs.tree.getCheckedKeys();
+      updateMenuTree({ id: this.roleId, data: menuTreeData }).then(response => {
+        Message.success(response.message);
+        this.menuDialogVisible = false;
+      });
+    },
+    /** 资源绑定提交 */
+    submitResource() {
+      const resourceTreeData = this.$refs.tree.getCheckedKeys().filter(Boolean);
+      updateResourceTree({ id: this.roleId, data: resourceTreeData }).then(response => {
+        Message.success(response.message);
+        this.resourceDialogVisible = false;
+      });
     }
   }
 }

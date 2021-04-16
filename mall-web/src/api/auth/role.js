@@ -66,3 +66,31 @@ export function changeSwitch(row) {
     }
   })
 }
+
+// 查询所有可用角色
+export function getRoleAll() {
+  return request({
+    url: '/mall-admin/role/getRoleAll',
+    method: 'get'
+  })
+}
+
+// 更新用户的角色
+export function updateRoleById(data) {
+  return request({
+    url: '/mall-admin/role/updateRoleById',
+    method: 'put',
+    params: {
+      userId: data.userId,
+      roleId: data.roleId
+    }
+  })
+}
+
+// 根据用户id查询角色
+export function getRoleById(id) {
+  return request({
+    url: '/mall-admin/role/getRoleById/' + id,
+    method: 'get'
+  })
+}

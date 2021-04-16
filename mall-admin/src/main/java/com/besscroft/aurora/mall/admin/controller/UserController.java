@@ -86,7 +86,7 @@ public class UserController {
     @PostMapping(value = "/logout")
     public AjaxResult logout() {
         BmsAuthUser currentAdmin = userService.getCurrentAdmin();
-        boolean b = userService.logout(currentAdmin.getId());
+        userService.logout(currentAdmin.getId());
         return AjaxResult.success("成功退出登录啦！");
     }
 

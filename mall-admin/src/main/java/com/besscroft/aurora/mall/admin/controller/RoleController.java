@@ -91,4 +91,33 @@ public class RoleController {
         return AjaxResult.error("哎呀，状态更新失败了！");
     }
 
+    @ApiOperation("查询所有可用角色")
+    @GetMapping("/getRoleAll")
+    public AjaxResult getRoleAll() {
+        List<BmsAuthRole> roles = roleService.getRoleAll();
+        return AjaxResult.success(roles);
+    }
+
+    @ApiOperation("更新用户的角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "roleId", value = "角色id", required = true, dataType = "Long")
+    })
+    @PutMapping("/updateRoleById")
+    public AjaxResult updateRoleById(@RequestParam Long userId, @RequestParam Long roleId) {
+        boolean b = roleService.updateRoleById(userId, roleId);
+        if (b) {
+            return AjaxResult.success("更新角色绑定成功！");
+        }
+        return AjaxResult.error("哎呀，更新失败了呢！");
+    }
+
+    @ApiOperation("根据用户id查询角色")
+    @ApiImplicitParam(name = "id", value = "用户id", readOnly = true, dataType = "Long")
+    @GetMapping("/getRoleById/{id}")
+    public AjaxResult getRoleById(@PathVariable("id") Long id) {
+        BmsAuthRole role = roleService.getRoleById(id);
+        return AjaxResult.success(role);
+    }
+
 }

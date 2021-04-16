@@ -3,6 +3,8 @@ package com.besscroft.aurora.mall.admin.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.besscroft.aurora.mall.admin.mapper.BmsAuthMenuMapper;
+import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceMapper;
+import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceSortMapper;
 import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.common.entity.BmsAuthMenu;
 import com.besscroft.aurora.mall.common.model.MetaVo;
@@ -24,6 +26,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private BmsAuthMenuMapper bmsAuthMenuMapper;
+
+    @Autowired
+    private BmsAuthResourceMapper bmsAuthResourceMapper;
+
+    @Autowired
+    private BmsAuthResourceSortMapper bmsAuthResourceSortMapper;
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -147,6 +155,32 @@ public class MenuServiceImpl implements MenuService {
     public boolean addMenu(BmsAuthMenu bmsAuthMenu) {
         bmsAuthMenu.setCreateTime(new Date());
         return bmsAuthMenuMapper.addMenu(bmsAuthMenu) > 0;
+    }
+
+    @Override
+    public List<Long> getMenuTreeById(Long id) {
+        List<Long> longs = bmsAuthMenuMapper.selectMenuTreeById(id);
+        return longs;
+    }
+
+    @Override
+    public List<BmsAuthMenu> getAllMenuTree() {
+        List<BmsAuthMenu> parentMenu = bmsAuthMenuMapper.getParentMenu();
+        parentMenu.forEach(menu -> {
+            List<BmsAuthMenu> childList = bmsAuthMenuMapper.getChildList(menu.getId());
+            menu.setChildren(childList);
+        });
+        return parentMenu;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateMenuTree(List<Long> data, Long id) {
+        int i = bmsAuthMenuMapper.deleteRoleMenuRelation(id);
+        data.forEach(d -> {
+            bmsAuthMenuMapper.insertRoleMenuRelation(d, id);
+        });
+        return true;
     }
 
 }

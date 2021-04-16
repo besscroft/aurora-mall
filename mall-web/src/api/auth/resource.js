@@ -54,3 +54,31 @@ export function exportResource(query) {
     params: query
   })
 }
+
+// 获取所有资源的资源树
+export function getAllResourceTree() {
+  return request({
+    url: '/mall-admin/resource/getAllResourceTree',
+    method: 'get'
+  })
+}
+
+// 根据角色id获取资源树数组
+export function getResourceTreeById(id) {
+  return request({
+    url: '/mall-admin/resource/getResourceTreeById/' + id,
+    method: 'get'
+  })
+}
+
+// 更新资源树
+export function updateResourceTree(row) {
+  return request({
+    url: '/mall-admin/resource/updateResourceTree',
+    method: 'put',
+    params: {
+      id: row.id
+    },
+    data: row.data
+  })
+}
