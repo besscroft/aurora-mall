@@ -176,10 +176,11 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateMenuTree(List<Long> data, Long id) {
-        int i = bmsAuthMenuMapper.deleteRoleMenuRelation(id);
+        bmsAuthMenuMapper.deleteRoleMenuRelation(id);
         data.forEach(d -> {
             bmsAuthMenuMapper.insertRoleMenuRelation(d, id);
         });
+        redisTemplate.delete("admin");
         return true;
     }
 

@@ -44,6 +44,9 @@ public class ResourceServiceImpl implements ResourceService {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Autowired
+    private ResourceServiceImpl resourceServiceImpl;
+
     @Value("${spring.application.name}")
     private String applicationName;
 
@@ -133,6 +136,7 @@ public class ResourceServiceImpl implements ResourceService {
         data.forEach(d -> {
             bmsAuthResourceMapper.insertRoleResourceRelation(d, id);
         });
+        resourceServiceImpl.initRoleResourceMap();
         return true;
     }
 

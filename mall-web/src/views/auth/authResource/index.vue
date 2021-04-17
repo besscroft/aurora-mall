@@ -118,7 +118,7 @@ export default {
   },
   data() {
     return {
-      adminRole: Object.assign({}, defaultAdminResource),
+      adminResource: Object.assign({}, defaultAdminResource),
       // 遮罩层
       loading: true,
       // 选中数组
@@ -152,7 +152,7 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询权限管理模块角色列表 */
+    /** 查询权限管理模块资源列表 */
     getList() {
       this.loading = true;
       console.log(this.listQuery)

@@ -26,8 +26,8 @@
       </div>
       <div>
         <span></span>
-        <img src="https://blog.52bess.com/images/wechat_channel.jpg" style="width: 150px" />
-        <img src="https://blog.52bess.com/images/RSS.png" style="width: 150px" />
+        <img src="https://imgcdn.52bess.com/images/2b9dd5d0cb163.jpg" style="width: 150px" />
+        <img src="https://imgcdn.52bess.com/images/660d6aa2efed3.png" style="width: 150px" />
       </div>
     </el-card>
   </div>
