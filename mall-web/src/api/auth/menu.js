@@ -74,3 +74,31 @@ export function changeSwitch(row) {
     }
   })
 }
+
+// 获取所有菜单的菜单树
+export function getAllMenuTree() {
+  return request({
+    url: '/mall-admin/menu/getAllMenuTree',
+    method: 'get'
+  })
+}
+
+// 根据角色id获取菜单树数组
+export function getMenuTreeById(id) {
+  return request({
+    url: '/mall-admin/menu/getMenuTreeById/' + id,
+    method: 'get'
+  })
+}
+
+// 更新菜单树
+export function updateMenuTree(row) {
+  return request({
+    url: '/mall-admin/menu/updateMenuTree',
+    method: 'put',
+    params: {
+      id: row.id
+    },
+    data: row.data
+  })
+}

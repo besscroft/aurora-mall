@@ -50,7 +50,7 @@
         <el-table-column label="菜单排序" align="center" prop="sort" />
         <el-table-column label="前端名称" align="center" prop="name" />
         <el-table-column label="路由地址" align="center" prop="path" />
-        <el-table-column label="最后登录时间" align="center" prop="loginTime" />
+        <el-table-column label="创建时间" align="center" prop="createTime" />
         <el-table-column label="帐号启用状态" align="center" prop="hidden" width="160">
           <template slot-scope="scope">
             <el-switch

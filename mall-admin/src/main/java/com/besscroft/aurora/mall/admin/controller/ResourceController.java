@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.controller;
 
+import com.besscroft.aurora.mall.admin.dto.BmsResourceParam;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
 import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
@@ -75,6 +76,34 @@ public class ResourceController {
             return AjaxResult.success("删除成功！");
         }
         return AjaxResult.error("哎呀，删除失败了");
+    }
+
+    @ApiOperation("获取所有资源的资源树")
+    @GetMapping("/getAllResourceTree")
+    public AjaxResult getAllResourceTree() {
+        List<BmsResourceParam> tree = resourceService.getAllResourceTree();
+        return AjaxResult.success(tree);
+    }
+
+    @ApiOperation("根据角色id获取资源树数组")
+    @GetMapping("/getResourceTreeById/{id}")
+    public AjaxResult getResourceTreeById(@PathVariable("id") Long id) {
+        List<Long> tree = resourceService.getResourceTreeById(id);
+        return AjaxResult.success(tree);
+    }
+
+    @ApiOperation("更新资源树")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "data", value = "资源树数据",required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
+    })
+    @PutMapping("/updateResourceTree")
+    public AjaxResult updateResourceTree(@RequestBody List<Long> data, @RequestParam Long id) {
+        boolean b = resourceService.updateResourceTree(data, id);
+        if (b) {
+            return AjaxResult.success("更新成功！");
+        }
+        return AjaxResult.error("哎呀，更新失败了呢！");
     }
 
 }

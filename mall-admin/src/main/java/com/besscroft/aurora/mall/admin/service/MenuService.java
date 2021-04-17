@@ -80,4 +80,25 @@ public interface MenuService {
      */
     boolean addMenu(BmsAuthMenu bmsAuthMenu);
 
+    /**
+     * 根据角色id获取菜单树数组
+     * @param id
+     * @return
+     */
+    List<Long> getMenuTreeById(Long id);
+
+    /**
+     * 获取所有菜单的菜单树
+     * @return
+     */
+    List<BmsAuthMenu> getAllMenuTree();
+
+    /**
+     * 批量更新菜单树
+     * @param data
+     * @param id
+     * @return
+     */
+    boolean updateMenuTree(List<Long> data, Long id);
+
 }

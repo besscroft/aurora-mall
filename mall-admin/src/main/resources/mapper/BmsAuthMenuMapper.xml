@@ -98,6 +98,12 @@
         order by m.sort
     </select>
 
+    <select id="getChildList" resultSets="java.util.List" resultMap="BmsAuthMenuMap">
+        select <include refid="Base_Column_List"/>
+        from bms_auth_menu
+        where parent_id = #{parentId}
+    </select>
+
     <select id="selectMenuListByPage" resultSets="java.util.List" resultMap="BmsAuthMenuMap">
         select <include refid="Base_Column_List" />
         from bms_auth_menu
@@ -166,6 +172,24 @@
         (parent_id, create_time, title, parent_title, level, sort, name, path, icon, hidden)
         values
         (#{parentId}, #{createTime}, #{title}, #{parentTitle}, #{level}, #{sort}, #{name}, #{path}, #{icon}, #{hidden})
+    </insert>
+
+    <select id="selectMenuTreeById" resultSets="java.util.List" resultType="long">
+        select menu_id
+        from bms_auth_role_menu_relation
+        where role_id = #{id}
+    </select>
+
+    <delete id="deleteRoleMenuRelation">
+        delete from bms_auth_role_menu_relation
+        where role_id = #{id}
+    </delete>
+
+    <insert id="insertRoleMenuRelation">
+        insert into bms_auth_role_menu_relation
+        (role_id, menu_id)
+        values
+        (#{roleId}, #{menuId})
     </insert>
 
 </mapper>

@@ -71,4 +71,20 @@ public interface BmsAuthRoleMapper extends BaseMapper<BmsAuthRole> {
     int changeSwitch(@Param("status") Integer status,
                      @Param("id") Long id);
 
+    /**
+     * 根据用户id删除用户和角色对应关系
+     * @param userId
+     * @return
+     */
+    int deleteUserRoleRelationById(Long userId);
+
+    /**
+     * 更新用户和角色对应关系
+     * @param userId
+     * @param roleId
+     * @return
+     */
+    int insertUserRoleRelation(@Param("userId") Long userId,
+                       @Param("roleId") Long roleId);
+
 }

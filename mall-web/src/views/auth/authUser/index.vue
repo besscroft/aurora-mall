@@ -67,6 +67,12 @@
               size="mini"
               type="text"
               icon="el-icon-edit"
+              @click="handleBind(scope.row)"
+            >角色绑定</el-button>
+            <el-button
+              size="mini"
+              type="text"
+              icon="el-icon-edit"
               @click="handleUpdate(scope.row)"
             >修改</el-button>
             <el-button
@@ -126,12 +132,39 @@
       </div>
     </el-dialog>
 
+    <!-- 绑定角色对话框 -->
+    <el-dialog
+      :title="title"
+      :visible.sync="centerDialogVisible"
+      width="30%"
+      center>
+      <el-tag v-if="roleData">当前绑定角色为：{{ roleData.name }}</el-tag>
+      <el-tag v-if="!roleData">当前无绑定角色</el-tag>
+      <el-form :model="form">
+        <el-form-item label="角色" label-width="100px">
+          <el-select v-model="form.id" placeholder="请选择角色">
+            <el-option
+              v-for="item in roleDataList"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="centerDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitRole">确 定</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { listUser, getUser, updateUser, addUser, delUser, exportUser, changeSwitch } from '@/api/auth/user'
+import { getRoleAll, updateRoleById, getRoleById } from '@/api/auth/role'
 import { Message } from 'element-ui'
 
 const defaultAdminUser = {
@@ -187,7 +220,14 @@ export default {
         // 分页参数（条）
         pageSize: 10,
         keyword: null
-      }
+      },
+      centerDialogVisible: false,
+      // 可选择的角色数据
+      roleDataList: [],
+      // 编辑的用户id
+      userId: 0,
+      // 用户的角色数据
+      roleData: []
     };
   },
   created() {
@@ -297,6 +337,31 @@ export default {
       console.log('handleCurrentChange:' + event)
       this.listQuery.pageNum = event
       this.getList()
+    },
+    /** 角色绑定 */
+    handleBind(row) {
+      getRoleAll().then(response => {
+        this.roleData = null;
+        this.userId = row.id;
+        this.roleDataList = response.data;
+        this.centerDialogVisible = true;
+        this.title = "一个用户只能绑定一个角色！！！";
+        getRoleById(row.id).then(response => {
+          if (response.data != null) {
+            this.roleData = response.data;
+          }
+        });
+      });
+    },
+    /** 用户角色提交更新 */
+    submitRole() {
+      if (this.form.id != null) {
+        updateRoleById({userId: this.userId, roleId: this.form.id}).then(response => {
+          Message.success(response.message);
+          this.centerDialogVisible = false;
+          // this.getList();
+        });
+      }
     }
   }
 }

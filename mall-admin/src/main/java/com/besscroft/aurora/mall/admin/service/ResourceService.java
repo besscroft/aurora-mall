@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
+import com.besscroft.aurora.mall.admin.dto.BmsResourceParam;
 import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
 
 import java.util.List;
@@ -55,5 +56,25 @@ public interface ResourceService {
      * @return
      */
     boolean delResource(Long id);
+
+    /**
+     * 获取所有资源的资源树
+     * @return
+     */
+    List<BmsResourceParam> getAllResourceTree();
+
+    /**
+     * 根据角色id获取资源树数组
+     * @return
+     */
+    List<Long> getResourceTreeById(Long id);
+
+    /**
+     * 批量更新资源树
+     * @param data
+     * @param id
+     * @return
+     */
+    boolean updateResourceTree(List<Long> data, Long id);
 
 }

@@ -55,4 +55,18 @@ public interface RoleService {
      */
     boolean changeSwitch(boolean status, Long id);
 
+    /**
+     * 查询所有角色
+     * @return
+     */
+    List<BmsAuthRole> getRoleAll();
+
+    /**
+     * 根据用户id和角色id修改用户和角色的对应关系
+     * @param userId
+     * @param roleId
+     * @return
+     */
+    boolean updateRoleById(Long userId, Long roleId);
+
 }
