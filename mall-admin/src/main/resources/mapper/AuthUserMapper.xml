@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.besscroft.aurora.mall.admin.mapper.AuthUserMapper">
+
+    <resultMap id="authUserMap" type="com.besscroft.aurora.mall.common.entity.AuthUser">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="icon" property="icon"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="note" property="note"/>
+        <result column="create_time" property="createTime"/>
+        <result column="login_time" property="loginTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <sql id="selectAuthUserVo">
+        select id, username, password, icon, email, phone, nick_name, note, create_time, login_time, status from bms_auth_user
+    </sql>
+
+    <select id="selectAuthUserByUsername" parameterType="String" resultMap="authUserMap">
+        <include refid="selectAuthUserVo"/>
+        where username = #{username} and del = '1'
+    </select>
+
+    <select id="selectUserListByPage" resultSets="java.util.List" resultMap="authUserMap">
+        <include refid="selectAuthUserVo" />
+        where del = '1'
+        <if test="keyword != null">
+            and username like CONCAT('%',#{keyword},'%')
+        </if>
+        order by id
+<!--        <if test="pageNum != null and pageSize != null">-->
+<!--            limit #{pageNum}, #{pageSize}-->
+<!--        </if>-->
+    </select>
+
+    <update id="updateLoginTime">
+        update bms_auth_user
+        set login_time = #{loginTime}
+        where id = #{id}
+    </update>
+
+    <update id="updateUser">
+        update bms_auth_user
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName},
+            </if>
+            <if test="note != null">
+                note = #{note},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id} and del = '1'
+    </update>
+
+    <update id="changeSwitch">
+        update bms_auth_user
+        set status = #{status}
+        where id = #{id} and del = '1'
+    </update>
+
+    <update id="delUser">
+        update bms_auth_user
+        set del = '0'
+        where id = #{id}
+    </update>
+
+    <insert id="insertUser">
+        insert into bms_auth_user
+        (username, password, icon, email, phone, nick_name, note, create_time, login_time, status, del)
+        values
+        (#{username}, #{password}, #{icon}, #{email}, #{phone}, #{nickName}, #{note}, #{createTime}, #{loginTime}, #{status}, #{del})
+    </insert>
+
+    <select id="getAllList" resultSets="java.util.List" resultMap="authUserMap">
+        <include refid="selectAuthUserVo"/>
+    </select>
+
+</mapper>

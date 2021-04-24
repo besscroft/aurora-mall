@@ -1,13 +1,13 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import cn.hutool.core.collection.CollUtil;
-import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
-import com.besscroft.aurora.mall.admin.dto.BmsUserLoginParam;
+import com.besscroft.aurora.mall.admin.dto.AdminParam;
+import com.besscroft.aurora.mall.admin.dto.UserLoginParam;
 import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.domain.UserDto;
-import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
-import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
+import com.besscroft.aurora.mall.common.entity.AuthRole;
+import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
 import io.swagger.annotations.Api;
@@ -40,9 +40,9 @@ public class UserController {
 
     @ApiOperation(value = "登录并返回token")
     @PostMapping(value = "/login")
-    public AjaxResult login(@Validated @RequestBody BmsUserLoginParam bmsUserLoginParam) {
-        log.info("请求进来了,打印bmsUserLoginParam:{}",bmsUserLoginParam);
-        AjaxResult result = userService.login(bmsUserLoginParam.getUsername(), bmsUserLoginParam.getPassword());
+    public AjaxResult login(@Validated @RequestBody UserLoginParam userLoginParam) {
+        log.info("请求进来了,打印bmsUserLoginParam:{}", userLoginParam);
+        AjaxResult result = userService.login(userLoginParam.getUsername(), userLoginParam.getPassword());
         log.info("请求进来了,oauth2Token:{}",result);
         return AjaxResult.success(result);
     }
@@ -56,8 +56,8 @@ public class UserController {
 
     @ApiOperation(value = "超级管理员添加后台管理系统用户接口")
     @PostMapping("/updateUser")
-    public AjaxResult updateUser(@Validated @RequestBody BmsAdminParam bmsAdminParam) {
-        boolean b = userService.register(bmsAdminParam);
+    public AjaxResult updateUser(@Validated @RequestBody AdminParam adminParam) {
+        boolean b = userService.register(adminParam);
         if (b) {
             return AjaxResult.success("添加管理平台用户成功!");
         } else {
@@ -68,13 +68,13 @@ public class UserController {
     @ApiOperation(value = "获取当前后台系统登录用户的一些信息")
     @GetMapping("/info")
     public AjaxResult getInfo() {
-        BmsAuthUser currentAdmin = userService.getCurrentAdmin();
+        AuthUser currentAdmin = userService.getCurrentAdmin();
         Map<String, Object> data = menuService.getTreeListById(currentAdmin.getId());
         data.put("username", currentAdmin.getNickName());
         data.put("icon", currentAdmin.getIcon());
-        List<BmsAuthRole> roleList = userService.getRoleList(currentAdmin.getId());
+        List<AuthRole> roleList = userService.getRoleList(currentAdmin.getId());
         if (CollUtil.isNotEmpty(roleList)) {
-            List<String> roles = roleList.stream().map(BmsAuthRole::getName).collect(Collectors.toList());
+            List<String> roles = roleList.stream().map(AuthRole::getName).collect(Collectors.toList());
             data.put("roles", roles);
         }
         // 设置登录时间
@@ -85,7 +85,7 @@ public class UserController {
     @ApiOperation("后台管理系统登出功能")
     @PostMapping(value = "/logout")
     public AjaxResult logout() {
-        BmsAuthUser currentAdmin = userService.getCurrentAdmin();
+        AuthUser currentAdmin = userService.getCurrentAdmin();
         userService.logout(currentAdmin.getId());
         return AjaxResult.success("成功退出登录啦！");
     }
@@ -97,7 +97,7 @@ public class UserController {
     })
     @GetMapping("/list")
     public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        List<BmsAuthUser> list = userService.getUserPageList(pageNum, pageSize, null);
+        List<AuthUser> list = userService.getUserPageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
@@ -105,15 +105,15 @@ public class UserController {
     @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "Long")
     @GetMapping("/getUser/{id}")
     public AjaxResult getUser(@PathVariable("id") Long id) {
-        BmsAuthUser user = userService.getUserById(id);
+        AuthUser user = userService.getUserById(id);
         user.setPassword("");
         return AjaxResult.success(user);
     }
 
     @ApiOperation("修改权限管理模块用户")
     @PutMapping("/updateUser")
-    public AjaxResult updateUser(@Validated @RequestBody BmsAuthUser bmsAuthUser) {
-        BmsAuthUser currentAdmin = userService.getCurrentAdmin();
+    public AjaxResult updateUser(@Validated @RequestBody AuthUser bmsAuthUser) {
+        AuthUser currentAdmin = userService.getCurrentAdmin();
         if (!"1".equals(bmsAuthUser.getId()) || ("1".equals(bmsAuthUser.getId()) && "1".equals(currentAdmin.getId()))) {
             boolean b = userService.updateUser(bmsAuthUser);
             if (b) {
@@ -132,7 +132,7 @@ public class UserController {
     })
     @PutMapping("/changeSwitch")
     public AjaxResult changeSwitch(@RequestParam boolean status, @RequestParam Long id) {
-        BmsAuthUser currentAdmin = userService.getCurrentAdmin();
+        AuthUser currentAdmin = userService.getCurrentAdmin();
         if (currentAdmin.getId() != id && !"1".equals(id)) {
             boolean b = userService.changeSwitch(status, id);
             if (b && status == true) {
@@ -148,7 +148,7 @@ public class UserController {
     @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "Long")
     @DeleteMapping("/delUser/{id}")
     public AjaxResult delUser(@PathVariable("id") Long id) {
-        BmsAuthUser currentAdmin = userService.getCurrentAdmin();
+        AuthUser currentAdmin = userService.getCurrentAdmin();
         if (!"1".equals(id) || currentAdmin.getId() != id) {
             boolean b = userService.delUser(id);
             if (b) {
@@ -160,7 +160,7 @@ public class UserController {
 
     @ApiOperation("新增权限管理模块用户")
     @PostMapping("/addUser")
-    public AjaxResult addUser(@RequestBody BmsAuthUser bmsAuthUser) {
+    public AjaxResult addUser(@RequestBody AuthUser bmsAuthUser) {
         log.info("BmsAuthUser:{}", bmsAuthUser);
         boolean b = userService.addUser(bmsAuthUser);
         if (b) {

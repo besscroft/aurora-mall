@@ -1,7 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.RoleService;
-import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
+import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
 import io.swagger.annotations.Api;
@@ -34,7 +34,7 @@ public class RoleController {
     })
     @GetMapping("/list")
     public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        List<BmsAuthRole> list = roleService.getRolePageList(pageNum, pageSize, null);
+        List<AuthRole> list = roleService.getRolePageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
@@ -42,13 +42,13 @@ public class RoleController {
     @ApiImplicitParam(name = "id", value = "角色id",required = true, dataType = "Long")
     @GetMapping("/getRole/{id}")
     public AjaxResult getRole(@PathVariable("id") Long id) {
-        BmsAuthRole role = roleService.getRoleById(id);
+        AuthRole role = roleService.getRoleById(id);
         return AjaxResult.success(role);
     }
 
     @ApiOperation("新增角色")
     @PostMapping("/addRole")
-    public AjaxResult addRole(@RequestBody BmsAuthRole bmsAuthRole) {
+    public AjaxResult addRole(@RequestBody AuthRole bmsAuthRole) {
         boolean b = roleService.addRole(bmsAuthRole);
         if (b) {
             return AjaxResult.success("新增成功！");
@@ -58,7 +58,7 @@ public class RoleController {
 
     @ApiOperation("修改角色")
     @PutMapping("/updateRole")
-    public AjaxResult updateRole(@RequestBody BmsAuthRole bmsAuthRole) {
+    public AjaxResult updateRole(@RequestBody AuthRole bmsAuthRole) {
         boolean b = roleService.updateRole(bmsAuthRole);
         if (b) {
             return AjaxResult.success("更新成功！");
@@ -94,7 +94,7 @@ public class RoleController {
     @ApiOperation("查询所有可用角色")
     @GetMapping("/getRoleAll")
     public AjaxResult getRoleAll() {
-        List<BmsAuthRole> roles = roleService.getRoleAll();
+        List<AuthRole> roles = roleService.getRoleAll();
         return AjaxResult.success(roles);
     }
 
@@ -116,7 +116,7 @@ public class RoleController {
     @ApiImplicitParam(name = "id", value = "用户id", readOnly = true, dataType = "Long")
     @GetMapping("/getRoleById/{id}")
     public AjaxResult getRoleById(@PathVariable("id") Long id) {
-        BmsAuthRole role = roleService.getRoleById(id);
+        AuthRole role = roleService.getRoleById(id);
         return AjaxResult.success(role);
     }
 

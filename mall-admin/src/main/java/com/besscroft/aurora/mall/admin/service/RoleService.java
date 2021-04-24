@@ -1,6 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
+import com.besscroft.aurora.mall.common.entity.AuthRole;
 
 import java.util.List;
 
@@ -17,28 +17,28 @@ public interface RoleService {
      * @param keyword
      * @return
      */
-    List<BmsAuthRole> getRolePageList(Integer pageNum, Integer pageSize, String keyword);
+    List<AuthRole> getRolePageList(Integer pageNum, Integer pageSize, String keyword);
 
     /**
      * 根据id查询角色详情
      * @param id
      * @return
      */
-    BmsAuthRole getRoleById(Long id);
+    AuthRole getRoleById(Long id);
 
     /**
      * 新增角色
      * @param bmsAuthRole
      * @return
      */
-    boolean addRole(BmsAuthRole bmsAuthRole);
+    boolean addRole(AuthRole authRole);
 
     /**
      * 更新角色信息
      * @param bmsAuthRole
      * @return
      */
-    boolean updateRole(BmsAuthRole bmsAuthRole);
+    boolean updateRole(AuthRole authRole);
 
     /**
      * 根据角色id进行假删除
@@ -59,7 +59,7 @@ public interface RoleService {
      * 查询所有角色
      * @return
      */
-    List<BmsAuthRole> getRoleAll();
+    List<AuthRole> getRoleAll();
 
     /**
      * 根据用户id和角色id修改用户和角色的对应关系

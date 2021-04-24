@@ -2,11 +2,9 @@ package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthMenuMapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceMapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceSortMapper;
+import com.besscroft.aurora.mall.admin.mapper.AuthMenuMapper;
 import com.besscroft.aurora.mall.admin.service.MenuService;
-import com.besscroft.aurora.mall.common.entity.BmsAuthMenu;
+import com.besscroft.aurora.mall.common.entity.AuthMenu;
 import com.besscroft.aurora.mall.common.model.MetaVo;
 import com.besscroft.aurora.mall.common.model.RouterVo;
 import com.github.pagehelper.PageHelper;
@@ -25,13 +23,7 @@ import java.util.*;
 public class MenuServiceImpl implements MenuService {
 
     @Autowired
-    private BmsAuthMenuMapper bmsAuthMenuMapper;
-
-    @Autowired
-    private BmsAuthResourceMapper bmsAuthResourceMapper;
-
-    @Autowired
-    private BmsAuthResourceSortMapper bmsAuthResourceSortMapper;
+    private AuthMenuMapper authMenuMapper;
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -43,9 +35,9 @@ public class MenuServiceImpl implements MenuService {
             synchronized (this) {
                 data = (Map<String, Object>) redisTemplate.boundHashOps("admin").get("user:tree:" + adminId);
                 if (CollUtil.isEmpty(data)) {
-                    List<BmsAuthMenu> menuList = bmsAuthMenuMapper.getParentListById(adminId);
+                    List<AuthMenu> menuList = authMenuMapper.getParentListById(adminId);
                     menuList.forEach(menu -> {
-                        List<BmsAuthMenu> childListById = bmsAuthMenuMapper.getChildListById(adminId, menu.getId());
+                        List<AuthMenu> childListById = authMenuMapper.getChildListById(adminId, menu.getId());
                         menu.setChildren(childListById);
                     });
                     List<RouterVo> routerVoList = new LinkedList<>();
@@ -84,15 +76,15 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<BmsAuthMenu> getMenuListById(Long adminId) {
-        List<BmsAuthMenu> menuList = (List<BmsAuthMenu>) redisTemplate.opsForValue().get("admin:menu:user:" + adminId);
+    public List<AuthMenu> getMenuListById(Long adminId) {
+        List<AuthMenu> menuList = (List<AuthMenu>) redisTemplate.opsForValue().get("admin:menu:user:" + adminId);
         if (CollUtil.isEmpty(menuList)) {
             synchronized (this) {
-                menuList = (List<BmsAuthMenu>) redisTemplate.opsForValue().get("admin:menu:user:" + adminId);
+                menuList = (List<AuthMenu>) redisTemplate.opsForValue().get("admin:menu:user:" + adminId);
                 if (CollUtil.isEmpty(menuList)) {
-                    menuList = bmsAuthMenuMapper.getParentListById(adminId);
+                    menuList = authMenuMapper.getParentListById(adminId);
                     menuList.forEach(menu -> {
-                        List<BmsAuthMenu> childListById = bmsAuthMenuMapper.getChildListById(adminId, menu.getId());
+                        List<AuthMenu> childListById = authMenuMapper.getChildListById(adminId, menu.getId());
                         menu.setChildren(childListById);
                     });
 //                    redisTemplate.delete("admin:menu:user:" + adminId);
@@ -104,70 +96,70 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<BmsAuthMenu> getMenuAllList() {
-        return bmsAuthMenuMapper.selectList(new QueryWrapper<BmsAuthMenu>());
+    public List<AuthMenu> getMenuAllList() {
+        return authMenuMapper.selectList(new QueryWrapper<AuthMenu>());
     }
 
     @Override
-    public List<BmsAuthMenu> getParentMenu() {
-        return bmsAuthMenuMapper.getParentMenu();
+    public List<AuthMenu> getParentMenu() {
+        return authMenuMapper.getParentMenu();
     }
 
     @Override
-    public List<BmsAuthMenu> getMenuPageList(Integer pageNum, Integer pageSize, String keyword) {
+    public List<AuthMenu> getMenuPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<BmsAuthMenu> menus = bmsAuthMenuMapper.selectMenuListByPage(keyword);
+        List<AuthMenu> menus = authMenuMapper.selectMenuListByPage(keyword);
         return menus;
     }
 
     @Override
-    public BmsAuthMenu getMenuById(Long id) {
-        return bmsAuthMenuMapper.selectMenuById(id);
+    public AuthMenu getMenuById(Long id) {
+        return authMenuMapper.selectMenuById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateMenu(BmsAuthMenu bmsAuthMenu) {
-        return bmsAuthMenuMapper.updateMenu(bmsAuthMenu) > 0;
+    public boolean updateMenu(AuthMenu authMenu) {
+        return authMenuMapper.updateMenu(authMenu) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean changeSwitch(boolean hidden, Long id, Long adminId) {
         if (hidden) {
-            int i = bmsAuthMenuMapper.changeSwitch(0, id);
+            int i = authMenuMapper.changeSwitch(0, id);
             if (i>0) {
                 redisTemplate.boundHashOps("admin").delete("user:tree:" + adminId);
                 return true;
             }
         }
-        return bmsAuthMenuMapper.changeSwitch(1, id) > 0;
+        return authMenuMapper.changeSwitch(1, id) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delMenu(Long id) {
-        return bmsAuthMenuMapper.delMenu(id) > 0;
+        return authMenuMapper.delMenu(id) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addMenu(BmsAuthMenu bmsAuthMenu) {
-        bmsAuthMenu.setCreateTime(new Date());
-        return bmsAuthMenuMapper.addMenu(bmsAuthMenu) > 0;
+    public boolean addMenu(AuthMenu authMenu) {
+        authMenu.setCreateTime(new Date());
+        return authMenuMapper.addMenu(authMenu) > 0;
     }
 
     @Override
     public List<Long> getMenuTreeById(Long id) {
-        List<Long> longs = bmsAuthMenuMapper.selectMenuTreeById(id);
+        List<Long> longs = authMenuMapper.selectMenuTreeById(id);
         return longs;
     }
 
     @Override
-    public List<BmsAuthMenu> getAllMenuTree() {
-        List<BmsAuthMenu> parentMenu = bmsAuthMenuMapper.getParentMenu();
+    public List<AuthMenu> getAllMenuTree() {
+        List<AuthMenu> parentMenu = authMenuMapper.getParentMenu();
         parentMenu.forEach(menu -> {
-            List<BmsAuthMenu> childList = bmsAuthMenuMapper.getChildList(menu.getId());
+            List<AuthMenu> childList = authMenuMapper.getChildList(menu.getId());
             menu.setChildren(childList);
         });
         return parentMenu;
@@ -176,9 +168,9 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateMenuTree(List<Long> data, Long id) {
-        bmsAuthMenuMapper.deleteRoleMenuRelation(id);
+        authMenuMapper.deleteRoleMenuRelation(id);
         data.forEach(d -> {
-            bmsAuthMenuMapper.insertRoleMenuRelation(d, id);
+            authMenuMapper.insertRoleMenuRelation(d, id);
         });
         redisTemplate.delete("admin");
         return true;

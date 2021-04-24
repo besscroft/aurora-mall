@@ -1,11 +1,11 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsUpdateLogDetailMapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsUpdateLogMapper;
+import com.besscroft.aurora.mall.admin.mapper.UpdateLogDetailMapper;
+import com.besscroft.aurora.mall.admin.mapper.UpdateLogMapper;
 import com.besscroft.aurora.mall.admin.service.UpdateLogService;
-import com.besscroft.aurora.mall.common.entity.BmsUpdateLog;
-import com.besscroft.aurora.mall.common.entity.BmsUpdateLogDetail;
+import com.besscroft.aurora.mall.common.entity.UpdateLog;
+import com.besscroft.aurora.mall.common.entity.UpdateLogDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +19,18 @@ import java.util.List;
 public class UpdateLogServiceImpl implements UpdateLogService {
 
     @Autowired
-    private BmsUpdateLogMapper bmsUpdateLogMapper;
+    private UpdateLogMapper updateLogMapper;
 
     @Autowired
-    private BmsUpdateLogDetailMapper bmsUpdateLogDetailMapper;
+    private UpdateLogDetailMapper updateLogDetailMapper;
 
     @Override
-    public List<BmsUpdateLog> getUpdateLogList() {
-        List<BmsUpdateLog> updateLogs = bmsUpdateLogMapper.selectAllList();
+    public List<UpdateLog> getUpdateLogList() {
+        List<UpdateLog> updateLogs = updateLogMapper.selectAllList();
         updateLogs.forEach(updateLog -> {
-            QueryWrapper<BmsUpdateLogDetail> queryWrapper = new QueryWrapper<>();
+            QueryWrapper<UpdateLogDetail> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("log_id", updateLog.getId());
-            List<BmsUpdateLogDetail> updateLogDetails = bmsUpdateLogDetailMapper.selectList(queryWrapper);
+            List<UpdateLogDetail> updateLogDetails = updateLogDetailMapper.selectList(queryWrapper);
             updateLog.setDetail(updateLogDetails);
         });
         return updateLogs;

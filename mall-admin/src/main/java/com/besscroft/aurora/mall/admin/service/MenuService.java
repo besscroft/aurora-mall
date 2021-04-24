@@ -1,6 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.common.entity.BmsAuthMenu;
+import com.besscroft.aurora.mall.common.entity.AuthMenu;
 
 import java.util.List;
 import java.util.Map;
@@ -23,39 +23,39 @@ public interface MenuService {
      * @param adminId
      * @return
      */
-    List<BmsAuthMenu> getMenuListById(Long adminId);
+    List<AuthMenu> getMenuListById(Long adminId);
 
     /**
      * 获取所有系统菜单
      * @return
      */
-    List<BmsAuthMenu> getMenuAllList();
+    List<AuthMenu> getMenuAllList();
 
     /**
      * 获取所有父菜单
      * @return
      */
-    List<BmsAuthMenu> getParentMenu();
+    List<AuthMenu> getParentMenu();
 
     /**
      * 分页查询菜单
      * @return
      */
-    List<BmsAuthMenu> getMenuPageList(Integer pageNum, Integer pageSize, String keyword);
+    List<AuthMenu> getMenuPageList(Integer pageNum, Integer pageSize, String keyword);
 
     /**
      * 根据id获取菜单详细信息
      * @param id
      * @return
      */
-    BmsAuthMenu getMenuById(Long id);
+    AuthMenu getMenuById(Long id);
 
     /**
      * 更新菜单信息
-     * @param bmsAuthMenu
+     * @param authMenu
      * @return
      */
-    boolean updateMenu(BmsAuthMenu bmsAuthMenu);
+    boolean updateMenu(AuthMenu authMenu);
 
     /**
      * 修改菜单显示状态
@@ -75,10 +75,10 @@ public interface MenuService {
 
     /**
      * 新增菜单
-     * @param bmsAuthMenu
+     * @param authMenu
      * @return
      */
-    boolean addMenu(BmsAuthMenu bmsAuthMenu);
+    boolean addMenu(AuthMenu authMenu);
 
     /**
      * 根据角色id获取菜单树数组
@@ -91,7 +91,7 @@ public interface MenuService {
      * 获取所有菜单的菜单树
      * @return
      */
-    List<BmsAuthMenu> getAllMenuTree();
+    List<AuthMenu> getAllMenuTree();
 
     /**
      * 批量更新菜单树

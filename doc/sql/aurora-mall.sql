@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 17/04/2021 21:58:00
+ Date: 24/04/2021 12:49:02
 */
 
 SET NAMES utf8mb4;
@@ -385,8 +385,8 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-04-17 21:55:14', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-04 17:26:03', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-04-24 12:43:08', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.52bess.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.52bess.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (5, 'user3', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user3@qq.com', '113', '普通用户3', '普通用户3', '2021-04-04 22:04:50', '2021-04-04 22:04:28', 1, 1);
@@ -879,9 +879,10 @@ CREATE TABLE `bms_update_log`  (
 -- ----------------------------
 -- Records of bms_update_log
 -- ----------------------------
-INSERT INTO `bms_update_log` VALUES (1, 1, 'v.0.0.1', 'el-icon-s-promotion', 'danger', 'bug修复', '测试版', '2021-04-17 21:14:03');
-INSERT INTO `bms_update_log` VALUES (2, 2, 'v.0.0.2', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:14:53');
-INSERT INTO `bms_update_log` VALUES (3, 3, 'v.0.0.3', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:15:45');
+INSERT INTO `bms_update_log` VALUES (1, 1, 'v0.0.1', 'el-icon-s-promotion', 'danger', 'bug修复', '测试版', '2021-04-17 21:14:03');
+INSERT INTO `bms_update_log` VALUES (2, 2, 'v0.0.2', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:14:53');
+INSERT INTO `bms_update_log` VALUES (3, 3, 'v0.0.3', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:15:45');
+INSERT INTO `bms_update_log` VALUES (4, 4, 'v0.0.4', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-04-24 12:47:14');
 
 -- ----------------------------
 -- Table structure for bms_update_log_detail
@@ -892,7 +893,7 @@ CREATE TABLE `bms_update_log_detail`  (
   `log_id` bigint(20) NULL DEFAULT NULL COMMENT '更新日志id',
   `body` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log_detail
@@ -905,6 +906,7 @@ INSERT INTO `bms_update_log_detail` VALUES (11, 2, '[fix] 修复了部分未知b
 INSERT INTO `bms_update_log_detail` VALUES (12, 2, '[feat] 新增Docker镜像');
 INSERT INTO `bms_update_log_detail` VALUES (13, 3, '[feat] 完善了权限管理模块的功能');
 INSERT INTO `bms_update_log_detail` VALUES (14, 3, '[feat] 新增版本更新日志');
+INSERT INTO `bms_update_log_detail` VALUES (15, 4, '[refactor] 简化实体类的命名，避免调用链过长');
 
 -- ----------------------------
 -- Table structure for bms_user_address

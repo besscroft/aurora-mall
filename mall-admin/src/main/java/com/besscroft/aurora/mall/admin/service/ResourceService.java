@@ -1,7 +1,7 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.admin.dto.BmsResourceParam;
-import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
+import com.besscroft.aurora.mall.admin.dto.ResourceParam;
+import com.besscroft.aurora.mall.common.entity.AuthResource;
 
 import java.util.List;
 import java.util.Map;
@@ -27,28 +27,28 @@ public interface ResourceService {
      * @param keyword
      * @return
      */
-    List<BmsAuthResource> getResourcePageList(Integer pageNum, Integer pageSize, String keyword);
+    List<AuthResource> getResourcePageList(Integer pageNum, Integer pageSize, String keyword);
 
     /**
      * 根据id获取资源详情
      * @param id
      * @return
      */
-    BmsAuthResource getResourceById(Long id);
+    AuthResource getResourceById(Long id);
 
     /**
      * 新增资源
-     * @param bmsAuthResource
+     * @param authResource
      * @return
      */
-    boolean addResource(BmsAuthResource bmsAuthResource);
+    boolean addResource(AuthResource authResource);
 
     /**
      * 更新资源信息
-     * @param bmsAuthResource
+     * @param authResource
      * @return
      */
-    boolean updateResource(BmsAuthResource bmsAuthResource);
+    boolean updateResource(AuthResource authResource);
 
     /**
      * 根据id删除资源
@@ -61,7 +61,7 @@ public interface ResourceService {
      * 获取所有资源的资源树
      * @return
      */
-    List<BmsResourceParam> getAllResourceTree();
+    List<ResourceParam> getAllResourceTree();
 
     /**
      * 根据角色id获取资源树数组

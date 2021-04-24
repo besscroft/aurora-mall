@@ -3,15 +3,15 @@ package com.besscroft.aurora.mall.admin.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
-import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthRoleMapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthUserMapper;
+import com.besscroft.aurora.mall.admin.dto.AdminParam;
+import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
+import com.besscroft.aurora.mall.admin.mapper.AuthUserMapper;
 import com.besscroft.aurora.mall.admin.service.AuthService;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.domain.UserDto;
-import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
-import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
+import com.besscroft.aurora.mall.common.entity.AuthRole;
+import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +41,10 @@ public class UserServiceImpl implements UserService {
     private AuthService authService;
 
     @Autowired
-    private BmsAuthUserMapper bmsAuthUserMapper;
+    private AuthUserMapper authUserMapper;
 
     @Autowired
-    private BmsAuthRoleMapper bmsAuthRoleMapper;
+    private AuthRoleMapper authRoleMapper;
 
     @Autowired
     private HttpServletRequest request;
@@ -77,18 +77,18 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean setLoginTime(Date loginTime, Long id) {
-        return bmsAuthUserMapper.updateLoginTime(loginTime, id) > 0;
+        return authUserMapper.updateLoginTime(loginTime, id) > 0;
     }
 
     @Override
     public UserDto loadUserByUsername(String username) {
-        BmsAuthUser bmsAuthUser = bmsAuthUserMapper.selectBmsAuthUserByUsername(username);
-        if (bmsAuthUser != null) {
-            List<BmsAuthRole> bmsAuthRoles = bmsAuthRoleMapper.selectBmsAuthRoleListByAdminId(bmsAuthUser.getId());
+        AuthUser authUser = authUserMapper.selectAuthUserByUsername(username);
+        if (authUser != null) {
+            List<AuthRole> authRoles = authRoleMapper.selectAuthRoleListByAdminId(authUser.getId());
             UserDto userDto = new UserDto();
-            BeanUtils.copyProperties(bmsAuthUser,userDto);
-            if(CollUtil.isNotEmpty(bmsAuthRoles)){
-                List<String> roleStrList = bmsAuthRoles.stream().map(item -> item.getId() + "_" + item.getName()).collect(Collectors.toList());
+            BeanUtils.copyProperties(authUser,userDto);
+            if(CollUtil.isNotEmpty(authRoles)){
+                List<String> roleStrList = authRoles.stream().map(item -> item.getId() + "_" + item.getName()).collect(Collectors.toList());
                 userDto.setRoles(roleStrList);
             }
             return userDto;
@@ -98,40 +98,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean register(BmsAdminParam bmsAdminParam) {
-        BmsAuthUser bmsAuthUser = new BmsAuthUser();
-        BeanUtils.copyProperties(bmsAdminParam, bmsAuthUser);
+    public boolean register(AdminParam adminParam) {
+        AuthUser authUser = new AuthUser();
+        BeanUtils.copyProperties(adminParam, authUser);
         // 设置用户注册的时间
-        bmsAuthUser.setCreateTime(new Date());
+        authUser.setCreateTime(new Date());
         // 设置用户状态
-        bmsAuthUser.setStatus(1);
+        authUser.setStatus(1);
         // 对密码进行加密
-        bmsAuthUser.setPassword(new BCryptPasswordEncoder().encode(bmsAdminParam.getPassword()));
+        authUser.setPassword(new BCryptPasswordEncoder().encode(adminParam.getPassword()));
         // 更新到数据库
-        int insert = bmsAuthUserMapper.insert(bmsAuthUser);
+        int insert = authUserMapper.insert(authUser);
         return insert > 0;
     }
 
     @Override
-    public BmsAuthUser getCurrentAdmin() {
+    public AuthUser getCurrentAdmin() {
         String header = request.getHeader(AuthConstants.USER_TOKEN_HEADER);
         if(StrUtil.isEmpty(header)){
             log.error("暂未登录或token已经过期");
         }
         UserDto userDto = JSONUtil.toBean(header, UserDto.class);
-        BmsAuthUser bmsAuthUser = bmsAuthUserMapper.selectById(userDto.getId());
-        return bmsAuthUser;
+        AuthUser authUser = authUserMapper.selectById(userDto.getId());
+        return authUser;
     }
 
     @Override
-    public List<BmsAuthRole> getRoleList(Long adminId) {
-        return bmsAuthRoleMapper.selectBmsAuthRoleListByAdminId(adminId);
+    public List<AuthRole> getRoleList(Long adminId) {
+        return authRoleMapper.selectAuthRoleListByAdminId(adminId);
     }
 
     @Override
-    public List<BmsAuthUser> getUserPageList(Integer pageNum, Integer pageSize, String keyword) {
+    public List<AuthUser> getUserPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<BmsAuthUser> users = bmsAuthUserMapper.selectUserListByPage(keyword);
+        List<AuthUser> users = authUserMapper.selectUserListByPage(keyword);
         users.forEach(user -> {
             user.setPassword("");
         });
@@ -139,14 +139,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public BmsAuthUser getUserById(Long id) {
-        return bmsAuthUserMapper.selectById(id);
+    public AuthUser getUserById(Long id) {
+        return authUserMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateUser(BmsAuthUser bmsAuthUser) {
-        return bmsAuthUserMapper.updateUser(bmsAuthUser) > 0;
+    public boolean updateUser(AuthUser authUser) {
+        return authUserMapper.updateUser(authUser) > 0;
     }
 
     @Override
@@ -158,32 +158,32 @@ public class UserServiceImpl implements UserService {
         } else {
             status = 0;
         }
-        return bmsAuthUserMapper.changeSwitch(status, id) > 0;
+        return authUserMapper.changeSwitch(status, id) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delUser(Long id) {
-        return bmsAuthUserMapper.delUser(id) > 0;
+        return authUserMapper.delUser(id) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addUser(BmsAuthUser bmsAuthUser) {
+    public boolean addUser(AuthUser authUser) {
         // 设置用户注册的时间
-        bmsAuthUser.setCreateTime(new Date());
+        authUser.setCreateTime(new Date());
         // 设置用户登录时间与注册时间一致
-        bmsAuthUser.setLoginTime(new Date());
+        authUser.setLoginTime(new Date());
         // 加密密码
-        bmsAuthUser.setPassword(new BCryptPasswordEncoder().encode(bmsAuthUser.getPassword()));
+        authUser.setPassword(new BCryptPasswordEncoder().encode(authUser.getPassword()));
         // 设置删除状态
-        bmsAuthUser.setDel(1);
-        return bmsAuthUserMapper.insertUser(bmsAuthUser) > 0;
+        authUser.setDel(1);
+        return authUserMapper.insertUser(authUser) > 0;
     }
 
     @Override
-    public List<BmsAuthUser> getUserAllList() {
-        return bmsAuthUserMapper.getAllList();
+    public List<AuthUser> getUserAllList() {
+        return authUserMapper.getAllList();
     }
 
 }
