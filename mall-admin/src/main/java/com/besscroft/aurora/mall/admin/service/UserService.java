@@ -1,9 +1,9 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.admin.dto.BmsAdminParam;
+import com.besscroft.aurora.mall.admin.dto.AdminParam;
 import com.besscroft.aurora.mall.common.domain.UserDto;
-import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
-import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
+import com.besscroft.aurora.mall.common.entity.AuthRole;
+import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 
 import java.util.Date;
@@ -46,43 +46,43 @@ public interface UserService {
 
     /**
      * 添加后台管理系统的用户
-     * @param bmsAdminParam
+     * @param adminParam
      * @return
      */
-    boolean register(BmsAdminParam bmsAdminParam);
+    boolean register(AdminParam adminParam);
 
     /**
      * 获取当前登录后台用户
      * @return
      */
-    BmsAuthUser getCurrentAdmin();
+    AuthUser getCurrentAdmin();
 
     /**
      * 获取用户对应的角色列表
      * @param adminId
      * @return
      */
-    List<BmsAuthRole> getRoleList(Long adminId);
+    List<AuthRole> getRoleList(Long adminId);
 
     /**
      * 分页查询用户
      * @return
      */
-    List<BmsAuthUser> getUserPageList(Integer pageNum, Integer pageSize, String keyword);
+    List<AuthUser> getUserPageList(Integer pageNum, Integer pageSize, String keyword);
 
     /**
      * 根据id获取用户信息
      * @param id
      * @return
      */
-    BmsAuthUser getUserById(Long id);
+    AuthUser getUserById(Long id);
 
     /**
      * 更新用户信息
-     * @param bmsAuthUser
+     * @param authUser
      * @return
      */
-    boolean updateUser(BmsAuthUser bmsAuthUser);
+    boolean updateUser(AuthUser authUser);
 
     /**
      * 用户账户启用状态更新
@@ -101,15 +101,15 @@ public interface UserService {
 
     /**
      * 新增权限管理模块用户
-     * @param bmsAuthUser
+     * @param authUser
      * @return
      */
-    boolean addUser(BmsAuthUser bmsAuthUser);
+    boolean addUser(AuthUser authUser);
 
     /**
      * 查询所有用户
      * @return
      */
-    List<BmsAuthUser> getUserAllList();
+    List<AuthUser> getUserAllList();
 
 }

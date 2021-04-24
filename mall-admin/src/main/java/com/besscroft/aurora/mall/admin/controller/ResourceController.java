@@ -1,8 +1,8 @@
 package com.besscroft.aurora.mall.admin.controller;
 
-import com.besscroft.aurora.mall.admin.dto.BmsResourceParam;
+import com.besscroft.aurora.mall.admin.dto.ResourceParam;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
-import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
+import com.besscroft.aurora.mall.common.entity.AuthResource;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
 import io.swagger.annotations.Api;
@@ -35,7 +35,7 @@ public class ResourceController {
     })
     @GetMapping("/list")
     public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        List<BmsAuthResource> list = resourceService.getResourcePageList(pageNum, pageSize, null);
+        List<AuthResource> list = resourceService.getResourcePageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
@@ -43,14 +43,14 @@ public class ResourceController {
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @GetMapping("/getResource/{id}")
     public AjaxResult getResource(@PathVariable("id") Long id) {
-        BmsAuthResource resource = resourceService.getResourceById(id);
+        AuthResource resource = resourceService.getResourceById(id);
         return AjaxResult.success(resource);
     }
 
     @ApiOperation("新增资源")
     @PostMapping("/addResource")
-    public AjaxResult addResource(@RequestBody BmsAuthResource bmsAuthResource) {
-        boolean b = resourceService.addResource(bmsAuthResource);
+    public AjaxResult addResource(@RequestBody AuthResource authResource) {
+        boolean b = resourceService.addResource(authResource);
         if (b) {
             return AjaxResult.success("新增成功！");
         }
@@ -59,7 +59,7 @@ public class ResourceController {
 
     @ApiOperation("更新资源")
     @PutMapping("/updateResource")
-    public AjaxResult updateResource(@RequestBody BmsAuthResource bmsAuthResource) {
+    public AjaxResult updateResource(@RequestBody AuthResource bmsAuthResource) {
         boolean b = resourceService.updateResource(bmsAuthResource);
         if (b) {
             return AjaxResult.success("更新成功！");
@@ -81,7 +81,7 @@ public class ResourceController {
     @ApiOperation("获取所有资源的资源树")
     @GetMapping("/getAllResourceTree")
     public AjaxResult getAllResourceTree() {
-        List<BmsResourceParam> tree = resourceService.getAllResourceTree();
+        List<ResourceParam> tree = resourceService.getAllResourceTree();
         return AjaxResult.success(tree);
     }
 

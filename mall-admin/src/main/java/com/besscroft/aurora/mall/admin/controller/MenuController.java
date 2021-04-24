@@ -2,8 +2,8 @@ package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.admin.service.UserService;
-import com.besscroft.aurora.mall.common.entity.BmsAuthMenu;
-import com.besscroft.aurora.mall.common.entity.BmsAuthUser;
+import com.besscroft.aurora.mall.common.entity.AuthMenu;
+import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
 import io.swagger.annotations.Api;
@@ -36,8 +36,8 @@ public class MenuController {
     @ApiOperation(value = "获取当前用户管理系统菜单")
     @GetMapping(value = "/getMenu")
     public AjaxResult getRouter() {
-        BmsAuthUser currentAdmin = userService.getCurrentAdmin();
-        List<BmsAuthMenu> list = menuService.getMenuListById(currentAdmin.getId());
+        AuthUser currentAdmin = userService.getCurrentAdmin();
+        List<AuthMenu> list = menuService.getMenuListById(currentAdmin.getId());
         log.info("菜单：{}",list);
         return AjaxResult.success(list);
     }
@@ -49,14 +49,14 @@ public class MenuController {
     })
     @GetMapping("/list")
     public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        List<BmsAuthMenu> list = menuService.getMenuPageList(pageNum, pageSize, null);
+        List<AuthMenu> list = menuService.getMenuPageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
     @ApiOperation("获取所有父菜单")
     @GetMapping("/getParentMenu")
     public AjaxResult getParentMenu() {
-        List<BmsAuthMenu> list = menuService.getParentMenu();
+        List<AuthMenu> list = menuService.getParentMenu();
         return AjaxResult.success(list);
     }
 
@@ -64,14 +64,14 @@ public class MenuController {
     @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
     @GetMapping("/getMenu/{id}")
     public AjaxResult getMenu(@PathVariable("id") Long id) {
-        BmsAuthMenu menu = menuService.getMenuById(id);
+        AuthMenu menu = menuService.getMenuById(id);
         return AjaxResult.success(menu);
     }
 
     @ApiOperation("修改菜单")
     @PutMapping("/updateMenu")
-    public AjaxResult updateMenu(@Validated @RequestBody BmsAuthMenu bmsAuthMenu) {
-        boolean b = menuService.updateMenu(bmsAuthMenu);
+    public AjaxResult updateMenu(@Validated @RequestBody AuthMenu authMenu) {
+        boolean b = menuService.updateMenu(authMenu);
         if (b) {
             return AjaxResult.success("更新成功！");
         }
@@ -85,7 +85,7 @@ public class MenuController {
     })
     @PutMapping("/changeSwitch")
     public AjaxResult changeSwitch(@RequestParam boolean hidden, @RequestParam Long id) {
-        BmsAuthUser currentAdmin = userService.getCurrentAdmin();
+        AuthUser currentAdmin = userService.getCurrentAdmin();
         boolean b = menuService.changeSwitch(hidden, id, currentAdmin.getId());
         if (b) {
             return AjaxResult.success("修改成功");
@@ -106,9 +106,8 @@ public class MenuController {
 
     @ApiOperation("新增菜单")
     @PostMapping("/addMenu")
-    public AjaxResult addUser(@RequestBody BmsAuthMenu bmsAuthMenu) {
-        log.info("bmsAuthMenu:{}", bmsAuthMenu);
-        boolean b = menuService.addMenu(bmsAuthMenu);
+    public AjaxResult addUser(@RequestBody AuthMenu authMenu) {
+        boolean b = menuService.addMenu(authMenu);
         if (b) {
             return AjaxResult.success("添加成功！");
         }
@@ -126,7 +125,7 @@ public class MenuController {
     @ApiOperation("获取所有菜单的菜单树")
     @GetMapping("/getAllMenuTree")
     public AjaxResult getAllMenuTree() {
-        List<BmsAuthMenu> tree = menuService.getAllMenuTree();
+        List<AuthMenu> tree = menuService.getAllMenuTree();
         return AjaxResult.success(tree);
     }
 

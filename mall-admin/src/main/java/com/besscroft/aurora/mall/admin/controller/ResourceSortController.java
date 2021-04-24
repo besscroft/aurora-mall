@@ -1,7 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.ResourceSortService;
-import com.besscroft.aurora.mall.common.entity.BmsAuthResourceSort;
+import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
 import io.swagger.annotations.Api;
@@ -34,7 +34,7 @@ public class ResourceSortController {
     })
     @GetMapping("/list")
     public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        List<BmsAuthResourceSort> list = resourceSortService.getResourcePageList(pageNum, pageSize, null);
+        List<AuthResourceSort> list = resourceSortService.getResourcePageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
@@ -42,13 +42,13 @@ public class ResourceSortController {
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @GetMapping("/getResourceSort/{id}")
     public AjaxResult getResource(@PathVariable("id") Long id) {
-        BmsAuthResourceSort resourceSort = resourceSortService.getResourceSortById(id);
+        AuthResourceSort resourceSort = resourceSortService.getResourceSortById(id);
         return AjaxResult.success(resourceSort);
     }
 
     @ApiOperation("新增资源")
     @PostMapping("/addResourceSort")
-    public AjaxResult addResource(@RequestBody BmsAuthResourceSort bmsAuthResourceSort) {
+    public AjaxResult addResource(@RequestBody AuthResourceSort bmsAuthResourceSort) {
         boolean b = resourceSortService.addResourceSort(bmsAuthResourceSort);
         if (b) {
             return AjaxResult.success("新增成功！");
@@ -58,7 +58,7 @@ public class ResourceSortController {
 
     @ApiOperation("更新资源")
     @PutMapping("/updateResourceSort")
-    public AjaxResult updateResource(@RequestBody BmsAuthResourceSort bmsAuthResourceSort) {
+    public AjaxResult updateResource(@RequestBody AuthResourceSort bmsAuthResourceSort) {
         boolean b = resourceSortService.updateResourceSort(bmsAuthResourceSort);
         if (b) {
             return AjaxResult.success("更新成功！");

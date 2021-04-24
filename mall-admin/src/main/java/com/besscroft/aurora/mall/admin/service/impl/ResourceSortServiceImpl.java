@@ -1,8 +1,8 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceSortMapper;
+import com.besscroft.aurora.mall.admin.mapper.AuthResourceSortMapper;
 import com.besscroft.aurora.mall.admin.service.ResourceSortService;
-import com.besscroft.aurora.mall.common.entity.BmsAuthResourceSort;
+import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,38 +19,38 @@ import java.util.List;
 public class ResourceSortServiceImpl implements ResourceSortService {
 
     @Autowired
-    private BmsAuthResourceSortMapper bmsAuthResourceSortMapper;
+    private AuthResourceSortMapper authResourceSortMapper;
 
     @Override
-    public List<BmsAuthResourceSort> getResourcePageList(Integer pageNum, Integer pageSize, String keyword) {
+    public List<AuthResourceSort> getResourcePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<BmsAuthResourceSort> resources = bmsAuthResourceSortMapper.selectResourceSortListByPage(keyword);
+        List<AuthResourceSort> resources = authResourceSortMapper.selectResourceSortListByPage(keyword);
         return resources;
     }
 
     @Override
-    public BmsAuthResourceSort getResourceSortById(Long id) {
-        return bmsAuthResourceSortMapper.selectById(id);
+    public AuthResourceSort getResourceSortById(Long id) {
+        return authResourceSortMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addResourceSort(BmsAuthResourceSort bmsAuthResourceSort) {
-        bmsAuthResourceSort.setCreateTime(new Date());
-        return bmsAuthResourceSortMapper.addResourceSort(bmsAuthResourceSort) > 0;
+    public boolean addResourceSort(AuthResourceSort authResourceSort) {
+        authResourceSort.setCreateTime(new Date());
+        return authResourceSortMapper.addResourceSort(authResourceSort) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateResourceSort(BmsAuthResourceSort bmsAuthResourceSort) {
-        bmsAuthResourceSort.setCreateTime(new Date());
-        return bmsAuthResourceSortMapper.updateResourceSort(bmsAuthResourceSort) > 0;
+    public boolean updateResourceSort(AuthResourceSort authResourceSort) {
+        authResourceSort.setCreateTime(new Date());
+        return authResourceSortMapper.updateResourceSort(authResourceSort) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delResourceSort(Long id) {
-        return bmsAuthResourceSortMapper.deleteById(id) > 0;
+        return authResourceSortMapper.deleteById(id) > 0;
     }
 
 }

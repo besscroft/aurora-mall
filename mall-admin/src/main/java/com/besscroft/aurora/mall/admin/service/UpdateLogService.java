@@ -1,6 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.common.entity.BmsUpdateLog;
+import com.besscroft.aurora.mall.common.entity.UpdateLog;
 
 import java.util.List;
 
@@ -14,6 +14,6 @@ public interface UpdateLogService {
      * 获取所有的版本日志
      * @return
      */
-    List<BmsUpdateLog> getUpdateLogList();
+    List<UpdateLog> getUpdateLogList();
 
 }

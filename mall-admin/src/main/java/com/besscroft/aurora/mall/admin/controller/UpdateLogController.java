@@ -1,7 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.UpdateLogService;
-import com.besscroft.aurora.mall.common.entity.BmsUpdateLog;
+import com.besscroft.aurora.mall.common.entity.UpdateLog;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +29,7 @@ public class UpdateLogController {
     @ApiOperation("查询版本日志列表")
     @GetMapping("/list")
     public AjaxResult list() {
-        List<BmsUpdateLog> list = updateLogService.getUpdateLogList();
+        List<UpdateLog> list = updateLogService.getUpdateLogList();
         return AjaxResult.success(list);
     }
 

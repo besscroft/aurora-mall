@@ -1,17 +1,17 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.besscroft.aurora.mall.admin.dto.BmsResourceParam;
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceMapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthResourceSortMapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsAuthRoleMapper;
-import com.besscroft.aurora.mall.admin.mapper.BmsRoleResourceRelationMapper;
+import com.besscroft.aurora.mall.admin.dto.ResourceParam;
+import com.besscroft.aurora.mall.admin.mapper.AuthResourceMapper;
+import com.besscroft.aurora.mall.admin.mapper.AuthResourceSortMapper;
+import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
+import com.besscroft.aurora.mall.admin.mapper.RoleResourceRelationMapper;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
-import com.besscroft.aurora.mall.common.entity.BmsAuthResource;
-import com.besscroft.aurora.mall.common.entity.BmsAuthResourceSort;
-import com.besscroft.aurora.mall.common.entity.BmsAuthRole;
-import com.besscroft.aurora.mall.common.model.BmsRoleResourceRelation;
+import com.besscroft.aurora.mall.common.entity.AuthResource;
+import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
+import com.besscroft.aurora.mall.common.entity.AuthRole;
+import com.besscroft.aurora.mall.common.model.RoleResourceRelation;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,16 +30,16 @@ import java.util.stream.Collectors;
 public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
-    private BmsAuthResourceMapper bmsAuthResourceMapper;
+    private AuthResourceMapper authResourceMapper;
 
     @Autowired
-    private BmsAuthRoleMapper bmsAuthRoleMapper;
+    private AuthRoleMapper authRoleMapper;
 
     @Autowired
-    private BmsRoleResourceRelationMapper bmsRoleResourceRelationMapper;
+    private RoleResourceRelationMapper roleResourceRelationMapper;
 
     @Autowired
-    private BmsAuthResourceSortMapper bmsAuthResourceSortMapper;
+    private AuthResourceSortMapper authResourceSortMapper;
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -53,13 +53,13 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public Map<String, List<String>> initRoleResourceMap() {
         Map<String,List<String>> RoleResourceMap = new TreeMap<>();
-        List<BmsAuthResource> authResourceList = bmsAuthResourceMapper.selectAll();
-        List<BmsAuthRole> authRoleList = bmsAuthRoleMapper.selectAll();
-        List<BmsRoleResourceRelation> roleResourceRelationList = bmsRoleResourceRelationMapper.selectAll();
-        for (BmsAuthResource resource: authResourceList) {
+        List<AuthResource> authResourceList = authResourceMapper.selectAll();
+        List<AuthRole> authRoleList = authRoleMapper.selectAll();
+        List<RoleResourceRelation> roleResourceRelationList = roleResourceRelationMapper.selectAll();
+        for (AuthResource resource: authResourceList) {
             Set<Long> roleIds = roleResourceRelationList.stream().filter(item ->
                     item.getResourceId().equals(resource.getId())
-            ).map(BmsRoleResourceRelation::getRoleId)
+            ).map(RoleResourceRelation::getRoleId)
                     .collect(Collectors.toSet());
             List<String> roleNames = authRoleList.stream().filter(item ->
                     roleIds.contains(item.getId())
@@ -76,65 +76,65 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<BmsAuthResource> getResourcePageList(Integer pageNum, Integer pageSize, String keyword) {
+    public List<AuthResource> getResourcePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<BmsAuthResource> resources = bmsAuthResourceMapper.selectResourceListByPage(keyword);
+        List<AuthResource> resources = authResourceMapper.selectResourceListByPage(keyword);
         return resources;
     }
 
     @Override
-    public BmsAuthResource getResourceById(Long id) {
-        return bmsAuthResourceMapper.selectById(id);
+    public AuthResource getResourceById(Long id) {
+        return authResourceMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addResource(BmsAuthResource bmsAuthResource) {
-        bmsAuthResource.setCreateTime(new Date());
-        return bmsAuthResourceMapper.insertResource(bmsAuthResource) > 0;
+    public boolean addResource(AuthResource authResource) {
+        authResource.setCreateTime(new Date());
+        return authResourceMapper.insertResource(authResource) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateResource(BmsAuthResource bmsAuthResource) {
-        return bmsAuthResourceMapper.updateResource(bmsAuthResource) > 0;
+    public boolean updateResource(AuthResource authResource) {
+        return authResourceMapper.updateResource(authResource) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delResource(Long id) {
-        return bmsAuthResourceMapper.deleteById(id) > 0;
+        return authResourceMapper.deleteById(id) > 0;
     }
 
     @Override
-    public List<BmsResourceParam> getAllResourceTree() {
-        List<BmsResourceParam> list = new ArrayList<>();
-        List<BmsAuthResourceSort> resourceSorts = bmsAuthResourceSortMapper.selectList(new QueryWrapper<>());
+    public List<ResourceParam> getAllResourceTree() {
+        List<ResourceParam> list = new ArrayList<>();
+        List<AuthResourceSort> resourceSorts = authResourceSortMapper.selectList(new QueryWrapper<>());
         resourceSorts.forEach(r -> {
-            BmsResourceParam bmsResourceParam = new BmsResourceParam();
-            QueryWrapper<BmsAuthResource> queryWrapper = new QueryWrapper<>();
+            ResourceParam resourceParam = new ResourceParam();
+            QueryWrapper<AuthResource> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("category_id",r.getId());
-            List<BmsAuthResource> resources = bmsAuthResourceMapper.selectList(queryWrapper);
-            bmsResourceParam.setName(r.getCategoryName());
-            bmsResourceParam.setDisabled(true);
-            bmsResourceParam.setChildren(resources);
-            list.add(bmsResourceParam);
+            List<AuthResource> resources = authResourceMapper.selectList(queryWrapper);
+            resourceParam.setName(r.getCategoryName());
+            resourceParam.setDisabled(true);
+            resourceParam.setChildren(resources);
+            list.add(resourceParam);
         });
         return list;
     }
 
     @Override
     public List<Long> getResourceTreeById(Long id) {
-        List<Long> longs = bmsAuthResourceMapper.selectResourceTreeById(id);
+        List<Long> longs = authResourceMapper.selectResourceTreeById(id);
         return longs;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateResourceTree(List<Long> data, Long id) {
-        bmsAuthResourceMapper.deleteRoleResourceRelation(id);
+        authResourceMapper.deleteRoleResourceRelation(id);
         data.forEach(d -> {
-            bmsAuthResourceMapper.insertRoleResourceRelation(d, id);
+            authResourceMapper.insertRoleResourceRelation(d, id);
         });
         resourceServiceImpl.initRoleResourceMap();
         return true;

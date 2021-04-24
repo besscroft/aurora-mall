@@ -1,6 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.common.entity.BmsAuthResourceSort;
+import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
 
 import java.util.List;
 
@@ -17,28 +17,28 @@ public interface ResourceSortService {
      * @param keyword
      * @return
      */
-    List<BmsAuthResourceSort> getResourcePageList(Integer pageNum, Integer pageSize, String keyword);
+    List<AuthResourceSort> getResourcePageList(Integer pageNum, Integer pageSize, String keyword);
 
     /**
      * 根据id获取资源类别详情
      * @param id
      * @return
      */
-    BmsAuthResourceSort getResourceSortById(Long id);
+    AuthResourceSort getResourceSortById(Long id);
 
     /**
      * 新增资源类别
-     * @param bmsAuthResourceSort
+     * @param authResourceSort
      * @return
      */
-    boolean addResourceSort(BmsAuthResourceSort bmsAuthResourceSort);
+    boolean addResourceSort(AuthResourceSort authResourceSort);
 
     /**
      * 修改资源类别
-     * @param bmsAuthResourceSort
+     * @param authResourceSort
      * @return
      */
-    boolean updateResourceSort(BmsAuthResourceSort bmsAuthResourceSort);
+    boolean updateResourceSort(AuthResourceSort authResourceSort);
 
     /**
      * 删除资源类别
