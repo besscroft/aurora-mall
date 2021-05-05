@@ -81,7 +81,7 @@ $ git clone https://github.com/besscroft/aurora-mall.git
 git clone https://github.com/besscroft/aurora-mall.git
 
 # 进入项目目录
-cd aurora-drive/mall-web
+cd aurora-mall/mall-web
 
 # 安装依赖
 npm install
