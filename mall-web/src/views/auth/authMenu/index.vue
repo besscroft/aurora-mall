@@ -207,9 +207,7 @@ export default {
     /** 查询权限管理模块菜单列表 */
     getList() {
       this.loading = true;
-      console.log(this.listQuery)
       listMenu(this.listQuery).then(response => {
-        console.log(response.data)
         const data = response.data.list;
         data.forEach(menu => {
           if (menu.hidden == 0) {
@@ -262,7 +260,6 @@ export default {
     },
     /** 是否启用按钮监听 */
     changeSwitch(row) {
-      console.log(row)
       changeSwitch(row).then(response => {
         Message.success(response.message);
       })
@@ -304,13 +301,11 @@ export default {
     // 分页
     // 每页显示条目个数处理
     handleSizeChange(event) {
-      console.log('handleSizeChange:' + event)
       this.listQuery.pageSize = event
       this.getList()
     },
     // 当前页数处理
     handleCurrentChange(event) {
-      console.log('handleCurrentChange:' + event)
       this.listQuery.pageNum = event
       this.getList()
     }

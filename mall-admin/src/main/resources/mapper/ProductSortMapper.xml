@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.besscroft.aurora.mall.admin.mapper.ProductSortMapper">
+
+    <resultMap id="productSortMap" type="com.besscroft.aurora.mall.common.entity.ProductSort">
+        <result column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="level" property="level"/>
+        <result column="show_status" property="showStatus"/>
+        <result column="sort" property="sort"/>
+        <result column="icon" property="icon"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, parent_id, name, level, show_status, sort, icon, description
+    </sql>
+
+    <select id="selectProductSortListByPage" resultSets="java.util.List" resultMap="productSortMap">
+        select <include refid="Base_Column_List"/>
+        from  bms_product_sort
+        <where>
+            <if test="keyword != null">
+                and name like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
+        order by id
+    </select>
+
+    <insert id="addProductSort">
+        insert into bms_product_sort
+            (parent_id, name, level, show_status, sort, icon, description)
+        values
+            (#{parentId},#{name},#{level},#{showStatus},#{sort},#{icon},#{description})
+    </insert>
+
+    <update id="updateProductSort">
+        update bms_product_sort
+        <set>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="showStatus != null">
+                show_status = #{showStatus},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getProductSortByParent" resultSets="java.util.List" resultMap="productSortMap">
+        select <include refid="Base_Column_List"/>
+        from  bms_product_sort
+        where parent_id = 0
+        <if test="keyword != null">
+            and name like CONCAT('%',#{keyword},'%')
+        </if>
+        order by id
+    </select>
+
+    <update id="changeSwitch">
+        update bms_product_sort
+        set show_status = #{showStatus}
+        where id = #{id}
+    </update>
+
+</mapper>

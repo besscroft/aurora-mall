@@ -19,9 +19,11 @@
     <select id="selectResourceSortListByPage" resultSets="java.util.List" resultMap="authResourceSortMap">
         select <include refid="Base_Column_List"/>
         from  bms_auth_resource_sort
-        <if test="keyword != null">
-            and name like CONCAT('%',#{keyword},'%')
-        </if>
+        <where>
+            <if test="keyword != null">
+                and name like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
         order by id
     </select>
 

@@ -48,8 +48,8 @@ public class RoleController {
 
     @ApiOperation("新增角色")
     @PostMapping("/addRole")
-    public AjaxResult addRole(@RequestBody AuthRole bmsAuthRole) {
-        boolean b = roleService.addRole(bmsAuthRole);
+    public AjaxResult addRole(@RequestBody AuthRole authRole) {
+        boolean b = roleService.addRole(authRole);
         if (b) {
             return AjaxResult.success("新增成功！");
         }
@@ -58,8 +58,8 @@ public class RoleController {
 
     @ApiOperation("修改角色")
     @PutMapping("/updateRole")
-    public AjaxResult updateRole(@RequestBody AuthRole bmsAuthRole) {
-        boolean b = roleService.updateRole(bmsAuthRole);
+    public AjaxResult updateRole(@RequestBody AuthRole authRole) {
+        boolean b = roleService.updateRole(authRole);
         if (b) {
             return AjaxResult.success("更新成功！");
         }

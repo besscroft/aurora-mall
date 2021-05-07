@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.besscroft.aurora.mall.admin.dto.AdminParam;
 import com.besscroft.aurora.mall.admin.dto.UserLoginParam;
 import com.besscroft.aurora.mall.admin.service.MenuService;
@@ -41,7 +42,7 @@ public class UserController {
     @ApiOperation(value = "登录并返回token")
     @PostMapping(value = "/login")
     public AjaxResult login(@Validated @RequestBody UserLoginParam userLoginParam) {
-        log.info("请求进来了,打印bmsUserLoginParam:{}", userLoginParam);
+        log.info("请求进来了,打印UserLoginParam:{}", userLoginParam);
         AjaxResult result = userService.login(userLoginParam.getUsername(), userLoginParam.getPassword());
         log.info("请求进来了,oauth2Token:{}",result);
         return AjaxResult.success(result);
@@ -86,7 +87,9 @@ public class UserController {
     @PostMapping(value = "/logout")
     public AjaxResult logout() {
         AuthUser currentAdmin = userService.getCurrentAdmin();
-        userService.logout(currentAdmin.getId());
+        if (ObjectUtil.isNotNull(currentAdmin)) {
+            userService.logout(currentAdmin.getId());
+        }
         return AjaxResult.success("成功退出登录啦！");
     }
 
@@ -112,10 +115,10 @@ public class UserController {
 
     @ApiOperation("修改权限管理模块用户")
     @PutMapping("/updateUser")
-    public AjaxResult updateUser(@Validated @RequestBody AuthUser bmsAuthUser) {
+    public AjaxResult updateUser(@Validated @RequestBody AuthUser authUser) {
         AuthUser currentAdmin = userService.getCurrentAdmin();
-        if (!"1".equals(bmsAuthUser.getId()) || ("1".equals(bmsAuthUser.getId()) && "1".equals(currentAdmin.getId()))) {
-            boolean b = userService.updateUser(bmsAuthUser);
+        if (!"1".equals(authUser.getId()) || ("1".equals(authUser.getId()) && "1".equals(currentAdmin.getId()))) {
+            boolean b = userService.updateUser(authUser);
             if (b) {
                 return AjaxResult.success("更新成功！");
             } else {
@@ -160,9 +163,8 @@ public class UserController {
 
     @ApiOperation("新增权限管理模块用户")
     @PostMapping("/addUser")
-    public AjaxResult addUser(@RequestBody AuthUser bmsAuthUser) {
-        log.info("BmsAuthUser:{}", bmsAuthUser);
-        boolean b = userService.addUser(bmsAuthUser);
+    public AjaxResult addUser(@RequestBody AuthUser authUser) {
+        boolean b = userService.addUser(authUser);
         if (b) {
             return AjaxResult.success("添加成功！");
         }

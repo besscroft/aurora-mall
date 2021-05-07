@@ -25,9 +25,11 @@
     <select id="selectResourceListByPage" resultSets="java.util.List" resultMap="authResourceMap">
         select <include refid="Base_Column_List"/>
         from  bms_auth_resource
-        <if test="keyword != null">
-            and name like CONCAT('%',#{keyword},'%')
-        </if>
+        <where>
+            <if test="keyword != null">
+                and name like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
         order by id
     </select>
 

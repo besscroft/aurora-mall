@@ -96,7 +96,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { addResourceSort, delResourceSort, getResourceSort, listResourceSort, updateResourceSort} from "@/api/auth/resourceSort";
-import {Message} from "element-ui";
+import { Message } from "element-ui";
 
 const defaultAdminResourceSort = {
   // 查询参数
@@ -150,12 +150,10 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询权限管理模块角色列表 */
+    /** 查询权限管理模块资源类别列表 */
     getList() {
       this.loading = true;
-      console.log(this.listQuery)
       listResourceSort(this.listQuery).then(response => {
-        console.log(response.data)
         const data = response.data.list;
         this.dataList = data;
         this.total = response.data.total;
@@ -230,13 +228,11 @@ export default {
     // 分页
     // 每页显示条目个数处理
     handleSizeChange(event) {
-      console.log('handleSizeChange:' + event)
       this.listQuery.pageSize = event
       this.getList()
     },
     // 当前页数处理
     handleCurrentChange(event) {
-      console.log('handleCurrentChange:' + event)
       this.listQuery.pageNum = event
       this.getList()
     }
