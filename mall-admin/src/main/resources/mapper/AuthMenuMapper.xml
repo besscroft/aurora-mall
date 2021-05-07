@@ -107,9 +107,11 @@
     <select id="selectMenuListByPage" resultSets="java.util.List" resultMap="authMenuMap">
         select <include refid="Base_Column_List" />
         from bms_auth_menu
-        <if test="keyword != null">
-            and username like CONCAT('%',#{keyword},'%')
-        </if>
+        <where>
+            <if test="keyword != null">
+                and username like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
         order by id
     </select>
 

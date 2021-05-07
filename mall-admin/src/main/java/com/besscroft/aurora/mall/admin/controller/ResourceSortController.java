@@ -41,15 +41,15 @@ public class ResourceSortController {
     @ApiOperation("获取资源详情")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @GetMapping("/getResourceSort/{id}")
-    public AjaxResult getResource(@PathVariable("id") Long id) {
+    public AjaxResult getResourceSort(@PathVariable("id") Long id) {
         AuthResourceSort resourceSort = resourceSortService.getResourceSortById(id);
         return AjaxResult.success(resourceSort);
     }
 
     @ApiOperation("新增资源")
     @PostMapping("/addResourceSort")
-    public AjaxResult addResource(@RequestBody AuthResourceSort bmsAuthResourceSort) {
-        boolean b = resourceSortService.addResourceSort(bmsAuthResourceSort);
+    public AjaxResult addResourceSort(@RequestBody AuthResourceSort authResourceSort) {
+        boolean b = resourceSortService.addResourceSort(authResourceSort);
         if (b) {
             return AjaxResult.success("新增成功！");
         }
@@ -58,8 +58,8 @@ public class ResourceSortController {
 
     @ApiOperation("更新资源")
     @PutMapping("/updateResourceSort")
-    public AjaxResult updateResource(@RequestBody AuthResourceSort bmsAuthResourceSort) {
-        boolean b = resourceSortService.updateResourceSort(bmsAuthResourceSort);
+    public AjaxResult updateResourceSort(@RequestBody AuthResourceSort authResourceSort) {
+        boolean b = resourceSortService.updateResourceSort(authResourceSort);
         if (b) {
             return AjaxResult.success("更新成功！");
         }
@@ -69,7 +69,7 @@ public class ResourceSortController {
     @ApiOperation("删除资源")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delResourceSort/{id}")
-    public AjaxResult delResource(@PathVariable("id") Long id) {
+    public AjaxResult delResourceSort(@PathVariable("id") Long id) {
         boolean b = resourceSortService.delResourceSort(id);
         if (b) {
             return AjaxResult.success("删除成功！");

@@ -34,9 +34,6 @@
             and username like CONCAT('%',#{keyword},'%')
         </if>
         order by id
-<!--        <if test="pageNum != null and pageSize != null">-->
-<!--            limit #{pageNum}, #{pageSize}-->
-<!--        </if>-->
     </select>
 
     <update id="updateLoginTime">

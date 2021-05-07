@@ -59,8 +59,8 @@ public class ResourceController {
 
     @ApiOperation("更新资源")
     @PutMapping("/updateResource")
-    public AjaxResult updateResource(@RequestBody AuthResource bmsAuthResource) {
-        boolean b = resourceService.updateResource(bmsAuthResource);
+    public AjaxResult updateResource(@RequestBody AuthResource authResource) {
+        boolean b = resourceService.updateResource(authResource);
         if (b) {
             return AjaxResult.success("更新成功！");
         }

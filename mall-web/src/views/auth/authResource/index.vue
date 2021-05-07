@@ -72,7 +72,7 @@
       :total="total">
     </el-pagination>
 
-    <!-- 添加或修改权限管理模块角色对话框 -->
+    <!-- 添加或修改权限管理模块资源对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" label-width="100px">
         <el-form-item label="资源名" prop="icon">
@@ -155,9 +155,7 @@ export default {
     /** 查询权限管理模块资源列表 */
     getList() {
       this.loading = true;
-      console.log(this.listQuery)
       listResource(this.listQuery).then(response => {
-        console.log(response.data)
         const data = response.data.list;
         this.dataList = data;
         this.total = response.data.total;
@@ -232,13 +230,11 @@ export default {
     // 分页
     // 每页显示条目个数处理
     handleSizeChange(event) {
-      console.log('handleSizeChange:' + event)
       this.listQuery.pageSize = event
       this.getList()
     },
     // 当前页数处理
     handleCurrentChange(event) {
-      console.log('handleCurrentChange:' + event)
       this.listQuery.pageNum = event
       this.getList()
     }

@@ -15,6 +15,7 @@
         <br />
         <br />
         <a href="https://github.com/besscroft/aurora-mall/blob/main/fork-and-push.md" target="_blank">--> 贡献项目 <--</a>
+        <a href="https://mall.doc.besscroft.com/" target="_blank">--> 阅读文档 <--</a>
       </div>
     </el-card>
 
@@ -26,8 +27,7 @@
       </div>
       <div>
         <span></span>
-        <img src="https://imgcdn.52bess.com/images/2b9dd5d0cb163.jpg" style="width: 150px" />
-        <img src="https://imgcdn.52bess.com/images/660d6aa2efed3.png" style="width: 150px" />
+        <img src="https://imgcdn.52bess.com/images/9ae613da046d8.png" style="width: 150px" />
       </div>
     </el-card>
   </div>
