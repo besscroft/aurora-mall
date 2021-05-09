@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 07/05/2021 17:00:27
+ Date: 09/05/2021 21:39:58
 */
 
 SET NAMES utf8mb4;
@@ -3483,7 +3483,7 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-05-07 16:54:32', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-05-09 21:32:05', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.52bess.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.52bess.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
@@ -3976,7 +3976,7 @@ CREATE TABLE `bms_update_log`  (
   `title_tag` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本标识',
   `title_time` datetime NULL DEFAULT NULL COMMENT '版本更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log
@@ -3986,6 +3986,7 @@ INSERT INTO `bms_update_log` VALUES (2, 2, 'v0.0.2', 'el-icon-s-promotion', 'suc
 INSERT INTO `bms_update_log` VALUES (3, 3, 'v0.0.3', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:15:45');
 INSERT INTO `bms_update_log` VALUES (4, 4, 'v0.0.4', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-04-24 12:47:14');
 INSERT INTO `bms_update_log` VALUES (5, 5, 'v0.0.5', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-07 16:57:22');
+INSERT INTO `bms_update_log` VALUES (6, 6, 'v0.0.6', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-09 21:38:14');
 
 -- ----------------------------
 -- Table structure for bms_update_log_detail
@@ -3996,7 +3997,7 @@ CREATE TABLE `bms_update_log_detail`  (
   `log_id` bigint(20) NULL DEFAULT NULL COMMENT '更新日志id',
   `body` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log_detail
@@ -4013,6 +4014,9 @@ INSERT INTO `bms_update_log_detail` VALUES (15, 4, '[refactor] 简化实体类�
 INSERT INTO `bms_update_log_detail` VALUES (16, 5, '[feat] 新增商品分类管理');
 INSERT INTO `bms_update_log_detail` VALUES (17, 5, '[fix] 修复了可能存在错误的sql语句');
 INSERT INTO `bms_update_log_detail` VALUES (18, 5, '[fix] 修复了TagsView的bug');
+INSERT INTO `bms_update_log_detail` VALUES (19, 6, '[feat] 新增 Elasticsearch 基础框架');
+INSERT INTO `bms_update_log_detail` VALUES (20, 6, '[refactor] 给实体类添加了必要的注解');
+INSERT INTO `bms_update_log_detail` VALUES (21, 6, '[feat] 配置了日志文件');
 
 -- ----------------------------
 -- Table structure for bms_user_address

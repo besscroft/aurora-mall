@@ -1,8 +1,12 @@
 package com.besscroft.aurora.mall.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 
@@ -13,10 +17,14 @@ import java.io.Serializable;
  * @Date 2021/1/22 20:48
  */
 @TableName(value = "bms_market_bit")
+@Document(indexName = "bms_market_bit")
+@ApiModel(value = "营销管理模块极光币对象")
 public class MarketBit implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @ApiModelProperty(value = "极光币id", dataType = "Long")
     private Long id;
 
     public void setId(Long id) {
