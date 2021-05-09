@@ -2,8 +2,14 @@ package com.besscroft.aurora.mall.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,23 +21,35 @@ import java.util.Date;
  * @Date 2021/1/22 20:40
  */
 @TableName(value = "bms_auth_resource_sort")
+@Document(indexName = "bms_auth_resource_sort")
+@ApiModel(value = "权限管理模块资源类别管理对象")
 public class AuthResourceSort implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @ApiModelProperty(value = "类别管理id", dataType = "Long")
     private Long id;
 
     /** 资源类别名称 */
+    @Field(type = FieldType.Keyword)
+    @ApiModelProperty(value = "资源类别名称", dataType = "String")
     private String categoryName;
 
     /** 创建时间 */
+    @Field(type = FieldType.Date)
+    @ApiModelProperty(value = "创建时间", dataType = "Date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /** 资源描述 */
+    @Field(type = FieldType.Keyword)
+    @ApiModelProperty(value = "资源描述", dataType = "String")
     private String description;
 
     /** 排序 */
+    @Field(type = FieldType.Long)
+    @ApiModelProperty(value = "排序", dataType = "Long")
     private Long sort;
 
     public Long getId() {

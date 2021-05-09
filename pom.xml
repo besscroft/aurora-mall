@@ -18,6 +18,7 @@
         <module>mall-auth</module>
         <module>mall-common</module>
         <module>mall-admin</module>
+        <module>mall-elasticsearch</module>
     </modules>
 
     <parent>

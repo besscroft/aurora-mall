@@ -1,8 +1,14 @@
 package com.besscroft.aurora.mall.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -13,19 +19,29 @@ import java.io.Serializable;
  * @Date 2021/1/22 21:24
  */
 @TableName(value = "bms_product_type")
+@Document(indexName = "bms_product_type")
+@ApiModel(value = "商品管理模块商品类型对象")
 public class ProductType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @ApiModelProperty(value = "商品类型id", dataType = "Long")
     private Long id;
 
     /** 属性名称 */
+    @Field(type = FieldType.Keyword)
+    @ApiModelProperty(value = "属性名称", dataType = "String")
     private String name;
 
     /** 属性数量，默认为0 */
+    @Field(type = FieldType.Long)
+    @ApiModelProperty(value = "属性数量，默认为0", dataType = "Long")
     private Long attributeCount;
 
     /** 参数数量，默认为0 */
+    @Field(type = FieldType.Long)
+    @ApiModelProperty(value = "参数数量，默认为0", dataType = "Long")
     private Long paramCount;
 
     public void setId(Long id) {

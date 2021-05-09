@@ -2,8 +2,14 @@ package com.besscroft.aurora.mall.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,24 +21,35 @@ import java.util.Date;
  * @Date 2021/1/22 21:03
  */
 @TableName(value = "bms_order_log")
+@Document(indexName = "bms_order_log")
+@ApiModel(value = "订单管理模块订单日志对象")
 public class OrderLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
+    @Id
+    @ApiModelProperty(value = "日志id", dataType = "Long")
     private Long id;
 
     /** 用户名 */
+    @Field(type = FieldType.Keyword)
+    @ApiModelProperty(value = "用户名", dataType = "String")
     private String username;
 
     /** 操作时间 */
+    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "操作时间", dataType = "Date")
     private Date logTime;
 
     /** 操作详情，这里可以以json等格式保留信息 */
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "操作详情", dataType = "String")
     private String logDetail;
 
     /** 操作者登录ip */
+    @Field(type = FieldType.Ip)
+    @ApiModelProperty(value = "操作者登录ip", dataType = "String")
     private String logIp;
 
     public void setId(Long id) {
