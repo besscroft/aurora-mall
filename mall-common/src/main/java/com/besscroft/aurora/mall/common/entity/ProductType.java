@@ -29,9 +29,9 @@ public class ProductType implements Serializable {
     @ApiModelProperty(value = "商品类型id", dataType = "Long")
     private Long id;
 
-    /** 属性名称 */
+    /** 类型名称 */
     @Field(type = FieldType.Keyword)
-    @ApiModelProperty(value = "属性名称", dataType = "String")
+    @ApiModelProperty(value = "类型名称", dataType = "String")
     private String name;
 
     /** 属性数量，默认为0 */

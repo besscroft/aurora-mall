@@ -40,7 +40,7 @@ public interface ProductSortMapper extends BaseMapper<ProductSort> {
     List<ProductSort> getProductSortByParent();
 
     /**
-     *
+     * 修改商品分类显示状态
      * @param showStatus
      * @param id
      * @return

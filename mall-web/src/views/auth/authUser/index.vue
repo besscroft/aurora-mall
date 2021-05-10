@@ -37,7 +37,7 @@
     </el-card>
 
     <el-card class="box-card" style="margin-top: 30px" shadow="never">
-      <el-table v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
+      <el-table border v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="用户名" align="center" prop="username" width="150"/>
         <el-table-column label="头像" align="center" prop="icon">

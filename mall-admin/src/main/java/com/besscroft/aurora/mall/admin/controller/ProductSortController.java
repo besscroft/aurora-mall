@@ -28,7 +28,6 @@ public class ProductSortController {
     @Autowired
     private ProductSortService productSortService;
 
-
     @ApiOperation("查询后台管理商品分类列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "第几页",required = true, dataType = "Integer"),

@@ -34,59 +34,137 @@ public class ProductAttribute implements Serializable {
     @ApiModelProperty(value = "属性名称", dataType = "String")
     private String paramName;
 
-    /** 父属性id */
-    @Field(type = FieldType.Long)
-    @ApiModelProperty(value = "父属性id", dataType = "Long")
-    private Long paramId;
-
     /** 排序 */
     @Field(type = FieldType.Long)
     @ApiModelProperty(value = "排序", dataType = "Long")
     private Long sort;
+
+    /** 属性选择类型：0->唯一；1->单选；2->多选 */
+    @Field(type = FieldType.Integer)
+    @ApiModelProperty(value = "属性选择类型", dataType = "Integer")
+    private Integer selectType;
+
+    /** 属性录入方式：0->手工录入；1->从列表中选取 */
+    @Field(type = FieldType.Integer)
+    @ApiModelProperty(value = "属性录入方式", dataType = "Integer")
+    private Integer inputType;
+
+    /** 分类筛选样式：1->普通；1->颜色 */
+    @Field(type = FieldType.Integer)
+    @ApiModelProperty(value = "分类筛选样式", dataType = "Integer")
+    private Integer filterType;
+
+    /** 检索类型：0->不需要进行检索；1->关键字检索；2->范围检索 */
+    @Field(type = FieldType.Integer)
+    @ApiModelProperty(value = "检索类型", dataType = "Integer")
+    private Integer searchType;
+
+    /** 相同属性产品是否关联：0->不关联；1->关联 */
+    @Field(type = FieldType.Integer)
+    @ApiModelProperty(value = "相同属性产品是否关联", dataType = "Integer")
+    private Integer relatedStatus;
+
+    /** 是否支持手动新增：0->不支持；1->支持 */
+    @Field(type = FieldType.Integer)
+    @ApiModelProperty(value = "是否支持手动新增", dataType = "Integer")
+    private Integer handAddStatus;
+
+    /** 属性的类型：0->规格；1->参数 */
+    @Field(type = FieldType.Integer)
+    @ApiModelProperty(value = "属性的类型", dataType = "Integer")
+    private Integer type;
 
     /** 属性值，以json格式保存 */
     @Field(type = FieldType.Text)
     @ApiModelProperty(value = "属性值", dataType = "String")
     private String value;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setParamName(String paramName) {
-        this.paramName = paramName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getParamName() {
         return paramName;
     }
 
-    public void setParamId(Long paramId) {
-        this.paramId = paramId;
-    }
-
-    public Long getParamId() {
-        return paramId;
-    }
-
-    public void setSort(Long sort) {
-        this.sort = sort;
+    public void setParamName(String paramName) {
+        this.paramName = paramName;
     }
 
     public Long getSort() {
         return sort;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setSort(Long sort) {
+        this.sort = sort;
+    }
+
+    public Integer getSelectType() {
+        return selectType;
+    }
+
+    public void setSelectType(Integer selectType) {
+        this.selectType = selectType;
+    }
+
+    public Integer getInputType() {
+        return inputType;
+    }
+
+    public void setInputType(Integer inputType) {
+        this.inputType = inputType;
+    }
+
+    public Integer getFilterType() {
+        return filterType;
+    }
+
+    public void setFilterType(Integer filterType) {
+        this.filterType = filterType;
+    }
+
+    public Integer getSearchType() {
+        return searchType;
+    }
+
+    public void setSearchType(Integer searchType) {
+        this.searchType = searchType;
+    }
+
+    public Integer getRelatedStatus() {
+        return relatedStatus;
+    }
+
+    public void setRelatedStatus(Integer relatedStatus) {
+        this.relatedStatus = relatedStatus;
+    }
+
+    public Integer getHandAddStatus() {
+        return handAddStatus;
+    }
+
+    public void setHandAddStatus(Integer handAddStatus) {
+        this.handAddStatus = handAddStatus;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getValue() {
         return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
@@ -94,8 +172,14 @@ public class ProductAttribute implements Serializable {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
                 .append("paramName", getParamName())
-                .append("paramId", getParamId())
                 .append("sort", getSort())
+                .append("selectType", getSelectType())
+                .append("inputType", getInputType())
+                .append("filterType", getFilterType())
+                .append("searchType", getSearchType())
+                .append("relatedStatus", getRelatedStatus())
+                .append("handAddStatus", getHandAddStatus())
+                .append("type", getType())
                 .append("value", getValue())
                 .toString();
     }
