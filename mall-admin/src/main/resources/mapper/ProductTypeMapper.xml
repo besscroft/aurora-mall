@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.besscroft.aurora.mall.admin.mapper.ProductTypeMapper">
+
+    <resultMap id="productTypeMap" type="com.besscroft.aurora.mall.common.entity.ProductType">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="attribute_count" property="attributeCount"/>
+        <result column="param_count" property="paramCount"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, attribute_count, param_count
+    </sql>
+
+    <select id="selectProductTypeListByPage" resultSets="java.util.List" resultMap="productTypeMap">
+        select <include refid="Base_Column_List"/>
+        from  bms_product_type
+        <where>
+            <if test="keyword != null">
+                and name like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
+        order by id
+    </select>
+
+    <insert id="addProductType">
+        insert into bms_product_type
+            (name)
+        values
+            (#{name})
+    </insert>
+
+    <update id="updateProductType">
+        update bms_product_type
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

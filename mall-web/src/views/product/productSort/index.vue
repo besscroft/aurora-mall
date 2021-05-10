@@ -37,7 +37,7 @@
     </el-card>
 
     <el-card class="box-card" style="margin-top: 30px" shadow="never">
-      <el-table v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
+      <el-table border v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="分类名称" align="center" prop="name" width="150"/>
         <el-table-column label="分类级别" align="center" prop="level" />

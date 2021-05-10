@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 09/05/2021 21:39:58
+ Date: 10/05/2021 17:59:53
 */
 
 SET NAMES utf8mb4;
@@ -3204,7 +3204,7 @@ CREATE TABLE `bms_auth_resource`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `category_id` bigint(20) NULL DEFAULT NULL COMMENT '资源类别ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_resource
@@ -3258,6 +3258,11 @@ INSERT INTO `bms_auth_resource` VALUES (46, '更新商品分类', '/productSort/
 INSERT INTO `bms_auth_resource` VALUES (47, '删除商品分类', '/productSort/delProductSort/**', '删除商品分类', '2021-05-07 14:48:20', 15);
 INSERT INTO `bms_auth_resource` VALUES (48, '查询商品分类所有父级', '/productSort/getProductSortByParent', '查询商品分类所有父级', '2021-05-07 15:26:43', 15);
 INSERT INTO `bms_auth_resource` VALUES (49, '商品分类启用状态更新', '/productSort/changeSwitch', '商品分类启用状态更新', '2021-05-07 15:57:11', 15);
+INSERT INTO `bms_auth_resource` VALUES (50, '商品类型列表', '/productType/list', '查询后台管理商品类型列表', '2021-05-10 17:46:47', 12);
+INSERT INTO `bms_auth_resource` VALUES (51, '商品类型详情', '/productType/getProductType/**', '获取商品类型详情', '2021-05-10 17:47:07', 12);
+INSERT INTO `bms_auth_resource` VALUES (52, '新增商品类型', '/productType/addProductType', '新增商品类型', '2021-05-10 17:47:17', 12);
+INSERT INTO `bms_auth_resource` VALUES (53, '更新商品类型', '/productType/updateProductType', '更新商品类型', '2021-05-10 17:47:32', 12);
+INSERT INTO `bms_auth_resource` VALUES (54, '删除商品类型', '/productType/delProductType/**', '删除商品类型', '2021-05-10 17:47:52', 12);
 
 -- ----------------------------
 -- Table structure for bms_auth_resource_sort
@@ -3330,7 +3335,7 @@ CREATE TABLE `bms_auth_role_menu_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色菜单关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色菜单关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_menu_relation
@@ -3363,20 +3368,27 @@ INSERT INTO `bms_auth_role_menu_relation` VALUES (26, 1, 42);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (27, 1, 43);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (28, 1, 50);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (42, 1, 51);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (56, 2, 1);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (57, 2, 10);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (58, 2, 11);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (59, 2, 12);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (60, 2, 13);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (61, 2, 14);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (62, 2, 15);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (63, 2, 2);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (64, 2, 20);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (65, 2, 21);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (66, 2, 22);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (67, 2, 23);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (68, 2, 30);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (69, 2, 31);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (70, 2, 1);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (71, 2, 10);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (72, 2, 11);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (73, 2, 12);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (74, 2, 13);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (75, 2, 14);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (76, 2, 15);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (77, 2, 2);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (78, 2, 20);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (79, 2, 21);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (80, 2, 22);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (81, 2, 23);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (82, 2, 30);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (83, 2, 31);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (84, 2, 32);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (85, 2, 33);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (86, 2, 43);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (87, 2, 5);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (88, 2, 50);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (89, 2, 6);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (90, 2, 51);
 
 -- ----------------------------
 -- Table structure for bms_auth_role_permission_relation
@@ -3402,63 +3414,69 @@ CREATE TABLE `bms_auth_role_resource_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `resource_id` bigint(20) NULL DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 298 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 356 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_resource_relation
 -- ----------------------------
-INSERT INTO `bms_auth_role_resource_relation` VALUES (68, 2, 3);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (69, 2, 5);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (70, 2, 7);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (249, 1, 10);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (250, 1, 11);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (251, 1, 12);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (252, 1, 13);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (253, 1, 14);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (254, 1, 15);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (255, 1, 16);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (256, 1, 31);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (257, 1, 32);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (258, 1, 35);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (259, 1, 1);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (260, 1, 2);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (261, 1, 3);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (262, 1, 4);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (263, 1, 5);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (264, 1, 6);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (265, 1, 7);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (266, 1, 8);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (267, 1, 9);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (268, 1, 37);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (269, 1, 38);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (270, 1, 39);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (271, 1, 40);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (272, 1, 41);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (273, 1, 23);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (274, 1, 24);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (275, 1, 25);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (276, 1, 26);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (277, 1, 27);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (278, 1, 33);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (279, 1, 34);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (280, 1, 36);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (281, 1, 17);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (282, 1, 18);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (283, 1, 19);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (284, 1, 20);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (285, 1, 21);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (286, 1, 22);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (287, 1, 28);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (288, 1, 29);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (289, 1, 30);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (290, 1, 43);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (291, 1, 44);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (292, 1, 45);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (293, 1, 46);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (294, 1, 47);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (295, 1, 48);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (296, 1, 49);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (297, 1, 42);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (298, 2, 3);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (299, 2, 5);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (300, 2, 6);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (301, 2, 7);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (302, 1, 10);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (303, 1, 11);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (304, 1, 12);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (305, 1, 13);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (306, 1, 14);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (307, 1, 15);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (308, 1, 16);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (309, 1, 31);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (310, 1, 32);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (311, 1, 35);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (312, 1, 1);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (313, 1, 2);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (314, 1, 3);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (315, 1, 4);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (316, 1, 5);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (317, 1, 6);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (318, 1, 7);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (319, 1, 8);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (320, 1, 9);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (321, 1, 37);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (322, 1, 38);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (323, 1, 39);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (324, 1, 40);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (325, 1, 41);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (326, 1, 23);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (327, 1, 24);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (328, 1, 25);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (329, 1, 26);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (330, 1, 27);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (331, 1, 33);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (332, 1, 34);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (333, 1, 36);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (334, 1, 17);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (335, 1, 18);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (336, 1, 19);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (337, 1, 20);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (338, 1, 21);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (339, 1, 22);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (340, 1, 28);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (341, 1, 29);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (342, 1, 30);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (343, 1, 50);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (344, 1, 51);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (345, 1, 52);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (346, 1, 53);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (347, 1, 54);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (348, 1, 43);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (349, 1, 44);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (350, 1, 45);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (351, 1, 46);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (352, 1, 47);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (353, 1, 48);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (354, 1, 49);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (355, 1, 42);
 
 -- ----------------------------
 -- Table structure for bms_auth_user
@@ -3483,7 +3501,7 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-05-09 21:32:05', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-05-10 17:54:15', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.52bess.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.52bess.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
@@ -3815,11 +3833,17 @@ DROP TABLE IF EXISTS `bms_product_attribute`;
 CREATE TABLE `bms_product_attribute`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `param_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属性名称',
-  `param_id` bigint(20) NULL DEFAULT NULL COMMENT '父属性id',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
+  `select_type` int(1) NULL DEFAULT NULL COMMENT '属性选择类型：0->唯一；1->单选；2->多选',
+  `input_type` int(1) NULL DEFAULT NULL COMMENT '属性录入方式：0->手工录入；1->从列表中选取',
+  `filter_type` int(1) NULL DEFAULT NULL COMMENT '分类筛选样式：1->普通；1->颜色',
+  `search_type` int(1) NULL DEFAULT NULL COMMENT '检索类型：0->不需要进行检索；1->关键字检索；2->范围检索',
+  `related_status` int(1) NULL DEFAULT NULL COMMENT '相同属性产品是否关联：0->不关联；1->关联',
+  `hand_add_status` int(1) NULL DEFAULT NULL COMMENT '是否支持手动新增：0->不支持；1->支持',
+  `type` int(1) NULL DEFAULT NULL COMMENT '属性的类型：0->规格；1->参数',
   `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属性值，以json格式保存',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型属性表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型属性表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_attribute
@@ -3842,28 +3866,6 @@ CREATE TABLE `bms_product_brand`  (
 
 -- ----------------------------
 -- Records of bms_product_brand
--- ----------------------------
-
--- ----------------------------
--- Table structure for bms_product_group
--- ----------------------------
-DROP TABLE IF EXISTS `bms_product_group`;
-CREATE TABLE `bms_product_group`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) NULL DEFAULT NULL COMMENT '套餐对应的商品id',
-  `group_code` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '套餐编码',
-  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '套餐价格',
-  `stock` int(11) NULL DEFAULT 0 COMMENT '库存',
-  `low_stock` int(11) NULL DEFAULT NULL COMMENT '预警库存',
-  `pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '展示图片',
-  `sale` int(11) NULL DEFAULT NULL COMMENT '销量',
-  `lock_stock` int(11) NULL DEFAULT 0 COMMENT '锁定库存',
-  `sp_data` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品销售属性，以json格式保存',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品套餐表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of bms_product_group
 -- ----------------------------
 
 -- ----------------------------
@@ -3890,11 +3892,17 @@ DROP TABLE IF EXISTS `bms_product_parameter`;
 CREATE TABLE `bms_product_parameter`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `param_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数名称',
-  `param_id` bigint(20) NULL DEFAULT NULL COMMENT '父参数id',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
+  `select_type` int(1) NULL DEFAULT NULL COMMENT '参数选择类型：0->唯一；1->单选；2->多选',
+  `input_type` int(1) NULL DEFAULT NULL COMMENT '参数录入方式：0->手工录入；1->从列表中选取',
+  `filter_type` int(1) NULL DEFAULT NULL COMMENT '分类筛选样式：1->普通；1->颜色',
+  `search_type` int(1) NULL DEFAULT NULL COMMENT '检索类型：0->不需要进行检索；1->关键字检索；2->范围检索',
+  `related_status` int(1) NULL DEFAULT NULL COMMENT '相同属性产品是否关联：0->不关联；1->关联',
+  `hand_add_status` int(1) NULL DEFAULT NULL COMMENT '是否支持手动新增：0->不支持；1->支持',
+  `type` int(1) NULL DEFAULT NULL COMMENT '参数的类型：0->规格；1->参数',
   `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数值，以json格式保存',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型参数表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型参数表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_parameter
@@ -3936,15 +3944,17 @@ CREATE TABLE `bms_product_sort`  (
   `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图标',
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '描述',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品分类表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品分类表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_sort
 -- ----------------------------
-INSERT INTO `bms_product_sort` VALUES (1, 0, '测试类型1', 0, 1, 1, 'el-icon-s-tools', '测试类型');
-INSERT INTO `bms_product_sort` VALUES (2, 0, '测试类型2', 0, 1, 1, 'el-icon-s-tools', '测试类型');
-INSERT INTO `bms_product_sort` VALUES (5, 1, '测试分类1-1', 1, 1, 2, 'el-icon-s-tools', '测试类型');
-INSERT INTO `bms_product_sort` VALUES (6, 2, '测试分类2-1', 1, 1, 2, 'el-icon-s-tools', '测试类型');
+INSERT INTO `bms_product_sort` VALUES (7, 0, '手机', 0, 1, 1, NULL, '手机分类');
+INSERT INTO `bms_product_sort` VALUES (8, 0, '电脑', 0, 1, 1, NULL, '电脑分类');
+INSERT INTO `bms_product_sort` VALUES (9, 0, '水果', 0, 1, 2, NULL, '水果分类');
+INSERT INTO `bms_product_sort` VALUES (10, 7, '手机通讯', 1, 1, 11, NULL, '手机通讯');
+INSERT INTO `bms_product_sort` VALUES (11, 7, '手机配件', 1, 1, 12, NULL, '手机配件');
+INSERT INTO `bms_product_sort` VALUES (12, 8, '游戏本', 1, 1, 12, NULL, '游戏本');
 
 -- ----------------------------
 -- Table structure for bms_product_type
@@ -3956,10 +3966,28 @@ CREATE TABLE `bms_product_type`  (
   `attribute_count` int(11) NULL DEFAULT 0 COMMENT '属性数量，默认为0',
   `param_count` int(11) NULL DEFAULT 0 COMMENT '参数数量，默认为0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_type
+-- ----------------------------
+INSERT INTO `bms_product_type` VALUES (1, '手机—手机通讯', 0, 0);
+INSERT INTO `bms_product_type` VALUES (2, '手机—手机配件', 0, 0);
+INSERT INTO `bms_product_type` VALUES (3, '电脑—游戏本', 0, 0);
+
+-- ----------------------------
+-- Table structure for bms_product_type_value_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `bms_product_type_value_relation`;
+CREATE TABLE `bms_product_type_value_relation`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_type_id` bigint(20) NULL DEFAULT NULL COMMENT '类型id',
+  `product_value_id` bigint(20) NULL DEFAULT NULL COMMENT '属性/参数id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类型和属性/参数关系表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of bms_product_type_value_relation
 -- ----------------------------
 
 -- ----------------------------
@@ -3976,7 +4004,7 @@ CREATE TABLE `bms_update_log`  (
   `title_tag` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本标识',
   `title_time` datetime NULL DEFAULT NULL COMMENT '版本更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log
@@ -3987,6 +4015,7 @@ INSERT INTO `bms_update_log` VALUES (3, 3, 'v0.0.3', 'el-icon-s-promotion', 'suc
 INSERT INTO `bms_update_log` VALUES (4, 4, 'v0.0.4', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-04-24 12:47:14');
 INSERT INTO `bms_update_log` VALUES (5, 5, 'v0.0.5', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-07 16:57:22');
 INSERT INTO `bms_update_log` VALUES (6, 6, 'v0.0.6', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-09 21:38:14');
+INSERT INTO `bms_update_log` VALUES (7, 7, 'v0.0.7', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-05-10 17:58:25');
 
 -- ----------------------------
 -- Table structure for bms_update_log_detail
@@ -3997,7 +4026,7 @@ CREATE TABLE `bms_update_log_detail`  (
   `log_id` bigint(20) NULL DEFAULT NULL COMMENT '更新日志id',
   `body` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log_detail
@@ -4017,6 +4046,9 @@ INSERT INTO `bms_update_log_detail` VALUES (18, 5, '[fix] 修复了TagsView的bu
 INSERT INTO `bms_update_log_detail` VALUES (19, 6, '[feat] 新增 Elasticsearch 基础框架');
 INSERT INTO `bms_update_log_detail` VALUES (20, 6, '[refactor] 给实体类添加了必要的注解');
 INSERT INTO `bms_update_log_detail` VALUES (21, 6, '[feat] 配置了日志文件');
+INSERT INTO `bms_update_log_detail` VALUES (22, 7, '[refactor] 修改了数据库结构');
+INSERT INTO `bms_update_log_detail` VALUES (23, 7, '[fix] 修复了页面表头错位bug');
+INSERT INTO `bms_update_log_detail` VALUES (24, 7, '[feat] 新增商品类型管理模块');
 
 -- ----------------------------
 -- Table structure for bms_user_address
