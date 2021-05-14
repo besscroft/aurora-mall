@@ -70,8 +70,8 @@ public class ResourceController {
     @ApiOperation("删除资源")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delResource/{id}")
-    public AjaxResult delResource(@PathVariable("id") Long id) {
-        boolean b = resourceService.delResource(id);
+    public AjaxResult delResource(@PathVariable("id") List<Long> ids) {
+        boolean b = resourceService.delResource(ids);
         if (b) {
             return AjaxResult.success("删除成功！");
         }

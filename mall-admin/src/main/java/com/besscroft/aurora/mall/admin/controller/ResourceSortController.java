@@ -69,8 +69,8 @@ public class ResourceSortController {
     @ApiOperation("删除资源")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delResourceSort/{id}")
-    public AjaxResult delResourceSort(@PathVariable("id") Long id) {
-        boolean b = resourceSortService.delResourceSort(id);
+    public AjaxResult delResourceSort(@PathVariable("id") List<Long> ids) {
+        boolean b = resourceSortService.delResourceSort(ids);
         if (b) {
             return AjaxResult.success("删除成功！");
         }

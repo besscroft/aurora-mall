@@ -49,8 +49,11 @@ public class ResourceSortServiceImpl implements ResourceSortService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delResourceSort(Long id) {
-        return authResourceSortMapper.deleteById(id) > 0;
+    public boolean delResourceSort(List<Long> ids) {
+        ids.forEach(id -> {
+            authResourceSortMapper.deleteById(id);
+        });
+        return true;
     }
 
 }

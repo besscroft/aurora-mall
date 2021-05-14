@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 10/05/2021 17:59:53
+ Date: 14/05/2021 20:26:27
 */
 
 SET NAMES utf8mb4;
@@ -3317,14 +3317,13 @@ CREATE TABLE `bms_auth_role`  (
   `sort` int(11) NULL DEFAULT 0 COMMENT '排序',
   `del` int(1) NULL DEFAULT NULL COMMENT '假删除：0->删除状态；1->可用状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role
 -- ----------------------------
 INSERT INTO `bms_auth_role` VALUES (1, '超级管理员', '超级管理员，拥有所有的权限', 1, '2021-01-25 13:31:45', 1, 0, 1);
 INSERT INTO `bms_auth_role` VALUES (2, '测试员111', '测试账号权限', 2, '2021-03-21 13:41:37', 1, 0, 1);
-INSERT INTO `bms_auth_role` VALUES (3, '111', '111', NULL, NULL, 1, 1, 0);
 
 -- ----------------------------
 -- Table structure for bms_auth_role_menu_relation
@@ -3501,7 +3500,7 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-05-10 17:54:15', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-05-14 20:25:49', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.52bess.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.52bess.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
@@ -3843,7 +3842,7 @@ CREATE TABLE `bms_product_attribute`  (
   `type` int(1) NULL DEFAULT NULL COMMENT '属性的类型：0->规格；1->参数',
   `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属性值，以json格式保存',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型属性表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型属性表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_attribute
@@ -3902,7 +3901,7 @@ CREATE TABLE `bms_product_parameter`  (
   `type` int(1) NULL DEFAULT NULL COMMENT '参数的类型：0->规格；1->参数',
   `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数值，以json格式保存',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型参数表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型参数表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_parameter
@@ -3984,7 +3983,7 @@ CREATE TABLE `bms_product_type_value_relation`  (
   `product_type_id` bigint(20) NULL DEFAULT NULL COMMENT '类型id',
   `product_value_id` bigint(20) NULL DEFAULT NULL COMMENT '属性/参数id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类型和属性/参数关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类型和属性/参数关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bms_product_type_value_relation

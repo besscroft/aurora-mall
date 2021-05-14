@@ -52,10 +52,10 @@ public interface ResourceService {
 
     /**
      * 根据id删除资源
-     * @param id
+     * @param ids
      * @return
      */
-    boolean delResource(Long id);
+    boolean delResource(List<Long> ids);
 
     /**
      * 获取所有资源的资源树

@@ -12,33 +12,12 @@
             @click="handleAdd"
           >新增</el-button>
         </el-col>
-        <el-col :span="1.5">
-          <el-button
-            type="success"
-            plain
-            icon="el-icon-edit"
-            size="mini"
-            :disabled="single"
-            @click="handleUpdate"
-          >修改</el-button>
-        </el-col>
-        <el-col :span="1.5">
-          <el-button
-            type="danger"
-            plain
-            icon="el-icon-delete"
-            size="mini"
-            :disabled="multiple"
-            @click="handleDelete"
-          >删除</el-button>
-        </el-col>
         <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
     </el-card>
 
     <el-card class="box-card" style="margin-top: 30px" shadow="never">
       <el-table border v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="用户名" align="center" prop="username" width="150"/>
         <el-table-column label="头像" align="center" prop="icon">
           <template slot-scope="scope">

@@ -52,8 +52,11 @@ public class ProductSortServiceImpl implements ProductSortService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delProductSort(Long id) {
-        return productSortMapper.deleteById(id) > 0;
+    public boolean delProductSort(List<Long> ids) {
+        ids.forEach(id -> {
+            productSortMapper.deleteById(id);
+        });
+        return true;
     }
 
     @Override

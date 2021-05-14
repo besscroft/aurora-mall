@@ -37,6 +37,7 @@ public class RoleServiceImpl implements RoleService {
     @Transactional(rollbackFor = Exception.class)
     public boolean addRole(AuthRole authRole) {
         authRole.setCreateTime(new Date());
+        authRole.setDel(1);
         return authRoleMapper.insertRole(authRole) > 0;
     }
 
@@ -48,8 +49,11 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delRoleById(Long id) {
-        return authRoleMapper.deleteRoleById(id) > 0;
+    public boolean delRoleById(List<Long> ids) {
+        ids.forEach(id -> {
+            authRoleMapper.deleteRoleById(id);
+        });
+        return true;
     }
 
     @Override

@@ -138,8 +138,11 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delMenu(Long id) {
-        return authMenuMapper.delMenu(id) > 0;
+    public boolean delMenu(List<Long> ids) {
+        ids.forEach(id -> {
+            authMenuMapper.delMenu(id);
+        });
+        return true;
     }
 
     @Override

@@ -46,8 +46,11 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delProductType(Long id) {
-        return productTypeMapper.deleteById(id) > 0;
+    public boolean delProductType(List<Long> ids) {
+        ids.forEach(id -> {
+            productTypeMapper.deleteById(id);
+        });
+        return true;
     }
 
 }

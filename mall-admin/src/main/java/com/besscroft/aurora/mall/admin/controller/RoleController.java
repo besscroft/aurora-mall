@@ -69,8 +69,8 @@ public class RoleController {
     @ApiOperation("删除角色")
     @ApiImplicitParam(name = "id", value = "角色id",required = true, dataType = "Long")
     @DeleteMapping("/delRole/{id}")
-    public AjaxResult delRole(@PathVariable("id") Long id) {
-        boolean b = roleService.delRoleById(id);
+    public AjaxResult delRole(@PathVariable("id") List<Long> ids) {
+        boolean b = roleService.delRoleById(ids);
         if (b) {
             return AjaxResult.success("删除成功！");
         }
