@@ -42,9 +42,9 @@ public interface ProductTypeService {
 
     /**
      * 删除商品类型
-     * @param id
+     * @param ids
      * @return
      */
-    boolean delProductType(Long id);
+    boolean delProductType(List<Long> ids);
 
 }

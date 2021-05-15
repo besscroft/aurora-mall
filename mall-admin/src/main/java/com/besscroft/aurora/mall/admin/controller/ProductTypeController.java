@@ -69,8 +69,8 @@ public class ProductTypeController {
     @ApiOperation("删除商品类型")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delProductType/{id}")
-    public AjaxResult delProductType(@PathVariable("id") Long id) {
-        boolean b = productTypeService.delProductType(id);
+    public AjaxResult delProductType(@PathVariable("id") List<Long> ids) {
+        boolean b = productTypeService.delProductType(ids);
         if (b) {
             return AjaxResult.success("删除成功！");
         }

@@ -42,9 +42,9 @@ public interface ResourceSortService {
 
     /**
      * 删除资源类别
-     * @param id
+     * @param ids
      * @return
      */
-    boolean delResourceSort(Long id);
+    boolean delResourceSort(List<Long> ids);
 
 }

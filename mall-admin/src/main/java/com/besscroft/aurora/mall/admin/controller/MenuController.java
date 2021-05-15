@@ -96,8 +96,8 @@ public class MenuController {
     @ApiOperation("删除菜单")
     @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
     @DeleteMapping("/delMenu/{id}")
-    public AjaxResult delMenu(@PathVariable("id") Long id) {
-        boolean b = menuService.delMenu(id);
+    public AjaxResult delMenu(@PathVariable("id") List<Long> ids) {
+        boolean b = menuService.delMenu(ids);
         if (b) {
             return AjaxResult.success("删除成功！");
         }

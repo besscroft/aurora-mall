@@ -28,24 +28,24 @@ public interface RoleService {
 
     /**
      * 新增角色
-     * @param bmsAuthRole
+     * @param authRole
      * @return
      */
     boolean addRole(AuthRole authRole);
 
     /**
      * 更新角色信息
-     * @param bmsAuthRole
+     * @param authRole
      * @return
      */
     boolean updateRole(AuthRole authRole);
 
     /**
      * 根据角色id进行假删除
-     * @param id
+     * @param ids
      * @return
      */
-    boolean delRoleById(Long id);
+    boolean delRoleById(List<Long> ids);
 
     /**
      * 角色是否可用状态更新

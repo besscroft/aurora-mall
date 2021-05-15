@@ -102,8 +102,11 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delResource(Long id) {
-        return authResourceMapper.deleteById(id) > 0;
+    public boolean delResource(List<Long> ids) {
+        ids.forEach(id -> {
+            authResourceMapper.deleteById(id);
+        });
+        return true;
     }
 
     @Override

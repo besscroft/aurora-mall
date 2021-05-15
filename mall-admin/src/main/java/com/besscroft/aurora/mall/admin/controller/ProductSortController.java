@@ -70,8 +70,8 @@ public class ProductSortController {
     @ApiOperation("删除商品分类")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delProductSort/{id}")
-    public AjaxResult delProductSort(@PathVariable("id") Long id) {
-        boolean b = productSortService.delProductSort(id);
+    public AjaxResult delProductSort(@PathVariable("id") List<Long> ids) {
+        boolean b = productSortService.delProductSort(ids);
         if (b) {
             return AjaxResult.success("删除成功！");
         }

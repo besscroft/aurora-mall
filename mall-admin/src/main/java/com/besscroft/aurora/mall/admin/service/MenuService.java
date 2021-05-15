@@ -68,10 +68,10 @@ public interface MenuService {
 
     /**
      * 根据id删除菜单
-     * @param id
+     * @param ids
      * @return
      */
-    boolean delMenu(Long id);
+    boolean delMenu(List<Long> ids);
 
     /**
      * 新增菜单

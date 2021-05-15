@@ -42,10 +42,10 @@ public interface ProductSortService {
 
     /**
      * 删除商品分类
-     * @param id
+     * @param ids
      * @return
      */
-    boolean delProductSort(Long id);
+    boolean delProductSort(List<Long> ids);
 
     /**
      * 查询商品分类所有父级
