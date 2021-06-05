@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.besscroft.aurora.mall.admin.mapper.ProductMapper">
+
+    <resultMap id="productMap" type="com.besscroft.aurora.mall.common.entity.Product">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="brand_name" property="brandName"/>
+        <result column="product_type_id" property="productTypeId"/>
+        <result column="product_type_name" property="productTypeName"/>
+        <result column="product_category_id" property="productCategoryId"/>
+        <result column="product_category_name" property="productCategoryName"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="push_status" property="pushStatus"/>
+        <result column="new_status" property="newStatus"/>
+        <result column="recommand_status" property="recommandStatus"/>
+        <result column="verify_status" property="verifyStatus"/>
+        <result column="delete_status" property="deleteStatus"/>
+        <result column="sort" property="sort"/>
+        <result column="sale" property="sale"/>
+        <result column="price" property="price"/>
+        <result column="aurora_point" property="auroraPoint"/>
+        <result column="aurora_bit" property="auroraBit"/>
+        <result column="sub_title" property="subTitle"/>
+        <result column="description" property="description"/>
+        <result column="stock" property="stock"/>
+        <result column="low_stock" property="lowStock"/>
+        <result column="unit" property="unit"/>
+        <result column="weight" property="weight"/>
+        <result column="preview_status" property="previewStatus"/>
+        <result column="service_ids" property="serviceIds"/>
+        <result column="detail_title" property="detailTitle"/>
+        <result column="detail_html" property="detailHtml"/>
+        <result column="detail_mobile_html" property="detailMobileHtml"/>
+        <result column="promotion_start_time" property="promotionStartTime"/>
+        <result column="promotion_end_time" property="promotionEndTime"/>
+        <result column="promotion_per_limit" property="promotionPerLimit"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, pic, brand_id, brand_name, product_type_id, product_type_name, product_category_id, product_category_name,
+        product_sn, push_status, new_status, recommand_status, verify_status, delete_status, sort, sale, price, aurora_point,
+        aurora_bit, sub_title, description, stock, low_stock, unit, weight, preview_status, service_ids, detail_title,
+        detail_html, detail_mobile_html, promotion_start_time, promotion_end_time, promotion_per_limit
+    </sql>
+
+    <select id="selectProductListByPage" resultSets="java.util.List" resultMap="productMap">
+        select <include refid="Base_Column_List"/>
+        from  bms_product
+        <where>
+            <if test="keyword != null">
+                and name like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
+        order by id
+    </select>
+
+</mapper>
