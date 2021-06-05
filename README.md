@@ -1,6 +1,6 @@
 ## aurora-mall	极光商城
 
-[![](https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E8%BF%9B%E5%BA%A6-%E5%BC%80%E5%8F%91%E4%B8%AD-brightgreen?style=flat-square)]() [![](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://github.com/besscroft/SpringCloud-mall/blob/master/LICENSE) [![](https://img.shields.io/badge/release-v0.0.1-orange?style=flat-square)]()
+[![](https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E8%BF%9B%E5%BA%A6-%E5%BC%80%E5%8F%91%E4%B8%AD-brightgreen?style=flat-square)]() [![](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://github.com/besscroft/SpringCloud-mall/blob/master/LICENSE) [![](https://img.shields.io/badge/release-v0.0.8-orange?style=flat-square)]()
 
 ### 简介
 
@@ -11,8 +11,6 @@ aurora-mall 是一个微服务商城项目，我做这个项目的目的就是�
 预计每周末更新预览版本
 
 https://mall.aurora.besscroft.com/
-
-> 服务器有点拉跨，求大佬放过~~~
 
 ### TODO
 
@@ -50,7 +48,7 @@ https://mall.aurora.besscroft.com/
 ### 开发环境
 
 * JDK 1.8
-* Idea 2020.3.1
+* Idea 2021.1.1
 * [nodejs](https://nodejs.org/dist/latest-v12.x/) v12.20.1
 
 ### 行为准则
@@ -92,12 +90,6 @@ npm install --registry=https://registry.npm.taobao.org
 # 本地开发 启动项目
 npm run dev
 ```
-
-#### 本项目的参考的项目（学到了不少思想）
-
-[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-[mall](https://github.com/macrozheng/mall)
-[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)
 
 #### 联系我
 
