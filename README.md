@@ -22,25 +22,24 @@ https://mall.aurora.besscroft.com/
 
 ### 后端技术
 
-* [Spring Cloud](https://spring.io/projects/spring-cloud) && [Spring Cloud Alibaba](https://spring.io/projects/spring-cloud-alibaba) && [Spring Cloud Security](https://spring.io/projects/spring-cloud-security)
-* [MyBatis](https://mybatis.org/mybatis-3/zh/index.html) && [MyBatis-Plus](https://baomidou.com/) && [PageHelper](https://pagehelper.github.io/) && [Druid](https://github.com/alibaba/druid)
-* [guava](https://github.com/google/guava) && [HuTool](https://www.hutool.cn/docs/#/) && [lombok](https://projectlombok.org/) && [spring-data-commons](https://github.com/spring-projects/spring-data-commons) && [commons-lang3](https://commons.apache.org/proper/commons-lang/)
-* [knife4j](https://doc.xiaominfo.com/knife4j/)
-* [nacos](https://nacos.io/zh-cn/docs/what-is-nacos.html) && redis && mysql
-* [nimbus-jose-jwt](https://bitbucket.org/connect2id/nimbus-jose-jwt/src/master/) && [jwt](https://github.com/jwtk/jjwt)
-
-### 部署/运维
-
-* [Docker](https://www.docker.com/)
-* [Portainer](https://github.com/portainer/portainer)
-* [Jenkins](https://github.com/jenkinsci/jenkins)
+| 技术                 | 版本          | 说明                             | site                                            |
+| -------------------- | ------------- | -------------------------------- | ----------------------------------------------- |
+| Spring Cloud         | Hoxton.SR8    | 微服务框架                       | https://spring.io/projects/spring-cloud         |
+| mybatis-plus         | 3.4.2         | 为简化开发而生                   | https://baomidou.com/                           |
+| spring-cloud-alibaba | 2.2.3.RELEASE | 微服务开发的一站式解决方案       | https://spring.io/projects/spring-cloud-alibaba |
+| PageHelper           | starter1.3.0  | MyBatis物理分页插件              | http://git.oschina.net/free/Mybatis_PageHelper  |
+| Druid                | starter1.2.4  | 数据库连接池                     | https://github.com/alibaba/druid                |
+| Redis                |               | 分布式缓存                       |                                                 |
+| knife4j              | 2.0.4         | Swagger生成Api文档的增强解决方案 | https://doc.xiaominfo.com                       |                                         |
 
 ### 前端技术
 
-* [Vue](https://vuejs.org/)
-* [element-ui](https://element.eleme.io/)
-* [Axios](https://github.com/axios/axios)
-* [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/)
+| 技术              | 说明                | 官网                                                    |
+| ----------------- | ------------------- | ------------------------------------------------------- |
+| Vue               | 前端框架            | https://vuejs.org/                                      |
+| Element           | 前端UI框架          | https://element.eleme.io/                               |
+| Axios             | 前端HTTP框架        | https://github.com/axios/axios                          |
+| vue-element-admin | A magical vue admin | https://panjiachen.github.io/vue-element-admin-site/zh/ |
 
 
 ## 环境搭建
@@ -48,7 +47,7 @@ https://mall.aurora.besscroft.com/
 ### 开发环境
 
 * JDK 1.8
-* Idea 2021.1.1
+* Idea 2021.1.2
 * [nodejs](https://nodejs.org/dist/latest-v12.x/) v12.20.1
 
 ### 行为准则
