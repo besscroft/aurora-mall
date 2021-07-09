@@ -27,7 +27,7 @@
       </div>
       <div>
         <span></span>
-        <img src="https://imgcdn.52bess.com/images/9ae613da046d8.png" style="width: 150px" />
+        <img src="https://imgcdn.besscroft.com/images/9ae613da046d8.png" style="width: 150px" />
       </div>
     </el-card>
   </div>
