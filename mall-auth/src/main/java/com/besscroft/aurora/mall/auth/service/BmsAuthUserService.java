@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 后台用户管理Service
+ * 后台用户管理服务
  *
  * @Author Besscroft
  * @Date 2021/1/23 14:53
@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient("mall-admin")
 public interface BmsAuthUserService {
 
+    /**
+     * 根据用户名获取用户登录信息
+     * @param username 用户名
+     * @return 用户登录信息
+     */
     @GetMapping("/user/loadByUsername")
     UserDto loadUserByUsername(@RequestParam String username);
+
 }

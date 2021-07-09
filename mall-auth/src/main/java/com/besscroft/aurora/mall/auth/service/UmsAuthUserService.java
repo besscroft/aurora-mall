@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient("mall-user")
 public interface UmsAuthUserService {
 
+    /**
+     * 根据用户名获取用户登录信息
+     * @param username 用户名
+     * @return 用户登录信息
+     */
     @GetMapping("/user/loadByUsername")
     UserDto loadUserByUsername(@RequestParam String username);
+
 }
