@@ -16,6 +16,11 @@ import java.util.Map;
 @FeignClient("mall-auth")
 public interface AuthService {
 
+    /**
+     * 获取Oauth2Token
+     * @param parameters 请求参数
+     * @return Oauth2Token
+     */
     @PostMapping(value = "/oauth/token")
     AjaxResult getAccessToken(@RequestParam Map<String, String> parameters);
 

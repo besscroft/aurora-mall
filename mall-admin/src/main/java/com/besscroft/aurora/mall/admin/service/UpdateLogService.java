@@ -5,6 +5,8 @@ import com.besscroft.aurora.mall.common.entity.UpdateLog;
 import java.util.List;
 
 /**
+ * 版本日志服务
+ *
  * @Author Besscroft
  * @Date 2021/4/17 21:32
  */
@@ -12,7 +14,7 @@ public interface UpdateLogService {
 
     /**
      * 获取所有的版本日志
-     * @return
+     * @return 版本日志集合
      */
     List<UpdateLog> getUpdateLogList();
 

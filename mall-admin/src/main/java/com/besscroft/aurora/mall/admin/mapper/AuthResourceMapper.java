@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 权限管理模块资源Mapper接口
+ * 权限管理模块资源持久化
  *
  * @Author Besscroft
  * @Date 2021/3/17 15:51
@@ -16,45 +16,51 @@ public interface AuthResourceMapper extends BaseMapper<AuthResource> {
 
     /**
      * 查询所有资源
-     * @return
+     * @return 所有资源
      */
     List<AuthResource> selectAll();
 
     /**
      * 分页查询资源列表
-     * @param keyword
-     * @return
+     * @param keyword 关键字
+     * @return 分页资源列表
      */
     List<AuthResource> selectResourceListByPage(String keyword);
 
     /**
      * 新增资源
-     * @param authResource
+     * @param authResource 资源实体
      * @return
      */
     int insertResource(AuthResource authResource);
 
     /**
      * 更新资源
-     * @param authResource
+     * @param authResource 资源实体
      * @return
      */
     int updateResource(AuthResource authResource);
 
     /**
      * 根据角色id获取资源树数组
-     * @param id
-     * @return
+     * @param id 角色id
+     * @return 角色的资源树数组
      */
     List<Long> selectResourceTreeById(Long id);
 
     /**
      * 根据角色id删除角色资源关系
-     * @param id
+     * @param id 角色id
      * @return
      */
     int deleteRoleResourceRelation(Long id);
 
+    /**
+     * 插入角色和资源对应关系
+     * @param resourceId 资源id
+     * @param roleId 角色id
+     * @return
+     */
     int insertRoleResourceRelation(@Param("resourceId") Long resourceId,
                                    @Param("roleId") Long roleId);
 
