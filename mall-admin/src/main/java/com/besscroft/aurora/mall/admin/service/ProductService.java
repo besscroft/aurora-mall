@@ -21,4 +21,11 @@ public interface ProductService {
      */
     List<Product> getProductPageList(Integer pageNum, Integer pageSize, String keyword);
 
+    /**
+     * 新增商品
+     * @param productParam 商品参数(新增）
+     * @return
+     */
+    boolean productAdd(Product product);
+
 }

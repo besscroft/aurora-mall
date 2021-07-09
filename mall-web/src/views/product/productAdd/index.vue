@@ -181,7 +181,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getToken } from "@/api/imgUtils";
-import {Message} from "element-ui";
+import { Message } from "element-ui";
+import { productAdd } from '@/api/product/productAdd'
 
 const defaultProductParam = {
   // 商品名称
@@ -237,7 +238,7 @@ const defaultProductParam = {
   // 是否为秒杀商品：0->不是；1->是
   previewStatus: 0,
   // 以逗号分割的产品服务：1->包邮；2->急速退款；3->7天无理由；4->此商品不可用极光券
-  serviceIds: [],
+  serviceIds: '',
   // 产品详情标题
   detailTitle: '',
   // 产品详情网页内容
@@ -340,7 +341,16 @@ export default {
       this.form.productTypeId = this.form.productTypeId.value
       this.form.productCategoryName = this.form.productCategoryId.label
       this.form.productCategoryId = this.form.productCategoryId.value
-      console.log(this.form)
+      this.form.serviceIds = JSON.stringify(this.form.serviceIds)
+      productAdd(this.form).then(response => {
+        console.log(response)
+        if (response.code == 200) {
+          Message.success(response.message)
+        } else {
+          Message.error(response.message)
+        }
+        this.form = Object.assign({}, defaultProductParam)
+      });
     }
   }
 }

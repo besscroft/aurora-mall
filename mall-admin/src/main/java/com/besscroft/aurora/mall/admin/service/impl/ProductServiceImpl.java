@@ -6,6 +6,7 @@ import com.besscroft.aurora.mall.common.entity.Product;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,12 @@ public class ProductServiceImpl implements ProductService {
         PageHelper.startPage(pageNum, pageSize);
         List<Product> products = productMapper.selectProductListByPage(keyword);
         return products;
+    }
+
+    @Override
+    @Transactional
+    public boolean productAdd(Product product) {
+        return productMapper.insert(product) > 0;
     }
 
 }
