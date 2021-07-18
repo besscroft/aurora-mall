@@ -67,6 +67,34 @@ spring:
             - StripPrefix=1
             # 重写路径，也相当于去掉前缀了
             # - RewritePath=/mall-auth/(?<segment>.*), /$\{segment}
+        # 分布式ID服务的路由
+        # 路由 ID
+        - id: mall-id-generator
+          # 请求地址
+          uri: lb://mall-id-generator
+          # 断言（判断条件）
+          predicates:
+            - Path=/mall-id-generator/**
+          # 过滤器
+          filters:
+            # 去掉前缀
+            - StripPrefix=1
+            # 重写路径，也相当于去掉前缀了
+            # - RewritePath=/mall-auth/(?<segment>.*), /$\{segment}
+        # 日志服务的路由
+        # 路由 ID
+        - id: mall-log
+          # 请求地址
+          uri: lb://mall-log
+          # 断言（判断条件）
+          predicates:
+            - Path=/mall-log/**
+          # 过滤器
+          filters:
+            # 去掉前缀
+            - StripPrefix=1
+            # 重写路径，也相当于去掉前缀了
+            # - RewritePath=/mall-auth/(?<segment>.*), /$\{segment}
       discovery:
         locator:
           enabled: true #开启从注册中心动态创建路由的功能
