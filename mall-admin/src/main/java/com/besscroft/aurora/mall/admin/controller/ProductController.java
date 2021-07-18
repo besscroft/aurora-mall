@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +36,16 @@ public class ProductController {
     public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         List<Product> list = productService.getProductPageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
+    }
+
+    @ApiOperation("新增商品")
+    @PostMapping("/productAdd")
+    public AjaxResult productAdd(@RequestBody Product product) {
+        boolean b = productService.productAdd(product);
+        if (b) {
+            return AjaxResult.success("新增成功！");
+        }
+        return AjaxResult.error("哎呀，添加失败了！");
     }
 
 }

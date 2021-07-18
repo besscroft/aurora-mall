@@ -6,6 +6,7 @@ import com.besscroft.aurora.mall.admin.dto.AdminParam;
 import com.besscroft.aurora.mall.admin.dto.UserLoginParam;
 import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.admin.service.UserService;
+import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.domain.UserDto;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
@@ -39,6 +40,7 @@ public class UserController {
     @Autowired
     private MenuService menuService;
 
+    @WebLog(description = "登录接口")
     @ApiOperation(value = "登录并返回token")
     @PostMapping(value = "/login")
     public AjaxResult login(@Validated @RequestBody UserLoginParam userLoginParam) {
@@ -48,6 +50,7 @@ public class UserController {
         return AjaxResult.success(result);
     }
 
+    @WebLog(description = "根据用户名获取用户信息接口")
     @ApiOperation("根据用户名获取用户信息")
     @GetMapping(value = "/loadByUsername")
     public UserDto loadByUsername(@RequestParam String username) {
@@ -55,6 +58,7 @@ public class UserController {
         return userDto;
     }
 
+    @WebLog(description = "超级管理员添加后台管理系统用户接口")
     @ApiOperation(value = "超级管理员添加后台管理系统用户接口")
     @PostMapping("/updateUser")
     public AjaxResult updateUser(@Validated @RequestBody AdminParam adminParam) {
@@ -66,6 +70,7 @@ public class UserController {
         }
     }
 
+    @WebLog(description = "获取当前后台系统登录用户的一些信息")
     @ApiOperation(value = "获取当前后台系统登录用户的一些信息")
     @GetMapping("/info")
     public AjaxResult getInfo() {
@@ -83,6 +88,7 @@ public class UserController {
         return AjaxResult.success(data);
     }
 
+    @WebLog(description = "后台管理系统登出功能")
     @ApiOperation("后台管理系统登出功能")
     @PostMapping(value = "/logout")
     public AjaxResult logout() {
@@ -93,6 +99,7 @@ public class UserController {
         return AjaxResult.success("成功退出登录啦！");
     }
 
+    @WebLog(description = "查询权限管理模块用户列表")
     @ApiOperation("查询权限管理模块用户列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "第几页",required = true, dataType = "Integer"),
@@ -104,6 +111,7 @@ public class UserController {
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
+    @WebLog(description = "查询权限管理模块用户详情")
     @ApiOperation("查询权限管理模块用户详情")
     @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "Long")
     @GetMapping("/getUser/{id}")
@@ -113,6 +121,7 @@ public class UserController {
         return AjaxResult.success(user);
     }
 
+    @WebLog(description = "修改权限管理模块用户")
     @ApiOperation("修改权限管理模块用户")
     @PutMapping("/updateUser")
     public AjaxResult updateUser(@Validated @RequestBody AuthUser authUser) {
@@ -128,6 +137,7 @@ public class UserController {
         return AjaxResult.error("Unauthorized");
     }
 
+    @WebLog(description = "用户账户启用状态更新")
     @ApiOperation("用户账户启用状态更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "status", value = "启用状态",required = true, dataType = "Boolean"),
@@ -147,6 +157,7 @@ public class UserController {
         return AjaxResult.error("哎呀，更新失败了！");
     }
 
+    @WebLog(description = "删除权限管理模块用户")
     @ApiOperation("删除权限管理模块用户")
     @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "Long")
     @DeleteMapping("/delUser/{id}")
@@ -161,6 +172,7 @@ public class UserController {
         return AjaxResult.error("哎呀，删除失败了！");
     }
 
+    @WebLog(description = "新增权限管理模块用户")
     @ApiOperation("新增权限管理模块用户")
     @PostMapping("/addUser")
     public AjaxResult addUser(@RequestBody AuthUser authUser) {

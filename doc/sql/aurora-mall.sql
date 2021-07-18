@@ -11,7 +11,7 @@
  Target Server Version : 50734
  File Encoding         : 65001
 
- Date: 05/06/2021 16:02:35
+ Date: 18/07/2021 19:35:52
 */
 
 SET NAMES utf8mb4;
@@ -3102,23 +3102,6 @@ INSERT INTO `area` VALUES (3066, '昆玉市', 659009, 659000);
 INSERT INTO `area` VALUES (3067, '胡杨河市', 659010, 659000);
 
 -- ----------------------------
--- Table structure for bms_auth_log
--- ----------------------------
-DROP TABLE IF EXISTS `bms_auth_log`;
-CREATE TABLE `bms_auth_log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `log_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
-  `log_detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作详情，这里可以以json等格式保留信息',
-  `log_ip` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '1.1.1.1' COMMENT '操作者登录ip',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块权限操作日志表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of bms_auth_log
--- ----------------------------
-
--- ----------------------------
 -- Table structure for bms_auth_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_auth_menu`;
@@ -3204,7 +3187,7 @@ CREATE TABLE `bms_auth_resource`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `category_id` bigint(20) NULL DEFAULT NULL COMMENT '资源类别ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_resource
@@ -3270,6 +3253,7 @@ INSERT INTO `bms_auth_resource` VALUES (58, '新增商品品牌', '/productBrand
 INSERT INTO `bms_auth_resource` VALUES (59, '修改商品品牌', '/productBrand/updateProductBrand', '修改商品品牌', '2021-05-15 14:18:12', 13);
 INSERT INTO `bms_auth_resource` VALUES (60, '删除商品品牌', '/productBrand/delProductBrand/**', '删除商品品牌', '2021-05-15 14:18:17', 13);
 INSERT INTO `bms_auth_resource` VALUES (61, '商品列表', '/product/list', '商品列表', '2021-05-15 15:28:23', 16);
+INSERT INTO `bms_auth_resource` VALUES (62, '新增商品', '/product/productAdd', '新增商品', '2021-07-09 15:29:18', 14);
 
 -- ----------------------------
 -- Table structure for bms_auth_resource_sort
@@ -3420,7 +3404,7 @@ CREATE TABLE `bms_auth_role_resource_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `resource_id` bigint(20) NULL DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 536 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 598 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_resource_relation
@@ -3429,67 +3413,68 @@ INSERT INTO `bms_auth_role_resource_relation` VALUES (298, 2, 3);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (299, 2, 5);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (300, 2, 6);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (301, 2, 7);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (475, 1, 10);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (476, 1, 11);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (477, 1, 12);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (478, 1, 13);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (479, 1, 14);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (480, 1, 15);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (481, 1, 16);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (482, 1, 31);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (483, 1, 32);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (484, 1, 35);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (485, 1, 1);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (486, 1, 2);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (487, 1, 3);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (488, 1, 4);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (489, 1, 5);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (490, 1, 6);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (491, 1, 7);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (492, 1, 8);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (493, 1, 9);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (494, 1, 37);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (495, 1, 38);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (496, 1, 39);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (497, 1, 40);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (498, 1, 41);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (499, 1, 23);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (500, 1, 24);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (501, 1, 25);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (502, 1, 26);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (503, 1, 27);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (504, 1, 33);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (505, 1, 34);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (506, 1, 36);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (507, 1, 17);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (508, 1, 18);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (509, 1, 19);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (510, 1, 20);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (511, 1, 21);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (512, 1, 22);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (513, 1, 28);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (514, 1, 29);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (515, 1, 30);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (516, 1, 50);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (517, 1, 51);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (518, 1, 52);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (519, 1, 53);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (520, 1, 54);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (521, 1, 55);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (522, 1, 56);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (523, 1, 57);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (524, 1, 58);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (525, 1, 59);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (526, 1, 60);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (527, 1, 43);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (528, 1, 44);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (529, 1, 45);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (530, 1, 46);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (531, 1, 47);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (532, 1, 48);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (533, 1, 49);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (534, 1, 61);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (535, 1, 42);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (536, 1, 10);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (537, 1, 11);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (538, 1, 12);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (539, 1, 13);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (540, 1, 14);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (541, 1, 15);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (542, 1, 16);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (543, 1, 31);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (544, 1, 32);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (545, 1, 35);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (546, 1, 1);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (547, 1, 2);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (548, 1, 3);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (549, 1, 4);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (550, 1, 5);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (551, 1, 6);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (552, 1, 7);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (553, 1, 8);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (554, 1, 9);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (555, 1, 37);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (556, 1, 38);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (557, 1, 39);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (558, 1, 40);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (559, 1, 41);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (560, 1, 23);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (561, 1, 24);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (562, 1, 25);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (563, 1, 26);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (564, 1, 27);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (565, 1, 33);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (566, 1, 34);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (567, 1, 36);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (568, 1, 17);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (569, 1, 18);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (570, 1, 19);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (571, 1, 20);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (572, 1, 21);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (573, 1, 22);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (574, 1, 28);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (575, 1, 29);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (576, 1, 30);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (577, 1, 50);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (578, 1, 51);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (579, 1, 52);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (580, 1, 53);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (581, 1, 54);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (582, 1, 55);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (583, 1, 56);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (584, 1, 57);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (585, 1, 58);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (586, 1, 59);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (587, 1, 60);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (588, 1, 62);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (589, 1, 43);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (590, 1, 44);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (591, 1, 45);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (592, 1, 46);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (593, 1, 47);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (594, 1, 48);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (595, 1, 49);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (596, 1, 61);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (597, 1, 42);
 
 -- ----------------------------
 -- Table structure for bms_auth_user
@@ -3514,7 +3499,7 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-06-05 15:07:27', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-07-18 19:33:40', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.52bess.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.52bess.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
@@ -3603,23 +3588,6 @@ CREATE TABLE `bms_market_coupon`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for bms_market_coupon_log
--- ----------------------------
-DROP TABLE IF EXISTS `bms_market_coupon_log`;
-CREATE TABLE `bms_market_coupon_log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `log_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
-  `log_detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作详情，这里可以以json等格式保留信息',
-  `log_ip` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '1.1.1.1' COMMENT '操作者登录ip',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销管理模块优惠券使用记录表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of bms_market_coupon_log
--- ----------------------------
-
--- ----------------------------
 -- Table structure for bms_order
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_order`;
@@ -3699,23 +3667,6 @@ CREATE TABLE `bms_order_item`  (
 
 -- ----------------------------
 -- Records of bms_order_item
--- ----------------------------
-
--- ----------------------------
--- Table structure for bms_order_log
--- ----------------------------
-DROP TABLE IF EXISTS `bms_order_log`;
-CREATE TABLE `bms_order_log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `log_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
-  `log_detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作详情，这里可以以json等格式保留信息',
-  `log_ip` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '1.1.1.1' COMMENT '操作者登录ip',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单日志表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of bms_order_log
 -- ----------------------------
 
 -- ----------------------------
@@ -3833,11 +3784,22 @@ CREATE TABLE `bms_product`  (
   `promotion_end_time` datetime NULL DEFAULT NULL COMMENT '促销结束时间',
   `promotion_per_limit` int(11) NULL DEFAULT NULL COMMENT '活动限购数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1413407615706316802 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product
 -- ----------------------------
+INSERT INTO `bms_product` VALUES (1413406166251323394, 'test', '', 1, '测试', NULL, NULL, NULL, NULL, 'test', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test', 'test', 0, 0, 'test', 0.00, 0, '[\"1\",\"2\",\"3\",\"4\"]', 'test', 'test', 'test', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413406328730271746, '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '[]', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413406516807057410, 'test1', '', 1, '测试', NULL, NULL, NULL, NULL, 'test1', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test1', 'test1', 0, 0, 'test1', 0.00, 0, '[\"1\",\"2\"]', 'test1', 'test1', 'test', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413406664522055681, 'test111', '', 1, '测试', NULL, NULL, NULL, NULL, 'test111', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test111', 'test111', 0, 0, 'test111', 0.00, 0, '[\"1\",\"2\"]', 'test111', 'test111', 'test111', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413406893514276866, 'response', '', 1, '测试', NULL, NULL, NULL, NULL, 'response', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'response', 'response', 0, 0, 'response', 0.00, 0, '[\"1\",\"2\"]', 'response', 'response', 'response', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413407198092050433, 'dgbf', '', 1, '测试', NULL, NULL, NULL, NULL, 'dgbf', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'dgbf', 'dgbf', 0, 0, 'dgbf', 0.00, 0, '[]', 'dgbf', 'dgbf', 'dgbf', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413407302588940289, 'message', '', NULL, NULL, NULL, NULL, NULL, NULL, 'message', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'message', 'message', 0, 0, 'message', 0.00, 0, '[]', 'message', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413407555270590466, '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '[]', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413407558667976706, '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413407562434461698, '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413407615706316801, 'Object.assign({}, defaultProductParam)', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for bms_product_attribute
@@ -3883,23 +3845,6 @@ CREATE TABLE `bms_product_brand`  (
 INSERT INTO `bms_product_brand` VALUES (1, '小米', NULL, 1, NULL, NULL, 1);
 INSERT INTO `bms_product_brand` VALUES (2, '联想', NULL, 1, 1, NULL, 1);
 INSERT INTO `bms_product_brand` VALUES (3, 'Apple', NULL, 1, 1, NULL, 1);
-
--- ----------------------------
--- Table structure for bms_product_log
--- ----------------------------
-DROP TABLE IF EXISTS `bms_product_log`;
-CREATE TABLE `bms_product_log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `log_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
-  `log_detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作详情，这里可以以json等格式保留信息',
-  `log_ip` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '1.1.1.1' COMMENT '操作者登录ip',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品操作日志表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of bms_product_log
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for bms_product_parameter
@@ -4195,23 +4140,6 @@ CREATE TABLE `bms_user_level`  (
 
 -- ----------------------------
 -- Records of bms_user_level
--- ----------------------------
-
--- ----------------------------
--- Table structure for bms_user_log
--- ----------------------------
-DROP TABLE IF EXISTS `bms_user_log`;
-CREATE TABLE `bms_user_log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `log_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
-  `log_detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作详情，这里可以以json等格式保留信息',
-  `log_ip` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '1.1.1.1' COMMENT '操作者登录ip',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户操作日志表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of bms_user_log
 -- ----------------------------
 
 -- ----------------------------
@@ -4659,5 +4587,32 @@ CREATE TABLE `ums_car_item`  (
 -- ----------------------------
 -- Records of ums_car_item
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for web_log
+-- ----------------------------
+DROP TABLE IF EXISTS `web_log`;
+CREATE TABLE `web_log`  (
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作用户',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志描述信息',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求地址',
+  `http_method` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法',
+  `class_method` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法路径:全限定名+方法名',
+  `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求者ip地址',
+  `request_args` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求入参',
+  `response_args` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '响应出参',
+  `start_time` datetime NULL DEFAULT NULL COMMENT '请求时间',
+  `spend_time` bigint(20) NULL DEFAULT NULL COMMENT '消耗时间(毫秒)',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '日志表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of web_log
+-- ----------------------------
+INSERT INTO `web_log` VALUES ('59054a68b4fc441a8fc5c14dd2da891f', NULL, '查询权限管理模块用户列表', 'http://192.168.222.1:20200/user/list', 'GET', 'com.besscroft.aurora.mall.admin.controller.UserControllerlist', '192.168.222.1', '[0,10]', '{\"code\":200,\"data\":{\"totalPage\":2,\"pageSize\":10,\"list\":[{\"note\":\"管理员\",\"nickName\":\"管理员\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1626608020000,\"phone\":\"12345678901\",\"createTime\":1614172968000,\"id\":1,\"email\":\"admin@qq.com\",\"username\":\"admin\",\"status\":1},{\"note\":\"测试员\",\"nickName\":\"测试员\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1619239554000,\"phone\":\"12345678902\",\"createTime\":1616305330000,\"id\":2,\"email\":\"test@qq.com\",\"username\":\"test\",\"status\":1},{\"note\":\"普通用户1\",\"nickName\":\"普通用户1\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1617531524000,\"phone\":\"111\",\"createTime\":1617531524000,\"id\":3,\"email\":\"user1@qq.com\",\"username\":\"user1\",\"status\":1},{\"note\":\"普通用户2\",\"nickName\":\"普通用户2\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1617532621000,\"phone\":\"112\",\"createTime\":1617532621000,\"id\":4,\"email\":\"user2@qq.com\",\"username\":\"user2\",\"status\":1},{\"note\":\"普通用户3\",\"nickName\":\"普通用户3\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1617545068000,\"phone\":\"113\",\"createTime\":1617545090000,\"id\":5,\"email\":\"user3@qq.com\",\"username\":\"user3\",\"status\":1},{\"note\":\"普通用户4\",\"nickName\":\"普通用户4\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1617545071000,\"phone\":\"114\",\"createTime\":1617545092000,\"id\":6,\"email\":\"user4@qq.com\",\"username\":\"user4\",\"status\":1},{\"note\":\"普通用户5\",\"nickName\":\"普通用户5\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1617545073000,\"phone\":\"115\",\"createTime\":1617545094000,\"id\":7,\"email\":\"user5@qq.com\",\"username\":\"user5\",\"status\":1},{\"note\":\"普通用户6\",\"nickName\":\"普通用户6\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1617545076000,\"phone\":\"116\",\"createTime\":1617545097000,\"id\":8,\"email\":\"user6@qq.com\",\"username\":\"user6\",\"status\":1},{\"note\":\"普通用户7\",\"nickName\":\"普通用户7\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1617545078000,\"phone\":\"117\",\"createTime\":1617545099000,\"id\":9,\"email\":\"user7@qq.com\",\"username\":\"user7\",\"status\":1},{\"note\":\"普通用户8\",\"nickName\":\"普通用户8\",\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"password\":\"\",\"loginTime\":1617545081000,\"phone\":\"118\",\"createTime\":1617545101000,\"id\":10,\"email\":\"user8@qq.com\",\"username\":\"user8\",\"status\":1}],\"pageNum\":1,\"total\":12},\"message\":\"操作成功\"}', '2021-07-18 19:33:52', 57);
+INSERT INTO `web_log` VALUES ('d17076f97b474df5a95f50c33066dbdb', NULL, '获取当前后台系统登录用户的一些信息', 'http://192.168.222.1:20200/user/info', 'GET', 'com.besscroft.aurora.mall.admin.controller.UserControllergetInfo', '192.168.222.1', '[]', '{\"code\":200,\"data\":{\"roles\":[\"超级管理员\"],\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"menus\":[{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/auth\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/auth/authPermission\",\"component\":\"/auth/authPermission/index\",\"meta\":{\"icon\":\"el-icon-check\",\"title\":\"权限管理\",\"noCache\":false},\"name\":\"authPermission\"},{\"hidden\":true,\"path\":\"/auth/authMenu\",\"component\":\"/auth/authMenu/index\",\"meta\":{\"icon\":\"el-icon-menu\",\"title\":\"菜单管理\",\"noCache\":false},\"name\":\"authMenu\"},{\"hidden\":true,\"path\":\"/auth/authUser\",\"component\":\"/auth/authUser/index\",\"meta\":{\"icon\":\"el-icon-user-solid\",\"title\":\"用户管理\",\"noCache\":false},\"name\":\"authUser\"},{\"hidden\":true,\"path\":\"/auth/authResourceSort\",\"component\":\"/auth/authResourceSort/index\",\"meta\":{\"icon\":\"el-icon-finished\",\"title\":\"资源类别管理\",\"noCache\":false},\"name\":\"authResourceSort\"},{\"hidden\":true,\"path\":\"/auth/authResource\",\"component\":\"/auth/authResource/index\",\"meta\":{\"icon\":\"el-icon-s-promotion\",\"title\":\"资源管理\",\"noCache\":false},\"name\":\"authResource\"},{\"hidden\":true,\"path\":\"/auth/authRole\",\"component\":\"/auth/authRole/index\",\"meta\":{\"icon\":\"el-icon-s-custom\",\"title\":\"角色管理\",\"noCache\":false},\"name\":\"authRole\"}],\"meta\":{\"icon\":\"el-icon-success\",\"title\":\"权限管理\",\"noCache\":false},\"name\":\"auth\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/order\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/order/orderReturn\",\"component\":\"/order/orderReturn\",\"meta\":{\"icon\":\"el-icon-s-claim\",\"title\":\"售后订单\",\"noCache\":false},\"name\":\"orderReturn\"},{\"hidden\":true,\"path\":\"/order/orderList\",\"component\":\"/order/orderList/index\",\"meta\":{\"icon\":\"el-icon-s-order\",\"title\":\"订单列表\",\"noCache\":false},\"name\":\"orderList\"},{\"hidden\":true,\"path\":\"/order/orderReason\",\"component\":\"/order/orderReason/index\",\"meta\":{\"icon\":\"el-icon-notebook-1\",\"title\":\"售后原因\",\"noCache\":false},\"name\":\"orderReason\"},{\"hidden\":true,\"path\":\"/order/orderTimeTask\",\"component\":\"/order/orderTimeTask/index\",\"meta\":{\"icon\":\"el-icon-timer\",\"title\":\"定时任务\",\"noCache\":false},\"name\":\"orderTimeTask\"}],\"meta\":{\"icon\":\"el-icon-s-order\",\"title\":\"订单管理\",\"noCache\":false},\"name\":\"order\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/product\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/product/productUpdate\",\"component\":\"/product/productUpdate/index\",\"meta\":{\"icon\":\"el-icon-sold-out\",\"title\":\"修改商品\",\"noCache\":false},\"name\":\"productUpdate\"},{\"hidden\":true,\"path\":\"/product/productType\",\"component\":\"/product/productType/index\",\"meta\":{\"icon\":\"el-icon-price-tag\",\"title\":\"类型管理\",\"noCache\":false},\"name\":\"productType\"},{\"hidden\":true,\"path\":\"/product/productBrand\",\"component\":\"/product/productBrand/index\",\"meta\":{\"icon\":\"el-icon-postcard\",\"title\":\"品牌管理\",\"noCache\":false},\"name\":\"productBrand\"},{\"hidden\":true,\"path\":\"/product/productAdd\",\"component\":\"/product/productAdd/index\",\"meta\":{\"icon\":\"el-icon-sell\",\"title\":\"添加商品\",\"noCache\":false},\"name\":\"productAdd\"},{\"hidden\":true,\"path\":\"/product/productSort\",\"component\":\"/product/productSort/index\",\"meta\":{\"icon\":\"el-icon-discount\",\"title\":\"分类管理\",\"noCache\":false},\"name\":\"productSort\"},{\"hidden\":true,\"path\":\"/product/productList\",\"component\":\"/product/productList/index\",\"meta\":{\"icon\":\"el-icon-s-goods\",\"title\":\"商品列表\",\"noCache\":false},\"name\":\"productList\"}],\"meta\":{\"icon\":\"el-icon-s-goods\",\"title\":\"商品管理\",\"noCache\":false},\"name\":\"product\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/market\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/market/marketCoupon\",\"component\":\"/market/marketCoupon/index\",\"meta\":{\"icon\":\"el-icon-s-ticket\",\"title\":\"优惠券管理\",\"noCache\":false},\"name\":\"marketCoupon\"},{\"hidden\":true,\"path\":\"/market/marketBit\",\"component\":\"/market/marketBit/index\",\"meta\":{\"icon\":\"el-icon-s-finance\",\"title\":\"虚拟币管理\",\"noCache\":false},\"name\":\"marketBit\"},{\"hidden\":true,\"path\":\"/market/marketAD\",\"component\":\"/market/marketAD/index\",\"meta\":{\"icon\":\"el-icon-data-line\",\"title\":\"广告管理\",\"noCache\":false},\"name\":\"marketAD\"},{\"hidden\":true,\"path\":\"/market/marketSpike\",\"component\":\"/market/marketSpike/index\",\"meta\":{\"icon\":\"el-icon-alarm-clock\",\"title\":\"秒杀管理\",\"noCache\":false},\"name\":\"marketSpike\"}],\"meta\":{\"icon\":\"el-icon-s-marketing\",\"title\":\"营销管理\",\"noCache\":false},\"name\":\"market\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/user\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/user/userList\",\"component\":\"/user/userList/index\",\"meta\":{\"icon\":\"el-icon-user\",\"title\":\"会员列表\",\"noCache\":false},\"name\":\"userList\"}],\"meta\":{\"icon\":\"el-icon-user-solid\",\"title\":\"会员管理\",\"noCache\":false},\"name\":\"user\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/system\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/system/version\",\"component\":\"/system/version/index\",\"meta\":{\"icon\":\"el-icon-s-promotion\",\"title\":\"版本日志\",\"noCache\":false},\"name\":\"version\"}],\"meta\":{\"icon\":\"el-icon-s-tools\",\"title\":\"系统管理\",\"noCache\":false},\"name\":\"system\",\"alwaysShow\":true}],\"username\":\"管理员\"},\"message\":\"操作成功\"}', '2021-07-18 19:33:40', 38);
+INSERT INTO `web_log` VALUES ('e9fdc08623e645ddbb83c971887b0178', NULL, '登录接口', 'http://192.168.222.1:20200/user/login', 'POST', 'com.besscroft.aurora.mall.admin.controller.UserControllerlogin', '192.168.222.1', '[{\"password\":\"666666\",\"username\":\"admin\"}]', '{\"code\":200,\"data\":{\"token_type\":\"bearer\",\"client_id\":\"admin-app\",\"access_token\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJpZCI6MSwiZXhwIjoxNjI2Njk0NDIwLCJhdXRob3JpdGllcyI6WyIxX-i2hee6p-euoeeQhuWRmCJdLCJqdGkiOiJjNmE0ZjRiMy02ZTFkLTRjNjQtOWM5MS1jZTE4MDZlOWFmNTciLCJjbGllbnRfaWQiOiJhZG1pbi1hcHAifQ.Tpov2XqH1Wbox2FzTzBjWyfXUFxQE8_PqeLjWKjiCxl2vjcJn8qNyvzufsGhwctBnYsYA2mhI4vFRSkZEU9Y6yfKz6w4xr3bfspNUCBgVkRuBmuCf-Jvh4jFRRmh2Z9zGvRhOe6xgmGXjZd44AgZKVBsz3HkTxhI-sy9PeJly22jhckVcRvAElgZXP-hUyJOV1FwGTvnkYwxGcioS4tNaR-nJfjNakAPvWkh1ndHlB9lN_K-F2B8ISGMiXbmgb6CVAGckrDNoWtY__txpKuDd0c5cklTx5U2QINTOP7BRDG_9c36qEn7Q5DpHi-t-Zic8Xe-F4TQ-WWMH35HkDBzQQ\",\"refresh_token\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJhdGkiOiJjNmE0ZjRiMy02ZTFkLTRjNjQtOWM5MS1jZTE4MDZlOWFmNTciLCJpZCI6MSwiZXhwIjoxNjI3MjEyODIwLCJhdXRob3JpdGllcyI6WyIxX-i2hee6p-euoeeQhuWRmCJdLCJqdGkiOiJlNDQ2ODdjMy0wYmI1LTQ0ZjgtODk4YS02NjdlMzJmMmYzMjYiLCJjbGllbnRfaWQiOiJhZG1pbi1hcHAifQ.pbLeozhNpAqhTDzalr_-a-e5VKZSp3Qi-LwXCoY1XMZFLQ-q_W0CyVA_vhkBl5jOi6zoHQEwSv9jBXAyu5sYt3RoxCqId0S9bFXtH5DLyK3rR86elqkydP-Cgs7O7v5tyHF0n1FBTYkc9pREUw-9WsAqP6yZIBzGfhNQitHSwNot4IKxqvPHOpttAX65IIo0iWFp_ml3AhfWEZiTwNr3k6jcejtAThAhD9OmCnPDoLu-VwlwFV5oiv8JyEEgmsNkRziPvj-lu5pvCdbZVfYZUuxTryBc4ToHCeCkmd7IPWQztTKe1v0pmKtuvIQySoVWi7wFGlmt9HR7prlIfWZzCA\",\"scope\":\"all\",\"id\":1,\"expires_in\":86399,\"jti\":\"c6a4f4b3-6e1d-4c64-9c91-ce1806e9af57\"},\"message\":\"操作成功\"}', '2021-07-18 19:33:40', 731);
+INSERT INTO `web_log` VALUES ('f64aa3b7957147bbb7ee34ea60222e32', NULL, '根据用户名获取用户信息接口', 'http://192.168.222.1:20200/user/loadByUsername', 'GET', 'com.besscroft.aurora.mall.admin.controller.UserControllerloadByUsername', '192.168.222.1', '[\"admin\"]', '{\"roles\":[\"1_超级管理员\"],\"password\":\"$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC\",\"id\":1,\"username\":\"admin\",\"status\":1}', '2021-07-18 19:33:40', 15);
 
 SET FOREIGN_KEY_CHECKS = 1;
