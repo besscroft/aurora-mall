@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: mall-admin
+    name: mall-id-generator
   profiles:
     active: '@spring.active@'
   cloud:
