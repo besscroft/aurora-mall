@@ -10,9 +10,10 @@
 
     <groupId>com.besscroft.idGenerator</groupId>
     <artifactId>mall-id-generator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>mall-id-generator</name>
     <description>分布式id生成服务</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>

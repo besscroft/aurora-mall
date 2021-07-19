@@ -19,6 +19,8 @@
         <module>mall-common</module>
         <module>mall-admin</module>
         <module>mall-elasticsearch</module>
+        <module>mall-id-generator</module>
+        <module>mall-log</module>
     </modules>
 
     <parent>
