@@ -23,8 +23,7 @@ public class ProductSortServiceImpl implements ProductSortService {
     @Override
     public List<ProductSort> getProductSortPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<ProductSort> resources = productSortMapper.selectProductSortListByPage(keyword);
-        return resources;
+        return productSortMapper.selectProductSortListByPage(keyword);
     }
 
     @Override
@@ -53,10 +52,7 @@ public class ProductSortServiceImpl implements ProductSortService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delProductSort(List<Long> ids) {
-        ids.forEach(id -> {
-            productSortMapper.deleteById(id);
-        });
-        return true;
+        return productSortMapper.deleteBatchIds(ids) > 0;
     }
 
     @Override

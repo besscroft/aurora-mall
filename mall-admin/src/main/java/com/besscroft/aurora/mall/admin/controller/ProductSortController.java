@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.ProductSortService;
+import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.entity.ProductSort;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
@@ -28,6 +29,7 @@ public class ProductSortController {
     @Autowired
     private ProductSortService productSortService;
 
+    @WebLog(description = "查询后台管理商品分类列表")
     @ApiOperation("查询后台管理商品分类列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "第几页",required = true, dataType = "Integer"),
@@ -39,6 +41,7 @@ public class ProductSortController {
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
+    @WebLog(description = "获取商品分类详情")
     @ApiOperation("获取商品分类详情")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @GetMapping("/getProductSort/{id}")
@@ -47,6 +50,7 @@ public class ProductSortController {
         return AjaxResult.success(productSort);
     }
 
+    @WebLog(description = "新增商品分类")
     @ApiOperation("新增商品分类")
     @PostMapping("/addProductSort")
     public AjaxResult addProductSort(@RequestBody ProductSort productSort) {
@@ -57,6 +61,7 @@ public class ProductSortController {
         return AjaxResult.error("哎呀，新增失败了！");
     }
 
+    @WebLog(description = "更新商品分类")
     @ApiOperation("更新商品分类")
     @PutMapping("/updateProductSort")
     public AjaxResult updateProductSort(@RequestBody ProductSort productSort) {
@@ -67,6 +72,7 @@ public class ProductSortController {
         return AjaxResult.error("哎呀，更新失败了！");
     }
 
+    @WebLog(description = "删除商品分类")
     @ApiOperation("删除商品分类")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delProductSort/{id}")
@@ -78,6 +84,7 @@ public class ProductSortController {
         return AjaxResult.error("哎呀，删除失败了");
     }
 
+    @WebLog(description = "查询商品分类所有父级")
     @ApiOperation("查询商品分类所有父级")
     @GetMapping("/getProductSortByParent")
     public AjaxResult getProductSortByParent() {
@@ -85,6 +92,7 @@ public class ProductSortController {
         return AjaxResult.success(list);
     }
 
+    @WebLog(description = "商品分类启用状态更新")
     @ApiOperation("商品分类启用状态更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "showStatus", value = "显示状态",required = true, dataType = "Boolean"),

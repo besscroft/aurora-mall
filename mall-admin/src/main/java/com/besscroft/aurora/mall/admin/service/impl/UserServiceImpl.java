@@ -108,8 +108,7 @@ public class UserServiceImpl implements UserService {
         // 对密码进行加密
         authUser.setPassword(new BCryptPasswordEncoder().encode(adminParam.getPassword()));
         // 更新到数据库
-        int insert = authUserMapper.insert(authUser);
-        return insert > 0;
+        return authUserMapper.insert(authUser) > 0;
     }
 
     @Override
@@ -119,8 +118,7 @@ public class UserServiceImpl implements UserService {
             log.error("暂未登录或token已经过期");
         }
         UserDto userDto = JSONUtil.toBean(header, UserDto.class);
-        AuthUser authUser = authUserMapper.selectById(userDto.getId());
-        return authUser;
+        return authUserMapper.selectById(userDto.getId());
     }
 
     @Override

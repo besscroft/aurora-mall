@@ -78,8 +78,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<AuthResource> getResourcePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<AuthResource> resources = authResourceMapper.selectResourceListByPage(keyword);
-        return resources;
+        return authResourceMapper.selectResourceListByPage(keyword);
     }
 
     @Override
@@ -103,9 +102,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delResource(List<Long> ids) {
-        ids.forEach(id -> {
-            authResourceMapper.deleteById(id);
-        });
+            authResourceMapper.deleteBatchIds(ids);
         return true;
     }
 
@@ -128,19 +125,19 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<Long> getResourceTreeById(Long id) {
-        List<Long> longs = authResourceMapper.selectResourceTreeById(id);
-        return longs;
+        return authResourceMapper.selectResourceTreeById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateResourceTree(List<Long> data, Long id) {
-        authResourceMapper.deleteRoleResourceRelation(id);
-        data.forEach(d -> {
-            authResourceMapper.insertRoleResourceRelation(d, id);
-        });
-        resourceServiceImpl.initRoleResourceMap();
-        return true;
+    public boolean updateResourceTree(List<Long> resourceIds, Long id) {
+        int i = authResourceMapper.deleteRoleResourceRelation(id);
+        if (i > 0) {
+            int relation = authResourceMapper.insertRoleResourceRelation(resourceIds, id);
+            resourceServiceImpl.initRoleResourceMap();
+            return relation > 0;
+        }
+        return false;
     }
 
 }

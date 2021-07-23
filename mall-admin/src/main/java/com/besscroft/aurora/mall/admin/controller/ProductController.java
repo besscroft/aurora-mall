@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.ProductService;
+import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.Product;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
@@ -27,6 +28,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @WebLog(description = "查询后台管理商品列表")
     @ApiOperation("查询后台管理商品列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "第几页",required = true, dataType = "Integer"),
@@ -38,6 +40,7 @@ public class ProductController {
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
+    @WebLog(description = "新增商品")
     @ApiOperation("新增商品")
     @PostMapping("/productAdd")
     public AjaxResult productAdd(@RequestBody Product product) {

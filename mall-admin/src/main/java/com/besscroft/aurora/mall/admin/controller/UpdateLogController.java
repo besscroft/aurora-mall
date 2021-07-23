@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.UpdateLogService;
+import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.UpdateLog;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import io.swagger.annotations.Api;
@@ -26,6 +27,7 @@ public class UpdateLogController {
     @Autowired
     private UpdateLogService updateLogService;
 
+    @WebLog(description = "查询版本日志列表")
     @ApiOperation("查询版本日志列表")
     @GetMapping("/list")
     public AjaxResult list() {

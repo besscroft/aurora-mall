@@ -57,10 +57,10 @@ public interface AuthRoleMapper extends BaseMapper<AuthRole> {
 
     /**
      * 根据id删除角色（假删除）
-     * @param id 角色id
+     * @param ids 角色id集合
      * @return
      */
-    int deleteRoleById(Long id);
+    int deleteRoleById(List<Long> ids);
 
     /**
      * 角色可用状态变更

@@ -57,11 +57,11 @@ public interface AuthResourceMapper extends BaseMapper<AuthResource> {
 
     /**
      * 插入角色和资源对应关系
-     * @param resourceId 资源id
+     * @param resourceIds 资源id集合
      * @param roleId 角色id
      * @return
      */
-    int insertRoleResourceRelation(@Param("resourceId") Long resourceId,
+    int insertRoleResourceRelation(@Param("resourceIds") List<Long> resourceIds,
                                    @Param("roleId") Long roleId);
 
 }

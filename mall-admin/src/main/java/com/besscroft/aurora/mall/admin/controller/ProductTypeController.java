@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.ProductTypeService;
+import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.ProductType;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
@@ -27,6 +28,7 @@ public class ProductTypeController {
     @Autowired
     private ProductTypeService productTypeService;
 
+    @WebLog(description = "查询后台管理商品类型列表")
     @ApiOperation("查询后台管理商品类型列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "第几页",required = true, dataType = "Integer"),
@@ -38,6 +40,7 @@ public class ProductTypeController {
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
+    @WebLog(description = "获取商品类型详情")
     @ApiOperation("获取商品类型详情")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @GetMapping("/getProductType/{id}")
@@ -46,6 +49,7 @@ public class ProductTypeController {
         return AjaxResult.success(productType);
     }
 
+    @WebLog(description = "新增商品类型")
     @ApiOperation("新增商品类型")
     @PostMapping("/addProductType")
     public AjaxResult addProductType(@RequestBody ProductType productType) {
@@ -56,6 +60,7 @@ public class ProductTypeController {
         return AjaxResult.error("哎呀，新增失败了！");
     }
 
+    @WebLog(description = "更新商品类型")
     @ApiOperation("更新商品类型")
     @PutMapping("/updateProductType")
     public AjaxResult updateProductType(@RequestBody ProductType productType) {
@@ -66,6 +71,7 @@ public class ProductTypeController {
         return AjaxResult.error("哎呀，更新失败了！");
     }
 
+    @WebLog(description = "删除商品类型")
     @ApiOperation("删除商品类型")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delProductType/{id}")

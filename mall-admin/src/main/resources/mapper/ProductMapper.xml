@@ -49,14 +49,17 @@
     </sql>
 
     <select id="selectProductListByPage" resultSets="java.util.List" resultMap="productMap">
-        select <include refid="Base_Column_List"/>
-        from  bms_product
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_product
         <where>
             <if test="keyword != null">
                 and name like CONCAT('%',#{keyword},'%')
             </if>
         </where>
-        order by id
+        order by
+            id
     </select>
 
 </mapper>

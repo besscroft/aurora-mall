@@ -42,8 +42,12 @@
             inner join bms_auth_role r on rm.role_id = r.id
             inner join bms_auth_user_role_relation ur on r.id = ur.role_id
             inner join bms_auth_user u on ur.admin_id = u.id
-        where u.id = #{adminId} and m.hidden = 0
-        order by m.sort, m.parent_id
+        where
+            u.id = #{adminId}
+        and
+            m.hidden = 0
+        order by
+            m.sort, m.parent_id
     </select>
 
     <select id="getParentListById" resultSets="java.util.List" resultMap="authMenuMap">
@@ -65,14 +69,23 @@
                  inner join bms_auth_role r on rm.role_id = r.id
                  inner join bms_auth_user_role_relation ur on r.id = ur.role_id
                  inner join bms_auth_user u on ur.admin_id = u.id
-        where u.id = #{adminId} and m.hidden = 0 and m.parent_id = 0
-        order by m.sort
+        where
+            u.id = #{adminId}
+        and
+            m.hidden = 0
+        and
+            m.parent_id = 0
+        order by
+            m.sort
     </select>
 
     <select id="getParentMenu" resultSets="java.util.List" resultMap="authMenuMap">
-        select <include refid="Base_Column_List"/>
-        from bms_auth_menu
-        where parent_id = 0
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_auth_menu
+        where
+            parent_id = 0
     </select>
 
     <select id="getChildListById" resultSets="java.util.List" resultMap="authMenuMap">
@@ -94,35 +107,51 @@
                  inner join bms_auth_role r on rm.role_id = r.id
                  inner join bms_auth_user_role_relation ur on r.id = ur.role_id
                  inner join bms_auth_user u on ur.admin_id = u.id
-        where u.id = #{adminId} and m.hidden = 0 and m.parent_id = #{parentId}
-        order by m.sort
+        where
+            u.id = #{adminId}
+        and
+            m.hidden = 0
+        and
+            m.parent_id = #{parentId}
+        order by
+            m.sort
     </select>
 
     <select id="getChildList" resultSets="java.util.List" resultMap="authMenuMap">
-        select <include refid="Base_Column_List"/>
-        from bms_auth_menu
-        where parent_id = #{parentId}
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_auth_menu
+        where
+            parent_id = #{parentId}
     </select>
 
     <select id="selectMenuListByPage" resultSets="java.util.List" resultMap="authMenuMap">
-        select <include refid="Base_Column_List" />
-        from bms_auth_menu
+        select
+            <include refid="Base_Column_List" />
+        from
+            bms_auth_menu
         <where>
             <if test="keyword != null">
                 and username like CONCAT('%',#{keyword},'%')
             </if>
         </where>
-        order by id
+        order by
+            id
     </select>
 
     <select id="selectMenuById" resultMap="authMenuMap">
-        select <include refid="Base_Column_List" />
-        from bms_auth_menu
-        where id = #{id}
+        select
+            <include refid="Base_Column_List" />
+        from
+            bms_auth_menu
+        where
+            id = #{id}
     </select>
 
     <update id="updateMenu">
-        update bms_auth_menu
+        update
+            bms_auth_menu
         <set>
             <if test="parentId != null">
                 parent_id = #{parentId},
@@ -155,43 +184,52 @@
                 hidden = #{hidden},
             </if>
         </set>
-        where id = #{id}
+        where
+            id = #{id}
     </update>
 
     <update id="changeSwitch">
-        update bms_auth_menu
-        set hidden = #{hidden}
-        where id = #{id}
+        update
+            bms_auth_menu
+        set
+            hidden = #{hidden}
+        where
+            id = #{id}
     </update>
 
-    <delete id="delMenu">
-        delete from bms_auth_menu
-        where id = #{id}
-    </delete>
-
     <insert id="addMenu">
-        insert into bms_auth_menu
-        (parent_id, create_time, title, parent_title, level, sort, name, path, icon, hidden)
+        insert into
+        bms_auth_menu
+            (parent_id, create_time, title, parent_title, level, sort, name, path, icon, hidden)
         values
-        (#{parentId}, #{createTime}, #{title}, #{parentTitle}, #{level}, #{sort}, #{name}, #{path}, #{icon}, #{hidden})
+            (#{parentId}, #{createTime}, #{title}, #{parentTitle}, #{level}, #{sort}, #{name}, #{path}, #{icon}, #{hidden})
     </insert>
 
     <select id="selectMenuTreeById" resultSets="java.util.List" resultType="long">
-        select menu_id
-        from bms_auth_role_menu_relation
-        where role_id = #{id}
+        select
+            menu_id
+        from
+            bms_auth_role_menu_relation
+        where
+            role_id = #{id}
     </select>
 
     <delete id="deleteRoleMenuRelation">
-        delete from bms_auth_role_menu_relation
-        where role_id = #{id}
+        delete
+        from
+            bms_auth_role_menu_relation
+        where
+            role_id = #{id}
     </delete>
 
     <insert id="insertRoleMenuRelation">
-        insert into bms_auth_role_menu_relation
-        (role_id, menu_id)
+        insert into
+        bms_auth_role_menu_relation
+            (role_id, menu_id)
         values
-        (#{roleId}, #{menuId})
+        <foreach collection="menuIds" item="item" index="index" separator=",">
+            (#{roleId},#{item})
+        </foreach>
     </insert>
 
 </mapper>

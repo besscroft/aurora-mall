@@ -13,6 +13,7 @@
     <version>1.0</version>
     <name>mall-log</name>
     <description>日志服务</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>

@@ -81,13 +81,6 @@ public interface AuthMenuMapper extends BaseMapper<AuthMenu> {
                     @Param("id") Long id);
 
     /**
-     * 根据id删除菜单
-     * @param id 菜单id
-     * @return
-     */
-    int delMenu(Long id);
-
-    /**
      * 添加菜单
      * @param authMenu 菜单实体
      * @return
@@ -110,11 +103,11 @@ public interface AuthMenuMapper extends BaseMapper<AuthMenu> {
 
     /**
      * 插入角色和菜单对应关系
-     * @param menuId 菜单id
+     * @param menuIds 菜单id集合
      * @param roleId 角色id
      * @return
      */
-    int insertRoleMenuRelation(@Param("menuId") Long menuId,
+    int insertRoleMenuRelation(@Param("menuId") List<Long> menuIds,
                                @Param("roleId") Long roleId);
 
 }

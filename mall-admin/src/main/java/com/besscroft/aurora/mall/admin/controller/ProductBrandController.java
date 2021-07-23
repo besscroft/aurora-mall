@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.ProductBrandService;
+import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.ProductBrand;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
@@ -27,6 +28,7 @@ public class ProductBrandController {
     @Autowired
     private ProductBrandService productBrandService;
 
+    @WebLog(description = "查询后台管理商品品牌列表")
     @ApiOperation("查询后台管理商品品牌列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "第几页",required = true, dataType = "Integer"),
@@ -38,6 +40,7 @@ public class ProductBrandController {
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
+    @WebLog(description = "获取商品品牌详情")
     @ApiOperation("获取商品品牌详情")
     @ApiImplicitParam(name = "id", value = "品牌id",required = true, dataType = "Long")
     @GetMapping("/getProductBrand/{id}")
@@ -46,6 +49,7 @@ public class ProductBrandController {
         return AjaxResult.success(productBrand);
     }
 
+    @WebLog(description = "新增商品品牌")
     @ApiOperation("新增商品品牌")
     @PostMapping("/addProductBrand")
     public AjaxResult addProductBrand(@RequestBody ProductBrand productBrand) {
@@ -56,6 +60,7 @@ public class ProductBrandController {
         return AjaxResult.error("哎呀，新增失败了！");
     }
 
+    @WebLog(description = "更新商品品牌")
     @ApiOperation("更新商品品牌")
     @PutMapping("/updateProductBrand")
     public AjaxResult updateProductBrand(@RequestBody ProductBrand productBrand) {
@@ -66,6 +71,7 @@ public class ProductBrandController {
         return AjaxResult.error("哎呀，更新失败了！");
     }
 
+    @WebLog(description = "删除商品品牌")
     @ApiOperation("删除商品品牌")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delProductBrand/{id}")
@@ -77,6 +83,7 @@ public class ProductBrandController {
         return AjaxResult.error("哎呀，删除失败了");
     }
 
+    @WebLog(description = "商品品牌启用状态更新")
     @ApiOperation("商品品牌启用状态更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "showStatus", value = "显示状态",required = true, dataType = "Boolean"),

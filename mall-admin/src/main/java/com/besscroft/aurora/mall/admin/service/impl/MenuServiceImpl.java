@@ -108,8 +108,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<AuthMenu> getMenuPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<AuthMenu> menus = authMenuMapper.selectMenuListByPage(keyword);
-        return menus;
+        return authMenuMapper.selectMenuListByPage(keyword);
     }
 
     @Override
@@ -139,10 +138,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delMenu(List<Long> ids) {
-        ids.forEach(id -> {
-            authMenuMapper.delMenu(id);
-        });
-        return true;
+        return authMenuMapper.deleteBatchIds(ids) > 0;
     }
 
     @Override
@@ -154,8 +150,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Long> getMenuTreeById(Long id) {
-        List<Long> longs = authMenuMapper.selectMenuTreeById(id);
-        return longs;
+        return authMenuMapper.selectMenuTreeById(id);
     }
 
     @Override
@@ -170,13 +165,14 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateMenuTree(List<Long> data, Long id) {
-        authMenuMapper.deleteRoleMenuRelation(id);
-        data.forEach(d -> {
-            authMenuMapper.insertRoleMenuRelation(d, id);
-        });
-        redisTemplate.delete("admin");
-        return true;
+    public boolean updateMenuTree(List<Long> menuIds, Long id) {
+        int i = authMenuMapper.deleteRoleMenuRelation(id);
+        if (i > 0) {
+            int j = authMenuMapper.insertRoleMenuRelation(menuIds, id);
+            redisTemplate.delete("admin");
+            return j > 0;
+        }
+        return false;
     }
 
 }

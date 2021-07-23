@@ -13,6 +13,7 @@
     <version>1.0</version>
     <name>mall-elasticsearch</name>
     <description>elasticsearch中心</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>

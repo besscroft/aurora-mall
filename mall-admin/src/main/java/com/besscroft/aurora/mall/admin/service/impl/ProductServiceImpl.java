@@ -23,8 +23,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Product> products = productMapper.selectProductListByPage(keyword);
-        return products;
+        return productMapper.selectProductListByPage(keyword);
     }
 
     @Override

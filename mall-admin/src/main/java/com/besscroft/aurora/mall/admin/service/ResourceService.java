@@ -72,10 +72,10 @@ public interface ResourceService {
 
     /**
      * 批量更新资源树
-     * @param data 资源id集合
+     * @param resourceIds 资源id集合
      * @param id 角色id
      * @return
      */
-    boolean updateResourceTree(List<Long> data, Long id);
+    boolean updateResourceTree(List<Long> resourceIds, Long id);
 
 }

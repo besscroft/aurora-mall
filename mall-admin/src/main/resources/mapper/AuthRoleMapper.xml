@@ -20,58 +20,74 @@
     </sql>
 
     <sql id="selectAuthRoleVo">
-        select id, name, description, admin_count, create_time, status, sort, del from bms_auth_role
+        select
+            id, name, description, admin_count, create_time, status, sort, del
+        from
+            bms_auth_role
     </sql>
 
     <sql id="selectAuthRoleVo2">
         select
-               r.id,
-               r.name,
-               r.description,
-               r.admin_count,
-               r.create_time,
-               r.status,
-               r.sort,
-               r.del
-        from bms_auth_role r
+            r.id,
+            r.name,
+            r.description,
+            r.admin_count,
+            r.create_time,
+            r.status,
+            r.sort,
+            r.del
+        from
+            bms_auth_role r
     </sql>
 
     <select id="selectAll" resultSets="java.util.List" resultMap="authRoleMap">
-        select <include refid="Base_Column_List"/>
-        from bms_auth_role
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_auth_role
     </select>
 
     <select id="selectAuthRoleListByAdminId" parameterType="Long" resultMap="authRoleMap" resultSets="java.util.List">
         <include refid="selectAuthRoleVo2"/>
         inner join bms_auth_user_role_relation re on r.id = re.role_id
-        where re.admin_id = #{adminId}
+        where
+            re.admin_id = #{adminId}
     </select>
 
     <select id="selectRoleListByPage" resultSets="java.util.List" resultMap="authRoleMap">
-        select <include refid="Base_Column_List" />
-        from bms_auth_role
-        where del = 1
+        select
+            <include refid="Base_Column_List" />
+        from
+            bms_auth_role
+        where
+            del = 1
         <if test="keyword != null">
             and name like CONCAT('%',#{keyword},'%')
         </if>
-        order by id
+        order by
+            id
     </select>
 
     <select id="selectRoleById" resultMap="authRoleMap">
-        select <include refid="Base_Column_List" />
-        from bms_auth_role
-        where id = #{id}
+        select
+            <include refid="Base_Column_List" />
+        from
+            bms_auth_role
+        where
+            id = #{id}
     </select>
 
     <insert id="insertRole">
-        insert into bms_auth_role
-        (name, description, admin_count, create_time, status, sort, del)
+        insert into
+        bms_auth_role
+            (name, description, admin_count, create_time, status, sort, del)
         values
-        (#{name}, #{description}, #{adminCount}, #{createTime}, #{status}, #{sort}, #{del})
+            (#{name}, #{description}, #{adminCount}, #{createTime}, #{status}, #{sort}, #{del})
     </insert>
 
     <update id="updateRole">
-        update bms_auth_role
+        update
+            bms_auth_role
         <set>
             <if test="name != null">
                 name = #{name},
@@ -95,31 +111,49 @@
                 del = #{del},
             </if>
         </set>
-        where id = #{id}
+        where
+            id = #{id}
     </update>
 
     <update id="deleteRoleById">
-        update bms_auth_role
-        set del = 0
-        where id = #{id}
+        update
+            bms_auth_role
+        set
+            del = case
+        <foreach collection="ids" item="item">
+            when #{item} then 0
+        </foreach>
+        end
+        where
+            id in
+        <foreach collection="ids" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
     </update>
 
     <update id="changeSwitch">
-        update bms_auth_role
-        set status = #{status}
-        where id = #{id}
+        update
+            bms_auth_role
+        set
+            status = #{status}
+        where
+            id = #{id}
     </update>
 
     <delete id="deleteUserRoleRelationById">
-        delete from deleteUserRoleRelationById
-        where admin_id = #{userId}
+        delete
+        from
+            deleteUserRoleRelationById
+        where
+            admin_id = #{userId}
     </delete>
 
     <insert id="insertUserRoleRelation">
-        insert into bms_auth_user_role_relation
-        (admin_id, role_id)
+        insert into
+        bms_auth_user_role_relation
+            (admin_id, role_id)
         values
-        (#{userId}, #{roleId})
+            (#{userId}, #{roleId})
     </insert>
 
 </mapper>
