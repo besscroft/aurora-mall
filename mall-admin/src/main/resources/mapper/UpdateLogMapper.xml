@@ -20,9 +20,13 @@
     </sql>
 
     <select id="selectAllList" resultSets="java.util.List" resultMap="updateLogMap">
-        select <include refid="Base_Column_List"/>
-        from  bms_update_log
-        order by id desc
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_update_log
+        order by
+            id
+        desc
     </select>
 
 

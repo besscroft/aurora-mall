@@ -17,25 +17,30 @@
     </sql>
 
     <select id="selectResourceSortListByPage" resultSets="java.util.List" resultMap="authResourceSortMap">
-        select <include refid="Base_Column_List"/>
-        from  bms_auth_resource_sort
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_auth_resource_sort
         <where>
             <if test="keyword != null">
                 and name like CONCAT('%',#{keyword},'%')
             </if>
         </where>
-        order by id
+        order by
+            id
     </select>
 
     <insert id="addResourceSort">
-        insert into bms_auth_resource_sort
-        (category_name, create_time, description, sort)
+        insert into
+        bms_auth_resource_sort
+            (category_name, create_time, description, sort)
         values
-        (#{categoryName},#{createTime},#{description},#{sort})
+            (#{categoryName},#{createTime},#{description},#{sort})
     </insert>
 
     <update id="updateResourceSort">
-        update bms_auth_resource_sort
+        update
+            bms_auth_resource_sort
         <set>
             <if test="categoryName != null">
                 category_name = #{categoryName},
@@ -50,7 +55,8 @@
                 sort = #{sort},
             </if>
         </set>
-        where id = #{id}
+        where
+            id = #{id}
     </update>
 
 </mapper>

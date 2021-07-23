@@ -23,8 +23,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     @Override
     public List<ProductType> getProductTypePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<ProductType> resources = productTypeMapper.selectProductTypeListByPage(keyword);
-        return resources;
+        return productTypeMapper.selectProductTypeListByPage(keyword);
     }
 
     @Override
@@ -47,10 +46,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delProductType(List<Long> ids) {
-        ids.forEach(id -> {
-            productTypeMapper.deleteById(id);
-        });
-        return true;
+        return productTypeMapper.deleteBatchIds(ids) > 0;
     }
 
 }

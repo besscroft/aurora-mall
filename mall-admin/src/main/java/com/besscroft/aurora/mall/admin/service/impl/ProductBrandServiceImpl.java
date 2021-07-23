@@ -23,8 +23,7 @@ public class ProductBrandServiceImpl implements ProductBrandService {
     @Override
     public List<ProductBrand> getProductBrandPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<ProductBrand> list = productBrandMapper.selectProductBrandListByPage(keyword);
-        return list;
+        return productBrandMapper.selectProductBrandListByPage(keyword);
     }
 
     @Override
@@ -47,10 +46,7 @@ public class ProductBrandServiceImpl implements ProductBrandService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delProductBrand(List<Long> ids) {
-        ids.forEach(id -> {
-            productBrandMapper.deleteById(id);
-        });
-        return true;
+        return productBrandMapper.deleteBatchIds(ids) > 0;
     }
 
     @Override

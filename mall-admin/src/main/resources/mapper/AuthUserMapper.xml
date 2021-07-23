@@ -19,31 +19,43 @@
     </resultMap>
 
     <sql id="selectAuthUserVo">
-        select id, username, password, icon, email, phone, nick_name, note, create_time, login_time, status from bms_auth_user
+        select
+            id, username, password, icon, email, phone, nick_name, note, create_time, login_time, status
+        from
+            bms_auth_user
     </sql>
 
     <select id="selectAuthUserByUsername" parameterType="String" resultMap="authUserMap">
         <include refid="selectAuthUserVo"/>
-        where username = #{username} and del = '1'
+        where
+            username = #{username}
+        and
+            del = '1'
     </select>
 
     <select id="selectUserListByPage" resultSets="java.util.List" resultMap="authUserMap">
         <include refid="selectAuthUserVo" />
-        where del = '1'
+        where
+            del = '1'
         <if test="keyword != null">
             and username like CONCAT('%',#{keyword},'%')
         </if>
-        order by id
+        order by
+            id
     </select>
 
     <update id="updateLoginTime">
-        update bms_auth_user
-        set login_time = #{loginTime}
-        where id = #{id}
+        update
+            bms_auth_user
+        set
+            login_time = #{loginTime}
+        where
+            id = #{id}
     </update>
 
     <update id="updateUser">
-        update bms_auth_user
+        update
+            bms_auth_user
         <set>
             <if test="username != null">
                 username = #{username},
@@ -67,26 +79,38 @@
                 status = #{status},
             </if>
         </set>
-        where id = #{id} and del = '1'
+        where
+            id = #{id}
+        and
+            del = '1'
     </update>
 
     <update id="changeSwitch">
-        update bms_auth_user
-        set status = #{status}
-        where id = #{id} and del = '1'
+        update
+            bms_auth_user
+        set
+            status = #{status}
+        where
+            id = #{id}
+        and
+            del = '1'
     </update>
 
     <update id="delUser">
-        update bms_auth_user
-        set del = '0'
-        where id = #{id}
+        update
+            bms_auth_user
+        set
+            del = '0'
+        where
+            id = #{id}
     </update>
 
     <insert id="insertUser">
-        insert into bms_auth_user
-        (username, password, icon, email, phone, nick_name, note, create_time, login_time, status, del)
+        insert into
+        bms_auth_user
+            (username, password, icon, email, phone, nick_name, note, create_time, login_time, status, del)
         values
-        (#{username}, #{password}, #{icon}, #{email}, #{phone}, #{nickName}, #{note}, #{createTime}, #{loginTime}, #{status}, #{del})
+            (#{username}, #{password}, #{icon}, #{email}, #{phone}, #{nickName}, #{note}, #{createTime}, #{loginTime}, #{status}, #{del})
     </insert>
 
     <select id="getAllList" resultSets="java.util.List" resultMap="authUserMap">

@@ -16,31 +16,37 @@
     </sql>
 
     <select id="selectProductTypeListByPage" resultSets="java.util.List" resultMap="productTypeMap">
-        select <include refid="Base_Column_List"/>
-        from  bms_product_type
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_product_type
         <where>
             <if test="keyword != null">
                 and name like CONCAT('%',#{keyword},'%')
             </if>
         </where>
-        order by id
+        order by
+            id
     </select>
 
     <insert id="addProductType">
-        insert into bms_product_type
+        insert into
+        bms_product_type
             (name)
         values
             (#{name})
     </insert>
 
     <update id="updateProductType">
-        update bms_product_type
+        update
+            bms_product_type
         <set>
             <if test="name != null">
                 name = #{name},
             </if>
         </set>
-        where id = #{id}
+        where
+            id = #{id}
     </update>
 
 </mapper>

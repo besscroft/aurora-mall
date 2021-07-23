@@ -100,10 +100,10 @@ public interface MenuService {
 
     /**
      * 批量更新菜单树
-     * @param data 菜单id集合
+     * @param menuIds 菜单id集合
      * @param id 角色id
      * @return
      */
-    boolean updateMenuTree(List<Long> data, Long id);
+    boolean updateMenuTree(List<Long> menuIds, Long id);
 
 }

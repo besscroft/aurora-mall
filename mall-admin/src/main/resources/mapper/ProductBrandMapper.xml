@@ -19,25 +19,30 @@
     </sql>
 
     <select id="selectProductBrandListByPage" resultSets="java.util.List" resultMap="productBrandMap">
-        select <include refid="Base_Column_List"/>
-        from  bms_product_brand
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_product_brand
         <where>
             <if test="keyword != null">
                 and name like CONCAT('%',#{keyword},'%')
             </if>
         </where>
-        order by id
+        order by
+            id
     </select>
 
     <insert id="addProductBrand">
-        insert into bms_product_brand
+        insert into
+        bms_product_brand
             (name, logo, show_status, product_count, big_pic, sort)
         values
             (#{name}, #{logo}, #{showStatus}, #{productCount}, #{bigPic}, #{sort})
     </insert>
 
     <update id="updateProductBrand">
-        update bms_product_brand
+        update
+            bms_product_brand
         <set>
             <if test="name != null">
                 name = #{name},
@@ -58,13 +63,17 @@
                 sort = #{sort},
             </if>
         </set>
-        where id = #{id}
+        where
+            id = #{id}
     </update>
 
     <update id="changeSwitch">
-        update bms_product_brand
-        set show_status = #{showStatus}
-        where id = #{id}
+        update
+            bms_product_brand
+        set
+            show_status = #{showStatus}
+        where
+            id = #{id}
     </update>
 
 </mapper>

@@ -24,8 +24,7 @@ public class ResourceSortServiceImpl implements ResourceSortService {
     @Override
     public List<AuthResourceSort> getResourcePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<AuthResourceSort> resources = authResourceSortMapper.selectResourceSortListByPage(keyword);
-        return resources;
+        return authResourceSortMapper.selectResourceSortListByPage(keyword);
     }
 
     @Override
@@ -50,10 +49,7 @@ public class ResourceSortServiceImpl implements ResourceSortService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delResourceSort(List<Long> ids) {
-        ids.forEach(id -> {
-            authResourceSortMapper.deleteById(id);
-        });
-        return true;
+        return authResourceSortMapper.deleteBatchIds(ids) > 0;
     }
 
 }

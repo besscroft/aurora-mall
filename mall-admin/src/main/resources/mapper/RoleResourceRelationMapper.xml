@@ -15,8 +15,10 @@
     </sql>
 
     <select id="selectAll" resultSets="java.util.List" resultMap="roleResourceRelationMap">
-        select <include refid="Base_Column_List"/>
-        from bms_auth_role_resource_relation
+        select
+            <include refid="Base_Column_List"/>
+        from
+            bms_auth_role_resource_relation
     </select>
 
 </mapper>

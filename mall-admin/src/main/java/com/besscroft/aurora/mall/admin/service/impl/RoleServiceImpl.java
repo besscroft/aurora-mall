@@ -24,8 +24,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<AuthRole> getRolePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<AuthRole> roles = authRoleMapper.selectRoleListByPage(keyword);
-        return roles;
+        return authRoleMapper.selectRoleListByPage(keyword);
     }
 
     @Override
@@ -50,10 +49,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delRoleById(List<Long> ids) {
-        ids.forEach(id -> {
-            authRoleMapper.deleteRoleById(id);
-        });
-        return true;
+        return authRoleMapper.deleteRoleById(ids) > 0;
     }
 
     @Override
