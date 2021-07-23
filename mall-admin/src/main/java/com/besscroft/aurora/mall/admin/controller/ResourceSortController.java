@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.ResourceSortService;
+import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
@@ -27,6 +28,7 @@ public class ResourceSortController {
     @Autowired
     private ResourceSortService resourceSortService;
 
+    @WebLog(description = "查询后台管理资源列表")
     @ApiOperation("查询后台管理资源列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "第几页",required = true, dataType = "Integer"),
@@ -38,6 +40,7 @@ public class ResourceSortController {
         return AjaxResult.success(CommonPage.restPage(list));
     }
 
+    @WebLog(description = "获取资源详情")
     @ApiOperation("获取资源详情")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @GetMapping("/getResourceSort/{id}")
@@ -46,6 +49,7 @@ public class ResourceSortController {
         return AjaxResult.success(resourceSort);
     }
 
+    @WebLog(description = "新增资源")
     @ApiOperation("新增资源")
     @PostMapping("/addResourceSort")
     public AjaxResult addResourceSort(@RequestBody AuthResourceSort authResourceSort) {
@@ -56,6 +60,7 @@ public class ResourceSortController {
         return AjaxResult.error("哎呀，新增失败了！");
     }
 
+    @WebLog(description = "更新资源")
     @ApiOperation("更新资源")
     @PutMapping("/updateResourceSort")
     public AjaxResult updateResourceSort(@RequestBody AuthResourceSort authResourceSort) {
@@ -66,6 +71,7 @@ public class ResourceSortController {
         return AjaxResult.error("哎呀，更新失败了！");
     }
 
+    @WebLog(description = "删除资源")
     @ApiOperation("删除资源")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delResourceSort/{id}")
