@@ -122,8 +122,8 @@
         </el-form-item>
         <el-form-item label="菜单显示状态">
           <el-select v-model="form.hidden" placeholder="请选择显示状态">
-            <el-option label="显示" :value="0"></el-option>
-            <el-option label="不显示" :value="1"></el-option>
+            <el-option label="显示" :value="1"></el-option>
+            <el-option label="不显示" :value="0"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
