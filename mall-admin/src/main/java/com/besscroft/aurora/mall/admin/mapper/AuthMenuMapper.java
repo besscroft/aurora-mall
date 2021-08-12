@@ -107,7 +107,7 @@ public interface AuthMenuMapper extends BaseMapper<AuthMenu> {
      * @param roleId 角色id
      * @return
      */
-    int insertRoleMenuRelation(@Param("menuId") List<Long> menuIds,
+    int insertRoleMenuRelation(@Param("menuIds") List<Long> menuIds,
                                @Param("roleId") Long roleId);
 
 }

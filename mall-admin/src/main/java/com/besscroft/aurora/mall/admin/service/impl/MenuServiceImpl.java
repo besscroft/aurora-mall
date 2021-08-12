@@ -45,7 +45,7 @@ public class MenuServiceImpl implements MenuService {
                         RouterVo routerVo = new RouterVo();
                         routerVo.setName(menu.getName());
                         routerVo.setPath(menu.getPath());
-                        routerVo.setHidden(menu.getHidden() == 0);
+                        routerVo.setHidden(menu.getHidden() != 0);
                         routerVo.setComponent(menu.getComponent());
                         routerVo.setMeta(new MetaVo(menu.getTitle(), menu.getIcon(), false));
                         List<RouterVo> list = new ArrayList<>();
@@ -58,7 +58,7 @@ public class MenuServiceImpl implements MenuService {
                                 router.setName(child.getName());
                                 router.setComponent(child.getComponent());
                                 router.setMeta(new MetaVo(child.getTitle(), child.getIcon(), false));
-                                router.setHidden(child.getHidden() == 0);
+                                router.setHidden(child.getHidden() != 0);
                                 list.add(router);
                             });
                             routerVo.setChildren(list);
@@ -126,13 +126,13 @@ public class MenuServiceImpl implements MenuService {
     @Transactional(rollbackFor = Exception.class)
     public boolean changeSwitch(boolean hidden, Long id, Long adminId) {
         if (hidden) {
-            int i = authMenuMapper.changeSwitch(0, id);
+            int i = authMenuMapper.changeSwitch(1, id);
             if (i>0) {
                 redisTemplate.boundHashOps("admin").delete("user:tree:" + adminId);
                 return true;
             }
         }
-        return authMenuMapper.changeSwitch(1, id) > 0;
+        return authMenuMapper.changeSwitch(0, id) > 0;
     }
 
     @Override

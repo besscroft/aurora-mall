@@ -45,7 +45,7 @@
         where
             u.id = #{adminId}
         and
-            m.hidden = 0
+            m.hidden = 1
         order by
             m.sort, m.parent_id
     </select>
@@ -72,7 +72,7 @@
         where
             u.id = #{adminId}
         and
-            m.hidden = 0
+            m.hidden = 1
         and
             m.parent_id = 0
         order by
@@ -110,7 +110,7 @@
         where
             u.id = #{adminId}
         and
-            m.hidden = 0
+            m.hidden = 1
         and
             m.parent_id = #{parentId}
         order by
