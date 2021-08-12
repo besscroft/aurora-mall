@@ -210,7 +210,7 @@ export default {
       listMenu(this.listQuery).then(response => {
         const data = response.data.list;
         data.forEach(menu => {
-          if (menu.hidden == 0) {
+          if (menu.hidden == 1) {
             menu.hidden = true
           } else {
             menu.hidden = false
