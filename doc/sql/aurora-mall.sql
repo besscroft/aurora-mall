@@ -11,7 +11,7 @@
  Target Server Version : 50734
  File Encoding         : 65001
 
- Date: 23/07/2021 22:25:34
+ Date: 12/08/2021 09:53:23
 */
 
 SET NAMES utf8mb4;
@@ -3116,7 +3116,7 @@ CREATE TABLE `bms_auth_menu`  (
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '前端名称',
   `path` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路由地址',
   `icon` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '前端图标',
-  `hidden` int(1) NULL DEFAULT 1 COMMENT '显示状态：0->显示；1->不显示',
+  `hidden` int(1) NULL DEFAULT 1 COMMENT '显示状态：0->不显示；1->显示',
   `component` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组件路径',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块菜单表' ROW_FORMAT = DYNAMIC;
@@ -4603,7 +4603,7 @@ CREATE TABLE `web_log`  (
   `http_method` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法',
   `class_method` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法路径:全限定名+方法名',
   `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求者ip地址',
-  `request_args` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求入参',
+  `request_args` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '请求入参',
   `response_args` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '响应出参',
   `start_time` datetime NULL DEFAULT NULL COMMENT '请求时间',
   `spend_time` bigint(20) NULL DEFAULT NULL COMMENT '消耗时间(毫秒)',
