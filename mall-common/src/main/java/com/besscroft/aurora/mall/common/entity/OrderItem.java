@@ -31,9 +31,9 @@ public class OrderItem implements Serializable {
     private Long id;
 
     /** 父订单id */
-    @Field(type = FieldType.Long)
-    @ApiModelProperty(value = "父订单id", dataType = "Long")
-    private Long orderId;
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "父订单id", dataType = "String")
+    private String orderId;
 
     /** 订单编号 */
     @Field(type = FieldType.Text)
@@ -113,11 +113,11 @@ public class OrderItem implements Serializable {
         return id;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 

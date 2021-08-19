@@ -32,6 +32,16 @@ public class Order implements Serializable {
     @ApiModelProperty(value = "订单id", dataType = "Long")
     private Long id;
 
+    /** 订单id */
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "订单id", dataType = "String")
+    private String orderId;
+
+    /** 订单编号 */
+    @Field(type = FieldType.Keyword)
+    @ApiModelProperty(value = "订单编号", dataType = "String")
+    private String orderSn;
+
     /** 用户id */
     @Field(type = FieldType.Long)
     @ApiModelProperty(value = "用户id", dataType = "Long")
@@ -41,11 +51,6 @@ public class Order implements Serializable {
     @Field(type = FieldType.Long)
     @ApiModelProperty(value = "优惠券id", dataType = "Long")
     private Long couponId;
-
-    /** 订单编号 */
-    @Field(type = FieldType.Keyword)
-    @ApiModelProperty(value = "订单编号", dataType = "String")
-    private String orderSn;
 
     /** 创建时间 */
     @Field(type = FieldType.Date)
@@ -251,6 +256,22 @@ public class Order implements Serializable {
         this.id = id;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getOrderSn() {
+        return orderSn;
+    }
+
+    public void setOrderSn(String orderSn) {
+        this.orderSn = orderSn;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -265,14 +286,6 @@ public class Order implements Serializable {
 
     public void setCouponId(Long couponId) {
         this.couponId = couponId;
-    }
-
-    public String getOrderSn() {
-        return orderSn;
-    }
-
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn;
     }
 
     public Date getCreateTime() {
@@ -583,9 +596,10 @@ public class Order implements Serializable {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
+                .append("orderId", getOrderId())
+                .append("orderSn", getOrderSn())
                 .append("userId", getUserId())
                 .append("couponId", getCouponId())
-                .append("orderSn", getOrderSn())
                 .append("createTime", getCreateTime())
                 .append("memberUsername", getMemberUsername())
                 .append("totalAmount", getTotalAmount())

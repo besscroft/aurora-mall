@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.besscroft.aurora.mall.admin.mapper.ProductMapper;
 import com.besscroft.aurora.mall.admin.service.ProductService;
 import com.besscroft.aurora.mall.common.entity.Product;
@@ -29,6 +30,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public boolean productAdd(Product product) {
+        // 设置商品唯一id
+        product.setProductId(IdUtil.simpleUUID());
         return productMapper.insert(product) > 0;
     }
 

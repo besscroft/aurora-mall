@@ -33,19 +33,19 @@ public class CarItem implements Serializable {
     private Long id;
 
     /** 购物车id */
-    @Field(type = FieldType.Long)
-    @ApiModelProperty(value = "购物车id", dataType = "Long")
-    private Long cartId;
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "购物车id", dataType = "String")
+    private String cartId;
 
     /** 商品id */
-    @Field(type = FieldType.Long)
-    @ApiModelProperty(value = "商品id", dataType = "Long")
-    private Long productId;
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "商品id", dataType = "String")
+    private String productId;
 
     /** 商品套餐id */
-    @Field(type = FieldType.Long)
-    @ApiModelProperty(value = "商品套餐id", dataType = "Long")
-    private Long productSkuId;
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "商品套餐id", dataType = "String")
+    private String productSkuId;
 
     /** 用户id */
     @Field(type = FieldType.Long)
@@ -112,27 +112,27 @@ public class CarItem implements Serializable {
         return id;
     }
 
-    public void setCartId(Long cartId) {
+    public void setCartId(String cartId) {
         this.cartId = cartId;
     }
 
-    public Long getCartId() {
+    public String getCartId() {
         return cartId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductSkuId(Long productSkuId) {
+    public void setProductSkuId(String productSkuId) {
         this.productSkuId = productSkuId;
     }
 
-    public Long getProductSkuId() {
+    public String getProductSkuId() {
         return productSkuId;
     }
 
