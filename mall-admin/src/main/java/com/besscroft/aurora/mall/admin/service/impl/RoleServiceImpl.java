@@ -21,6 +21,9 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private AuthRoleMapper authRoleMapper;
 
+    @Autowired
+    private ResourceServiceImpl resourceServiceImpl;
+
     @Override
     public List<AuthRole> getRolePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
@@ -37,19 +40,37 @@ public class RoleServiceImpl implements RoleService {
     public boolean addRole(AuthRole authRole) {
         authRole.setCreateTime(new Date());
         authRole.setDel(1);
-        return authRoleMapper.insertRole(authRole) > 0;
+        int i = authRoleMapper.insertRole(authRole);
+        if (i>0) {
+            // 更新角色与资源的对应关系
+            resourceServiceImpl.initRoleResourceMap();
+            return true;
+        }
+        return false;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateRole(AuthRole authRole) {
-        return authRoleMapper.updateRole(authRole) > 0;
+        int i = authRoleMapper.updateRole(authRole);
+        if (i>0) {
+            // 更新角色与资源的对应关系
+            resourceServiceImpl.initRoleResourceMap();
+            return true;
+        }
+        return false;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delRoleById(List<Long> ids) {
-        return authRoleMapper.deleteRoleById(ids) > 0;
+        int i = authRoleMapper.deleteRoleById(ids);
+        if (i>0) {
+            // 更新角色与资源的对应关系
+            resourceServiceImpl.initRoleResourceMap();
+            return true;
+        }
+        return false;
     }
 
     @Override
