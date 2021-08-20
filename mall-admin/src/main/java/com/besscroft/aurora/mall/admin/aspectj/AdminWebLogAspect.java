@@ -85,8 +85,13 @@ public class AdminWebLogAspect extends WebLogAspect {
         LOGGER.info("Response Args:{}", JSONUtil.toJsonStr(result));
         // 执行时间
         LOGGER.info("Time Consuming:{}", System.currentTimeMillis() - START_TIME.get());
-        // 将日志信息存入数据库
-        logService.mallLog(webLog);
+        try {
+            // 将日志信息存入数据库
+            logService.mallLog(webLog);
+        } catch (Exception e) {
+            log.error("调用 mall-log 服务失败！");
+            e.printStackTrace();
+        }
         return result;
     }
 }
