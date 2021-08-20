@@ -29,6 +29,11 @@ public class Car implements Serializable {
     @ApiModelProperty(value = "购物车id", dataType = "Long")
     private Long id;
 
+    /** 购物车id */
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "购物车id", dataType = "String")
+    private String carId;
+
     /** 用户id */
     @Field(type = FieldType.Long)
     @ApiModelProperty(value = "用户id", dataType = "Long")
@@ -40,6 +45,14 @@ public class Car implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public String getCarId() {
+        return carId;
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
     }
 
     public void setUserId(Long userId) {
@@ -54,6 +67,7 @@ public class Car implements Serializable {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
+                .append("carId", getCarId())
                 .append("userId", getUserId())
                 .toString();
     }

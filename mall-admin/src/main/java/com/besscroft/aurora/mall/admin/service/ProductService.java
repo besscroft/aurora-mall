@@ -23,7 +23,7 @@ public interface ProductService {
 
     /**
      * 新增商品
-     * @param productParam 商品参数(新增）
+     * @param product 商品参数(新增）
      * @return
      */
     boolean productAdd(Product product);

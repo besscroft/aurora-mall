@@ -11,7 +11,7 @@
  Target Server Version : 50734
  File Encoding         : 65001
 
- Date: 12/08/2021 10:50:37
+ Date: 19/08/2021 15:47:56
 */
 
 SET NAMES utf8mb4;
@@ -3498,7 +3498,7 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-08-12 10:50:12', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-08-19 15:32:53', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.52bess.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.52bess.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
@@ -3571,6 +3571,7 @@ CREATE TABLE `bms_market_bit`  (
 DROP TABLE IF EXISTS `bms_market_coupon`;
 CREATE TABLE `bms_market_coupon`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `coupon_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '优惠券id',
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '极光券名称',
   `status` int(1) NULL DEFAULT NULL COMMENT '是否可用：0->下线；1->上线',
   `start_money` decimal(8, 2) NULL DEFAULT NULL COMMENT '生效金额门槛',
@@ -3592,9 +3593,10 @@ CREATE TABLE `bms_market_coupon`  (
 DROP TABLE IF EXISTS `bms_order`;
 CREATE TABLE `bms_order`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '订单id',
+  `order_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单id',
+  `order_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单编号',
   `user_id` bigint(20) NOT NULL COMMENT '用户id',
   `coupon_id` bigint(20) NULL DEFAULT NULL COMMENT '优惠券id',
-  `order_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单编号',
   `create_time` datetime NULL DEFAULT NULL COMMENT '提交时间',
   `member_username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户帐号',
   `total_amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '订单总金额',
@@ -3646,7 +3648,7 @@ CREATE TABLE `bms_order`  (
 DROP TABLE IF EXISTS `bms_order_item`;
 CREATE TABLE `bms_order_item`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `order_id` bigint(20) NULL DEFAULT NULL COMMENT '父订单id',
+  `order_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父订单id',
   `order_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单编号',
   `product_id` bigint(20) NULL DEFAULT NULL COMMENT '商品id',
   `product_pic` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品图片',
@@ -3749,6 +3751,8 @@ CREATE TABLE `bms_order_timetask`  (
 DROP TABLE IF EXISTS `bms_product`;
 CREATE TABLE `bms_product`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品id',
+  `product_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品货号/编号',
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名称',
   `pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品图片',
   `brand_id` bigint(20) NULL DEFAULT NULL COMMENT '商品品牌id',
@@ -3757,7 +3761,6 @@ CREATE TABLE `bms_product`  (
   `product_type_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品类型名称',
   `product_category_id` bigint(20) NULL DEFAULT NULL COMMENT '商品分类id',
   `product_category_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品分类名称',
-  `product_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品货号/编号',
   `push_status` int(1) NULL DEFAULT NULL COMMENT '上架状态：0->下架；1->上架',
   `new_status` int(1) NULL DEFAULT NULL COMMENT '新品状态:0->不是新品；1->新品',
   `recommand_status` int(1) NULL DEFAULT NULL COMMENT '推荐状态；0->不推荐；1->推荐',
@@ -3788,17 +3791,17 @@ CREATE TABLE `bms_product`  (
 -- ----------------------------
 -- Records of bms_product
 -- ----------------------------
-INSERT INTO `bms_product` VALUES (1413406166251323394, 'test', '', 1, '测试', NULL, NULL, NULL, NULL, 'test', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test', 'test', 0, 0, 'test', 0.00, 0, '[\"1\",\"2\",\"3\",\"4\"]', 'test', 'test', 'test', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
-INSERT INTO `bms_product` VALUES (1413406328730271746, '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '[]', '', '', '', NULL, NULL, 1);
-INSERT INTO `bms_product` VALUES (1413406516807057410, 'test1', '', 1, '测试', NULL, NULL, NULL, NULL, 'test1', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test1', 'test1', 0, 0, 'test1', 0.00, 0, '[\"1\",\"2\"]', 'test1', 'test1', 'test', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
-INSERT INTO `bms_product` VALUES (1413406664522055681, 'test111', '', 1, '测试', NULL, NULL, NULL, NULL, 'test111', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test111', 'test111', 0, 0, 'test111', 0.00, 0, '[\"1\",\"2\"]', 'test111', 'test111', 'test111', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
-INSERT INTO `bms_product` VALUES (1413406893514276866, 'response', '', 1, '测试', NULL, NULL, NULL, NULL, 'response', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'response', 'response', 0, 0, 'response', 0.00, 0, '[\"1\",\"2\"]', 'response', 'response', 'response', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
-INSERT INTO `bms_product` VALUES (1413407198092050433, 'dgbf', '', 1, '测试', NULL, NULL, NULL, NULL, 'dgbf', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'dgbf', 'dgbf', 0, 0, 'dgbf', 0.00, 0, '[]', 'dgbf', 'dgbf', 'dgbf', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
-INSERT INTO `bms_product` VALUES (1413407302588940289, 'message', '', NULL, NULL, NULL, NULL, NULL, NULL, 'message', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'message', 'message', 0, 0, 'message', 0.00, 0, '[]', 'message', '', '', NULL, NULL, 1);
-INSERT INTO `bms_product` VALUES (1413407555270590466, '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '[]', '', '', '', NULL, NULL, 1);
-INSERT INTO `bms_product` VALUES (1413407558667976706, '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
-INSERT INTO `bms_product` VALUES (1413407562434461698, '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
-INSERT INTO `bms_product` VALUES (1413407615706316801, 'Object.assign({}, defaultProductParam)', '', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413406166251323394, '', 'test', 'test', '', 1, '测试', NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test', 'test', 0, 0, 'test', 0.00, 0, '[\"1\",\"2\",\"3\",\"4\"]', 'test', 'test', 'test', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413406328730271746, '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '[]', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413406516807057410, '', 'test1', 'test1', '', 1, '测试', NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test1', 'test1', 0, 0, 'test1', 0.00, 0, '[\"1\",\"2\"]', 'test1', 'test1', 'test', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413406664522055681, '', 'test111', 'test111', '', 1, '测试', NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'test111', 'test111', 0, 0, 'test111', 0.00, 0, '[\"1\",\"2\"]', 'test111', 'test111', 'test111', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413406893514276866, '', 'response', 'response', '', 1, '测试', NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'response', 'response', 0, 0, 'response', 0.00, 0, '[\"1\",\"2\"]', 'response', 'response', 'response', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413407198092050433, '', 'dgbf', 'dgbf', '', 1, '测试', NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'dgbf', 'dgbf', 0, 0, 'dgbf', 0.00, 0, '[]', 'dgbf', 'dgbf', 'dgbf', '2021-07-09 08:00:00', '2021-07-09 08:00:00', 1);
+INSERT INTO `bms_product` VALUES (1413407302588940289, '', 'message', 'message', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 'message', 'message', 0, 0, 'message', 0.00, 0, '[]', 'message', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413407555270590466, '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '[]', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413407558667976706, '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413407562434461698, '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
+INSERT INTO `bms_product` VALUES (1413407615706316801, '', '', 'Object.assign({}, defaultProductParam)', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '\"\"', '', '', '', NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for bms_product_attribute
@@ -3874,7 +3877,7 @@ CREATE TABLE `bms_product_parameter`  (
 DROP TABLE IF EXISTS `bms_product_sku`;
 CREATE TABLE `bms_product_sku`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) NULL DEFAULT NULL COMMENT '套餐对应的商品id',
+  `product_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '套餐对应的商品id',
   `sku_code` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '套餐编码',
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '套餐价格',
   `stock` int(11) NULL DEFAULT 0 COMMENT '库存',
@@ -4552,6 +4555,7 @@ INSERT INTO `province` VALUES (31, '新疆维吾尔自治区', 650000);
 DROP TABLE IF EXISTS `ums_car`;
 CREATE TABLE `ums_car`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `car_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '购物车id',
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车模块购物车表' ROW_FORMAT = DYNAMIC;
@@ -4566,9 +4570,9 @@ CREATE TABLE `ums_car`  (
 DROP TABLE IF EXISTS `ums_car_item`;
 CREATE TABLE `ums_car_item`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `cart_id` bigint(20) NULL DEFAULT NULL COMMENT '商品id',
-  `product_id` bigint(20) NULL DEFAULT NULL COMMENT '商品id',
-  `product_sku_id` bigint(20) NULL DEFAULT NULL COMMENT '商品套餐id',
+  `cart_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品id',
+  `product_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品id',
+  `product_sku_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品套餐id',
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户id',
   `quantity` int(11) NULL DEFAULT NULL COMMENT '购买数量',
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '购物车商品价格',
@@ -4609,5 +4613,8 @@ CREATE TABLE `web_log`  (
 -- ----------------------------
 -- Records of web_log
 -- ----------------------------
+INSERT INTO `web_log` VALUES ('13fb0cf8b78d4ce9a78a06e56f0961e6', NULL, '根据用户名获取用户信息接口', 'http://192.168.222.1:20200/user/loadByUsername', 'GET', 'com.besscroft.aurora.mall.admin.controller.UserController.loadByUsername()', '192.168.222.1', '[\"admin\"]', '{\"roles\":[\"1_超级管理员\"],\"password\":\"$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC\",\"id\":1,\"username\":\"admin\",\"status\":1}', '2021-08-19 15:32:52', 39);
+INSERT INTO `web_log` VALUES ('7879054e6cee4afdb711216e192d481b', NULL, '获取当前后台系统登录用户的一些信息', 'http://192.168.222.1:20200/user/info', 'GET', 'com.besscroft.aurora.mall.admin.controller.UserController.getInfo()', '192.168.222.1', '[]', '{\"code\":200,\"data\":{\"roles\":[\"超级管理员\"],\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"menus\":[{\"hidden\":true,\"path\":\"/dashboard\",\"component\":\"Layout\",\"meta\":{\"icon\":\"el-icon-s-platform\",\"title\":\"首页\",\"noCache\":false},\"name\":\"Dashboard\"},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/auth\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/auth/authMenu\",\"component\":\"/auth/authMenu/index\",\"meta\":{\"icon\":\"el-icon-menu\",\"title\":\"菜单管理\",\"noCache\":false},\"name\":\"authMenu\"},{\"hidden\":true,\"path\":\"/auth/authUser\",\"component\":\"/auth/authUser/index\",\"meta\":{\"icon\":\"el-icon-user-solid\",\"title\":\"用户管理\",\"noCache\":false},\"name\":\"authUser\"},{\"hidden\":true,\"path\":\"/auth/authResourceSort\",\"component\":\"/auth/authResourceSort/index\",\"meta\":{\"icon\":\"el-icon-finished\",\"title\":\"资源类别管理\",\"noCache\":false},\"name\":\"authResourceSort\"},{\"hidden\":true,\"path\":\"/auth/authResource\",\"component\":\"/auth/authResource/index\",\"meta\":{\"icon\":\"el-icon-s-promotion\",\"title\":\"资源管理\",\"noCache\":false},\"name\":\"authResource\"},{\"hidden\":true,\"path\":\"/auth/authRole\",\"component\":\"/auth/authRole/index\",\"meta\":{\"icon\":\"el-icon-s-custom\",\"title\":\"角色管理\",\"noCache\":false},\"name\":\"authRole\"},{\"hidden\":true,\"path\":\"/auth/authPermission\",\"component\":\"/auth/authPermission/index\",\"meta\":{\"icon\":\"el-icon-check\",\"title\":\"权限管理\",\"noCache\":false},\"name\":\"authPermission\"}],\"meta\":{\"icon\":\"el-icon-success\",\"title\":\"权限管理\",\"noCache\":false},\"name\":\"auth\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/order\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/order/orderReturn\",\"component\":\"/order/orderReturn\",\"meta\":{\"icon\":\"el-icon-s-claim\",\"title\":\"售后订单\",\"noCache\":false},\"name\":\"orderReturn\"},{\"hidden\":true,\"path\":\"/order/orderList\",\"component\":\"/order/orderList/index\",\"meta\":{\"icon\":\"el-icon-s-order\",\"title\":\"订单列表\",\"noCache\":false},\"name\":\"orderList\"},{\"hidden\":true,\"path\":\"/order/orderReason\",\"component\":\"/order/orderReason/index\",\"meta\":{\"icon\":\"el-icon-notebook-1\",\"title\":\"售后原因\",\"noCache\":false},\"name\":\"orderReason\"},{\"hidden\":true,\"path\":\"/order/orderTimeTask\",\"component\":\"/order/orderTimeTask/index\",\"meta\":{\"icon\":\"el-icon-timer\",\"title\":\"定时任务\",\"noCache\":false},\"name\":\"orderTimeTask\"}],\"meta\":{\"icon\":\"el-icon-s-order\",\"title\":\"订单管理\",\"noCache\":false},\"name\":\"order\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/product\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/product/productType\",\"component\":\"/product/productType/index\",\"meta\":{\"icon\":\"el-icon-price-tag\",\"title\":\"类型管理\",\"noCache\":false},\"name\":\"productType\"},{\"hidden\":true,\"path\":\"/product/productBrand\",\"component\":\"/product/productBrand/index\",\"meta\":{\"icon\":\"el-icon-postcard\",\"title\":\"品牌管理\",\"noCache\":false},\"name\":\"productBrand\"},{\"hidden\":true,\"path\":\"/product/productAdd\",\"component\":\"/product/productAdd/index\",\"meta\":{\"icon\":\"el-icon-sell\",\"title\":\"添加商品\",\"noCache\":false},\"name\":\"productAdd\"},{\"hidden\":true,\"path\":\"/product/productSort\",\"component\":\"/product/productSort/index\",\"meta\":{\"icon\":\"el-icon-discount\",\"title\":\"分类管理\",\"noCache\":false},\"name\":\"productSort\"},{\"hidden\":true,\"path\":\"/product/productList\",\"component\":\"/product/productList/index\",\"meta\":{\"icon\":\"el-icon-s-goods\",\"title\":\"商品列表\",\"noCache\":false},\"name\":\"productList\"},{\"hidden\":true,\"path\":\"/product/productUpdate\",\"component\":\"/product/productUpdate/index\",\"meta\":{\"icon\":\"el-icon-sold-out\",\"title\":\"修改商品\",\"noCache\":false},\"name\":\"productUpdate\"}],\"meta\":{\"icon\":\"el-icon-s-goods\",\"title\":\"商品管理\",\"noCache\":false},\"name\":\"product\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/market\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/market/marketCoupon\",\"component\":\"/market/marketCoupon/index\",\"meta\":{\"icon\":\"el-icon-s-ticket\",\"title\":\"优惠券管理\",\"noCache\":false},\"name\":\"marketCoupon\"},{\"hidden\":true,\"path\":\"/market/marketBit\",\"component\":\"/market/marketBit/index\",\"meta\":{\"icon\":\"el-icon-s-finance\",\"title\":\"虚拟币管理\",\"noCache\":false},\"name\":\"marketBit\"},{\"hidden\":true,\"path\":\"/market/marketAD\",\"component\":\"/market/marketAD/index\",\"meta\":{\"icon\":\"el-icon-data-line\",\"title\":\"广告管理\",\"noCache\":false},\"name\":\"marketAD\"},{\"hidden\":true,\"path\":\"/market/marketSpike\",\"component\":\"/market/marketSpike/index\",\"meta\":{\"icon\":\"el-icon-alarm-clock\",\"title\":\"秒杀管理\",\"noCache\":false},\"name\":\"marketSpike\"}],\"meta\":{\"icon\":\"el-icon-s-marketing\",\"title\":\"营销管理\",\"noCache\":false},\"name\":\"market\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/user\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/user/userList\",\"component\":\"/user/userList/index\",\"meta\":{\"icon\":\"el-icon-user\",\"title\":\"会员列表\",\"noCache\":false},\"name\":\"userList\"}],\"meta\":{\"icon\":\"el-icon-user-solid\",\"title\":\"会员管理\",\"noCache\":false},\"name\":\"user\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/system\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/system/version\",\"component\":\"/system/version/index\",\"meta\":{\"icon\":\"el-icon-s-promotion\",\"title\":\"版本日志\",\"noCache\":false},\"name\":\"version\"}],\"meta\":{\"icon\":\"el-icon-s-tools\",\"title\":\"系统管理\",\"noCache\":false},\"name\":\"system\",\"alwaysShow\":true}],\"username\":\"管理员\"},\"message\":\"操作成功\"}', '2021-08-19 15:32:53', 43);
+INSERT INTO `web_log` VALUES ('8c3abe3d28ce48d9946b0108493bc3b0', NULL, '登录接口', 'http://192.168.222.1:20200/user/login', 'POST', 'com.besscroft.aurora.mall.admin.controller.UserController.login()', '192.168.222.1', '[{\"password\":\"666666\",\"username\":\"admin\"}]', '{\"code\":200,\"data\":{\"token_type\":\"bearer\",\"client_id\":\"admin-app\",\"access_token\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJpZCI6MSwiZXhwIjoxNjI5NDQ0NzczLCJhdXRob3JpdGllcyI6WyIxX-i2hee6p-euoeeQhuWRmCJdLCJqdGkiOiJiZGFiZDRkNC04MTc0LTQ1NGEtYTM1NS00MmQxYWI3ODc2YWEiLCJjbGllbnRfaWQiOiJhZG1pbi1hcHAifQ.NOJtLsVxePFkRZ3i7LZEPyNpaJyhm8EjBg1mKcTLGMPJwWxxm_01Kvc0t7OTygNi-heabj1iAPZXFBG49HjILQnADc0qqriFCEneTcHDnag27hHGYk2-b4St2V46aADk-fcq9d48D4zS8BmkkZJK4PVpy9_VIJyVe9aOjSnZGIhwytX_elpq3ux84RaEQQy26mNZZwc2DFumjP_53RKtJkPM872OS501KiBFeTw9ViVh39GN0anBejcIFLgTwqvJYKxbZfE6fjwrnynRwZ-X8iXKdIRbIwJ09T4bUgjYyKd9QWtj4t2xXBLxXLbpf2_LsSkHtX9yogKdmeVntssB_A\",\"refresh_token\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJhdGkiOiJiZGFiZDRkNC04MTc0LTQ1NGEtYTM1NS00MmQxYWI3ODc2YWEiLCJpZCI6MSwiZXhwIjoxNjI5OTYzMTczLCJhdXRob3JpdGllcyI6WyIxX-i2hee6p-euoeeQhuWRmCJdLCJqdGkiOiJkYjEzNzIwOS1kN2NhLTQ1ZmUtYWJlOS00NjA0MjRlYzRhOTUiLCJjbGllbnRfaWQiOiJhZG1pbi1hcHAifQ.VHBJBEv-0Combhj7mTs5OiA-SiZjeooKNpDpSmJPU0DOIKA3Y9wDjvipHuIyoHN9-HQf3rkx1A-jEXLCIZ7IMHYwl3O99M6pj4jvBkbDqby8s5VUQ6QTEzWHkkVF0dzFYAH_aItu3lm2Db7x7w76uomJNZCqkNo_obdrwuP7qqV5iCIwz2O3bkLZcqdvfx8skx1hPGDhSoVOZrKfXd2B8pmXg3Kcz-zzzo0PL-VsxNnlHuCyjXiNxlxSwcZWkewcinGdqD-aqXvXpKjeFkDyHuNSq7qVzeenrO_1LkCegjToiZQDg8L8ePDdvHCcYQFAHj0N1w8qkQhVntjKmM-oFQ\",\"scope\":\"all\",\"id\":1,\"expires_in\":86399,\"jti\":\"bdabd4d4-8174-454a-a355-42d1ab7876aa\"},\"message\":\"操作成功\"}', '2021-08-19 15:32:53', 1358);
 
 SET FOREIGN_KEY_CHECKS = 1;

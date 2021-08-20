@@ -31,9 +31,9 @@ public class ProductSku implements Serializable {
     private Long id;
 
     /** 套餐对应的商品id */
-    @Field(type = FieldType.Long)
-    @ApiModelProperty(value = "套餐对应的商品id", dataType = "Long")
-    private Long productId;
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "套餐对应的商品id", dataType = "String")
+    private String productId;
 
     /** 套餐编码 */
     @Field(type = FieldType.Text)
@@ -83,11 +83,11 @@ public class ProductSku implements Serializable {
         return id;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 

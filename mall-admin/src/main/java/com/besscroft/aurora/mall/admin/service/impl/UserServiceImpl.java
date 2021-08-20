@@ -64,12 +64,15 @@ public class UserServiceImpl implements UserService {
         params.put("username",username);
         params.put("password",password);
         AjaxResult accessToken = authService.getAccessToken(params);
-        log.info("accessToken:{}",accessToken);
+        log.info("accessToken:{}", accessToken);
+        redisTemplate.opsForValue().set(AuthConstants.ADMIN_CLIENT_ID + ":token:user:" + username, accessToken.get("access_token").toString());
         return accessToken;
     }
 
     @Override
     public boolean logout(Long adminId) {
+        AuthUser user = authUserMapper.selectById(adminId);
+        redisTemplate.delete(AuthConstants.ADMIN_CLIENT_ID + ":token:user:" + user.getUsername());
         redisTemplate.boundHashOps("admin").delete("user:tree:" + adminId);
         return true;
     }

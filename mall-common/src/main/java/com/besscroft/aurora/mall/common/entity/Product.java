@@ -29,8 +29,18 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "商品id", dataType = "Long")
+    @ApiModelProperty(value = "id", dataType = "Long")
     private Long id;
+
+    /** 商品id */
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "商品id", dataType = "String")
+    private String productId;
+
+    /** 商品货号/编号 */
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "商品货号/编号", dataType = "String")
+    private String productSn;
 
     /** 商品名称 */
     @Field(type = FieldType.Keyword)
@@ -71,11 +81,6 @@ public class Product implements Serializable {
     @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "商品分类名称", dataType = "String")
     private String productCategoryName;
-
-    /** 商品货号/编号 */
-    @Field(type = FieldType.Text)
-    @ApiModelProperty(value = "商品货号/编号", dataType = "String")
-    private String productSn;
 
     /** 上架状态：0->下架；1->上架 */
     @Field(type = FieldType.Integer)
@@ -207,6 +212,26 @@ public class Product implements Serializable {
         return id;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public void setProductSn(String productSn) {
+        this.productSn = productSn;
+    }
+
+    public String getProductSn() {
+        return productSn;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -269,14 +294,6 @@ public class Product implements Serializable {
 
     public String getProductCategoryName() {
         return productCategoryName;
-    }
-
-    public void setProductSn(String productSn) {
-        this.productSn = productSn;
-    }
-
-    public String getProductSn() {
-        return productSn;
     }
 
     public void setPushStatus(Integer pushStatus) {
@@ -475,6 +492,8 @@ public class Product implements Serializable {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
+                .append("productId", getProductId())
+                .append("productSn", getProductSn())
                 .append("name", getName())
                 .append("pic", getPic())
                 .append("brandId", getBrandId())
@@ -483,7 +502,6 @@ public class Product implements Serializable {
                 .append("productTypeName", getProductTypeName())
                 .append("productCategoryId", getProductCategoryId())
                 .append("productCategoryName", getProductCategoryName())
-                .append("productSn", getProductSn())
                 .append("pushStatus", getPushStatus())
                 .append("newStatus", getNewStatus())
                 .append("recommandStatus", getRecommandStatus())

@@ -32,6 +32,11 @@ public class MarketCoupon implements Serializable {
     @ApiModelProperty(value = "优惠券id", dataType = "Long")
     private Long id;
 
+    /** 优惠券id */
+    @Field(type = FieldType.Text)
+    @ApiModelProperty(value = "优惠券id", dataType = "String")
+    private String couponId;
+
     /** 极光券名称 */
     @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "极光券名称", dataType = "String")
@@ -80,6 +85,14 @@ public class MarketCoupon implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
     }
 
     public void setName(String name) {
@@ -150,6 +163,7 @@ public class MarketCoupon implements Serializable {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
+                .append("couponId", getCouponId())
                 .append("name", getName())
                 .append("status", getStatus())
                 .append("startMoney", getStartMoney())

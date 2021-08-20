@@ -38,6 +38,7 @@
         <mysql.version>5.1.49</mysql.version>
         <druid-spring-boot-starter.version>1.2.4</druid-spring-boot-starter.version>
         <hutool.version>5.5.7</hutool.version>
+        <fastjson.version>1.2.75</fastjson.version>
         <guava.version>30.1-jre</guava.version>
         <jwt.version>0.9.1</jwt.version>
         <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
@@ -67,6 +68,10 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -118,6 +123,12 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
             <!-- guava -->
             <dependency>
