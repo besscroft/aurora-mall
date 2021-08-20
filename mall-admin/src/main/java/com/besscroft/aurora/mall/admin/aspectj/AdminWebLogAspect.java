@@ -8,6 +8,9 @@ import com.besscroft.aurora.mall.common.aspectj.WebLogAspect;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.domain.UserDto;
 import com.besscroft.aurora.mall.common.entity.WebLog;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +26,7 @@ import java.util.Date;
  * @Author Bess Croft
  * @Time 2021/7/18 18:25
  */
+@Slf4j
 @Component
 public class AdminWebLogAspect extends WebLogAspect {
 
@@ -34,6 +38,9 @@ public class AdminWebLogAspect extends WebLogAspect {
     @Autowired
     private LogService logService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Override
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         // 开始时间
@@ -43,14 +50,16 @@ public class AdminWebLogAspect extends WebLogAspect {
         // 获取当前请求对象
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
-        // 获取header
+        // 获取header -> {"user_name":"admin","scope":["all"],"id":1,"exp":1629446968,"authorities":["1_?????"],"jti":"1e950613-593e-4112-b628-f36cbb346e16","client_id":"admin-app"}
         String header = request.getHeader(AuthConstants.USER_TOKEN_HEADER);
+        log.info("header:{}", header);
         // 创建日志对象
         WebLog webLog = new WebLog();
         if(StrUtil.isNotBlank(header)){
-            UserDto userDto = JSONUtil.toBean(header, UserDto.class);
+            JsonNode jsonNode = objectMapper.readTree(header);
+            log.info("userDto:{}", jsonNode);
             // 设置操作用户
-            webLog.setUsername(userDto.getUsername());
+            webLog.setUsername(StrUtil.sub(jsonNode.get("user_name").toString(), 1, -1));
         }
         // 设置id
         webLog.setId(IdUtil.simpleUUID());
