@@ -35,6 +35,10 @@ public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
         // 白名单路径移除JWT请求头
         List<String> urls = ignoreUrlsConfig.getUrls();
         for (String url: urls) {
+            // 退出登录不移除请求头
+            if (pathMatcher.match("/mall-admin/user/logout", uri.getPath())) {
+                return webFilterChain.filter(serverWebExchange);
+            }
             if (pathMatcher.match(url, uri.getPath())) {
                 request = serverWebExchange.getRequest().mutate().header(AuthConstants.JWT_TOKEN_HEADER, "").build();
                 serverWebExchange = serverWebExchange.mutate().request(request).build();
