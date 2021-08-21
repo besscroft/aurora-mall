@@ -41,6 +41,11 @@ nbdist/
 
 *.log
 tmp/
+!**/nacos/target
+**/nacos/bin/work
+**/nacos/data
+**/nacos/LICENSE
+**/nacos/NOTICE
 
 .DS_Store
 node_modules/
