@@ -11,7 +11,7 @@
  Target Server Version : 50734
  File Encoding         : 65001
 
- Date: 19/08/2021 15:47:56
+ Date: 05/09/2021 18:04:25
 */
 
 SET NAMES utf8mb4;
@@ -3402,7 +3402,7 @@ CREATE TABLE `bms_auth_role_resource_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `resource_id` bigint(20) NULL DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 603 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 609 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_resource_relation
@@ -3469,11 +3469,12 @@ INSERT INTO `bms_auth_role_resource_relation` VALUES (594, 1, 48);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (595, 1, 49);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (596, 1, 61);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (597, 1, 42);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (598, 2, 3);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (599, 2, 5);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (600, 2, 6);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (601, 2, 7);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (602, 2, 8);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (603, 2, 3);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (604, 2, 5);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (605, 2, 6);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (606, 2, 7);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (607, 2, 8);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (608, 2, 9);
 
 -- ----------------------------
 -- Table structure for bms_auth_user
@@ -3498,18 +3499,18 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-08-19 15:32:53', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.52bess.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.52bess.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (5, 'user3', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user3@qq.com', '113', '普通用户3', '普通用户3', '2021-04-04 22:04:50', '2021-04-04 22:04:28', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (6, 'user4', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user4@qq.com', '114', '普通用户4', '普通用户4', '2021-04-04 22:04:52', '2021-04-04 22:04:31', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (7, 'user5', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user5@qq.com', '115', '普通用户5', '普通用户5', '2021-04-04 22:04:54', '2021-04-04 22:04:33', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (8, 'user6', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user6@qq.com', '116', '普通用户6', '普通用户6', '2021-04-04 22:04:57', '2021-04-04 22:04:36', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (9, 'user7', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user7@qq.com', '117', '普通用户7', '普通用户7', '2021-04-04 22:04:59', '2021-04-04 22:04:38', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (10, 'user8', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user8@qq.com', '118', '普通用户8', '普通用户8', '2021-04-04 22:05:01', '2021-04-04 22:04:41', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (11, 'user9', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user9@qq.com', '119', '普通用户9', '普通用户9', '2021-04-04 22:05:04', '2021-04-04 22:04:44', 1, 1);
-INSERT INTO `bms_auth_user` VALUES (12, 'user10', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.52bess.com/uploads/avatar.png', 'user10@qq.com', '120', '普通用户10', '普通用户10', '2021-04-04 22:05:06', '2021-04-04 22:04:47', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-08-25 17:45:36', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.besscroft.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.besscroft.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (5, 'user3', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'user3@qq.com', '113', '普通用户3', '普通用户3', '2021-04-04 22:04:50', '2021-04-04 22:04:28', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (6, 'user4', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'user4@qq.com', '114', '普通用户4', '普通用户4', '2021-04-04 22:04:52', '2021-04-04 22:04:31', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (7, 'user5', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'user5@qq.com', '115', '普通用户5', '普通用户5', '2021-04-04 22:04:54', '2021-04-04 22:04:33', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (8, 'user6', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'user6@qq.com', '116', '普通用户6', '普通用户6', '2021-04-04 22:04:57', '2021-04-04 22:04:36', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (9, 'user7', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'user7@qq.com', '117', '普通用户7', '普通用户7', '2021-04-04 22:04:59', '2021-04-04 22:04:38', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (10, 'user8', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'user8@qq.com', '118', '普通用户8', '普通用户8', '2021-04-04 22:05:01', '2021-04-04 22:04:41', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (11, 'user9', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'user9@qq.com', '119', '普通用户9', '普通用户9', '2021-04-04 22:05:04', '2021-04-04 22:04:44', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (12, 'user10', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'user10@qq.com', '120', '普通用户10', '普通用户10', '2021-04-04 22:05:06', '2021-04-04 22:04:47', 1, 1);
 
 -- ----------------------------
 -- Table structure for bms_auth_user_role_relation
@@ -3967,7 +3968,7 @@ CREATE TABLE `bms_update_log`  (
   `title_tag` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本标识',
   `title_time` datetime NULL DEFAULT NULL COMMENT '版本更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log
@@ -3980,6 +3981,8 @@ INSERT INTO `bms_update_log` VALUES (5, 5, 'v0.0.5', 'el-icon-s-promotion', 'suc
 INSERT INTO `bms_update_log` VALUES (6, 6, 'v0.0.6', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-09 21:38:14');
 INSERT INTO `bms_update_log` VALUES (7, 7, 'v0.0.7', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-05-10 17:58:25');
 INSERT INTO `bms_update_log` VALUES (8, 8, 'v0.0.8', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-06-05 16:01:44');
+INSERT INTO `bms_update_log` VALUES (9, 9, 'v0.0.9', 'el-icon-s-promotion', 'success', '新功能开发', '开发版', '2021-09-05 18:02:12');
+INSERT INTO `bms_update_log` VALUES (10, 10, 'v0.1.0', 'el-icon-s-promotion', 'success', '规范化处理', '开发版', '2021-09-05 18:03:37');
 
 -- ----------------------------
 -- Table structure for bms_update_log_detail
@@ -3990,7 +3993,7 @@ CREATE TABLE `bms_update_log_detail`  (
   `log_id` bigint(20) NULL DEFAULT NULL COMMENT '更新日志id',
   `body` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log_detail
@@ -4014,6 +4017,8 @@ INSERT INTO `bms_update_log_detail` VALUES (22, 7, '[refactor] 修改了数据�
 INSERT INTO `bms_update_log_detail` VALUES (23, 7, '[fix] 修复了页面表头错位bug');
 INSERT INTO `bms_update_log_detail` VALUES (24, 7, '[feat] 新增商品类型管理模块');
 INSERT INTO `bms_update_log_detail` VALUES (25, 8, '[feat] 新增后台商品列表查询');
+INSERT INTO `bms_update_log_detail` VALUES (26, 9, '[feat] 新增日志模块');
+INSERT INTO `bms_update_log_detail` VALUES (27, 10, '[feat] 规范化单元测试');
 
 -- ----------------------------
 -- Table structure for bms_user_address
@@ -4613,8 +4618,5 @@ CREATE TABLE `web_log`  (
 -- ----------------------------
 -- Records of web_log
 -- ----------------------------
-INSERT INTO `web_log` VALUES ('13fb0cf8b78d4ce9a78a06e56f0961e6', NULL, '根据用户名获取用户信息接口', 'http://192.168.222.1:20200/user/loadByUsername', 'GET', 'com.besscroft.aurora.mall.admin.controller.UserController.loadByUsername()', '192.168.222.1', '[\"admin\"]', '{\"roles\":[\"1_超级管理员\"],\"password\":\"$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC\",\"id\":1,\"username\":\"admin\",\"status\":1}', '2021-08-19 15:32:52', 39);
-INSERT INTO `web_log` VALUES ('7879054e6cee4afdb711216e192d481b', NULL, '获取当前后台系统登录用户的一些信息', 'http://192.168.222.1:20200/user/info', 'GET', 'com.besscroft.aurora.mall.admin.controller.UserController.getInfo()', '192.168.222.1', '[]', '{\"code\":200,\"data\":{\"roles\":[\"超级管理员\"],\"icon\":\"https://www.52bess.com/uploads/avatar.png\",\"menus\":[{\"hidden\":true,\"path\":\"/dashboard\",\"component\":\"Layout\",\"meta\":{\"icon\":\"el-icon-s-platform\",\"title\":\"首页\",\"noCache\":false},\"name\":\"Dashboard\"},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/auth\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/auth/authMenu\",\"component\":\"/auth/authMenu/index\",\"meta\":{\"icon\":\"el-icon-menu\",\"title\":\"菜单管理\",\"noCache\":false},\"name\":\"authMenu\"},{\"hidden\":true,\"path\":\"/auth/authUser\",\"component\":\"/auth/authUser/index\",\"meta\":{\"icon\":\"el-icon-user-solid\",\"title\":\"用户管理\",\"noCache\":false},\"name\":\"authUser\"},{\"hidden\":true,\"path\":\"/auth/authResourceSort\",\"component\":\"/auth/authResourceSort/index\",\"meta\":{\"icon\":\"el-icon-finished\",\"title\":\"资源类别管理\",\"noCache\":false},\"name\":\"authResourceSort\"},{\"hidden\":true,\"path\":\"/auth/authResource\",\"component\":\"/auth/authResource/index\",\"meta\":{\"icon\":\"el-icon-s-promotion\",\"title\":\"资源管理\",\"noCache\":false},\"name\":\"authResource\"},{\"hidden\":true,\"path\":\"/auth/authRole\",\"component\":\"/auth/authRole/index\",\"meta\":{\"icon\":\"el-icon-s-custom\",\"title\":\"角色管理\",\"noCache\":false},\"name\":\"authRole\"},{\"hidden\":true,\"path\":\"/auth/authPermission\",\"component\":\"/auth/authPermission/index\",\"meta\":{\"icon\":\"el-icon-check\",\"title\":\"权限管理\",\"noCache\":false},\"name\":\"authPermission\"}],\"meta\":{\"icon\":\"el-icon-success\",\"title\":\"权限管理\",\"noCache\":false},\"name\":\"auth\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/order\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/order/orderReturn\",\"component\":\"/order/orderReturn\",\"meta\":{\"icon\":\"el-icon-s-claim\",\"title\":\"售后订单\",\"noCache\":false},\"name\":\"orderReturn\"},{\"hidden\":true,\"path\":\"/order/orderList\",\"component\":\"/order/orderList/index\",\"meta\":{\"icon\":\"el-icon-s-order\",\"title\":\"订单列表\",\"noCache\":false},\"name\":\"orderList\"},{\"hidden\":true,\"path\":\"/order/orderReason\",\"component\":\"/order/orderReason/index\",\"meta\":{\"icon\":\"el-icon-notebook-1\",\"title\":\"售后原因\",\"noCache\":false},\"name\":\"orderReason\"},{\"hidden\":true,\"path\":\"/order/orderTimeTask\",\"component\":\"/order/orderTimeTask/index\",\"meta\":{\"icon\":\"el-icon-timer\",\"title\":\"定时任务\",\"noCache\":false},\"name\":\"orderTimeTask\"}],\"meta\":{\"icon\":\"el-icon-s-order\",\"title\":\"订单管理\",\"noCache\":false},\"name\":\"order\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/product\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/product/productType\",\"component\":\"/product/productType/index\",\"meta\":{\"icon\":\"el-icon-price-tag\",\"title\":\"类型管理\",\"noCache\":false},\"name\":\"productType\"},{\"hidden\":true,\"path\":\"/product/productBrand\",\"component\":\"/product/productBrand/index\",\"meta\":{\"icon\":\"el-icon-postcard\",\"title\":\"品牌管理\",\"noCache\":false},\"name\":\"productBrand\"},{\"hidden\":true,\"path\":\"/product/productAdd\",\"component\":\"/product/productAdd/index\",\"meta\":{\"icon\":\"el-icon-sell\",\"title\":\"添加商品\",\"noCache\":false},\"name\":\"productAdd\"},{\"hidden\":true,\"path\":\"/product/productSort\",\"component\":\"/product/productSort/index\",\"meta\":{\"icon\":\"el-icon-discount\",\"title\":\"分类管理\",\"noCache\":false},\"name\":\"productSort\"},{\"hidden\":true,\"path\":\"/product/productList\",\"component\":\"/product/productList/index\",\"meta\":{\"icon\":\"el-icon-s-goods\",\"title\":\"商品列表\",\"noCache\":false},\"name\":\"productList\"},{\"hidden\":true,\"path\":\"/product/productUpdate\",\"component\":\"/product/productUpdate/index\",\"meta\":{\"icon\":\"el-icon-sold-out\",\"title\":\"修改商品\",\"noCache\":false},\"name\":\"productUpdate\"}],\"meta\":{\"icon\":\"el-icon-s-goods\",\"title\":\"商品管理\",\"noCache\":false},\"name\":\"product\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/market\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/market/marketCoupon\",\"component\":\"/market/marketCoupon/index\",\"meta\":{\"icon\":\"el-icon-s-ticket\",\"title\":\"优惠券管理\",\"noCache\":false},\"name\":\"marketCoupon\"},{\"hidden\":true,\"path\":\"/market/marketBit\",\"component\":\"/market/marketBit/index\",\"meta\":{\"icon\":\"el-icon-s-finance\",\"title\":\"虚拟币管理\",\"noCache\":false},\"name\":\"marketBit\"},{\"hidden\":true,\"path\":\"/market/marketAD\",\"component\":\"/market/marketAD/index\",\"meta\":{\"icon\":\"el-icon-data-line\",\"title\":\"广告管理\",\"noCache\":false},\"name\":\"marketAD\"},{\"hidden\":true,\"path\":\"/market/marketSpike\",\"component\":\"/market/marketSpike/index\",\"meta\":{\"icon\":\"el-icon-alarm-clock\",\"title\":\"秒杀管理\",\"noCache\":false},\"name\":\"marketSpike\"}],\"meta\":{\"icon\":\"el-icon-s-marketing\",\"title\":\"营销管理\",\"noCache\":false},\"name\":\"market\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/user\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/user/userList\",\"component\":\"/user/userList/index\",\"meta\":{\"icon\":\"el-icon-user\",\"title\":\"会员列表\",\"noCache\":false},\"name\":\"userList\"}],\"meta\":{\"icon\":\"el-icon-user-solid\",\"title\":\"会员管理\",\"noCache\":false},\"name\":\"user\",\"alwaysShow\":true},{\"redirect\":\"noRedirect\",\"hidden\":true,\"path\":\"/system\",\"component\":\"Layout\",\"children\":[{\"hidden\":true,\"path\":\"/system/version\",\"component\":\"/system/version/index\",\"meta\":{\"icon\":\"el-icon-s-promotion\",\"title\":\"版本日志\",\"noCache\":false},\"name\":\"version\"}],\"meta\":{\"icon\":\"el-icon-s-tools\",\"title\":\"系统管理\",\"noCache\":false},\"name\":\"system\",\"alwaysShow\":true}],\"username\":\"管理员\"},\"message\":\"操作成功\"}', '2021-08-19 15:32:53', 43);
-INSERT INTO `web_log` VALUES ('8c3abe3d28ce48d9946b0108493bc3b0', NULL, '登录接口', 'http://192.168.222.1:20200/user/login', 'POST', 'com.besscroft.aurora.mall.admin.controller.UserController.login()', '192.168.222.1', '[{\"password\":\"666666\",\"username\":\"admin\"}]', '{\"code\":200,\"data\":{\"token_type\":\"bearer\",\"client_id\":\"admin-app\",\"access_token\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJpZCI6MSwiZXhwIjoxNjI5NDQ0NzczLCJhdXRob3JpdGllcyI6WyIxX-i2hee6p-euoeeQhuWRmCJdLCJqdGkiOiJiZGFiZDRkNC04MTc0LTQ1NGEtYTM1NS00MmQxYWI3ODc2YWEiLCJjbGllbnRfaWQiOiJhZG1pbi1hcHAifQ.NOJtLsVxePFkRZ3i7LZEPyNpaJyhm8EjBg1mKcTLGMPJwWxxm_01Kvc0t7OTygNi-heabj1iAPZXFBG49HjILQnADc0qqriFCEneTcHDnag27hHGYk2-b4St2V46aADk-fcq9d48D4zS8BmkkZJK4PVpy9_VIJyVe9aOjSnZGIhwytX_elpq3ux84RaEQQy26mNZZwc2DFumjP_53RKtJkPM872OS501KiBFeTw9ViVh39GN0anBejcIFLgTwqvJYKxbZfE6fjwrnynRwZ-X8iXKdIRbIwJ09T4bUgjYyKd9QWtj4t2xXBLxXLbpf2_LsSkHtX9yogKdmeVntssB_A\",\"refresh_token\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJhdGkiOiJiZGFiZDRkNC04MTc0LTQ1NGEtYTM1NS00MmQxYWI3ODc2YWEiLCJpZCI6MSwiZXhwIjoxNjI5OTYzMTczLCJhdXRob3JpdGllcyI6WyIxX-i2hee6p-euoeeQhuWRmCJdLCJqdGkiOiJkYjEzNzIwOS1kN2NhLTQ1ZmUtYWJlOS00NjA0MjRlYzRhOTUiLCJjbGllbnRfaWQiOiJhZG1pbi1hcHAifQ.VHBJBEv-0Combhj7mTs5OiA-SiZjeooKNpDpSmJPU0DOIKA3Y9wDjvipHuIyoHN9-HQf3rkx1A-jEXLCIZ7IMHYwl3O99M6pj4jvBkbDqby8s5VUQ6QTEzWHkkVF0dzFYAH_aItu3lm2Db7x7w76uomJNZCqkNo_obdrwuP7qqV5iCIwz2O3bkLZcqdvfx8skx1hPGDhSoVOZrKfXd2B8pmXg3Kcz-zzzo0PL-VsxNnlHuCyjXiNxlxSwcZWkewcinGdqD-aqXvXpKjeFkDyHuNSq7qVzeenrO_1LkCegjToiZQDg8L8ePDdvHCcYQFAHj0N1w8qkQhVntjKmM-oFQ\",\"scope\":\"all\",\"id\":1,\"expires_in\":86399,\"jti\":\"bdabd4d4-8174-454a-a355-42d1ab7876aa\"},\"message\":\"操作成功\"}', '2021-08-19 15:32:53', 1358);
 
 SET FOREIGN_KEY_CHECKS = 1;
