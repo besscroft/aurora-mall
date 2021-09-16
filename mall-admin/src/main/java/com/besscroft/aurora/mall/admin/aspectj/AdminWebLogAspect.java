@@ -20,6 +20,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -78,7 +79,7 @@ public class AdminWebLogAspect extends WebLogAspect {
         // 响应出参
         webLog.setResponseArgs(JSONUtil.toJsonStr(result));
         // 请求时间
-        webLog.setStartTime(new Date());
+        webLog.setStartTime(LocalDate.now());
         // 消耗时间
         webLog.setSpendTime(System.currentTimeMillis() - START_TIME.get());
         // 打印响应参数
