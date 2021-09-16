@@ -22,6 +22,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -85,7 +86,7 @@ public class UserController {
             data.put("roles", roles);
         }
         // 设置登录时间
-        userService.setLoginTime(LocalDate.now(), currentAdmin.getId());
+        userService.setLoginTime(LocalDateTime.now(), currentAdmin.getId());
         return AjaxResult.success(data);
     }
 

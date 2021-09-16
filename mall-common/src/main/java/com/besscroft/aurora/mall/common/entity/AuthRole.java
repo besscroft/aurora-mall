@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 权限管理模块角色对象 bms_auth_role
@@ -42,7 +42,7 @@ public class AuthRole implements Serializable {
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间", dataType = "Date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
     /** 启用状态：0->禁用；1->启用 */
     @ApiModelProperty(value = "启用状态", dataType = "Integer")
@@ -88,11 +88,11 @@ public class AuthRole implements Serializable {
         this.adminCount = adminCount;
     }
 
-    public LocalDate getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDate createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 

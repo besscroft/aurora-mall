@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
 import org.apache.ibatis.annotations.Param;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -36,7 +36,7 @@ public interface AuthUserMapper extends BaseMapper<AuthUser> {
      * @param id 用户id
      * @return
      */
-    int updateLoginTime(@Param("loginTime")LocalDate loginTime,
+    int updateLoginTime(@Param("loginTime") LocalDateTime loginTime,
                         @Param("id") Long id);
 
     /**

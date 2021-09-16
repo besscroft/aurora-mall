@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class UserServiceTest {
     @Test
     public void setLoginTime() throws Exception {
         Long adminId = 1L;
-        boolean b = userService.setLoginTime(LocalDate.now(), adminId);
+        boolean b = userService.setLoginTime(LocalDateTime.now(), adminId);
         assertTrue(b, "登录成功后设置登录时间操作失败！");
     }
 

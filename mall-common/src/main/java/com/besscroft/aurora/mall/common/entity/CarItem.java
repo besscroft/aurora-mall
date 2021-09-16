@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 购物车模块购物车子对象 ums_car_item
@@ -67,12 +67,12 @@ public class CarItem implements Serializable {
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private LocalDate createDate;
+    private LocalDateTime createDate;
 
     /** 修改时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "修改时间", dataType = "Date")
-    private LocalDate modifyDate;
+    private LocalDateTime modifyDate;
 
     /** 是否删除 */
     @ApiModelProperty(value = "是否删除", dataType = "Integer")
@@ -166,19 +166,19 @@ public class CarItem implements Serializable {
         return productSkuCode;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setModifyDate(LocalDate modifyDate) {
+    public void setModifyDate(LocalDateTime modifyDate) {
         this.modifyDate = modifyDate;
     }
 
-    public LocalDate getModifyDate() {
+    public LocalDateTime getModifyDate() {
         return modifyDate;
     }
 

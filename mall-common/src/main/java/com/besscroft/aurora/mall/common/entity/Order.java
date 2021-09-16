@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 订单管理模块订单对象 bms_order
@@ -47,7 +47,7 @@ public class Order implements Serializable {
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
     /** 用户帐号 */
     @ApiModelProperty(value = "用户帐号", dataType = "String")
@@ -180,27 +180,27 @@ public class Order implements Serializable {
     /** 支付时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "支付时间", dataType = "Date")
-    private LocalDate paymentTime;
+    private LocalDateTime paymentTime;
 
     /** 发货时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "发货时间", dataType = "Date")
-    private LocalDate deliveryTime;
+    private LocalDateTime deliveryTime;
 
     /** 确认收货时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "确认收货时间", dataType = "Date")
-    private LocalDate receiveTime;
+    private LocalDateTime receiveTime;
 
     /** 评价时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "评价时间", dataType = "Date")
-    private LocalDate commentTime;
+    private LocalDateTime commentTime;
 
     /** 修改时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "修改时间", dataType = "Date")
-    private LocalDate modifyTime;
+    private LocalDateTime modifyTime;
 
     public Long getId() {
         return id;
@@ -242,11 +242,11 @@ public class Order implements Serializable {
         this.couponId = couponId;
     }
 
-    public LocalDate getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDate createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
@@ -506,43 +506,43 @@ public class Order implements Serializable {
         this.deleteStatus = deleteStatus;
     }
 
-    public LocalDate getPaymentTime() {
+    public LocalDateTime getPaymentTime() {
         return paymentTime;
     }
 
-    public void setPaymentTime(LocalDate paymentTime) {
+    public void setPaymentTime(LocalDateTime paymentTime) {
         this.paymentTime = paymentTime;
     }
 
-    public LocalDate getDeliveryTime() {
+    public LocalDateTime getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(LocalDate deliveryTime) {
+    public void setDeliveryTime(LocalDateTime deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
-    public LocalDate getReceiveTime() {
+    public LocalDateTime getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(LocalDate receiveTime) {
+    public void setReceiveTime(LocalDateTime receiveTime) {
         this.receiveTime = receiveTime;
     }
 
-    public LocalDate getCommentTime() {
+    public LocalDateTime getCommentTime() {
         return commentTime;
     }
 
-    public void setCommentTime(LocalDate commentTime) {
+    public void setCommentTime(LocalDateTime commentTime) {
         this.commentTime = commentTime;
     }
 
-    public LocalDate getModifyTime() {
+    public LocalDateTime getModifyTime() {
         return modifyTime;
     }
 
-    public void setModifyTime(LocalDate modifyTime) {
+    public void setModifyTime(LocalDateTime modifyTime) {
         this.modifyTime = modifyTime;
     }
 

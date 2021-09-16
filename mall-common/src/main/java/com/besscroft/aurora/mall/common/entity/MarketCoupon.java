@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 营销管理模块优惠券对象 bms_market_coupon
@@ -51,12 +51,12 @@ public class MarketCoupon implements Serializable {
     /** 生效时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "生效时间", dataType = "Date")
-    private LocalDate startTime;
+    private LocalDateTime startTime;
 
     /** 失效时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "失效时间", dataType = "Date")
-    private LocalDate endTime;
+    private LocalDateTime endTime;
 
     /** 详情 */
     @ApiModelProperty(value = "详情", dataType = "String")
@@ -114,19 +114,19 @@ public class MarketCoupon implements Serializable {
         return money;
     }
 
-    public void setStartTime(LocalDate startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDate getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
-    public LocalDate getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,14 +36,14 @@ public class ResourceSortServiceImpl implements ResourceSortService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addResourceSort(AuthResourceSort authResourceSort) {
-        authResourceSort.setCreateTime(LocalDate.now());
+        authResourceSort.setCreateTime(LocalDateTime.now());
         return authResourceSortMapper.addResourceSort(authResourceSort) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateResourceSort(AuthResourceSort authResourceSort) {
-        authResourceSort.setCreateTime(LocalDate.now());
+        authResourceSort.setCreateTime(LocalDateTime.now());
         return authResourceSortMapper.updateResourceSort(authResourceSort) > 0;
     }
 

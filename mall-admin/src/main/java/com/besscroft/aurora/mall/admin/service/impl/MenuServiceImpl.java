@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -145,7 +146,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addMenu(AuthMenu authMenu) {
-        authMenu.setCreateTime(LocalDate.now());
+        authMenu.setCreateTime(LocalDateTime.now());
         return authMenuMapper.addMenu(authMenu) > 0;
     }
 

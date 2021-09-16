@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 会员管理模块会员用户信息对象 bms_user_info
@@ -50,7 +50,7 @@ public class UserInfo implements Serializable {
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
     /** 头像 */
     @ApiModelProperty(value = "头像", dataType = "String")
@@ -63,7 +63,7 @@ public class UserInfo implements Serializable {
     /** 生日 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "生日", dataType = "Date")
-    private LocalDate birthday;
+    private LocalDateTime birthday;
 
     /** 所在城市 */
     @ApiModelProperty(value = "所在城市", dataType = "String")
@@ -137,11 +137,11 @@ public class UserInfo implements Serializable {
         this.status = status;
     }
 
-    public LocalDate getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDate createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
@@ -161,11 +161,11 @@ public class UserInfo implements Serializable {
         this.gender = gender;
     }
 
-    public LocalDate getBirthday() {
+    public LocalDateTime getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(LocalDateTime birthday) {
         this.birthday = birthday;
     }
 
