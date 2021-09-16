@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean setLoginTime(LocalDate loginTime, Long id) {
+    public boolean setLoginTime(LocalDateTime loginTime, Long id) {
         return authUserMapper.updateLoginTime(loginTime, id) > 0;
     }
 
@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
         AuthUser authUser = new AuthUser();
         BeanUtils.copyProperties(adminParam, authUser);
         // 设置用户注册的时间
-        authUser.setCreateTime(LocalDate.now());
+        authUser.setCreateTime(LocalDateTime.now());
         // 设置用户状态
         authUser.setStatus(1);
         // 对密码进行加密
@@ -172,9 +172,9 @@ public class UserServiceImpl implements UserService {
     @Transactional(rollbackFor = Exception.class)
     public boolean addUser(AuthUser authUser) {
         // 设置用户注册的时间
-        authUser.setCreateTime(LocalDate.now());
+        authUser.setCreateTime(LocalDateTime.now());
         // 设置用户登录时间与注册时间一致
-        authUser.setLoginTime(LocalDate.now());
+        authUser.setLoginTime(LocalDateTime.now());
         // 加密密码
         authUser.setPassword(new BCryptPasswordEncoder().encode(authUser.getPassword()));
         // 设置删除状态

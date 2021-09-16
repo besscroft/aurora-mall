@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 营销管理模块广告（轮播图）对象 bms_market_ad
@@ -42,12 +42,12 @@ public class MarketAd implements Serializable {
     /** 开始时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "开始时间", dataType = "Date")
-    private LocalDate startTime;
+    private LocalDateTime startTime;
 
     /** 结束时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "结束时间", dataType = "Date")
-    private LocalDate endTime;
+    private LocalDateTime endTime;
 
     /** 上下线状态：0->下线；1->上线 */
     @ApiModelProperty(value = "上下线状态", dataType = "Integer")
@@ -103,19 +103,19 @@ public class MarketAd implements Serializable {
         return pic;
     }
 
-    public void setStartTime(LocalDate startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDate getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
-    public LocalDate getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 

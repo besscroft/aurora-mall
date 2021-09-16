@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 权限管理模块用户对象 bms_auth_user
@@ -59,12 +59,12 @@ public class AuthUser implements Serializable {
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
     /** 最后登录时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "最后登录时间", dataType = "Date")
-    private LocalDate loginTime;
+    private LocalDateTime loginTime;
 
     /** 帐号启用状态：0->禁用；1->启用 */
     @ApiModelProperty(value = "帐号启用状态", dataType = "Integer")
@@ -138,19 +138,19 @@ public class AuthUser implements Serializable {
         this.note = note;
     }
 
-    public LocalDate getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDate createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
-    public LocalDate getLoginTime() {
+    public LocalDateTime getLoginTime() {
         return loginTime;
     }
 
-    public void setLoginTime(LocalDate loginTime) {
+    public void setLoginTime(LocalDateTime loginTime) {
         this.loginTime = loginTime;
     }
 

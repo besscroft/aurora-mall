@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 商品管理模块商品对象 bms_product
@@ -155,12 +155,12 @@ public class Product implements Serializable {
     /** 促销开始时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "促销开始时间", dataType = "Date")
-    private LocalDate promotionStartTime;
+    private LocalDateTime promotionStartTime;
 
     /** 促销结束时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "促销结束时间", dataType = "Date")
-    private LocalDate promotionEndTime;
+    private LocalDateTime promotionEndTime;
 
     /** 活动限购数量 */
     @ApiModelProperty(value = "活动限购数量", dataType = "Long")
@@ -426,19 +426,19 @@ public class Product implements Serializable {
         return detailMobileHtml;
     }
 
-    public void setPromotionStartTime(LocalDate promotionStartTime) {
+    public void setPromotionStartTime(LocalDateTime promotionStartTime) {
         this.promotionStartTime = promotionStartTime;
     }
 
-    public LocalDate getPromotionStartTime() {
+    public LocalDateTime getPromotionStartTime() {
         return promotionStartTime;
     }
 
-    public void setPromotionEndTime(LocalDate promotionEndTime) {
+    public void setPromotionEndTime(LocalDateTime promotionEndTime) {
         this.promotionEndTime = promotionEndTime;
     }
 
-    public LocalDate getPromotionEndTime() {
+    public LocalDateTime getPromotionEndTime() {
         return promotionEndTime;
     }
 

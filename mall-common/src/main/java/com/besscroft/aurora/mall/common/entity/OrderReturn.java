@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 订单管理模块订单售后对象 bms_order_return
@@ -47,7 +47,7 @@ public class OrderReturn implements Serializable {
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
     /** 会员用户名 */
     @ApiModelProperty(value = "会员用户名", dataType = "String")
@@ -72,7 +72,7 @@ public class OrderReturn implements Serializable {
     /** 处理时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "处理时间", dataType = "Date")
-    private LocalDate handleTime;
+    private LocalDateTime handleTime;
 
     /** 商品图片 */
     @ApiModelProperty(value = "商品图片", dataType = "String")
@@ -129,7 +129,7 @@ public class OrderReturn implements Serializable {
     /** 收货时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "收货时间", dataType = "Date")
-    private LocalDate receiveTime;
+    private LocalDateTime receiveTime;
 
     /** 收货备注 */
     @ApiModelProperty(value = "收货备注", dataType = "String")
@@ -175,11 +175,11 @@ public class OrderReturn implements Serializable {
         this.orderSn = orderSn;
     }
 
-    public LocalDate getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDate createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
@@ -223,11 +223,11 @@ public class OrderReturn implements Serializable {
         this.status = status;
     }
 
-    public LocalDate getHandleTime() {
+    public LocalDateTime getHandleTime() {
         return handleTime;
     }
 
-    public void setHandleTime(LocalDate handleTime) {
+    public void setHandleTime(LocalDateTime handleTime) {
         this.handleTime = handleTime;
     }
 
@@ -335,11 +335,11 @@ public class OrderReturn implements Serializable {
         this.receiveMan = receiveMan;
     }
 
-    public LocalDate getReceiveTime() {
+    public LocalDateTime getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(LocalDate receiveTime) {
+    public void setReceiveTime(LocalDateTime receiveTime) {
         this.receiveTime = receiveTime;
     }
 
