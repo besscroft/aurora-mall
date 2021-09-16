@@ -28,7 +28,7 @@ public class SwaggerConfiguration extends BaseSwaggerConfig {
                 .contactUrl("https://github.com/besscroft/aurora-mall")
                 .license("Open Source")
                 .licenseUrl("https://github.com/besscroft/aurora-mall/blob/main/LICENSE")
-                .version("0.0.1")
+                .version("0.1.0")
                 .enableSecurity(true)
                 .build();
     }

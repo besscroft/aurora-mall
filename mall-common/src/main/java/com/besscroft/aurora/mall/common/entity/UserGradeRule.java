@@ -6,9 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -19,7 +16,6 @@ import java.io.Serializable;
  * @Date 2021/1/22 21:29
  */
 @TableName(value = "bms_user_grade_rule")
-@Document(indexName = "bms_user_grade_rule")
 @ApiModel(value = "会员管理模块会员用户等级规则对象")
 public class UserGradeRule implements Serializable {
 
@@ -30,17 +26,14 @@ public class UserGradeRule implements Serializable {
     private Long id;
 
     /** 等级名称 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "等级名称", dataType = "String")
     private String name;
 
     /** 到达当前等级需要的极光值 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "到达当前等级需要的极光值", dataType = "Integer")
     private Integer auroraPoint;
 
     /** 等级详情 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "等级详情", dataType = "String")
     private String detail;
 

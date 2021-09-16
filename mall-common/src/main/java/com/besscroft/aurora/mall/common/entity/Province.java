@@ -6,9 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -19,7 +16,6 @@ import java.io.Serializable;
  * @Date 2021/4/26 16:41
  */
 @TableName(value = "province")
-@Document(indexName = "province")
 @ApiModel(value = "省份表对象")
 public class Province implements Serializable {
 
@@ -30,12 +26,10 @@ public class Province implements Serializable {
     private Integer id;
 
     /** 省份名称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "省份名称", dataType = "String")
     private String name;
 
     /** 省份代码 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "省份代码", dataType = "Integer")
     private Integer provinceCode;
 

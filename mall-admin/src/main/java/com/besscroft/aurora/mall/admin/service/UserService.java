@@ -6,7 +6,7 @@ import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -38,7 +38,7 @@ public interface UserService {
      * @param id 用户id
      * @return
      */
-    boolean setLoginTime(Date loginTime, Long id);
+    boolean setLoginTime(LocalDate loginTime, Long id);
 
     /**
      * 获取用户信息

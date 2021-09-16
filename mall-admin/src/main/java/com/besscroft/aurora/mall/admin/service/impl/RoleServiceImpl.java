@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -38,7 +38,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addRole(AuthRole authRole) {
-        authRole.setCreateTime(new Date());
+        authRole.setCreateTime(LocalDate.now());
         authRole.setDel(1);
         int i = authRoleMapper.insertRole(authRole);
         if (i>0) {

@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 
@@ -17,7 +16,6 @@ import java.io.Serializable;
  * @Date 2021/1/22 21:28
  */
 @TableName(value = "bms_user_grade")
-@Document(indexName = "bms_user_grade")
 @ApiModel(value = "会员管理模块会员用户等级对象")
 public class UserGrade implements Serializable {
 

@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public boolean productAdd(Product product) {
         // 设置商品唯一id
-        product.setProductId(IdUtil.simpleUUID());
+        product.setProductId("S" + IdUtil.simpleUUID());
         return productMapper.insert(product) > 0;
     }
 

@@ -19,6 +19,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -89,7 +90,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addResource(AuthResource authResource) {
-        authResource.setCreateTime(new Date());
+        authResource.setCreateTime(LocalDate.now());
         return authResourceMapper.insertResource(authResource) > 0;
     }
 

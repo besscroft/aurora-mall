@@ -7,13 +7,10 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +20,6 @@ import java.util.List;
  * @Date 2021/1/22 20:26
  */
 @TableName(value = "bms_auth_menu")
-@Document(indexName = "bms_auth_menu")
 @ApiModel(value = "权限管理模块菜单对象")
 public class AuthMenu implements Serializable {
 
@@ -35,63 +31,51 @@ public class AuthMenu implements Serializable {
     private Long id;
 
     /** 父级ID */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "父级ID", dataType = "Long")
     private Long parentId;
 
     /** 创建时间 */
-    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private Date createTime;
+    private LocalDate createTime;
 
     /** 菜单名称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "菜单名称", dataType = "String")
     private String title;
 
     /** 父菜单名称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "父菜单名称", dataType = "String")
     private String parentTitle;
 
     /** 菜单级数 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "菜单级数", dataType = "Integer")
     private Integer level;
 
     /** 菜单排序 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "菜单排序", dataType = "Integer")
     private Integer sort;
 
     /** 前端名称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "前端名称", dataType = "String")
     private String name;
 
     /** 路由地址 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "路由地址", dataType = "String")
     private String path;
 
     /** 前端图标 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "前端图标", dataType = "String")
     private String icon;
 
     /** 显示状态：0->不显示；1->显示 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "显示状态", dataType = "Integer")
     private Integer hidden;
 
     /** 组件路径 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "组件路径", dataType = "String")
     private String component;
 
     /** 子菜单 **/
-    @Field(type = FieldType.Object)
     @ApiModelProperty(value = "子菜单")
     private List<AuthMenu> children = new ArrayList<>();
 
@@ -111,11 +95,11 @@ public class AuthMenu implements Serializable {
         this.parentId = parentId;
     }
 
-    public Date getCreateTime() {
+    public LocalDate getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
     }
 

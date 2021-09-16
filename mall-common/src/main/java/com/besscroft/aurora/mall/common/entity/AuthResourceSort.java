@@ -7,12 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 权限管理模块资源类别管理对象 bms_auth_resource_sort
@@ -21,7 +18,6 @@ import java.util.Date;
  * @Date 2021/1/22 20:40
  */
 @TableName(value = "bms_auth_resource_sort")
-@Document(indexName = "bms_auth_resource_sort")
 @ApiModel(value = "权限管理模块资源类别管理对象")
 public class AuthResourceSort implements Serializable {
 
@@ -32,23 +28,19 @@ public class AuthResourceSort implements Serializable {
     private Long id;
 
     /** 资源类别名称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "资源类别名称", dataType = "String")
     private String categoryName;
 
     /** 创建时间 */
-    @Field(type = FieldType.Date)
     @ApiModelProperty(value = "创建时间", dataType = "Date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private LocalDate createTime;
 
     /** 资源描述 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "资源描述", dataType = "String")
     private String description;
 
     /** 排序 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "排序", dataType = "Long")
     private Long sort;
 
@@ -68,11 +60,11 @@ public class AuthResourceSort implements Serializable {
         this.categoryName = categoryName;
     }
 
-    public Date getCreateTime() {
+    public LocalDate getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
     }
 

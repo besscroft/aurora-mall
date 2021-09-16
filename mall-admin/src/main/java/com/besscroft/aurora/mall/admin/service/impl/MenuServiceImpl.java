@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -144,7 +145,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addMenu(AuthMenu authMenu) {
-        authMenu.setCreateTime(new Date());
+        authMenu.setCreateTime(LocalDate.now());
         return authMenuMapper.addMenu(authMenu) > 0;
     }
 

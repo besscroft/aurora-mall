@@ -7,13 +7,10 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 订单管理模块订单对象 bms_order
@@ -22,7 +19,6 @@ import java.util.Date;
  * @Date 2021/1/22 20:55
  */
 @TableName(value = "bms_order")
-@Document(indexName = "bms_order")
 @ApiModel(value = "订单管理模块订单对象")
 public class Order implements Serializable {
 
@@ -33,220 +29,178 @@ public class Order implements Serializable {
     private Long id;
 
     /** 订单id */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "订单id", dataType = "String")
     private String orderId;
 
     /** 订单编号 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "订单编号", dataType = "String")
     private String orderSn;
 
     /** 用户id */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "用户id", dataType = "Long")
     private Long userId;
 
     /** 优惠券id */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "优惠券id", dataType = "Long")
     private Long couponId;
 
     /** 创建时间 */
-    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private Date createTime;
+    private LocalDate createTime;
 
     /** 用户帐号 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "用户帐号", dataType = "String")
     private String memberUsername;
 
     /** 订单总金额 */
-    @Field(type = FieldType.Integer_Range)
     @ApiModelProperty(value = "订单总金额", dataType = "BigDecimal")
     private BigDecimal totalAmount;
 
     /** 应付金额（实际支付金额） */
-    @Field(type = FieldType.Integer_Range)
     @ApiModelProperty(value = "应付金额", dataType = "BigDecimal")
     private BigDecimal payAmount;
 
     /** 运费金额 */
-    @Field(type = FieldType.Integer_Range)
     @ApiModelProperty(value = "运费金额", dataType = "BigDecimal")
     private BigDecimal freightAmount;
 
     /** 极光币抵扣金额 */
-    @Field(type = FieldType.Integer_Range)
     @ApiModelProperty(value = "极光币抵扣金额", dataType = "BigDecimal")
     private BigDecimal auroraBitAmount;
 
     /** 优惠券抵扣金额 */
-    @Field(type = FieldType.Integer_Range)
     @ApiModelProperty(value = "优惠券抵扣金额", dataType = "BigDecimal")
     private BigDecimal couponAmount;
 
     /** 管理员后台调整订单使用的折扣金额 */
-    @Field(type = FieldType.Integer_Range)
     @ApiModelProperty(value = "管理员后台调整订单使用的折扣金额", dataType = "BigDecimal")
     private BigDecimal discountAmount;
 
     /** 支付方式：0->未支付；1->支付宝；2->微信 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "支付方式", dataType = "Integer")
     private Integer payType;
 
     /** 订单来源：0->PC订单；1->app订单 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "订单来源", dataType = "Integer")
     private Integer sourceType;
 
     /** 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "订单状态", dataType = "Integer")
     private Integer status;
 
     /** 订单类型：0->正常订单；1->秒杀订单 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "订单类型", dataType = "Integer")
     private Integer orderType;
 
     /** 物流公司(配送方式) */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "物流公司(配送方式)", dataType = "String")
     private String deliveryCompany;
 
     /** 物流单号 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "物流单号", dataType = "String")
     private String deliverySn;
 
     /** 自动确认时间（天） */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "自动确认时间（天）", dataType = "Long")
     private Long autoConfirmDay;
 
     /** 可以获得的极光值 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "可以获得的极光值", dataType = "Long")
     private Long getAuroraPoint;
 
     /** 可以活动的极光币 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "可以活动的极光币", dataType = "Long")
     private Long getAuroraBit;
 
     /** 活动信息 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "活动信息", dataType = "String")
     private String promotionInfo;
 
     /** 发票类型：0->不开发票；1->电子发票；2->纸质发票 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "发票类型", dataType = "Integer")
     private Integer billType;
 
     /** 发票抬头 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "发票抬头", dataType = "String")
     private String billHeader;
 
     /** 发票内容 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "发票内容", dataType = "String")
     private String billContent;
 
     /** 收票人电话 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "收票人电话", dataType = "String")
     private String billReceiverPhone;
 
     /** 收票人邮箱 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "收票人邮箱", dataType = "String")
     private String billReceiverEmail;
 
     /** 收货人姓名 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "收货人姓名", dataType = "String")
     private String receiverName;
 
     /** 收货人电话 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "收货人电话", dataType = "String")
     private String receiverPhone;
 
     /** 收货人邮编 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "收货人邮编", dataType = "String")
     private String receiverPostCode;
 
     /** 省份/直辖市 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "省份/直辖市", dataType = "String")
     private String receiverProvince;
 
     /** 城市 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "城市", dataType = "String")
     private String receiverCity;
 
     /** 区 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "区", dataType = "String")
     private String receiverRegion;
 
     /** 详细地址 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "详细地址", dataType = "String")
     private String receiverDetailAddress;
 
     /** 订单备注 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "订单备注", dataType = "String")
     private String note;
 
     /** 确认收货状态：0->未确认；1->已确认 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "确认收货状态", dataType = "Integer")
     private Integer confirmStatus;
 
     /** 删除状态：0->未删除；1->已删除 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "删除状态", dataType = "Integer")
     private Integer deleteStatus;
 
     /** 支付时间 */
-    @Field(type = FieldType.Date)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "支付时间", dataType = "Date")
-    private Date paymentTime;
+    private LocalDate paymentTime;
 
     /** 发货时间 */
-    @Field(type = FieldType.Date)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "发货时间", dataType = "Date")
-    private Date deliveryTime;
+    private LocalDate deliveryTime;
 
     /** 确认收货时间 */
-    @Field(type = FieldType.Date)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "确认收货时间", dataType = "Date")
-    private Date receiveTime;
+    private LocalDate receiveTime;
 
     /** 评价时间 */
-    @Field(type = FieldType.Date)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "评价时间", dataType = "Date")
-    private Date commentTime;
+    private LocalDate commentTime;
 
     /** 修改时间 */
-    @Field(type = FieldType.Date)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "修改时间", dataType = "Date")
-    private Date modifyTime;
+    private LocalDate modifyTime;
 
     public Long getId() {
         return id;
@@ -288,11 +242,11 @@ public class Order implements Serializable {
         this.couponId = couponId;
     }
 
-    public Date getCreateTime() {
+    public LocalDate getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
     }
 
@@ -552,43 +506,43 @@ public class Order implements Serializable {
         this.deleteStatus = deleteStatus;
     }
 
-    public Date getPaymentTime() {
+    public LocalDate getPaymentTime() {
         return paymentTime;
     }
 
-    public void setPaymentTime(Date paymentTime) {
+    public void setPaymentTime(LocalDate paymentTime) {
         this.paymentTime = paymentTime;
     }
 
-    public Date getDeliveryTime() {
+    public LocalDate getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(Date deliveryTime) {
+    public void setDeliveryTime(LocalDate deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
-    public Date getReceiveTime() {
+    public LocalDate getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(Date receiveTime) {
+    public void setReceiveTime(LocalDate receiveTime) {
         this.receiveTime = receiveTime;
     }
 
-    public Date getCommentTime() {
+    public LocalDate getCommentTime() {
         return commentTime;
     }
 
-    public void setCommentTime(Date commentTime) {
+    public void setCommentTime(LocalDate commentTime) {
         this.commentTime = commentTime;
     }
 
-    public Date getModifyTime() {
+    public LocalDate getModifyTime() {
         return modifyTime;
     }
 
-    public void setModifyTime(Date modifyTime) {
+    public void setModifyTime(LocalDate modifyTime) {
         this.modifyTime = modifyTime;
     }
 

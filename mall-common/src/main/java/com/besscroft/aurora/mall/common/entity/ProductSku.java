@@ -6,9 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,7 +17,6 @@ import java.math.BigDecimal;
  * @Date 2021/1/22 21:21
  */
 @TableName(value = "bms_product_sku")
-@Document(indexName = "bms_product_sku")
 @ApiModel(value = "商品管理模块商品套餐对象")
 public class ProductSku implements Serializable {
 
@@ -31,47 +27,38 @@ public class ProductSku implements Serializable {
     private Long id;
 
     /** 套餐对应的商品id */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "套餐对应的商品id", dataType = "String")
     private String productId;
 
     /** 套餐编码 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "套餐编码", dataType = "String")
     private String skuCode;
 
     /** 套餐价格 */
-    @Field(type = FieldType.Integer_Range)
     @ApiModelProperty(value = "套餐价格", dataType = "BigDecimal")
     private BigDecimal price;
 
     /** 库存 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "库存", dataType = "Long")
     private Long stock;
 
     /** 预警库存 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "预警库存", dataType = "Long")
     private Long lowStock;
 
     /** 展示图片 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "展示图片", dataType = "String")
     private String pic;
 
     /** 销量 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "销量", dataType = "Long")
     private Long sale;
 
     /** 锁定库存 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "锁定库存", dataType = "Long")
     private Long lockStock;
 
     /** 商品销售属性，以json格式保存 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "商品销售属性", dataType = "String")
     private String spData;
 

@@ -6,9 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +17,6 @@ import java.util.List;
  * @Date 2021/4/17 21:20
  */
 @TableName(value = "bms_update_log")
-@Document(indexName = "bms_update_log")
 @ApiModel(value = "版本更新日志表对象")
 public class UpdateLog implements Serializable {
 
@@ -31,42 +27,34 @@ public class UpdateLog implements Serializable {
     private Long id;
 
     /** 面板的name值 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "面板的name值", dataType = "Long")
     private Long name;
 
     /** 版本号 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "版本号", dataType = "String")
     private String title;
 
     /** 版本号图标 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "版本号图标", dataType = "String")
     private String titleIcon;
 
     /** 版本标签类型：默认->蓝色；success->绿色；info->灰色；warning->橙色；danger->红色 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "版本标签类型", dataType = "String")
     private String titleType;
 
     /** 版本标签内容 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "版本标签内容", dataType = "String")
     private String titleTagInfo;
 
     /** 版本标识 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "版本标识", dataType = "String")
     private String titleTag;
 
     /** 版本更新时间 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "版本更新时间", dataType = "String")
     private String titleTime;
 
     /** 子日志 */
-    @Field(type = FieldType.Object)
     @ApiModelProperty(value = "子日志")
     private List<UpdateLogDetail> detail;
 

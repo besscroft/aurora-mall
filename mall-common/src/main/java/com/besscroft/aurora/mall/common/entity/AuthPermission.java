@@ -7,12 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 权限管理模块权限对象 bms_auth_permission
@@ -21,7 +18,6 @@ import java.util.Date;
  * @Date 2021/1/22 20:29
  */
 @TableName(value = "bms_auth_permission")
-@Document(indexName = "bms_auth_permission")
 @ApiModel(value = "权限管理模块权限对象")
 public class AuthPermission implements Serializable {
 
@@ -32,48 +28,39 @@ public class AuthPermission implements Serializable {
     private Long id;
 
     /** 父级权限id */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "父级权限id", dataType = "Long")
     private Long pid;
 
     /** 名称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "名称", dataType = "String")
     private String name;
 
     /** 权限值 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "权限值", dataType = "String")
     private String value;
 
     /** 图标 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "图标", dataType = "String")
     private String icon;
 
     /** 权限类型：0->目录；1->菜单；2->按钮（接口绑定权限） */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "父级ID", dataType = "Long")
     private Integer type;
 
     /** 前端资源路径 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "父级ID", dataType = "Long")
     private String uri;
 
     /** 启用状态；0->禁用；1->启用 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "启用状态", dataType = "Integer")
     private Integer status;
 
     /** 创建时间 */
-    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private Date createTime;
+    private LocalDate createTime;
 
     /** 排序 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "排序", dataType = "Long")
     private Long sort;
 
@@ -141,11 +128,11 @@ public class AuthPermission implements Serializable {
         this.status = status;
     }
 
-    public Date getCreateTime() {
+    public LocalDate getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
     }
 

@@ -7,12 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 权限管理模块用户对象 bms_auth_user
@@ -21,7 +18,6 @@ import java.util.Date;
  * @Date 2021/1/22 19:50
  */
 @TableName(value = "bms_auth_user")
-@Document(indexName = "bms_auth_user")
 @ApiModel(value = "权限管理模块用户对象")
 public class AuthUser implements Serializable {
 
@@ -33,59 +29,48 @@ public class AuthUser implements Serializable {
     private Long id;
 
     /** 用户名 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "用户名", dataType = "String")
     private String username;
 
     /** 密码 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "密码", dataType = "String")
     private String password;
 
     /** 头像 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "头像", dataType = "String")
     private String icon;
 
     /** 邮箱 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "邮箱", dataType = "String")
     private String email;
 
     /** 手机 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "手机", dataType = "String")
     private String phone;
 
     /** 昵称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "昵称", dataType = "String")
     private String nickName;
 
     /** 备注信息 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "备注信息", dataType = "String")
     private String note;
 
     /** 创建时间 */
-    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private Date createTime;
+    private LocalDate createTime;
 
     /** 最后登录时间 */
-    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "最后登录时间", dataType = "Date")
-    private Date loginTime;
+    private LocalDate loginTime;
 
     /** 帐号启用状态：0->禁用；1->启用 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "帐号启用状态", dataType = "Integer")
     private Integer status;
 
     /** 假删除：0->删除状态；1->可用状态 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "假删除", dataType = "Integer")
     private Integer del;
 
@@ -153,19 +138,19 @@ public class AuthUser implements Serializable {
         this.note = note;
     }
 
-    public Date getCreateTime() {
+    public LocalDate getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
     }
 
-    public Date getLoginTime() {
+    public LocalDate getLoginTime() {
         return loginTime;
     }
 
-    public void setLoginTime(Date loginTime) {
+    public void setLoginTime(LocalDate loginTime) {
         this.loginTime = loginTime;
     }
 

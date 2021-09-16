@@ -7,12 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 订单管理模块订单定时任务对象 bms_order_timetask
@@ -21,7 +18,6 @@ import java.util.Date;
  * @Date 2021/1/22 21:08
  */
 @TableName(value = "bms_order_timetask")
-@Document(indexName = "bms_order_timetask")
 @ApiModel(value = "订单管理模块订单定时任务对象")
 public class OrderTimetask implements Serializable {
 
@@ -32,28 +28,23 @@ public class OrderTimetask implements Serializable {
     private Long id;
 
     /** 任务名称 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "任务名称", dataType = "String")
     private String name;
 
     /** 任务定时 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "任务定时", dataType = "Long")
     private Long flashTime;
 
     /** 创建时间 */
-    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private Date createTime;
+    private LocalDate createTime;
 
     /** 排序 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "排序", dataType = "Long")
     private Long sort;
 
     /** 任务详情 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "任务详情", dataType = "String")
     private String detail;
 
@@ -81,11 +72,11 @@ public class OrderTimetask implements Serializable {
         this.flashTime = flashTime;
     }
 
-    public Date getCreateTime() {
+    public LocalDate getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
     }
 

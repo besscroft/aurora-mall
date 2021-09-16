@@ -6,9 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -19,7 +16,6 @@ import java.io.Serializable;
  * @Date 2021/1/22 21:27
  */
 @TableName(value = "bms_user_address")
-@Document(indexName = "bms_user_address")
 @ApiModel(value = "会员管理模块会员用户地址管理对象")
 public class UserAddress implements Serializable {
 
@@ -30,47 +26,38 @@ public class UserAddress implements Serializable {
     private Long id;
 
     /** 用户id */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "用户id", dataType = "Long")
     private Long userId;
 
     /** 收件人名称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "id", dataType = "String")
     private String name;
 
     /** 收件人号码 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "收件人号码", dataType = "Long")
     private Long phoneNumber;
 
     /** 是否为默认：0->不是；1->是 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "是否为默认", dataType = "Integer")
     private Integer defaultStatus;
 
     /** 邮政编码 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "邮政编码", dataType = "String")
     private String postCode;
 
     /** 省份/直辖市 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "省份/直辖市", dataType = "String")
     private String province;
 
     /** 城市 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "城市", dataType = "String")
     private String city;
 
     /** 区 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "区", dataType = "String")
     private String region;
 
     /** 详细地址(街道) */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "详细地址(街道)", dataType = "String")
     private String detailAddress;
 

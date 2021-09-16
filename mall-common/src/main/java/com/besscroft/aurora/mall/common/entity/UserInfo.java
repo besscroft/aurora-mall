@@ -7,12 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 会员管理模块会员用户信息对象 bms_user_info
@@ -21,7 +18,6 @@ import java.util.Date;
  * @Date 2021/1/22 21:30
  */
 @TableName(value = "bms_user_info")
-@Document(indexName = "bms_user_info")
 @ApiModel(value = "会员管理模块会员用户信息对象")
 public class UserInfo implements Serializable {
 
@@ -32,79 +28,64 @@ public class UserInfo implements Serializable {
     private Long id;
 
     /** 用户名 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "用户名", dataType = "String")
     private String username;
 
     /** 密码 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "密码", dataType = "String")
     private String password;
 
     /** 昵称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "昵称", dataType = "String")
     private String nickname;
 
     /** 手机号码 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "手机号码", dataType = "String")
     private String phone;
 
     /** 帐号启用状态:0->禁用；1->启用 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "帐号启用状态", dataType = "Integer")
     private Integer status;
 
     /** 创建时间 */
-    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private Date createTime;
+    private LocalDate createTime;
 
     /** 头像 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "头像", dataType = "String")
     private String avatar;
 
     /** 性别：0->未知；1->男；2->女 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "性别", dataType = "Integer")
     private Integer gender;
 
     /** 生日 */
-    @Field(type = FieldType.Date)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "生日", dataType = "Date")
-    private Date birthday;
+    private LocalDate birthday;
 
     /** 所在城市 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "所在城市", dataType = "String")
     private String city;
 
     /** 职业 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "职业", dataType = "String")
     private String job;
 
     /** 个性签名 */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "个性签名", dataType = "String")
     private String personalizedSignature;
 
     /** 用户注册来源 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "用户注册来源", dataType = "Integer")
     private Integer sourceType;
 
     /** 极光值 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "极光值", dataType = "Long")
     private Long auroraPoint;
 
     /** 极光币 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "极光币", dataType = "Long")
     private Long auroraBit;
 
@@ -156,11 +137,11 @@ public class UserInfo implements Serializable {
         this.status = status;
     }
 
-    public Date getCreateTime() {
+    public LocalDate getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
     }
 
@@ -180,11 +161,11 @@ public class UserInfo implements Serializable {
         this.gender = gender;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

@@ -7,13 +7,10 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 购物车模块购物车子对象 ums_car_item
@@ -22,7 +19,6 @@ import java.util.Date;
  * @Date 2021/1/22 21:36
  */
 @TableName(value = "ums_car_item")
-@Document(indexName = "ums_car_item")
 @ApiModel(value = "购物车模块购物车子对象")
 public class CarItem implements Serializable {
 
@@ -33,74 +29,60 @@ public class CarItem implements Serializable {
     private Long id;
 
     /** 购物车id */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "购物车id", dataType = "String")
     private String cartId;
 
     /** 商品id */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "商品id", dataType = "String")
     private String productId;
 
     /** 商品套餐id */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "商品套餐id", dataType = "String")
     private String productSkuId;
 
     /** 用户id */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "用户id", dataType = "Long")
     private Long userId;
 
     /** 购买数量 */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "购买数量", dataType = "Long")
     private Long quantity;
 
     /** 购物车商品价格 */
-    @Field(type = FieldType.Integer_Range)
     @ApiModelProperty(value = "购物车商品价格", dataType = "BigDecimal")
     private BigDecimal price;
 
     /** 商品图片 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "商品图片", dataType = "String")
     private String productPic;
 
     /** 商品名称 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "商品名称", dataType = "String")
     private String productName;
 
     /** 商品套餐编码 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "商品套餐编码", dataType = "String")
     private String productSkuCode;
 
     /** 创建时间 */
-    @Field(type = FieldType.Date)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", dataType = "Date")
-    private Date createDate;
+    private LocalDate createDate;
 
     /** 修改时间 */
-    @Field(type = FieldType.Date)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "修改时间", dataType = "Date")
-    private Date modifyDate;
+    private LocalDate modifyDate;
 
     /** 是否删除 */
-    @Field(type = FieldType.Integer)
     @ApiModelProperty(value = "是否删除", dataType = "Integer")
     private Integer deleteStatus;
 
     /** 商品编码 */
-    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "商品编码", dataType = "String")
     private String productSn;
 
     /** 商品销售属性:[{"key":"颜色","value":"蓝色"},{"key":"尺寸","value":"24英寸"}] */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "商品销售属性", dataType = "String")
     private String productAttr;
 
@@ -184,19 +166,19 @@ public class CarItem implements Serializable {
         return productSkuCode;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setModifyDate(Date modifyDate) {
+    public void setModifyDate(LocalDate modifyDate) {
         this.modifyDate = modifyDate;
     }
 
-    public Date getModifyDate() {
+    public LocalDate getModifyDate() {
         return modifyDate;
     }
 

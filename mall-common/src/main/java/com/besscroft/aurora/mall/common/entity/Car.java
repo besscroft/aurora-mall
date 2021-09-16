@@ -6,9 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -19,7 +16,6 @@ import java.io.Serializable;
  * @Date 2021/1/22 21:35
  */
 @TableName(value = "ums_car")
-@Document(indexName = "ums_car")
 @ApiModel(value = "购物车模块购物车对象")
 public class Car implements Serializable {
 
@@ -30,12 +26,10 @@ public class Car implements Serializable {
     private Long id;
 
     /** 购物车id */
-    @Field(type = FieldType.Text)
     @ApiModelProperty(value = "购物车id", dataType = "String")
     private String carId;
 
     /** 用户id */
-    @Field(type = FieldType.Long)
     @ApiModelProperty(value = "用户id", dataType = "Long")
     private Long userId;
 
