@@ -22,15 +22,16 @@ https://mall.aurora.besscroft.com/
 
 ### 后端技术
 
-| 技术                 | 版本          | 说明                             | site                                            |
-| -------------------- | ------------- | -------------------------------- | ----------------------------------------------- |
-| Spring Cloud         | Hoxton.SR8    | 微服务框架                       | https://spring.io/projects/spring-cloud         |
-| mybatis-plus         | 3.4.2         | 为简化开发而生                   | https://baomidou.com/                           |
-| spring-cloud-alibaba | 2.2.3.RELEASE | 微服务开发的一站式解决方案       | https://spring.io/projects/spring-cloud-alibaba |
-| PageHelper           | starter1.3.0  | MyBatis物理分页插件              | http://git.oschina.net/free/Mybatis_PageHelper  |
-| Druid                | starter1.2.4  | 数据库连接池                     | https://github.com/alibaba/druid                |
-| Redis                |               | 分布式缓存                       |                                                 |
-| knife4j              | 2.0.4         | Swagger生成Api文档的增强解决方案 | https://doc.xiaominfo.com                       |                                         |
+| 技术                 | 版本         | 说明                                                         | site                                            |
+| -------------------- | ------------ | ------------------------------------------------------------ | ----------------------------------------------- |
+| Spring Cloud         | 2020.0.1     | 微服务框架                                                   | https://spring.io/projects/spring-cloud         |
+| Spring Cloud Alibaba | 2021.1       | 微服务开发的一站式解决方案                                   | https://spring.io/projects/spring-cloud-alibaba |
+| Spring Boot          | 2.4.2        | *Spring Boot* — *Spring Boot*是基于Spring Framework 4.0衍生的，用于快速搭建独立的基于生产级别的Spring应用的框架，可以以最小的依赖引入来构建一个Spring应用。 | https://spring.io/projects/spring-boot          |
+| mybatis-plus         | 3.4.2        | 为简化开发而生                                               | https://baomidou.com/                           |
+| PageHelper           | starter1.3.0 | MyBatis物理分页插件                                          | http://git.oschina.net/free/Mybatis_PageHelper  |
+| Druid                | starter1.2.4 | 数据库连接池                                                 | https://github.com/alibaba/druid                |
+| Redis                |              | 分布式缓存                                                   |                                                 |
+| knife4j              | 2.0.4        | Swagger生成Api文档的增强解决方案                             | https://doc.xiaominfo.com                       |
 
 ### 前端技术
 
@@ -47,7 +48,7 @@ https://mall.aurora.besscroft.com/
 ### 开发环境
 
 * JDK 1.8
-* Idea 2021.1.2
+* Idea 2021.1.3
 * [nodejs](https://nodejs.org/dist/latest-v12.x/) v12.20.1
 
 ### 行为准则
