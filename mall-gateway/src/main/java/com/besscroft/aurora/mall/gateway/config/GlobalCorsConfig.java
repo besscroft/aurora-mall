@@ -24,7 +24,7 @@ public class GlobalCorsConfig {
         config.addAllowedHeader("*");
         config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/*", config);
 
         return new CorsWebFilter(source);
     }

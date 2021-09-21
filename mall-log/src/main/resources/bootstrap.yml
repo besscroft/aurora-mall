@@ -1,9 +1,9 @@
 server:
-  port: 20100
+  port: 20400
 
 spring:
   application:
-    name: mall-auth
+    name: mall-log
   profiles:
     active: '@spring.active@'
   cloud:
@@ -11,3 +11,7 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
         watch-delay: 1000
+      # 配置中心
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml
