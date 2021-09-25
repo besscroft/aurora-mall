@@ -153,6 +153,7 @@
             type="datetime"
             placeholder="选择日期时间"
             align="right"
+            value-format="yyyy-MM-dd HH:mm:ss"
             :picker-options="pickerOptions">
           </el-date-picker>
         </el-form-item>
@@ -162,6 +163,7 @@
             type="datetime"
             placeholder="选择日期时间"
             align="right"
+            value-format="yyyy-MM-dd HH:mm:ss"
             :picker-options="pickerOptions">
           </el-date-picker>
         </el-form-item>
@@ -312,11 +314,11 @@ export default {
     }
   },
   created() {
-    getToken({ email: 'mall@admin.com', password: 'mall' }).then(response => {
-      const data = response.data
-      this.token.token = data.token
-      console.log(this.token)
-    });
+    // getToken({ email: 'mall@admin.com', password: 'mall' }).then(response => {
+    //   const data = response.data
+    //   this.token.token = data.token
+    //   console.log(this.token)
+    // });
   },
   methods: {
     /** 文件上传成功 */
