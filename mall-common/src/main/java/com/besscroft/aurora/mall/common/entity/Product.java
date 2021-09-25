@@ -166,6 +166,10 @@ public class Product implements Serializable {
     @ApiModelProperty(value = "活动限购数量", dataType = "Long")
     private Long promotionPerLimit;
 
+    /** 创建人/所有人id */
+    @ApiModelProperty(value = "创建人/所有人id", dataType = "Long")
+    private Long createUserId;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -450,6 +454,14 @@ public class Product implements Serializable {
         return promotionPerLimit;
     }
 
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -488,6 +500,7 @@ public class Product implements Serializable {
                 .append("promotionStartTime", getPromotionStartTime())
                 .append("promotionEndTime", getPromotionEndTime())
                 .append("promotionPerLimit", getPromotionPerLimit())
+                .append("createUserId", getCreateUserId())
                 .toString();
     }
 
