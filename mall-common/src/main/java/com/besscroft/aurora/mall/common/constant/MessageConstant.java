@@ -3,7 +3,7 @@ package com.besscroft.aurora.mall.common.constant;
 /**
  * 消息常量
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/17 22:28
  */
 public interface MessageConstant {

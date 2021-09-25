@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -15,9 +14,13 @@ import java.time.LocalDateTime;
 /**
  * 营销管理模块优惠券对象 bms_market_coupon
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/22 20:49
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "bms_market_coupon")
 @ApiModel(value = "营销管理模块优惠券对象")
 public class MarketCoupon implements Serializable {
@@ -65,101 +68,5 @@ public class MarketCoupon implements Serializable {
     /** 排序 */
     @ApiModelProperty(value = "排序", dataType = "Long")
     private Long sort;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(String couponId) {
-        this.couponId = couponId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStartMoney(BigDecimal startMoney) {
-        this.startMoney = startMoney;
-    }
-
-    public BigDecimal getStartMoney() {
-        return startMoney;
-    }
-
-    public void setMoney(BigDecimal money) {
-        this.money = money;
-    }
-
-    public BigDecimal getMoney() {
-        return money;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setSort(Long sort) {
-        this.sort = sort;
-    }
-
-    public Long getSort() {
-        return sort;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("couponId", getCouponId())
-                .append("name", getName())
-                .append("status", getStatus())
-                .append("startMoney", getStartMoney())
-                .append("money", getMoney())
-                .append("startTime", getStartTime())
-                .append("endTime", getEndTime())
-                .append("detail", getDetail())
-                .append("sort", getSort())
-                .toString();
-    }
 
 }

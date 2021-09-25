@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 分页处理
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/4 13:01
  */
 public class CommonPage<T> {

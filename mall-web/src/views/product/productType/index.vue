@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-container">
     <el-card class="box-card" shadow="hover">
-      <span>商品类型管理</span>
       <el-row :gutter="10" class="mb8">
         <el-col :span="1.5">
           <el-button

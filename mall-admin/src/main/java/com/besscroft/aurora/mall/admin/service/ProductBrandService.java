@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 后台管理商品品牌服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/5/15 14:40
  */
 public interface ProductBrandService {

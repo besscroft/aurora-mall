@@ -41,6 +41,7 @@
             class="upload-demo"
             action="https://img.besscroft.com/api/upload"
             :headers="token"
+            name="image"
             :file-list="picList"
             :on-success="handleSuccess"
             :on-error="handleError"
@@ -153,6 +154,7 @@
             type="datetime"
             placeholder="选择日期时间"
             align="right"
+            value-format="yyyy-MM-dd HH:mm:ss"
             :picker-options="pickerOptions">
           </el-date-picker>
         </el-form-item>
@@ -162,6 +164,7 @@
             type="datetime"
             placeholder="选择日期时间"
             align="right"
+            value-format="yyyy-MM-dd HH:mm:ss"
             :picker-options="pickerOptions">
           </el-date-picker>
         </el-form-item>
@@ -312,7 +315,7 @@ export default {
     }
   },
   created() {
-    getToken({ email: 'mall@admin.com', password: 'mall' }).then(response => {
+    getToken({ email: 'admin@qq.com', password: 'img123456' }).then(response => {
       const data = response.data
       this.token.token = data.token
       console.log(this.token)
@@ -327,7 +330,7 @@ export default {
       } else {
         Message.error(response.msg)
       }
-      this.pic = response.data.url
+      this.form.pic = response.data.url
     },
     /** 文件上传失败 */
     handleError(file, picList) {

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 后台管理资源类别持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/16 15:43
  */
 public interface AuthResourceSortMapper extends BaseMapper<AuthResourceSort> {

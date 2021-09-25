@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 后台管理商品分类服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/5/7 14:29
  */
 public interface ProductSortService {

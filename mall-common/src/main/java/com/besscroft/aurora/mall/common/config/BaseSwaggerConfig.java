@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * swagger 通用配置
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/2 12:28
  */
 public abstract class BaseSwaggerConfig {

@@ -3,8 +3,7 @@ package com.besscroft.aurora.mall.common.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -12,9 +11,13 @@ import java.io.Serializable;
 /**
  * 区域表对象
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/26 16:40
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "area")
 @ApiModel(value = "区域表对象")
 public class Area implements Serializable {
@@ -36,47 +39,5 @@ public class Area implements Serializable {
     /** 城市代码 */
     @ApiModelProperty(value = "城市代码", dataType = "Integer")
     private Integer cityCode;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAreaCode() {
-        return areaCode;
-    }
-
-    public void setAreaCode(Integer areaCode) {
-        this.areaCode = areaCode;
-    }
-
-    public Integer getCityCode() {
-        return cityCode;
-    }
-
-    public void setCityCode(Integer cityCode) {
-        this.cityCode = cityCode;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("name", getName())
-                .append("areaCode", getAreaCode())
-                .append("cityCode", getCityCode())
-                .toString();
-    }
 
 }

@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-container">
     <el-card class="box-card" shadow="hover">
-      <span>角色管理</span>
       <el-row :gutter="10" class="mb8">
         <el-col :span="1.5">
           <el-button
@@ -378,7 +377,9 @@ export default {
     },
     /** 菜单绑定提交 */
     submitMenu() {
-      const menuTreeData = this.$refs.tree.getCheckedKeys();
+      let parentTree = this.$refs.tree.getHalfCheckedKeys();
+      let childTree = this.$refs.tree.getCheckedKeys().filter(Boolean);
+      const menuTreeData = [...parentTree, ...childTree];
       updateMenuTree({ id: this.roleId, data: menuTreeData }).then(response => {
         Message.success(response.message);
         this.menuDialogVisible = false;

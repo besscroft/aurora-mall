@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 用户系统请求服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/17 21:17
  */
 @FeignClient("mall-user")

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 /**
  * 后台管理系统用户参数
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/24 18:25
  */
 @Data

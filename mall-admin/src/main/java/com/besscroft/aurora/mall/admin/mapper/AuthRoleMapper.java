@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 权限管理模块角色持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/18 11:08
  */
 public interface AuthRoleMapper extends BaseMapper<AuthRole> {

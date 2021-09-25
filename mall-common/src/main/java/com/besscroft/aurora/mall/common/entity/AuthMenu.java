@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -16,9 +15,13 @@ import java.util.List;
 /**
  * 权限管理模块菜单对象 bms_auth_menu
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/22 20:26
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "bms_auth_menu")
 @ApiModel(value = "权限管理模块菜单对象")
 public class AuthMenu implements Serializable {
@@ -79,126 +82,4 @@ public class AuthMenu implements Serializable {
     @ApiModelProperty(value = "子菜单")
     private List<AuthMenu> children = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getParentTitle() {
-        return parentTitle;
-    }
-
-    public void setParentTitle(String parentTitle) {
-        this.parentTitle = parentTitle;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public Integer getHidden() {
-        return hidden;
-    }
-
-    public void setHidden(Integer hidden) {
-        this.hidden = hidden;
-    }
-
-    public List<AuthMenu> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<AuthMenu> children) {
-        this.children = children;
-    }
-
-    public String getComponent() {
-        return component;
-    }
-
-    public void setComponent(String component) {
-        this.component = component;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("parentId", getParentId())
-                .append("createTime", getCreateTime())
-                .append("title", getTitle())
-                .append("parentTitle", getParentTitle())
-                .append("level", getLevel())
-                .append("sort", getSort())
-                .append("name", getName())
-                .append("path", getPath())
-                .append("icon", getIcon())
-                .append("hidden", getHidden())
-                .append("children", getChildren())
-                .append("component", getComponent())
-                .toString();
-    }
 }

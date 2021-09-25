@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/5/9 21:32
  */
 @Configuration

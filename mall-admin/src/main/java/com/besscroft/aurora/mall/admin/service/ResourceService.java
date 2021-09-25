@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 后台管理系统资源服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/3/17 15:48
  */
 public interface ResourceService {

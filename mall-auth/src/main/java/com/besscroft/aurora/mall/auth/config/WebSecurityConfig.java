@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * WebSecurity配置
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/17 22:40
  */
 @Configuration

@@ -3,8 +3,7 @@ package com.besscroft.aurora.mall.common.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -13,9 +12,13 @@ import java.util.List;
 /**
  * 版本更新日志表对象 bms_update_log
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/17 21:20
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "bms_update_log")
 @ApiModel(value = "版本更新日志表对象")
 public class UpdateLog implements Serializable {
@@ -57,92 +60,5 @@ public class UpdateLog implements Serializable {
     /** 子日志 */
     @ApiModelProperty(value = "子日志")
     private List<UpdateLogDetail> detail;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getName() {
-        return name;
-    }
-
-    public void setName(Long name) {
-        this.name = name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitleIcon() {
-        return titleIcon;
-    }
-
-    public void setTitleIcon(String titleIcon) {
-        this.titleIcon = titleIcon;
-    }
-
-    public String getTitleType() {
-        return titleType;
-    }
-
-    public void setTitleType(String titleType) {
-        this.titleType = titleType;
-    }
-
-    public String getTitleTagInfo() {
-        return titleTagInfo;
-    }
-
-    public void setTitleTagInfo(String titleTagInfo) {
-        this.titleTagInfo = titleTagInfo;
-    }
-
-    public String getTitleTag() {
-        return titleTag;
-    }
-
-    public void setTitleTag(String titleTag) {
-        this.titleTag = titleTag;
-    }
-
-    public String getTitleTime() {
-        return titleTime;
-    }
-
-    public void setTitleTime(String titleTime) {
-        this.titleTime = titleTime;
-    }
-
-    public List<UpdateLogDetail> getDetail() {
-        return detail;
-    }
-
-    public void setDetail(List<UpdateLogDetail> detail) {
-        this.detail = detail;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("name", getName())
-                .append("title", getTitle())
-                .append("titleIcon", getTitleIcon())
-                .append("titleType", getTitleType())
-                .append("titleTagInfo", getTitleTagInfo())
-                .append("titleTag", getTitleTag())
-                .append("titleTime", getTitleTime())
-                .append("detail", getDetail())
-                .toString();
-    }
 
 }

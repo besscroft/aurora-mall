@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 服务调用通用返回对象
  *
- * @Author Besscroft
+ * @Author Bess Croft
  *
  * @Date 2021/2/25 19:20
  */

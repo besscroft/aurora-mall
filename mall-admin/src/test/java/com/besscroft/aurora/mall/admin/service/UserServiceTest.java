@@ -101,7 +101,7 @@ public class UserServiceTest {
 
     @Test
     public void updateUser() throws Exception {
-        AuthUser user = new AuthUser();
+        AuthUser user = AuthUser.builder().build();
         user.setId(3L);
         user.setNickName("测试");
         boolean b = userService.updateUser(user);
@@ -124,7 +124,7 @@ public class UserServiceTest {
 
     @Test
     public void addUser() throws Exception {
-        AuthUser user = new AuthUser();
+        AuthUser user = AuthUser.builder().build();
         user.setUsername("test666");
         user.setPassword("666666");
         boolean b = userService.addUser(user);

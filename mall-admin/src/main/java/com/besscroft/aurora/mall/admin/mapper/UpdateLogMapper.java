@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 日志持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/17 21:36
  */
 public interface UpdateLogMapper extends BaseMapper<UpdateLog> {

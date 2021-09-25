@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 后台管理资源类别服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/17 19:04
  */
 public interface ResourceSortService {

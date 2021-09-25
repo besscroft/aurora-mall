@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 网关白名单配置
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/4 21:07
  */
 @Data

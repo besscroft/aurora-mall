@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * swagger资源配置
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/2 12:37
  */
 @Slf4j

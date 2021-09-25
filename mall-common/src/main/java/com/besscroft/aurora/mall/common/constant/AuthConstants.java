@@ -3,7 +3,7 @@ package com.besscroft.aurora.mall.common.constant;
 /**
  * 权限相关常量
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/4 17:31
  */
 public interface AuthConstants {

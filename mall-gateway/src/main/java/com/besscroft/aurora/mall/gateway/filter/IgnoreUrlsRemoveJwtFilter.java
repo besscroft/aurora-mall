@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * 白名单路径移除JWT请求头
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/4 20:32
  */
 @Component

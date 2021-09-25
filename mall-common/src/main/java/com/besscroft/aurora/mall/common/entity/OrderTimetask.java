@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -14,9 +13,13 @@ import java.time.LocalDateTime;
 /**
  * 订单管理模块订单定时任务对象 bms_order_timetask
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/22 21:08
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "bms_order_timetask")
 @ApiModel(value = "订单管理模块订单定时任务对象")
 public class OrderTimetask implements Serializable {
@@ -47,65 +50,5 @@ public class OrderTimetask implements Serializable {
     /** 任务详情 */
     @ApiModelProperty(value = "任务详情", dataType = "String")
     private String detail;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getFlashTime() {
-        return flashTime;
-    }
-
-    public void setFlashTime(Long flashTime) {
-        this.flashTime = flashTime;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getSort() {
-        return sort;
-    }
-
-    public void setSort(Long sort) {
-        this.sort = sort;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("name", getName())
-                .append("flashTime", getFlashTime())
-                .append("createTime", getCreateTime())
-                .append("sort", getSort())
-                .append("detail", getDetail())
-                .toString();
-    }
 
 }

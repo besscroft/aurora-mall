@@ -16,7 +16,7 @@ import java.time.Duration;
  *
  * 文档地址：https://docs.spring.io/spring-data/elasticsearch/docs/4.2.0/reference/html/#elasticsearch.clients
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/5/9 17:17
  */
 @Configuration

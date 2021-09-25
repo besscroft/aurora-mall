@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 权限管理模块资源持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/3/17 15:51
  */
 public interface AuthResourceMapper extends BaseMapper<AuthResource> {

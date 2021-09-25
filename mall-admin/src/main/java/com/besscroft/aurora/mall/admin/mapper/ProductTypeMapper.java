@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 后台管理商品类型持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/5/10 15:54
  */
 public interface ProductTypeMapper extends BaseMapper<ProductType> {

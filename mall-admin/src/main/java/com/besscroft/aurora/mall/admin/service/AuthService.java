@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 认证中心请求服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/17 18:15
  */
 @FeignClient("mall-auth")
