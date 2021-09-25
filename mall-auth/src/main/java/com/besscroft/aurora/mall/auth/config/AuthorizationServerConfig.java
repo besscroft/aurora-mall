@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 认证中心授权服务配置
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/17 19:57
  */
 @Configuration

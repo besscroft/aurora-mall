@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 前端动态路由封装格式
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/3/29 14:54
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

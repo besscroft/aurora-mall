@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 资源树封装
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/16 15:40
  */
 @Data

@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 后台管理菜单服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/3/21 19:13
  */
 public interface MenuService {

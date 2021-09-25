@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 后台管理商品品牌持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/5/15 14:43
  */
 public interface ProductBrandMapper extends BaseMapper<ProductBrand> {

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 后台管理商品分类持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/5/7 14:39
  */
 public interface ProductSortMapper extends BaseMapper<ProductSort> {

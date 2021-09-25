@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 后台管理用户服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/17 18:08
  */
 public interface UserService {

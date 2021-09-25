@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -15,9 +14,13 @@ import java.time.LocalDateTime;
 /**
  * 订单管理模块订单售后对象 bms_order_return
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/22 21:05
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "bms_order_return")
 @ApiModel(value = "订单管理模块订单售后对象")
 public class OrderReturn implements Serializable {
@@ -134,254 +137,5 @@ public class OrderReturn implements Serializable {
     /** 收货备注 */
     @ApiModelProperty(value = "收货备注", dataType = "String")
     private String receiveNote;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getCompanyAddressId() {
-        return companyAddressId;
-    }
-
-    public void setCompanyAddressId(Long companyAddressId) {
-        this.companyAddressId = companyAddressId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getOrderSn() {
-        return orderSn;
-    }
-
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getMemberUsername() {
-        return memberUsername;
-    }
-
-    public void setMemberUsername(String memberUsername) {
-        this.memberUsername = memberUsername;
-    }
-
-    public BigDecimal getReturnAmount() {
-        return returnAmount;
-    }
-
-    public void setReturnAmount(BigDecimal returnAmount) {
-        this.returnAmount = returnAmount;
-    }
-
-    public String getReturnName() {
-        return returnName;
-    }
-
-    public void setReturnName(String returnName) {
-        this.returnName = returnName;
-    }
-
-    public String getReturnPhone() {
-        return returnPhone;
-    }
-
-    public void setReturnPhone(String returnPhone) {
-        this.returnPhone = returnPhone;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getHandleTime() {
-        return handleTime;
-    }
-
-    public void setHandleTime(LocalDateTime handleTime) {
-        this.handleTime = handleTime;
-    }
-
-    public String getProductPic() {
-        return productPic;
-    }
-
-    public void setProductPic(String productPic) {
-        this.productPic = productPic;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductBrand() {
-        return productBrand;
-    }
-
-    public void setProductBrand(String productBrand) {
-        this.productBrand = productBrand;
-    }
-
-    public String getProductSkuAttr() {
-        return productSkuAttr;
-    }
-
-    public void setProductSkuAttr(String productSkuAttr) {
-        this.productSkuAttr = productSkuAttr;
-    }
-
-    public Long getProductCount() {
-        return productCount;
-    }
-
-    public void setProductCount(Long productCount) {
-        this.productCount = productCount;
-    }
-
-    public BigDecimal getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(BigDecimal productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public BigDecimal getProductRealPrice() {
-        return productRealPrice;
-    }
-
-    public void setProductRealPrice(BigDecimal productRealPrice) {
-        this.productRealPrice = productRealPrice;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getProofPics() {
-        return proofPics;
-    }
-
-    public void setProofPics(String proofPics) {
-        this.proofPics = proofPics;
-    }
-
-    public String getHandleNote() {
-        return handleNote;
-    }
-
-    public void setHandleNote(String handleNote) {
-        this.handleNote = handleNote;
-    }
-
-    public String getHandleMan() {
-        return handleMan;
-    }
-
-    public void setHandleMan(String handleMan) {
-        this.handleMan = handleMan;
-    }
-
-    public String getReceiveMan() {
-        return receiveMan;
-    }
-
-    public void setReceiveMan(String receiveMan) {
-        this.receiveMan = receiveMan;
-    }
-
-    public LocalDateTime getReceiveTime() {
-        return receiveTime;
-    }
-
-    public void setReceiveTime(LocalDateTime receiveTime) {
-        this.receiveTime = receiveTime;
-    }
-
-    public String getReceiveNote() {
-        return receiveNote;
-    }
-
-    public void setReceiveNote(String receiveNote) {
-        this.receiveNote = receiveNote;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("orderId", getOrderId())
-                .append("companyAddressId", getCompanyAddressId())
-                .append("productId", getProductId())
-                .append("orderSn", getOrderSn())
-                .append("createTime", getCreateTime())
-                .append("memberUsername", getMemberUsername())
-                .append("returnAmount", getReturnAmount())
-                .append("returnName", getReturnName())
-                .append("returnPhone", getReturnPhone())
-                .append("status", getStatus())
-                .append("handleTime", getHandleTime())
-                .append("productPic", getProductPic())
-                .append("productName", getProductName())
-                .append("productBrand", getProductBrand())
-                .append("productSkuAttr", getProductSkuAttr())
-                .append("productCount", getProductCount())
-                .append("productPrice", getProductPrice())
-                .append("productRealPrice", getProductRealPrice())
-                .append("reason", getReason())
-                .append("description", getDescription())
-                .append("proofPics", getProofPics())
-                .append("handleNote", getHandleNote())
-                .append("handleMan", getHandleMan())
-                .append("receiveMan", getReceiveMan())
-                .append("receiveTime", getReceiveTime())
-                .append("receiveNote", getReceiveNote())
-                .toString();
-    }
 
 }

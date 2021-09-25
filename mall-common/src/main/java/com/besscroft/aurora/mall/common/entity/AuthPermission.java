@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -14,9 +13,13 @@ import java.time.LocalDateTime;
 /**
  * 权限管理模块权限对象 bms_auth_permission
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/22 20:29
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "bms_auth_permission")
 @ApiModel(value = "权限管理模块权限对象")
 public class AuthPermission implements Serializable {
@@ -63,101 +66,5 @@ public class AuthPermission implements Serializable {
     /** 排序 */
     @ApiModelProperty(value = "排序", dataType = "Long")
     private Long sort;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getPid() {
-        return pid;
-    }
-
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getSort() {
-        return sort;
-    }
-
-    public void setSort(Long sort) {
-        this.sort = sort;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("pid", getPid())
-                .append("name", getName())
-                .append("value", getValue())
-                .append("icon", getIcon())
-                .append("type", getType())
-                .append("uri", getUri())
-                .append("status", getStatus())
-                .append("createTime", getCreateTime())
-                .append("sort", getSort())
-                .toString();
-    }
 
 }

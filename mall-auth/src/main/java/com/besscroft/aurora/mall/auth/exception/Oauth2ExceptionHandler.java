@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Oauth2全局异常处理
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/22 12:04
  */
 @ControllerAdvice

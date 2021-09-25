@@ -3,7 +3,7 @@ package com.besscroft.aurora.mall.common.model;
 /**
  * 路由meta信息
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/3/29 14:55
  */
 public class MetaVo {

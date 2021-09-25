@@ -56,7 +56,7 @@ public class AdminWebLogAspect extends WebLogAspect {
         String header = request.getHeader(AuthConstants.USER_TOKEN_HEADER);
         log.info("header:{}", header);
         // 创建日志对象
-        WebLog webLog = new WebLog();
+        WebLog webLog = WebLog.builder().build();
         if(StrUtil.isNotBlank(header)){
             JsonNode jsonNode = objectMapper.readTree(header);
             log.info("userDto:{}", jsonNode);

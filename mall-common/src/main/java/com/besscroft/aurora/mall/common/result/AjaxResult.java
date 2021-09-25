@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Ajax封装对象
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/23 13:58
  */
 public class AjaxResult extends HashMap<String, Object> {

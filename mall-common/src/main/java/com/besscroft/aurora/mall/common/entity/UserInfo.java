@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -14,9 +13,13 @@ import java.time.LocalDateTime;
 /**
  * 会员管理模块会员用户信息对象 bms_user_info
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/22 21:30
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "bms_user_info")
 @ApiModel(value = "会员管理模块会员用户信息对象")
 public class UserInfo implements Serializable {
@@ -88,155 +91,5 @@ public class UserInfo implements Serializable {
     /** 极光币 */
     @ApiModelProperty(value = "极光币", dataType = "Long")
     private Long auroraBit;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
-    public LocalDateTime getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDateTime birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getPersonalizedSignature() {
-        return personalizedSignature;
-    }
-
-    public void setPersonalizedSignature(String personalizedSignature) {
-        this.personalizedSignature = personalizedSignature;
-    }
-
-    public Integer getSourceType() {
-        return sourceType;
-    }
-
-    public void setSourceType(Integer sourceType) {
-        this.sourceType = sourceType;
-    }
-
-    public Long getAuroraPoint() {
-        return auroraPoint;
-    }
-
-    public void setAuroraPoint(Long auroraPoint) {
-        this.auroraPoint = auroraPoint;
-    }
-
-    public Long getAuroraBit() {
-        return auroraBit;
-    }
-
-    public void setAuroraBit(Long auroraBit) {
-        this.auroraBit = auroraBit;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("username", getUsername())
-                .append("password", getPassword())
-                .append("nickname", getNickname())
-                .append("phone", getPhone())
-                .append("status", getStatus())
-                .append("createTime", getCreateTime())
-                .append("avatar", getAvatar())
-                .append("gender", getGender())
-                .append("birthday", getBirthday())
-                .append("city", getCity())
-                .append("job", getJob())
-                .append("personalizedSignature", getPersonalizedSignature())
-                .append("sourceType", getSourceType())
-                .append("auroraPoint", getAuroraPoint())
-                .append("auroraBit", getAuroraBit())
-                .toString();
-    }
 
 }

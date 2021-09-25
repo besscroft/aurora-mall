@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 后台管理商品持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/5/15 19:27
  */
 public interface ProductMapper extends BaseMapper<Product> {

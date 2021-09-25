@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/17 18:08
  */
 @Slf4j
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean register(AdminParam adminParam) {
-        AuthUser authUser = new AuthUser();
+        AuthUser authUser = AuthUser.builder().build();
         BeanUtils.copyProperties(adminParam, authUser);
         // 设置用户注册的时间
         authUser.setCreateTime(LocalDateTime.now());

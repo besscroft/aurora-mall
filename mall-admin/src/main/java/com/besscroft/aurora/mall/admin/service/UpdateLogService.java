@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 版本日志服务
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/4/17 21:32
  */
 public interface UpdateLogService {

@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * JWT内容增强
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/23 19:40
  */
 @Component

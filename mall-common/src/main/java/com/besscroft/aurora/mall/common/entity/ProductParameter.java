@@ -3,8 +3,7 @@ package com.besscroft.aurora.mall.common.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -12,9 +11,13 @@ import java.io.Serializable;
 /**
  * 商品管理模块商品类型参数对象 bms_product_parameter
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/22 21:20
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "bms_product_parameter")
 @ApiModel(value = "商品管理模块商品类型参数对象")
 public class ProductParameter implements Serializable {
@@ -64,110 +67,5 @@ public class ProductParameter implements Serializable {
     /** 参数值，以json格式保存 */
     @ApiModelProperty(value = "参数值", dataType = "String")
     private String value;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getParamName() {
-        return paramName;
-    }
-
-    public void setParamName(String paramName) {
-        this.paramName = paramName;
-    }
-
-    public Long getSort() {
-        return sort;
-    }
-
-    public void setSort(Long sort) {
-        this.sort = sort;
-    }
-
-    public Integer getSelectType() {
-        return selectType;
-    }
-
-    public void setSelectType(Integer selectType) {
-        this.selectType = selectType;
-    }
-
-    public Integer getInputType() {
-        return inputType;
-    }
-
-    public void setInputType(Integer inputType) {
-        this.inputType = inputType;
-    }
-
-    public Integer getFilterType() {
-        return filterType;
-    }
-
-    public void setFilterType(Integer filterType) {
-        this.filterType = filterType;
-    }
-
-    public Integer getSearchType() {
-        return searchType;
-    }
-
-    public void setSearchType(Integer searchType) {
-        this.searchType = searchType;
-    }
-
-    public Integer getRelatedStatus() {
-        return relatedStatus;
-    }
-
-    public void setRelatedStatus(Integer relatedStatus) {
-        this.relatedStatus = relatedStatus;
-    }
-
-    public Integer getHandAddStatus() {
-        return handAddStatus;
-    }
-
-    public void setHandAddStatus(Integer handAddStatus) {
-        this.handAddStatus = handAddStatus;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("paramName", getParamName())
-                .append("sort", getSort())
-                .append("selectType", getSelectType())
-                .append("inputType", getInputType())
-                .append("filterType", getFilterType())
-                .append("searchType", getSearchType())
-                .append("relatedStatus", getRelatedStatus())
-                .append("handAddStatus", getHandAddStatus())
-                .append("type", getType())
-                .append("value", getValue())
-                .toString();
-    }
 
 }

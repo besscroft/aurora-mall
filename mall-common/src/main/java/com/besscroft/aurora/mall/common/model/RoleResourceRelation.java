@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.io.Serializable;
 
 /**
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/3/17 16:15
  */
 public class RoleResourceRelation implements Serializable {

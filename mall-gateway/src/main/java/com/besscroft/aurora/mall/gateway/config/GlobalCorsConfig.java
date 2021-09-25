@@ -10,7 +10,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
 /**
  * 网关全局跨域配置
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/4 15:48
  */
 @Configuration

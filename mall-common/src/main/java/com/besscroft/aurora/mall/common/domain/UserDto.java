@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 登录用户信息
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/17 14:57
  */
 @Data

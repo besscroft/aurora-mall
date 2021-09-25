@@ -17,7 +17,7 @@ import java.text.ParseException;
 /**
  * 全局token过滤器
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/25 15:55
  */
 @Slf4j

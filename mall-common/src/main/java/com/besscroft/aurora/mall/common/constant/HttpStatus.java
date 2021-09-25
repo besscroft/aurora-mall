@@ -3,7 +3,7 @@ package com.besscroft.aurora.mall.common.constant;
 /**
  * 返回状态码
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/23 14:02
  */
 public class HttpStatus {

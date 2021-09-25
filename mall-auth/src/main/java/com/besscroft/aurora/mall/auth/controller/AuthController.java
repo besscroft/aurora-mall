@@ -30,7 +30,7 @@ import java.util.Set;
  * https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide
  *
  * 这里也算是对TokenEndpoint包装了一层Controller
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/1/23 13:55
  */
 @Slf4j

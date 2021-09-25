@@ -33,7 +33,7 @@ import java.nio.charset.Charset;
 /**
  * 资源服务器配置
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/4 17:41
  */
 @AllArgsConstructor

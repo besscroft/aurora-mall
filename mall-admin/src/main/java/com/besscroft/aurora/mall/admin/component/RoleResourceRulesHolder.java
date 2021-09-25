@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 /**
  * 初始化时加载角色与资源的对应关系
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/3/17 16:31
  */
 @Component

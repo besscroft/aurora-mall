@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 后台管理菜单持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/3/21 19:17
  */
 public interface AuthMenuMapper extends BaseMapper<AuthMenu> {

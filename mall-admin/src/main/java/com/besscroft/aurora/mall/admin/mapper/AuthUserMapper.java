@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 权限管理模块用户持久化
  *
- * @Author Besscroft
+ * @Author Bess Croft
  * @Date 2021/2/18 10:49
  */
 public interface AuthUserMapper extends BaseMapper<AuthUser> {
