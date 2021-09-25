@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-container">
     <el-card class="box-card" shadow="hover">
-      <span>商品列表</span>
       <el-row :gutter="10" class="mb8">
         <el-col :span="1.5">
           <el-button
@@ -135,37 +134,6 @@
       :total="total">
     </el-pagination>
 
-    <!-- 添加或修改商品管理模块商品列表对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
-      <el-form ref="form" :model="form" label-width="100px">
-        <el-form-item label="品牌名称" prop="icon">
-          <el-input v-model="form.name" type="textarea" placeholder="请输入品牌名称" />
-        </el-form-item>
-        <el-form-item label="品牌logo" prop="icon">
-          <el-input v-model="form.logo" type="textarea" placeholder="请输入品牌logo图片地址" />
-        </el-form-item>
-        <el-form-item label="显示状态">
-          <el-select v-model="form.showStatus" placeholder="请选择显示状态">
-            <el-option label="显示" :value="1"></el-option>
-            <el-option label="不显示" :value="0"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="产品数量" prop="icon">
-          <el-input v-model="form.productCount" type="textarea" placeholder="请输入产品数量" />
-        </el-form-item>
-        <el-form-item label="品牌专区大海报" prop="icon">
-          <el-input v-model="form.bigPic" type="textarea" placeholder="请输入品牌专区大海报地址" />
-        </el-form-item>
-        <el-form-item label="排序" prop="icon">
-          <el-input v-model="form.sort" type="textarea" placeholder="请输入排序" />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
-      </div>
-    </el-dialog>
-
   </div>
 </template>
 
@@ -262,13 +230,9 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.pwdFlag = false
-      const id = row.id || this.ids
-      getProductBrand(id).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改商品管理模块商品品牌";
-      });
+      const id = row.id || this.ids[0];
+      console.log(id)
+      this.$router.push({ path: '/product/productUpdate', query : { "productId" : id } })
     },
     /** 是否启用按钮监听 */
     changeSwitch(row) {

@@ -10,6 +10,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import {getToken} from "@/api/imgUtils";
 
 export default {
   name: 'productUpdate',
@@ -17,6 +18,9 @@ export default {
     ...mapGetters([
       'name'
     ])
+  },
+  mounted() {
+    console.log("当前商品id为:" + this.$route.query.productId)
   }
 }
 </script>
