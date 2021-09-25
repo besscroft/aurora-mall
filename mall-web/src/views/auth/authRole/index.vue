@@ -377,7 +377,9 @@ export default {
     },
     /** 菜单绑定提交 */
     submitMenu() {
-      const menuTreeData = this.$refs.tree.getCheckedKeys();
+      let parentTree = this.$refs.tree.getHalfCheckedKeys();
+      let childTree = this.$refs.tree.getCheckedKeys().filter(Boolean);
+      const menuTreeData = [...parentTree, ...childTree];
       updateMenuTree({ id: this.roleId, data: menuTreeData }).then(response => {
         Message.success(response.message);
         this.menuDialogVisible = false;
