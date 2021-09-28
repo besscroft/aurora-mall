@@ -29,4 +29,11 @@ public interface ProductService extends IService<Product> {
      */
     boolean productAdd(Product product);
 
+    /**
+     * 删除商品
+     * @param id
+     * @return
+     */
+    boolean productDel(Long id);
+
 }

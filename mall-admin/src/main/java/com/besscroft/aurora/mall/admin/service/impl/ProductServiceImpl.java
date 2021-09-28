@@ -42,4 +42,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         return this.baseMapper.insert(product) > 0;
     }
 
+    @Override
+    @Transactional
+    public boolean productDel(Long id) {
+        return this.baseMapper.deleteById(id) > 0;
+    }
+
 }

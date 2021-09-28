@@ -51,4 +51,17 @@ public class ProductController {
         return AjaxResult.error("哎呀，添加失败了！");
     }
 
+    /**
+     * 商品删除接口
+     * @param id 商品id
+     * @return
+     */
+    @WebLog(description = "删除商品")
+    @ApiOperation("删除商品")
+    @DeleteMapping("/productDel/{id}")
+    public AjaxResult productDel(@PathVariable("id") Long id) {
+        productService.productDel(id);
+        return AjaxResult.success();
+    }
+
 }
