@@ -20,14 +20,11 @@ import java.util.List;
 public class UpdateLogServiceImpl extends ServiceImpl<UpdateLogMapper, UpdateLog> implements UpdateLogService {
 
     @Autowired
-    private UpdateLogMapper updateLogMapper;
-
-    @Autowired
     private UpdateLogDetailMapper updateLogDetailMapper;
 
     @Override
     public List<UpdateLog> getUpdateLogList() {
-        List<UpdateLog> updateLogs = updateLogMapper.selectAllList();
+        List<UpdateLog> updateLogs = this.baseMapper.selectAllList();
         updateLogs.forEach(updateLog -> {
             QueryWrapper<UpdateLogDetail> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("log_id", updateLog.getId());

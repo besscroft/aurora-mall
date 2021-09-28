@@ -5,7 +5,6 @@ import com.besscroft.aurora.mall.admin.mapper.ProductBrandMapper;
 import com.besscroft.aurora.mall.admin.service.ProductBrandService;
 import com.besscroft.aurora.mall.common.entity.ProductBrand;
 import com.github.pagehelper.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,45 +17,42 @@ import java.util.List;
 @Service
 public class ProductBrandServiceImpl extends ServiceImpl<ProductBrandMapper, ProductBrand> implements ProductBrandService {
 
-    @Autowired
-    private ProductBrandMapper productBrandMapper;
-
     @Override
     public List<ProductBrand> getProductBrandPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        return productBrandMapper.selectProductBrandListByPage(keyword);
+        return this.baseMapper.selectProductBrandListByPage(keyword);
     }
 
     @Override
     public ProductBrand getProductBrandById(Long id) {
-        return productBrandMapper.selectById(id);
+        return this.baseMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addProductBrand(ProductBrand productBrand) {
-        return productBrandMapper.addProductBrand(productBrand) > 0;
+        return this.baseMapper.addProductBrand(productBrand) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateProductBrand(ProductBrand productBrand) {
-        return productBrandMapper.updateProductBrand(productBrand) > 0;
+        return this.baseMapper.updateProductBrand(productBrand) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delProductBrand(List<Long> ids) {
-        return productBrandMapper.deleteBatchIds(ids) > 0;
+        return this.baseMapper.deleteBatchIds(ids) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean changeSwitch(boolean showStatus, Long id) {
         if (showStatus) {
-            return productBrandMapper.changeSwitch(1, id) > 0;
+            return this.baseMapper.changeSwitch(1, id) > 0;
         }
-        return productBrandMapper.changeSwitch(0, id) > 0;
+        return this.baseMapper.changeSwitch(0, id) > 0;
     }
 
 }

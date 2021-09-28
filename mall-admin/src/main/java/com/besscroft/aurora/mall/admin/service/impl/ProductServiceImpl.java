@@ -22,15 +22,12 @@ import java.util.List;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements ProductService {
 
     @Autowired
-    private ProductMapper productMapper;
-
-    @Autowired
     private UserService userService;
 
     @Override
     public List<Product> getProductPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        return productMapper.selectProductListByPage(keyword);
+        return this.baseMapper.selectProductListByPage(keyword);
     }
 
     @Override
@@ -42,7 +39,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         product.setProductId("S" + IdUtil.simpleUUID());
         // 设置新增商品的用户
         product.setCreateUserId(currentAdmin.getId());
-        return productMapper.insert(product) > 0;
+        return this.baseMapper.insert(product) > 0;
     }
 
 }
