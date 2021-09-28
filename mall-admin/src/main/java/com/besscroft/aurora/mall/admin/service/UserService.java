@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.admin.dto.AdminParam;
 import com.besscroft.aurora.mall.common.domain.UserDto;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
@@ -15,7 +16,7 @@ import java.util.List;
  * @Author Bess Croft
  * @Date 2021/2/17 18:08
  */
-public interface UserService {
+public interface UserService extends IService<AuthUser> {
 
     /**
      * 登录

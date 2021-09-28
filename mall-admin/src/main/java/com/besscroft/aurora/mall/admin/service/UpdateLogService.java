@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.common.entity.UpdateLog;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Author Bess Croft
  * @Date 2021/4/17 21:32
  */
-public interface UpdateLogService {
+public interface UpdateLogService extends IService<UpdateLog> {
 
     /**
      * 获取所有的版本日志

@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.common.entity.AuthMenu;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Map;
  * @Author Bess Croft
  * @Date 2021/3/21 19:13
  */
-public interface MenuService {
+public interface MenuService extends IService<AuthMenu> {
 
     /**
      * 获取当前用户管理系统菜单动态路由

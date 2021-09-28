@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductMapper;
 import com.besscroft.aurora.mall.admin.service.ProductService;
 import com.besscroft.aurora.mall.admin.service.UserService;
@@ -18,10 +19,7 @@ import java.util.List;
  * @Date 2021/5/15 19:26
  */
 @Service
-public class ProductServiceImpl implements ProductService {
-
-    @Autowired
-    private ProductMapper productMapper;
+public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements ProductService {
 
     @Autowired
     private UserService userService;
@@ -29,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        return productMapper.selectProductListByPage(keyword);
+        return this.baseMapper.selectProductListByPage(keyword);
     }
 
     @Override
@@ -41,7 +39,13 @@ public class ProductServiceImpl implements ProductService {
         product.setProductId("S" + IdUtil.simpleUUID());
         // 设置新增商品的用户
         product.setCreateUserId(currentAdmin.getId());
-        return productMapper.insert(product) > 0;
+        return this.baseMapper.insert(product) > 0;
+    }
+
+    @Override
+    @Transactional
+    public boolean productDel(Long id) {
+        return this.baseMapper.deleteById(id) > 0;
     }
 
 }

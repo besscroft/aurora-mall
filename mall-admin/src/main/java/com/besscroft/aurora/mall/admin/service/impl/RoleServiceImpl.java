@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
 import com.besscroft.aurora.mall.admin.service.RoleService;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,10 +17,7 @@ import java.util.List;
  * @Date 2021/4/10 9:42
  */
 @Service
-public class RoleServiceImpl implements RoleService {
-
-    @Autowired
-    private AuthRoleMapper authRoleMapper;
+public class RoleServiceImpl extends ServiceImpl<AuthRoleMapper, AuthRole> implements RoleService {
 
     @Autowired
     private ResourceServiceImpl resourceServiceImpl;
@@ -28,12 +25,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<AuthRole> getRolePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        return authRoleMapper.selectRoleListByPage(keyword);
+        return this.baseMapper.selectRoleListByPage(keyword);
     }
 
     @Override
     public AuthRole getRoleById(Long id) {
-        return authRoleMapper.selectRoleById(id);
+        return this.baseMapper.selectRoleById(id);
     }
 
     @Override
@@ -41,7 +38,7 @@ public class RoleServiceImpl implements RoleService {
     public boolean addRole(AuthRole authRole) {
         authRole.setCreateTime(LocalDateTime.now());
         authRole.setDel(1);
-        int i = authRoleMapper.insertRole(authRole);
+        int i = this.baseMapper.insertRole(authRole);
         if (i>0) {
             // 更新角色与资源的对应关系
             resourceServiceImpl.initRoleResourceMap();
@@ -53,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateRole(AuthRole authRole) {
-        int i = authRoleMapper.updateRole(authRole);
+        int i = this.baseMapper.updateRole(authRole);
         if (i>0) {
             // 更新角色与资源的对应关系
             resourceServiceImpl.initRoleResourceMap();
@@ -65,7 +62,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delRoleById(List<Long> ids) {
-        int i = authRoleMapper.deleteRoleById(ids);
+        int i = this.baseMapper.deleteRoleById(ids);
         if (i>0) {
             // 更新角色与资源的对应关系
             resourceServiceImpl.initRoleResourceMap();
@@ -78,23 +75,23 @@ public class RoleServiceImpl implements RoleService {
     @Transactional(rollbackFor = Exception.class)
     public boolean changeSwitch(boolean status, Long id) {
         if (status) {
-            return authRoleMapper.changeSwitch(1, id) > 0;
+            return this.baseMapper.changeSwitch(1, id) > 0;
         }
-        return authRoleMapper.changeSwitch(0, id) > 0;
+        return this.baseMapper.changeSwitch(0, id) > 0;
     }
 
     @Override
     public List<AuthRole> getRoleAll() {
-        return authRoleMapper.selectAll();
+        return this.baseMapper.selectAll();
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateRoleById(Long userId, Long roleId) {
         // 先删除原有的
-        int i = authRoleMapper.deleteUserRoleRelationById(userId);
+        int i = this.baseMapper.deleteUserRoleRelationById(userId);
         if (i > 0) {
-            return authRoleMapper.insertUserRoleRelation(userId, roleId) > 0;
+            return this.baseMapper.insertUserRoleRelation(userId, roleId) > 0;
         }
         return false;
     }

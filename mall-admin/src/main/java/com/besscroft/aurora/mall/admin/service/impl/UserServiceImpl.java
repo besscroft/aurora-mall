@@ -3,6 +3,7 @@ package com.besscroft.aurora.mall.admin.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.dto.AdminParam;
 import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
 import com.besscroft.aurora.mall.admin.mapper.AuthUserMapper;
@@ -35,13 +36,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> implements UserService {
 
     @Autowired
     private AuthService authService;
-
-    @Autowired
-    private AuthUserMapper authUserMapper;
 
     @Autowired
     private AuthRoleMapper authRoleMapper;
@@ -71,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean logout(Long adminId) {
-        AuthUser user = authUserMapper.selectById(adminId);
+        AuthUser user = this.baseMapper.selectById(adminId);
         redisTemplate.delete(AuthConstants.ADMIN_CLIENT_ID + ":token:user:" + user.getUsername());
         redisTemplate.boundHashOps("admin").delete("user:tree:" + adminId);
         return true;
@@ -80,12 +78,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean setLoginTime(LocalDateTime loginTime, Long id) {
-        return authUserMapper.updateLoginTime(loginTime, id) > 0;
+        return this.baseMapper.updateLoginTime(loginTime, id) > 0;
     }
 
     @Override
     public UserDto loadUserByUsername(String username) {
-        AuthUser authUser = authUserMapper.selectAuthUserByUsername(username);
+        AuthUser authUser = this.baseMapper.selectAuthUserByUsername(username);
         if (authUser != null) {
             List<AuthRole> authRoles = authRoleMapper.selectAuthRoleListByAdminId(authUser.getId());
             UserDto userDto = new UserDto();
@@ -111,7 +109,7 @@ public class UserServiceImpl implements UserService {
         // 对密码进行加密
         authUser.setPassword(new BCryptPasswordEncoder().encode(adminParam.getPassword()));
         // 更新到数据库
-        return authUserMapper.insert(authUser) > 0;
+        return this.baseMapper.insert(authUser) > 0;
     }
 
     @Override
@@ -121,7 +119,7 @@ public class UserServiceImpl implements UserService {
             log.error("暂未登录或token已经过期");
         }
         UserDto userDto = JSONUtil.toBean(header, UserDto.class);
-        return authUserMapper.selectById(userDto.getId());
+        return this.baseMapper.selectById(userDto.getId());
     }
 
     @Override
@@ -132,7 +130,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<AuthUser> getUserPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        List<AuthUser> users = authUserMapper.selectUserListByPage(keyword);
+        List<AuthUser> users = this.baseMapper.selectUserListByPage(keyword);
         users.forEach(user -> {
             user.setPassword("");
         });
@@ -141,13 +139,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthUser getUserById(Long id) {
-        return authUserMapper.selectById(id);
+        return this.baseMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateUser(AuthUser authUser) {
-        return authUserMapper.updateUser(authUser) > 0;
+        return this.baseMapper.updateUser(authUser) > 0;
     }
 
     @Override
@@ -159,13 +157,13 @@ public class UserServiceImpl implements UserService {
         } else {
             status = 0;
         }
-        return authUserMapper.changeSwitch(status, id) > 0;
+        return this.baseMapper.changeSwitch(status, id) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delUser(Long id) {
-        return authUserMapper.delUser(id) > 0;
+        return this.baseMapper.delUser(id) > 0;
     }
 
     @Override
@@ -179,12 +177,12 @@ public class UserServiceImpl implements UserService {
         authUser.setPassword(new BCryptPasswordEncoder().encode(authUser.getPassword()));
         // 设置删除状态
         authUser.setDel(1);
-        return authUserMapper.insertUser(authUser) > 0;
+        return this.baseMapper.insertUser(authUser) > 0;
     }
 
     @Override
     public List<AuthUser> getUserAllList() {
-        return authUserMapper.getAllList();
+        return this.baseMapper.getAllList();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Author Bess Croft
  * @Date 2021/4/10 9:42
  */
-public interface RoleService {
+public interface RoleService extends IService<AuthRole> {
 
     /**
      * 分页查询角色列表

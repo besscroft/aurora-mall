@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.dto.ResourceParam;
 import com.besscroft.aurora.mall.admin.mapper.AuthResourceMapper;
 import com.besscroft.aurora.mall.admin.mapper.AuthResourceSortMapper;
@@ -19,7 +20,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,10 +29,7 @@ import java.util.stream.Collectors;
  * @Date 2021/3/17 15:49
  */
 @Service
-public class ResourceServiceImpl implements ResourceService {
-
-    @Autowired
-    private AuthResourceMapper authResourceMapper;
+public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthResource> implements ResourceService {
 
     @Autowired
     private AuthRoleMapper authRoleMapper;
@@ -55,7 +52,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public Map<String, List<String>> initRoleResourceMap() {
         Map<String,List<String>> RoleResourceMap = new TreeMap<>();
-        List<AuthResource> authResourceList = authResourceMapper.selectAll();
+        List<AuthResource> authResourceList = this.baseMapper.selectAll();
         List<AuthRole> authRoleList = authRoleMapper.selectAll();
         List<RoleResourceRelation> roleResourceRelationList = roleResourceRelationMapper.selectAll();
         for (AuthResource resource: authResourceList) {
@@ -80,31 +77,31 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<AuthResource> getResourcePageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
-        return authResourceMapper.selectResourceListByPage(keyword);
+        return this.baseMapper.selectResourceListByPage(keyword);
     }
 
     @Override
     public AuthResource getResourceById(Long id) {
-        return authResourceMapper.selectById(id);
+        return this.baseMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addResource(AuthResource authResource) {
         authResource.setCreateTime(LocalDateTime.now());
-        return authResourceMapper.insertResource(authResource) > 0;
+        return this.baseMapper.insertResource(authResource) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateResource(AuthResource authResource) {
-        return authResourceMapper.updateResource(authResource) > 0;
+        return this.baseMapper.updateResource(authResource) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delResource(List<Long> ids) {
-            authResourceMapper.deleteBatchIds(ids);
+        this.baseMapper.deleteBatchIds(ids);
         return true;
     }
 
@@ -116,7 +113,7 @@ public class ResourceServiceImpl implements ResourceService {
             ResourceParam resourceParam = new ResourceParam();
             QueryWrapper<AuthResource> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("category_id",r.getId());
-            List<AuthResource> resources = authResourceMapper.selectList(queryWrapper);
+            List<AuthResource> resources = this.baseMapper.selectList(queryWrapper);
             resourceParam.setName(r.getCategoryName());
             resourceParam.setDisabled(true);
             resourceParam.setChildren(resources);
@@ -127,15 +124,15 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<Long> getResourceTreeById(Long id) {
-        return authResourceMapper.selectResourceTreeById(id);
+        return this.baseMapper.selectResourceTreeById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateResourceTree(List<Long> resourceIds, Long id) {
-        int i = authResourceMapper.deleteRoleResourceRelation(id);
+        int i = this.baseMapper.deleteRoleResourceRelation(id);
         if (i > 0) {
-            int relation = authResourceMapper.insertRoleResourceRelation(resourceIds, id);
+            int relation = this.baseMapper.insertRoleResourceRelation(resourceIds, id);
             resourceServiceImpl.initRoleResourceMap();
             return relation > 0;
         }

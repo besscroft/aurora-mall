@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.UpdateLogDetailMapper;
 import com.besscroft.aurora.mall.admin.mapper.UpdateLogMapper;
 import com.besscroft.aurora.mall.admin.service.UpdateLogService;
@@ -16,17 +17,14 @@ import java.util.List;
  * @Date 2021/4/17 21:33
  */
 @Service
-public class UpdateLogServiceImpl implements UpdateLogService {
-
-    @Autowired
-    private UpdateLogMapper updateLogMapper;
+public class UpdateLogServiceImpl extends ServiceImpl<UpdateLogMapper, UpdateLog> implements UpdateLogService {
 
     @Autowired
     private UpdateLogDetailMapper updateLogDetailMapper;
 
     @Override
     public List<UpdateLog> getUpdateLogList() {
-        List<UpdateLog> updateLogs = updateLogMapper.selectAllList();
+        List<UpdateLog> updateLogs = this.baseMapper.selectAllList();
         updateLogs.forEach(updateLog -> {
             QueryWrapper<UpdateLogDetail> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("log_id", updateLog.getId());
