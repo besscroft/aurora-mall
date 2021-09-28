@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
 import com.besscroft.aurora.mall.admin.service.RoleService;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
@@ -17,7 +18,7 @@ import java.util.List;
  * @Date 2021/4/10 9:42
  */
 @Service
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl extends ServiceImpl<AuthRoleMapper, AuthRole> implements RoleService {
 
     @Autowired
     private AuthRoleMapper authRoleMapper;

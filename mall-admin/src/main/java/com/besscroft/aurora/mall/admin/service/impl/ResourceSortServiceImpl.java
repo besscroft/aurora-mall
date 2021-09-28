@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.AuthResourceSortMapper;
 import com.besscroft.aurora.mall.admin.service.ResourceSortService;
 import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
@@ -17,7 +18,7 @@ import java.util.List;
  * @Date 2021/4/17 19:04
  */
 @Service
-public class ResourceSortServiceImpl implements ResourceSortService {
+public class ResourceSortServiceImpl extends ServiceImpl<AuthResourceSortMapper, AuthResourceSort> implements ResourceSortService {
 
     @Autowired
     private AuthResourceSortMapper authResourceSortMapper;

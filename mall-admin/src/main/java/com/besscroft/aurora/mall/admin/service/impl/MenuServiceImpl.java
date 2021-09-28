@@ -2,6 +2,7 @@ package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.AuthMenuMapper;
 import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.common.entity.AuthMenu;
@@ -22,7 +23,7 @@ import java.util.*;
  * @Date 2021/3/21 19:15
  */
 @Service
-public class MenuServiceImpl implements MenuService {
+public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> implements MenuService {
 
     @Autowired
     private AuthMenuMapper authMenuMapper;

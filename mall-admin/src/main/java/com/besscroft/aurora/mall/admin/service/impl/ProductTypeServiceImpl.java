@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductTypeMapper;
 import com.besscroft.aurora.mall.admin.service.ProductTypeService;
 import com.besscroft.aurora.mall.common.entity.ProductType;
@@ -15,7 +16,7 @@ import java.util.List;
  * @Date 2021/5/10 14:16
  */
 @Service
-public class ProductTypeServiceImpl implements ProductTypeService {
+public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, ProductType> implements ProductTypeService {
 
     @Autowired
     private ProductTypeMapper productTypeMapper;

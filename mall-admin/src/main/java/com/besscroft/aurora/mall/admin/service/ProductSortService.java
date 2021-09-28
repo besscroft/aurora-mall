@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.common.entity.ProductSort;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Author Bess Croft
  * @Date 2021/5/7 14:29
  */
-public interface ProductSortService {
+public interface ProductSortService extends IService<ProductSort> {
 
     /**
      * 分页查询商品分类列表

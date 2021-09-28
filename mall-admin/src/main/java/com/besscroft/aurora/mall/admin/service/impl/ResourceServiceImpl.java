@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.dto.ResourceParam;
 import com.besscroft.aurora.mall.admin.mapper.AuthResourceMapper;
 import com.besscroft.aurora.mall.admin.mapper.AuthResourceSortMapper;
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
  * @Date 2021/3/17 15:49
  */
 @Service
-public class ResourceServiceImpl implements ResourceService {
+public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthResource> implements ResourceService {
 
     @Autowired
     private AuthResourceMapper authResourceMapper;

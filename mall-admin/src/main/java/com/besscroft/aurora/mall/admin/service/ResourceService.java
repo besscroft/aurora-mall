@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.admin.dto.ResourceParam;
 import com.besscroft.aurora.mall.common.entity.AuthResource;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  * @Author Bess Croft
  * @Date 2021/3/17 15:48
  */
-public interface ResourceService {
+public interface ResourceService extends IService<AuthResource> {
 
     /**
      * 初始化资源角色规则

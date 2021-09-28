@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductMapper;
 import com.besscroft.aurora.mall.admin.service.ProductService;
 import com.besscroft.aurora.mall.admin.service.UserService;
@@ -18,7 +19,7 @@ import java.util.List;
  * @Date 2021/5/15 19:26
  */
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements ProductService {
 
     @Autowired
     private ProductMapper productMapper;
