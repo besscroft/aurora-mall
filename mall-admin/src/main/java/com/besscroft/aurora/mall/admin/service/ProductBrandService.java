@@ -27,7 +27,7 @@ public interface ProductBrandService extends IService<ProductBrand> {
      * @param id 商品品牌id
      * @return 商品品牌详情
      */
-    ProductBrand getProductBrandById(Long id);
+    ProductBrand getProductBrandById(String id);
 
     /**
      * 新增商品品牌
@@ -48,7 +48,7 @@ public interface ProductBrandService extends IService<ProductBrand> {
      * @param ids 商品品牌id集合
      * @return
      */
-    boolean delProductBrand(List<Long> ids);
+    boolean delProductBrand(List<String> ids);
 
     /**
      * 修改商品品牌显示状态
@@ -56,6 +56,6 @@ public interface ProductBrandService extends IService<ProductBrand> {
      * @param id 商品品牌id
      * @return
      */
-    boolean changeSwitch(boolean showStatus, Long id);
+    boolean changeSwitch(boolean showStatus, String id);
 
 }

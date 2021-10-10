@@ -28,8 +28,8 @@ public class CarItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "购物车子id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "购物车子id", dataType = "String")
+    private String id;
 
     /** 购物车id */
     @ApiModelProperty(value = "购物车id", dataType = "String")

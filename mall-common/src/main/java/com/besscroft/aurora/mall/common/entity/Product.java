@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 /**
@@ -28,12 +29,8 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "id", dataType = "Long")
-    private Long id;
-
-    /** 商品id */
-    @ApiModelProperty(value = "商品id", dataType = "String")
-    private String productId;
+    @ApiModelProperty(value = "id", dataType = "String")
+    private String id;
 
     /** 商品货号/编号 */
     @ApiModelProperty(value = "商品货号/编号", dataType = "String")
@@ -56,16 +53,16 @@ public class Product implements Serializable {
     private String brandName;
 
     /** 商品类型id */
-    @ApiModelProperty(value = "商品类型id", dataType = "Long")
-    private Long productTypeId;
+    @ApiModelProperty(value = "商品类型id", dataType = "String")
+    private String productTypeId;
 
     /** 商品类型名称 */
     @ApiModelProperty(value = "商品类型名称", dataType = "String")
     private String productTypeName;
 
     /** 商品分类id */
-    @ApiModelProperty(value = "商品分类id", dataType = "Long")
-    private Long productCategoryId;
+    @ApiModelProperty(value = "商品分类id", dataType = "String")
+    private String productCategoryId;
 
     /** 商品分类名称 */
     @ApiModelProperty(value = "商品分类名称", dataType = "String")

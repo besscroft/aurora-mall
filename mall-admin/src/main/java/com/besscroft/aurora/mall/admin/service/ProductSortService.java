@@ -27,7 +27,7 @@ public interface ProductSortService extends IService<ProductSort> {
      * @param id 商品分类id
      * @return 商品分类实体
      */
-    ProductSort getProductSortById(Long id);
+    ProductSort getProductSortById(String id);
 
     /**
      * 新增商品分类
@@ -48,7 +48,7 @@ public interface ProductSortService extends IService<ProductSort> {
      * @param ids 商品分类id
      * @return
      */
-    boolean delProductSort(List<Long> ids);
+    boolean delProductSort(List<String> ids);
 
     /**
      * 查询商品分类所有父级
@@ -62,6 +62,6 @@ public interface ProductSortService extends IService<ProductSort> {
      * @param id 商品分类id
      * @return
      */
-    boolean changeSwitch(boolean showStatus, Long id);
+    boolean changeSwitch(boolean showStatus, String id);
 
 }

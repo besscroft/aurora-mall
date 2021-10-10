@@ -24,13 +24,10 @@ public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @ApiModelProperty(value = "购物车id", dataType = "Long")
-    private Long id;
-
     /** 购物车id */
+    @Id
     @ApiModelProperty(value = "购物车id", dataType = "String")
-    private String carId;
+    private String id;
 
     /** 用户id */
     @ApiModelProperty(value = "用户id", dataType = "Long")

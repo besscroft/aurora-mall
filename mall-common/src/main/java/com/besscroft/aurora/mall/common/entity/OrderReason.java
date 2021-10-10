@@ -27,8 +27,8 @@ public class OrderReason implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "订单售后原因id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "订单售后原因id", dataType = "String")
+    private String id;
 
     /** 原因类型 */
     @ApiModelProperty(value = "原因类型", dataType = "String")

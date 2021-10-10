@@ -42,9 +42,9 @@ public class ProductBrandController {
 
     @WebLog(description = "获取商品品牌详情")
     @ApiOperation("获取商品品牌详情")
-    @ApiImplicitParam(name = "id", value = "品牌id",required = true, dataType = "Long")
+    @ApiImplicitParam(name = "id", value = "品牌id",required = true, dataType = "String")
     @GetMapping("/getProductBrand/{id}")
-    public AjaxResult getProductBrand(@PathVariable("id") Long id) {
+    public AjaxResult getProductBrand(@PathVariable("id") String id) {
         ProductBrand productBrand = productBrandService.getProductBrandById(id);
         return AjaxResult.success(productBrand);
     }
@@ -73,9 +73,9 @@ public class ProductBrandController {
 
     @WebLog(description = "删除商品品牌")
     @ApiOperation("删除商品品牌")
-    @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
+    @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "String")
     @DeleteMapping("/delProductBrand/{id}")
-    public AjaxResult delProductBrand(@PathVariable("id") List<Long> ids) {
+    public AjaxResult delProductBrand(@PathVariable("id") List<String> ids) {
         boolean b = productBrandService.delProductBrand(ids);
         if (b) {
             return AjaxResult.success("删除成功！");
@@ -90,7 +90,7 @@ public class ProductBrandController {
             @ApiImplicitParam(name = "id", value = "商品品牌id",required = true, dataType = "Long")
     })
     @PutMapping("/changeSwitch")
-    public AjaxResult changeSwitch(@RequestParam boolean showStatus, @RequestParam Long id) {
+    public AjaxResult changeSwitch(@RequestParam boolean showStatus, @RequestParam String id) {
         boolean b = productBrandService.changeSwitch(showStatus, id);
         if (b) {
             return AjaxResult.success("修改成功");

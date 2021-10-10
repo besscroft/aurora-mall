@@ -42,6 +42,6 @@ public interface ProductBrandMapper extends BaseMapper<ProductBrand> {
      * @return
      */
     int changeSwitch(@Param("showStatus") Integer showStatus,
-                     @Param("id") Long id);
+                     @Param("id") String id);
 
 }

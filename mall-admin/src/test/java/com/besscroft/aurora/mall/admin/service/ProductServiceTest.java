@@ -25,7 +25,7 @@ public class ProductServiceTest {
 
     @Test
     public void productDel() {
-        boolean b = productService.productDel(1441761476536274946L);
+        boolean b = productService.productDel("");
         Assert.isTrue(b, "删除失败！");
     }
 

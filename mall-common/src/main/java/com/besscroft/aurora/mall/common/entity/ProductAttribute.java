@@ -25,8 +25,8 @@ public class ProductAttribute implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "商品类型属性id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "商品类型属性id", dataType = "String")
+    private String id;
 
     /** 属性名称 */
     @ApiModelProperty(value = "属性名称", dataType = "String")

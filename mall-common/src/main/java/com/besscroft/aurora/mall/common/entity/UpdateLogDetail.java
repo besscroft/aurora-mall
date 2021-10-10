@@ -25,12 +25,12 @@ public class UpdateLogDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "日志子id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "日志子id", dataType = "String")
+    private String id;
 
     /** 更新日志id */
-    @ApiModelProperty(value = "更新日志id", dataType = "Long")
-    private Long logId;
+    @ApiModelProperty(value = "更新日志id", dataType = "String")
+    private String logId;
 
     /** 日志内容 */
     @ApiModelProperty(value = "日志内容", dataType = "String")

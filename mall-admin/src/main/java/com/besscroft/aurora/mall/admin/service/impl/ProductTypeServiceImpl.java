@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductTypeMapper;
 import com.besscroft.aurora.mall.admin.service.ProductTypeService;
@@ -24,13 +25,14 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
     }
 
     @Override
-    public ProductType getProductTypeById(Long id) {
+    public ProductType getProductTypeById(String id) {
         return this.baseMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addProductType(ProductType productType) {
+        productType.setId("PT" + IdUtil.simpleUUID());
         return this.baseMapper.addProductType(productType) > 0;
     }
 
@@ -42,7 +44,7 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delProductType(List<Long> ids) {
+    public boolean delProductType(List<String> ids) {
         return this.baseMapper.deleteBatchIds(ids) > 0;
     }
 

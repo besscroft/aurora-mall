@@ -22,7 +22,7 @@ export function getProduct(id) {
 // 删除商品
 export function delProduct(id) {
   return request({
-    url: '/mall-admin/product/updateInfo' + id,
+    url: '/mall-admin/product/productDel/' + id,
     method: 'delete'
   })
 }

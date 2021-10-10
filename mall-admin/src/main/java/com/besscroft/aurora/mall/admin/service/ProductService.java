@@ -34,6 +34,6 @@ public interface ProductService extends IService<Product> {
      * @param id
      * @return
      */
-    boolean productDel(Long id);
+    boolean productDel(String id);
 
 }

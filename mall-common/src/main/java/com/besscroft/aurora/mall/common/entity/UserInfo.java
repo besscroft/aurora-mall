@@ -27,8 +27,8 @@ public class UserInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "会员用户信息id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "会员用户信息id", dataType = "String")
+    private String id;
 
     /** 用户名 */
     @ApiModelProperty(value = "用户名", dataType = "String")

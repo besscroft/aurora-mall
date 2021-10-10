@@ -26,8 +26,8 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "订单子id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "订单子id", dataType = "String")
+    private String id;
 
     /** 父订单id */
     @ApiModelProperty(value = "父订单id", dataType = "String")
@@ -38,8 +38,8 @@ public class OrderItem implements Serializable {
     private String orderSn;
 
     /** 商品id */
-    @ApiModelProperty(value = "商品id", dataType = "Long")
-    private Long productId;
+    @ApiModelProperty(value = "商品id", dataType = "String")
+    private String productId;
 
     /** 商品图片 */
     @ApiModelProperty(value = "商品图片", dataType = "String")
@@ -66,16 +66,16 @@ public class OrderItem implements Serializable {
     private Long productQuantity;
 
     /** 商品套餐id */
-    @ApiModelProperty(value = "商品套餐id", dataType = "Long")
-    private Long productSkuId;
+    @ApiModelProperty(value = "商品套餐id", dataType = "String")
+    private String productSkuId;
 
     /** 商品sku条码 */
     @ApiModelProperty(value = "商品sku条码", dataType = "String")
     private String productSkuCode;
 
     /** 商品分类id */
-    @ApiModelProperty(value = "商品分类id", dataType = "Long")
-    private Long productCategoryId;
+    @ApiModelProperty(value = "商品分类id", dataType = "String")
+    private String productCategoryId;
 
     /** 极光券优惠分解金额 */
     @ApiModelProperty(value = "极光券优惠分解金额", dataType = "BigDecimal")

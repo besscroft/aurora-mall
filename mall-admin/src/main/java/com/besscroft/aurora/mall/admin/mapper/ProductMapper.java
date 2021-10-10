@@ -26,6 +26,6 @@ public interface ProductMapper extends BaseMapper<Product> {
      * @param id
      * @return
      */
-    int deleteByProductId(@Param("id") Long id);
+    int deleteByProductId(@Param("id") String id);
 
 }

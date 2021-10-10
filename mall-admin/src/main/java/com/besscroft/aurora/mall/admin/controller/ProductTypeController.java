@@ -44,7 +44,7 @@ public class ProductTypeController {
     @ApiOperation("获取商品类型详情")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @GetMapping("/getProductType/{id}")
-    public AjaxResult getProductType(@PathVariable("id") Long id) {
+    public AjaxResult getProductType(@PathVariable("id") String id) {
         ProductType productType = productTypeService.getProductTypeById(id);
         return AjaxResult.success(productType);
     }
@@ -75,7 +75,7 @@ public class ProductTypeController {
     @ApiOperation("删除商品类型")
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delProductType/{id}")
-    public AjaxResult delProductType(@PathVariable("id") List<Long> ids) {
+    public AjaxResult delProductType(@PathVariable("id") List<String> ids) {
         boolean b = productTypeService.delProductType(ids);
         if (b) {
             return AjaxResult.success("删除成功！");

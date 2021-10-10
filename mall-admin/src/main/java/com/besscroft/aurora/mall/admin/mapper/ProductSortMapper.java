@@ -48,6 +48,6 @@ public interface ProductSortMapper extends BaseMapper<ProductSort> {
      * @return
      */
     int changeSwitch(@Param("showStatus") Integer showStatus,
-                     @Param("id") Long id);
+                     @Param("id") String id);
 
 }

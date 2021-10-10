@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductBrandMapper;
 import com.besscroft.aurora.mall.admin.service.ProductBrandService;
@@ -24,13 +25,14 @@ public class ProductBrandServiceImpl extends ServiceImpl<ProductBrandMapper, Pro
     }
 
     @Override
-    public ProductBrand getProductBrandById(Long id) {
+    public ProductBrand getProductBrandById(String id) {
         return this.baseMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addProductBrand(ProductBrand productBrand) {
+        productBrand.setId("PB" + IdUtil.simpleUUID());
         return this.baseMapper.addProductBrand(productBrand) > 0;
     }
 
@@ -42,13 +44,13 @@ public class ProductBrandServiceImpl extends ServiceImpl<ProductBrandMapper, Pro
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delProductBrand(List<Long> ids) {
+    public boolean delProductBrand(List<String> ids) {
         return this.baseMapper.deleteBatchIds(ids) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean changeSwitch(boolean showStatus, Long id) {
+    public boolean changeSwitch(boolean showStatus, String id) {
         if (showStatus) {
             return this.baseMapper.changeSwitch(1, id) > 0;
         }

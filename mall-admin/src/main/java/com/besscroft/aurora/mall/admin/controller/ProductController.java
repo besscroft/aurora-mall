@@ -59,7 +59,7 @@ public class ProductController {
     @WebLog(description = "删除商品")
     @ApiOperation("删除商品")
     @DeleteMapping("/productDel/{id}")
-    public AjaxResult productDel(@PathVariable("id") Long id) {
+    public AjaxResult productDel(@PathVariable("id") String id) {
         boolean b = productService.productDel(id);
         if (b) {
             return AjaxResult.success("删除成功！");

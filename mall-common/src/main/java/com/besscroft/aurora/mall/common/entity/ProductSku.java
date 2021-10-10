@@ -26,8 +26,8 @@ public class ProductSku implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "商品套餐id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "商品套餐id", dataType = "String")
+    private String id;
 
     /** 套餐对应的商品id */
     @ApiModelProperty(value = "套餐对应的商品id", dataType = "String")

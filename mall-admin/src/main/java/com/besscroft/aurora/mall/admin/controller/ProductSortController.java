@@ -43,9 +43,9 @@ public class ProductSortController {
 
     @WebLog(description = "获取商品分类详情")
     @ApiOperation("获取商品分类详情")
-    @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
+    @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "String")
     @GetMapping("/getProductSort/{id}")
-    public AjaxResult getProductSort(@PathVariable("id") Long id) {
+    public AjaxResult getProductSort(@PathVariable("id") String id) {
         ProductSort productSort = productSortService.getProductSortById(id);
         return AjaxResult.success(productSort);
     }
@@ -74,9 +74,9 @@ public class ProductSortController {
 
     @WebLog(description = "删除商品分类")
     @ApiOperation("删除商品分类")
-    @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
+    @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "String")
     @DeleteMapping("/delProductSort/{id}")
-    public AjaxResult delProductSort(@PathVariable("id") List<Long> ids) {
+    public AjaxResult delProductSort(@PathVariable("id") List<String> ids) {
         boolean b = productSortService.delProductSort(ids);
         if (b) {
             return AjaxResult.success("删除成功！");
@@ -99,7 +99,7 @@ public class ProductSortController {
             @ApiImplicitParam(name = "id", value = "商品分类id",required = true, dataType = "Long")
     })
     @PutMapping("/changeSwitch")
-    public AjaxResult changeSwitch(@RequestParam boolean showStatus, @RequestParam Long id) {
+    public AjaxResult changeSwitch(@RequestParam boolean showStatus, @RequestParam String id) {
         boolean b = productSortService.changeSwitch(showStatus, id);
         if (b) {
             return AjaxResult.success("修改成功");

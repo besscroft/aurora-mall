@@ -37,7 +37,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         // 获取当前用户
         AuthUser currentAdmin = userService.getCurrentAdmin();
         // 设置商品唯一id
-        product.setProductId("S" + IdUtil.simpleUUID());
+        product.setId("P" + IdUtil.simpleUUID());
         // 设置新增商品的用户
         product.setCreateUserId(currentAdmin.getId());
         return this.baseMapper.insert(product) > 0;
@@ -45,7 +45,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Override
     @Transactional
-    public boolean productDel(Long id) {
+    public boolean productDel(String id) {
         return this.baseMapper.deleteByProductId(id) > 0;
     }
 

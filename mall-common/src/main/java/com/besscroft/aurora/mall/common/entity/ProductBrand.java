@@ -25,8 +25,8 @@ public class ProductBrand implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "商品品牌id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "商品品牌id", dataType = "String")
+    private String id;
 
     /** 品牌名称 */
     @ApiModelProperty(value = "品牌名称", dataType = "String")

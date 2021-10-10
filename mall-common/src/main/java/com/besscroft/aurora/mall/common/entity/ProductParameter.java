@@ -25,8 +25,8 @@ public class ProductParameter implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "商品类型参数id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "商品类型参数id", dataType = "String")
+    private String id;
 
     /** 参数名称 */
     @ApiModelProperty(value = "参数名称", dataType = "String")
