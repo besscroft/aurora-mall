@@ -74,6 +74,16 @@
     <!-- 添加或修改权限管理模块资源对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" label-width="100px">
+        <el-form-item label="资源类别" prop="icon">
+          <el-select v-model="form.categoryId" placeholder="请选择资源类别">
+            <el-option
+              v-for="item in resourceSortList"
+              :key="item.id"
+              :label="item.categoryName"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="资源名" prop="icon">
           <el-input v-model="form.name" type="textarea" placeholder="请输入资源名" />
         </el-form-item>
@@ -97,6 +107,7 @@
 import { mapGetters } from 'vuex'
 import { Message } from 'element-ui'
 import { listResource, getResource, addResource, updateResource, delResource, exportResource } from '@/api/auth/resource'
+import { listResourceSort } from '@/api/auth/resourceSort'
 
 const defaultAdminResource = {
   // 查询参数
@@ -144,7 +155,9 @@ export default {
         // 分页参数（条）
         pageSize: 10,
         keyword: null
-      }
+      },
+      // 资源类别
+      resourceSortList: []
     };
   },
   created() {
@@ -181,11 +194,18 @@ export default {
       this.pwdFlag = true
       this.open = true
       this.title = "添加权限管理模块资源"
+      listResourceSort({ pageNum: 0, pageSize: 100, keyword: null }).then(response => {
+        this.resourceSortList = response.data.list
+      })
+      console.log(this.resourceSortList)
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.pwdFlag = false
       const id = row.id || this.ids
+      listResourceSort({ pageNum: 0, pageSize: 100, keyword: null }).then(response => {
+        this.resourceSortList = response.data.list
+      })
       getResource(id).then(response => {
         this.form = response.data;
         this.open = true;

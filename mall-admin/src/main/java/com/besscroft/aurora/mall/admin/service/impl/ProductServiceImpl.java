@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductMapper;
 import com.besscroft.aurora.mall.admin.service.ProductService;
@@ -36,7 +37,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         // 获取当前用户
         AuthUser currentAdmin = userService.getCurrentAdmin();
         // 设置商品唯一id
-        product.setProductId("S" + IdUtil.simpleUUID());
+        product.setId("P" + IdUtil.simpleUUID());
         // 设置新增商品的用户
         product.setCreateUserId(currentAdmin.getId());
         return this.baseMapper.insert(product) > 0;
@@ -44,8 +45,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Override
     @Transactional
-    public boolean productDel(Long id) {
-        return this.baseMapper.deleteById(id) > 0;
+    public boolean productDel(String id) {
+        return this.baseMapper.deleteByProductId(id) > 0;
     }
 
 }

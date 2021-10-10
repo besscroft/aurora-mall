@@ -2,6 +2,7 @@ package com.besscroft.aurora.mall.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.besscroft.aurora.mall.common.entity.Product;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,12 @@ public interface ProductMapper extends BaseMapper<Product> {
      * @return 分页商品列表
      */
     List<Product> selectProductListByPage(String keyword);
+
+    /**
+     * 商品软删除
+     * @param id
+     * @return
+     */
+    int deleteByProductId(@Param("id") String id);
 
 }

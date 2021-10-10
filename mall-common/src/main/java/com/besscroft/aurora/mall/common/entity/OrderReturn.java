@@ -28,20 +28,20 @@ public class OrderReturn implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "订单售后id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "订单售后id", dataType = "String")
+    private String id;
 
     /** 订单id */
-    @ApiModelProperty(value = "订单id", dataType = "Long")
-    private Long orderId;
+    @ApiModelProperty(value = "订单id", dataType = "String")
+    private String orderId;
 
     /** 收货地址表id */
-    @ApiModelProperty(value = "收货地址表id", dataType = "Long")
-    private Long companyAddressId;
+    @ApiModelProperty(value = "收货地址表id", dataType = "String")
+    private String companyAddressId;
 
     /** 退货商品id */
-    @ApiModelProperty(value = "退货商品id", dataType = "Long")
-    private Long productId;
+    @ApiModelProperty(value = "退货商品id", dataType = "String")
+    private String productId;
 
     /** 订单编号 */
     @ApiModelProperty(value = "订单编号", dataType = "String")

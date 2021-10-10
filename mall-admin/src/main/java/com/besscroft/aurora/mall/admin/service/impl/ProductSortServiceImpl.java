@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductSortMapper;
 import com.besscroft.aurora.mall.admin.service.ProductSortService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author Bess Croft
@@ -24,31 +26,32 @@ public class ProductSortServiceImpl extends ServiceImpl<ProductSortMapper, Produ
     }
 
     @Override
-    public ProductSort getProductSortById(Long id) {
+    public ProductSort getProductSortById(String id) {
         return this.baseMapper.selectById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addProductSort(ProductSort productSort) {
-        if (productSort.getLevel() == 0) {
-            productSort.setParentId(0L);
+        if (Objects.equals(productSort.getLevel(), 0)) {
+            productSort.setParentId("0");
         }
+        productSort.setId("PS" + IdUtil.simpleUUID());
         return this.baseMapper.addProductSort(productSort) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateProductSort(ProductSort productSort) {
-        if (productSort.getLevel() == 0) {
-            productSort.setParentId(0L);
+        if (Objects.equals(productSort.getLevel(), 0)) {
+            productSort.setParentId("0");
         }
         return this.baseMapper.updateProductSort(productSort) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delProductSort(List<Long> ids) {
+    public boolean delProductSort(List<String> ids) {
         return this.baseMapper.deleteBatchIds(ids) > 0;
     }
 
@@ -59,7 +62,7 @@ public class ProductSortServiceImpl extends ServiceImpl<ProductSortMapper, Produ
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean changeSwitch(boolean showStatus, Long id) {
+    public boolean changeSwitch(boolean showStatus, String id) {
         if (showStatus) {
             return this.baseMapper.changeSwitch(1, id) > 0;
         }

@@ -25,7 +25,7 @@ public class MarketBit implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "极光币id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "极光币id", dataType = "String")
+    private String id;
 
 }

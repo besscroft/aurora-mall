@@ -11,7 +11,7 @@
  Target Server Version : 50734
  File Encoding         : 65001
 
- Date: 25/09/2021 21:10:46
+ Date: 10/10/2021 16:10:53
 */
 
 SET NAMES utf8mb4;
@@ -3188,12 +3188,12 @@ CREATE TABLE `bms_auth_resource`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `category_id` bigint(20) NULL DEFAULT NULL COMMENT '资源类别ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 67 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_resource
 -- ----------------------------
-INSERT INTO `bms_auth_resource` VALUES (1, '添加用户', '/user/addUser', '新增后台管理系统的用户', '2021-01-25 13:34:04', 3);
+INSERT INTO `bms_auth_resource` VALUES (1, '添加用户', '/user/addUser', '添加权限管理模块用户', '2021-10-10 16:08:33', 3);
 INSERT INTO `bms_auth_resource` VALUES (2, '删除用户', '/user/delUser/**', '删除后台管理系统的用户', '2021-03-17 14:32:33', 3);
 INSERT INTO `bms_auth_resource` VALUES (3, '用户信息', '/user/info', '管理系统用户登陆后查询个人信息', '2021-03-17 15:32:20', 3);
 INSERT INTO `bms_auth_resource` VALUES (4, '修改用户', '/user/updateUser', '更新后台管理系统用户信息', '2021-03-21 13:42:59', 3);
@@ -3255,6 +3255,7 @@ INSERT INTO `bms_auth_resource` VALUES (59, '修改商品品牌', '/productBrand
 INSERT INTO `bms_auth_resource` VALUES (60, '删除商品品牌', '/productBrand/delProductBrand/**', '删除商品品牌', '2021-05-15 14:18:17', 13);
 INSERT INTO `bms_auth_resource` VALUES (61, '商品列表', '/product/list', '商品列表', '2021-05-15 15:28:23', 16);
 INSERT INTO `bms_auth_resource` VALUES (62, '新增商品', '/product/productAdd', '新增商品', '2021-07-09 15:29:18', 14);
+INSERT INTO `bms_auth_resource` VALUES (63, '商品删除', '/product/productDel/*', '商品软删除', '2021-10-10 14:13:44', 16);
 
 -- ----------------------------
 -- Table structure for bms_auth_resource_sort
@@ -3328,26 +3329,11 @@ CREATE TABLE `bms_auth_role_menu_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 358 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色菜单关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 375 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色菜单关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_menu_relation
 -- ----------------------------
-INSERT INTO `bms_auth_role_menu_relation` VALUES (205, 2, 2);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (206, 2, 20);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (207, 2, 21);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (208, 2, 22);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (209, 2, 23);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (210, 2, 30);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (211, 2, 31);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (212, 2, 32);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (213, 2, 33);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (214, 2, 43);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (215, 2, 5);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (216, 2, 50);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (217, 2, 6);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (218, 2, 51);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (219, 2, 100);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (329, 1, 1);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (330, 1, 10);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (331, 1, 11);
@@ -3377,6 +3363,23 @@ INSERT INTO `bms_auth_role_menu_relation` VALUES (354, 1, 50);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (355, 1, 6);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (356, 1, 51);
 INSERT INTO `bms_auth_role_menu_relation` VALUES (357, 1, 100);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (358, 2, 3);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (359, 2, 4);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (360, 2, 2);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (361, 2, 20);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (362, 2, 21);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (363, 2, 22);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (364, 2, 23);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (365, 2, 30);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (366, 2, 31);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (367, 2, 32);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (368, 2, 33);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (369, 2, 43);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (370, 2, 5);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (371, 2, 50);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (372, 2, 6);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (373, 2, 51);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (374, 2, 100);
 
 -- ----------------------------
 -- Table structure for bms_auth_role_permission_relation
@@ -3402,79 +3405,80 @@ CREATE TABLE `bms_auth_role_resource_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `resource_id` bigint(20) NULL DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 609 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 735 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_resource_relation
 -- ----------------------------
-INSERT INTO `bms_auth_role_resource_relation` VALUES (536, 1, 10);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (537, 1, 11);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (538, 1, 12);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (539, 1, 13);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (540, 1, 14);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (541, 1, 15);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (542, 1, 16);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (543, 1, 31);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (544, 1, 32);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (545, 1, 35);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (546, 1, 1);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (547, 1, 2);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (548, 1, 3);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (549, 1, 4);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (550, 1, 5);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (551, 1, 6);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (552, 1, 7);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (553, 1, 8);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (554, 1, 9);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (555, 1, 37);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (556, 1, 38);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (557, 1, 39);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (558, 1, 40);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (559, 1, 41);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (560, 1, 23);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (561, 1, 24);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (562, 1, 25);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (563, 1, 26);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (564, 1, 27);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (565, 1, 33);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (566, 1, 34);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (567, 1, 36);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (568, 1, 17);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (569, 1, 18);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (570, 1, 19);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (571, 1, 20);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (572, 1, 21);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (573, 1, 22);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (574, 1, 28);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (575, 1, 29);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (576, 1, 30);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (577, 1, 50);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (578, 1, 51);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (579, 1, 52);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (580, 1, 53);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (581, 1, 54);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (582, 1, 55);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (583, 1, 56);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (584, 1, 57);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (585, 1, 58);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (586, 1, 59);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (587, 1, 60);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (588, 1, 62);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (589, 1, 43);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (590, 1, 44);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (591, 1, 45);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (592, 1, 46);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (593, 1, 47);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (594, 1, 48);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (595, 1, 49);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (596, 1, 61);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (597, 1, 42);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (603, 2, 3);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (604, 2, 5);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (605, 2, 6);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (606, 2, 7);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (607, 2, 8);
 INSERT INTO `bms_auth_role_resource_relation` VALUES (608, 2, 9);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (672, 1, 10);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (673, 1, 11);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (674, 1, 12);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (675, 1, 13);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (676, 1, 14);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (677, 1, 15);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (678, 1, 16);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (679, 1, 31);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (680, 1, 32);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (681, 1, 35);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (682, 1, 1);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (683, 1, 2);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (684, 1, 3);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (685, 1, 4);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (686, 1, 5);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (687, 1, 6);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (688, 1, 7);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (689, 1, 8);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (690, 1, 9);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (691, 1, 37);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (692, 1, 38);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (693, 1, 39);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (694, 1, 40);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (695, 1, 41);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (696, 1, 23);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (697, 1, 24);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (698, 1, 25);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (699, 1, 26);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (700, 1, 27);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (701, 1, 33);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (702, 1, 34);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (703, 1, 36);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (704, 1, 17);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (705, 1, 18);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (706, 1, 19);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (707, 1, 20);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (708, 1, 21);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (709, 1, 22);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (710, 1, 28);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (711, 1, 29);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (712, 1, 30);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (713, 1, 50);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (714, 1, 51);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (715, 1, 52);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (716, 1, 53);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (717, 1, 54);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (718, 1, 55);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (719, 1, 56);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (720, 1, 57);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (721, 1, 58);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (722, 1, 59);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (723, 1, 60);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (724, 1, 62);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (725, 1, 43);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (726, 1, 44);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (727, 1, 45);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (728, 1, 46);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (729, 1, 47);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (730, 1, 48);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (731, 1, 49);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (732, 1, 61);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (733, 1, 63);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (734, 1, 42);
 
 -- ----------------------------
 -- Table structure for bms_auth_user
@@ -3499,7 +3503,7 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-09-25 20:57:31', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-10-10 16:08:58', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.besscroft.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.besscroft.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
@@ -3534,7 +3538,7 @@ INSERT INTO `bms_auth_user_role_relation` VALUES (2, 2, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_market_ad`;
 CREATE TABLE `bms_market_ad`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '广告名称',
   `type` int(1) NULL DEFAULT NULL COMMENT '轮播位置：0->PC首页轮播；1->app首页轮播',
   `pic` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '广告图片',
@@ -3547,7 +3551,7 @@ CREATE TABLE `bms_market_ad`  (
   `detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详情',
   `sort` int(11) NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销管理模块广告（轮播图）表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销管理模块广告（轮播图）表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_market_ad
@@ -3558,9 +3562,9 @@ CREATE TABLE `bms_market_ad`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_market_bit`;
 CREATE TABLE `bms_market_bit`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销管理模块极光币表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销管理模块极光币表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_market_bit
@@ -3571,7 +3575,7 @@ CREATE TABLE `bms_market_bit`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_market_coupon`;
 CREATE TABLE `bms_market_coupon`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `coupon_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '优惠券id',
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '极光券名称',
   `status` int(1) NULL DEFAULT NULL COMMENT '是否可用：0->下线；1->上线',
@@ -3582,7 +3586,7 @@ CREATE TABLE `bms_market_coupon`  (
   `detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详情',
   `sort` int(11) NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销管理模块优惠券表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销管理模块优惠券表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_market_coupon
@@ -3593,11 +3597,10 @@ CREATE TABLE `bms_market_coupon`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_order`;
 CREATE TABLE `bms_order`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '订单id',
-  `order_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单id',
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单id',
   `order_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单编号',
   `user_id` bigint(20) NOT NULL COMMENT '用户id',
-  `coupon_id` bigint(20) NULL DEFAULT NULL COMMENT '优惠券id',
+  `coupon_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '优惠券id',
   `create_time` datetime NULL DEFAULT NULL COMMENT '提交时间',
   `member_username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户帐号',
   `total_amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '订单总金额',
@@ -3637,7 +3640,7 @@ CREATE TABLE `bms_order`  (
   `comment_time` datetime NULL DEFAULT NULL COMMENT '评价时间',
   `modify_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_order
@@ -3648,24 +3651,24 @@ CREATE TABLE `bms_order`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_order_item`;
 CREATE TABLE `bms_order_item`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `order_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父订单id',
   `order_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单编号',
-  `product_id` bigint(20) NULL DEFAULT NULL COMMENT '商品id',
+  `product_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品id',
   `product_pic` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品图片',
   `product_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名称',
   `product_brand` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品品牌',
   `product_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品货号/编号',
   `product_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '销售价格',
   `product_quantity` int(11) NULL DEFAULT NULL COMMENT '购买数量',
-  `product_sku_id` bigint(20) NULL DEFAULT NULL COMMENT '商品套餐id',
+  `product_sku_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品套餐id',
   `product_sku_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品sku条码',
-  `product_category_id` bigint(20) NULL DEFAULT NULL COMMENT '商品分类id',
+  `product_category_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品分类id',
   `coupon_amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '极光券优惠分解金额',
   `real_amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '该商品经过优惠后的分解金额',
   `product_sku_attr` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品销售属性:[{\"key\":\"颜色\",\"value\":\"蓝色\"},{\"key\":\"尺寸\",\"value\":\"24英寸\"}]',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单子表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单子表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_order_item
@@ -3676,14 +3679,14 @@ CREATE TABLE `bms_order_item`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_order_reason`;
 CREATE TABLE `bms_order_reason`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '原因类型',
   `status` int(1) NULL DEFAULT NULL COMMENT '是否启用：0->不启用；1->启用',
   `create_time` datetime NULL DEFAULT NULL COMMENT '添加时间',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `receive_note` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单售后原因表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单售后原因表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_order_reason
@@ -3694,10 +3697,10 @@ CREATE TABLE `bms_order_reason`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_order_return`;
 CREATE TABLE `bms_order_return`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `order_id` bigint(20) NULL DEFAULT NULL COMMENT '订单id',
-  `company_address_id` bigint(20) NULL DEFAULT NULL COMMENT '收货地址表id',
-  `product_id` bigint(20) NULL DEFAULT NULL COMMENT '退货商品id',
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `order_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单id',
+  `company_address_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货地址表id',
+  `product_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退货商品id',
   `order_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单编号',
   `create_time` datetime NULL DEFAULT NULL COMMENT '申请时间',
   `member_username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '会员用户名',
@@ -3722,7 +3725,7 @@ CREATE TABLE `bms_order_return`  (
   `receive_time` datetime NULL DEFAULT NULL COMMENT '收货时间',
   `receive_note` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单售后表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单售后表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_order_return
@@ -3733,14 +3736,14 @@ CREATE TABLE `bms_order_return`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_order_timetask`;
 CREATE TABLE `bms_order_timetask`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务名称',
   `flash_time` int(11) NULL DEFAULT NULL COMMENT '任务定时',
   `create_time` datetime NULL DEFAULT NULL COMMENT '添加时间',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务详情',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单定时任务表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单管理模块订单定时任务表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_order_timetask
@@ -3751,16 +3754,15 @@ CREATE TABLE `bms_order_timetask`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_product`;
 CREATE TABLE `bms_product`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品id',
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品id',
   `product_sn` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品货号/编号',
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名称',
   `pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品图片',
-  `brand_id` bigint(20) NULL DEFAULT NULL COMMENT '商品品牌id',
+  `brand_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品品牌id',
   `brand_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '品牌名称',
-  `product_type_id` bigint(20) NULL DEFAULT NULL COMMENT '商品类型id',
+  `product_type_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品类型id',
   `product_type_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品类型名称',
-  `product_category_id` bigint(20) NULL DEFAULT NULL COMMENT '商品分类id',
+  `product_category_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品分类id',
   `product_category_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品分类名称',
   `push_status` int(1) NULL DEFAULT NULL COMMENT '上架状态：0->下架；1->上架',
   `new_status` int(1) NULL DEFAULT NULL COMMENT '新品状态:0->不是新品；1->新品',
@@ -3788,18 +3790,20 @@ CREATE TABLE `bms_product`  (
   `promotion_per_limit` int(11) NULL DEFAULT NULL COMMENT '活动限购数量',
   `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建人/所有人id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1441711636540317699 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product
 -- ----------------------------
+INSERT INTO `bms_product` VALUES ('SP1440761476536274305', '', 'mi 11', '', NULL, 'xiaomi', NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, '', '', 0, 0, '', 0.00, 0, '[]', '', '', '', NULL, NULL, 1, 1);
+INSERT INTO `bms_product` VALUES ('SP1441761476536274305', NULL, 'mi 10', NULL, NULL, 'xiaomi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for bms_product_attribute
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_product_attribute`;
 CREATE TABLE `bms_product_attribute`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `param_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属性名称',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `select_type` int(1) NULL DEFAULT NULL COMMENT '属性选择类型：0->唯一；1->单选；2->多选',
@@ -3811,7 +3815,7 @@ CREATE TABLE `bms_product_attribute`  (
   `type` int(1) NULL DEFAULT NULL COMMENT '属性的类型：0->规格；1->参数',
   `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属性值，以json格式保存',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型属性表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型属性表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_attribute
@@ -3822,7 +3826,7 @@ CREATE TABLE `bms_product_attribute`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_product_brand`;
 CREATE TABLE `bms_product_brand`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '品牌名称',
   `logo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '品牌logo',
   `show_status` int(1) NULL DEFAULT NULL COMMENT '显示状态：0->不显示；1->显示',
@@ -3830,21 +3834,21 @@ CREATE TABLE `bms_product_brand`  (
   `big_pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '品牌专区大海报',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品品牌表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品品牌表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_brand
 -- ----------------------------
-INSERT INTO `bms_product_brand` VALUES (1, '小米', NULL, 1, NULL, NULL, 1);
-INSERT INTO `bms_product_brand` VALUES (2, '联想', NULL, 1, 1, NULL, 1);
-INSERT INTO `bms_product_brand` VALUES (3, 'Apple', NULL, 1, 1, NULL, 1);
+INSERT INTO `bms_product_brand` VALUES ('1', '小米', NULL, 1, NULL, NULL, 1);
+INSERT INTO `bms_product_brand` VALUES ('2', '联想', NULL, 1, 1, NULL, 1);
+INSERT INTO `bms_product_brand` VALUES ('3', 'Apple', NULL, 1, 1, NULL, 1);
 
 -- ----------------------------
 -- Table structure for bms_product_parameter
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_product_parameter`;
 CREATE TABLE `bms_product_parameter`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `param_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数名称',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `select_type` int(1) NULL DEFAULT NULL COMMENT '参数选择类型：0->唯一；1->单选；2->多选',
@@ -3856,7 +3860,7 @@ CREATE TABLE `bms_product_parameter`  (
   `type` int(1) NULL DEFAULT NULL COMMENT '参数的类型：0->规格；1->参数',
   `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数值，以json格式保存',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型参数表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型参数表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_parameter
@@ -3867,7 +3871,7 @@ CREATE TABLE `bms_product_parameter`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_product_sku`;
 CREATE TABLE `bms_product_sku`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `product_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '套餐对应的商品id',
   `sku_code` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '套餐编码',
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '套餐价格',
@@ -3878,7 +3882,7 @@ CREATE TABLE `bms_product_sku`  (
   `lock_stock` int(11) NULL DEFAULT 0 COMMENT '锁定库存',
   `sp_data` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品销售属性，以json格式保存',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品套餐表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品套餐表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_sku
@@ -3889,8 +3893,8 @@ CREATE TABLE `bms_product_sku`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_product_sort`;
 CREATE TABLE `bms_product_sort`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `parent_id` bigint(20) NULL DEFAULT NULL COMMENT '父id：0表示一级分类',
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `parent_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父id：0表示一级分类',
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类名称',
   `level` int(1) NULL DEFAULT NULL COMMENT '分类级别：0->1级；1->2级',
   `show_status` int(1) NULL DEFAULT NULL COMMENT '显示状态：0->不显示；1->显示',
@@ -3898,47 +3902,47 @@ CREATE TABLE `bms_product_sort`  (
   `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图标',
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '描述',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品分类表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品分类表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_sort
 -- ----------------------------
-INSERT INTO `bms_product_sort` VALUES (7, 0, '手机', 0, 1, 1, NULL, '手机分类');
-INSERT INTO `bms_product_sort` VALUES (8, 0, '电脑', 0, 1, 1, NULL, '电脑分类');
-INSERT INTO `bms_product_sort` VALUES (9, 0, '水果', 0, 1, 2, NULL, '水果分类');
-INSERT INTO `bms_product_sort` VALUES (10, 7, '手机通讯', 1, 1, 11, NULL, '手机通讯');
-INSERT INTO `bms_product_sort` VALUES (11, 7, '手机配件', 1, 1, 12, NULL, '手机配件');
-INSERT INTO `bms_product_sort` VALUES (12, 8, '游戏本', 1, 1, 12, NULL, '游戏本');
+INSERT INTO `bms_product_sort` VALUES ('10', '7', '手机通讯', 1, 1, 11, NULL, '手机通讯');
+INSERT INTO `bms_product_sort` VALUES ('11', '7', '手机配件', 1, 1, 12, NULL, '手机配件');
+INSERT INTO `bms_product_sort` VALUES ('12', '8', '游戏本', 1, 1, 12, NULL, '游戏本');
+INSERT INTO `bms_product_sort` VALUES ('7', '0', '手机', 0, 1, 1, NULL, '手机分类');
+INSERT INTO `bms_product_sort` VALUES ('8', '0', '电脑', 0, 1, 1, NULL, '电脑分类');
+INSERT INTO `bms_product_sort` VALUES ('9', '0', '水果', 0, 1, 2, NULL, '水果分类');
 
 -- ----------------------------
 -- Table structure for bms_product_type
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_product_type`;
 CREATE TABLE `bms_product_type`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属性名称',
   `attribute_count` int(11) NULL DEFAULT 0 COMMENT '属性数量，默认为0',
   `param_count` int(11) NULL DEFAULT 0 COMMENT '参数数量，默认为0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品管理模块商品类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_type
 -- ----------------------------
-INSERT INTO `bms_product_type` VALUES (1, '手机—手机通讯', 0, 0);
-INSERT INTO `bms_product_type` VALUES (2, '手机—手机配件', 0, 0);
-INSERT INTO `bms_product_type` VALUES (3, '电脑—游戏本', 0, 0);
+INSERT INTO `bms_product_type` VALUES ('1', '手机—手机通讯', 0, 0);
+INSERT INTO `bms_product_type` VALUES ('2', '手机—手机配件', 0, 0);
+INSERT INTO `bms_product_type` VALUES ('3', '电脑—游戏本', 0, 0);
 
 -- ----------------------------
 -- Table structure for bms_product_type_value_relation
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_product_type_value_relation`;
 CREATE TABLE `bms_product_type_value_relation`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_type_id` bigint(20) NULL DEFAULT NULL COMMENT '类型id',
-  `product_value_id` bigint(20) NULL DEFAULT NULL COMMENT '属性/参数id',
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `product_type_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型id',
+  `product_value_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属性/参数id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类型和属性/参数关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类型和属性/参数关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_product_type_value_relation
@@ -3949,7 +3953,7 @@ CREATE TABLE `bms_product_type_value_relation`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_update_log`;
 CREATE TABLE `bms_update_log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` bigint(20) NULL DEFAULT NULL COMMENT '面板的name值',
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本号',
   `title_icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本号图标',
@@ -3958,64 +3962,64 @@ CREATE TABLE `bms_update_log`  (
   `title_tag` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本标识',
   `title_time` datetime NULL DEFAULT NULL COMMENT '版本更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log
 -- ----------------------------
-INSERT INTO `bms_update_log` VALUES (1, 1, 'v0.0.1', 'el-icon-s-promotion', 'danger', 'bug修复', '测试版', '2021-04-17 21:14:03');
-INSERT INTO `bms_update_log` VALUES (2, 2, 'v0.0.2', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:14:53');
-INSERT INTO `bms_update_log` VALUES (3, 3, 'v0.0.3', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:15:45');
-INSERT INTO `bms_update_log` VALUES (4, 4, 'v0.0.4', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-04-24 12:47:14');
-INSERT INTO `bms_update_log` VALUES (5, 5, 'v0.0.5', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-07 16:57:22');
-INSERT INTO `bms_update_log` VALUES (6, 6, 'v0.0.6', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-09 21:38:14');
-INSERT INTO `bms_update_log` VALUES (7, 7, 'v0.0.7', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-05-10 17:58:25');
-INSERT INTO `bms_update_log` VALUES (8, 8, 'v0.0.8', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-06-05 16:01:44');
-INSERT INTO `bms_update_log` VALUES (9, 9, 'v0.0.9', 'el-icon-s-promotion', 'success', '新功能开发', '开发版', '2021-09-05 18:02:12');
-INSERT INTO `bms_update_log` VALUES (10, 10, 'v0.1.0', 'el-icon-s-promotion', 'success', '规范化处理', '开发版', '2021-09-05 18:03:37');
+INSERT INTO `bms_update_log` VALUES ('1', 1, 'v0.0.1', 'el-icon-s-promotion', 'danger', 'bug修复', '测试版', '2021-04-17 21:14:03');
+INSERT INTO `bms_update_log` VALUES ('10', 10, 'v0.1.0', 'el-icon-s-promotion', 'success', '规范化处理', '开发版', '2021-09-05 18:03:37');
+INSERT INTO `bms_update_log` VALUES ('2', 2, 'v0.0.2', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:14:53');
+INSERT INTO `bms_update_log` VALUES ('3', 3, 'v0.0.3', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-04-17 21:15:45');
+INSERT INTO `bms_update_log` VALUES ('4', 4, 'v0.0.4', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-04-24 12:47:14');
+INSERT INTO `bms_update_log` VALUES ('5', 5, 'v0.0.5', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-07 16:57:22');
+INSERT INTO `bms_update_log` VALUES ('6', 6, 'v0.0.6', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-05-09 21:38:14');
+INSERT INTO `bms_update_log` VALUES ('7', 7, 'v0.0.7', 'el-icon-s-promotion', 'success', '重构', '测试版', '2021-05-10 17:58:25');
+INSERT INTO `bms_update_log` VALUES ('8', 8, 'v0.0.8', 'el-icon-s-promotion', 'success', '新功能添加', '测试版', '2021-06-05 16:01:44');
+INSERT INTO `bms_update_log` VALUES ('9', 9, 'v0.0.9', 'el-icon-s-promotion', 'success', '新功能开发', '开发版', '2021-09-05 18:02:12');
 
 -- ----------------------------
 -- Table structure for bms_update_log_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_update_log_detail`;
 CREATE TABLE `bms_update_log_detail`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `log_id` bigint(20) NULL DEFAULT NULL COMMENT '更新日志id',
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `log_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新日志id',
   `body` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本更新日志子表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_update_log_detail
 -- ----------------------------
-INSERT INTO `bms_update_log_detail` VALUES (7, 1, '[release] 第一个测试版本发布');
-INSERT INTO `bms_update_log_detail` VALUES (8, 1, '[fix] 修复了样式处理效果，提升了性能');
-INSERT INTO `bms_update_log_detail` VALUES (9, 1, '[fix] 修复了部分未知bug');
-INSERT INTO `bms_update_log_detail` VALUES (10, 2, '[fix] 修复了样式处理效果，提升了性能');
-INSERT INTO `bms_update_log_detail` VALUES (11, 2, '[fix] 修复了部分未知bug');
-INSERT INTO `bms_update_log_detail` VALUES (12, 2, '[feat] 新增Docker镜像');
-INSERT INTO `bms_update_log_detail` VALUES (13, 3, '[feat] 完善了权限管理模块的功能');
-INSERT INTO `bms_update_log_detail` VALUES (14, 3, '[feat] 新增版本更新日志');
-INSERT INTO `bms_update_log_detail` VALUES (15, 4, '[refactor] 简化实体类的命名，避免调用链过长');
-INSERT INTO `bms_update_log_detail` VALUES (16, 5, '[feat] 新增商品分类管理');
-INSERT INTO `bms_update_log_detail` VALUES (17, 5, '[fix] 修复了可能存在错误的sql语句');
-INSERT INTO `bms_update_log_detail` VALUES (18, 5, '[fix] 修复了TagsView的bug');
-INSERT INTO `bms_update_log_detail` VALUES (19, 6, '[feat] 新增 Elasticsearch 基础框架');
-INSERT INTO `bms_update_log_detail` VALUES (20, 6, '[refactor] 给实体类添加了必要的注解');
-INSERT INTO `bms_update_log_detail` VALUES (21, 6, '[feat] 配置了日志文件');
-INSERT INTO `bms_update_log_detail` VALUES (22, 7, '[refactor] 修改了数据库结构');
-INSERT INTO `bms_update_log_detail` VALUES (23, 7, '[fix] 修复了页面表头错位bug');
-INSERT INTO `bms_update_log_detail` VALUES (24, 7, '[feat] 新增商品类型管理模块');
-INSERT INTO `bms_update_log_detail` VALUES (25, 8, '[feat] 新增后台商品列表查询');
-INSERT INTO `bms_update_log_detail` VALUES (26, 9, '[feat] 新增日志模块');
-INSERT INTO `bms_update_log_detail` VALUES (27, 10, '[feat] 规范化单元测试');
+INSERT INTO `bms_update_log_detail` VALUES ('10', '2', '[fix] 修复了样式处理效果，提升了性能');
+INSERT INTO `bms_update_log_detail` VALUES ('11', '2', '[fix] 修复了部分未知bug');
+INSERT INTO `bms_update_log_detail` VALUES ('12', '2', '[feat] 新增Docker镜像');
+INSERT INTO `bms_update_log_detail` VALUES ('13', '3', '[feat] 完善了权限管理模块的功能');
+INSERT INTO `bms_update_log_detail` VALUES ('14', '3', '[feat] 新增版本更新日志');
+INSERT INTO `bms_update_log_detail` VALUES ('15', '4', '[refactor] 简化实体类的命名，避免调用链过长');
+INSERT INTO `bms_update_log_detail` VALUES ('16', '5', '[feat] 新增商品分类管理');
+INSERT INTO `bms_update_log_detail` VALUES ('17', '5', '[fix] 修复了可能存在错误的sql语句');
+INSERT INTO `bms_update_log_detail` VALUES ('18', '5', '[fix] 修复了TagsView的bug');
+INSERT INTO `bms_update_log_detail` VALUES ('19', '6', '[feat] 新增 Elasticsearch 基础框架');
+INSERT INTO `bms_update_log_detail` VALUES ('20', '6', '[refactor] 给实体类添加了必要的注解');
+INSERT INTO `bms_update_log_detail` VALUES ('21', '6', '[feat] 配置了日志文件');
+INSERT INTO `bms_update_log_detail` VALUES ('22', '7', '[refactor] 修改了数据库结构');
+INSERT INTO `bms_update_log_detail` VALUES ('23', '7', '[fix] 修复了页面表头错位bug');
+INSERT INTO `bms_update_log_detail` VALUES ('24', '7', '[feat] 新增商品类型管理模块');
+INSERT INTO `bms_update_log_detail` VALUES ('25', '8', '[feat] 新增后台商品列表查询');
+INSERT INTO `bms_update_log_detail` VALUES ('26', '9', '[feat] 新增日志模块');
+INSERT INTO `bms_update_log_detail` VALUES ('27', '10', '[feat] 规范化单元测试');
+INSERT INTO `bms_update_log_detail` VALUES ('7', '1', '[release] 第一个测试版本发布');
+INSERT INTO `bms_update_log_detail` VALUES ('8', '1', '[fix] 修复了样式处理效果，提升了性能');
+INSERT INTO `bms_update_log_detail` VALUES ('9', '1', '[fix] 修复了部分未知bug');
 
 -- ----------------------------
 -- Table structure for bms_user_address
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_user_address`;
 CREATE TABLE `bms_user_address`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户id',
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收件人名称',
   `phone_number` bigint(11) NULL DEFAULT NULL COMMENT '收件人号码',
@@ -4026,7 +4030,7 @@ CREATE TABLE `bms_user_address`  (
   `region` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '区',
   `detail_address` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详细地址(街道)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户地址管理表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户地址管理表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_user_address
@@ -4037,9 +4041,9 @@ CREATE TABLE `bms_user_address`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_user_grade`;
 CREATE TABLE `bms_user_grade`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户等级表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户等级表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_user_grade
@@ -4050,9 +4054,9 @@ CREATE TABLE `bms_user_grade`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_user_grade_role_relation`;
 CREATE TABLE `bms_user_grade_role_relation`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户等级角色关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户等级角色关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_user_grade_role_relation
@@ -4063,12 +4067,12 @@ CREATE TABLE `bms_user_grade_role_relation`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_user_grade_rule`;
 CREATE TABLE `bms_user_grade_rule`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '等级名称',
   `aurora_point` int(1) NULL DEFAULT NULL COMMENT '到达当前等级需要的极光值',
   `detail` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '等级详情',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户等级规则表(每天结算一次等级)' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户等级规则表(每天结算一次等级)' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_user_grade_rule
@@ -4079,7 +4083,7 @@ CREATE TABLE `bms_user_grade_rule`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_user_info`;
 CREATE TABLE `bms_user_info`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
   `nickname` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
@@ -4098,7 +4102,7 @@ CREATE TABLE `bms_user_info`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_username`(`username`) USING BTREE,
   UNIQUE INDEX `idx_phone`(`phone`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_user_info
@@ -4109,11 +4113,11 @@ CREATE TABLE `bms_user_info`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_user_info_grade_relation`;
 CREATE TABLE `bms_user_info_grade_relation`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
-  `level_id` bigint(20) NULL DEFAULT NULL COMMENT '等级ID',
+  `level_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '等级ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户用户等级关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户用户等级关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_user_info_grade_relation
@@ -4124,7 +4128,7 @@ CREATE TABLE `bms_user_info_grade_relation`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bms_user_level`;
 CREATE TABLE `bms_user_level`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '等级名称',
   `default_status` int(1) NULL DEFAULT NULL COMMENT '是否为默认等级：0->不是；1->是',
   `comment_aurora_point` int(11) NULL DEFAULT NULL COMMENT '评价奖励的极光值',
@@ -4133,7 +4137,7 @@ CREATE TABLE `bms_user_level`  (
   `shop_aurora_bit` int(1) NULL DEFAULT NULL COMMENT '购物奖励的极光币',
   `detail` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '等级详情',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户等级表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员管理模块会员用户等级表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_user_level
@@ -4549,11 +4553,10 @@ INSERT INTO `province` VALUES (31, '新疆维吾尔自治区', 650000);
 -- ----------------------------
 DROP TABLE IF EXISTS `ums_car`;
 CREATE TABLE `ums_car`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `car_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '购物车id',
+  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '购物车id',
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车模块购物车表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车模块购物车表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ums_car

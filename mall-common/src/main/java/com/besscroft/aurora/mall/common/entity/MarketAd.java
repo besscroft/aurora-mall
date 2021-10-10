@@ -27,8 +27,8 @@ public class MarketAd implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "广告id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "广告id", dataType = "String")
+    private String id;
 
     /** 广告名称 */
     @ApiModelProperty(value = "广告名称", dataType = "String")

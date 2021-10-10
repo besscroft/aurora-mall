@@ -27,7 +27,7 @@ public interface ProductTypeService extends IService<ProductType> {
      * @param id 商品类型id
      * @return 商品类型实体
      */
-    ProductType getProductTypeById(Long id);
+    ProductType getProductTypeById(String id);
 
     /**
      * 新增商品类型
@@ -48,6 +48,6 @@ public interface ProductTypeService extends IService<ProductType> {
      * @param ids 商品类型id集合
      * @return
      */
-    boolean delProductType(List<Long> ids);
+    boolean delProductType(List<String> ids);
 
 }

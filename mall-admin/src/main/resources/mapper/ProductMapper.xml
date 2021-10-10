@@ -6,6 +6,7 @@
 
     <resultMap id="productMap" type="com.besscroft.aurora.mall.common.entity.Product">
         <result column="id" property="id"/>
+        <result column="product_sn" property="productSn"/>
         <result column="name" property="name"/>
         <result column="pic" property="pic"/>
         <result column="brand_id" property="brandId"/>
@@ -39,13 +40,45 @@
         <result column="promotion_start_time" property="promotionStartTime"/>
         <result column="promotion_end_time" property="promotionEndTime"/>
         <result column="promotion_per_limit" property="promotionPerLimit"/>
+        <result column="create_user_id" property="createUserId"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, name, pic, brand_id, brand_name, product_type_id, product_type_name, product_category_id, product_category_name,
-        product_sn, push_status, new_status, recommand_status, verify_status, delete_status, sort, sale, price, aurora_point,
-        aurora_bit, sub_title, description, stock, low_stock, unit, weight, preview_status, service_ids, detail_title,
-        detail_html, detail_mobile_html, promotion_start_time, promotion_end_time, promotion_per_limit
+        id,
+        product_sn,
+        name,
+        pic,
+        brand_id,
+        brand_name,
+        product_type_id,
+        product_type_name,
+        product_category_id,
+        product_category_name,
+        product_sn,
+        push_status, new_status,
+        recommand_status,
+        verify_status,
+        delete_status,
+        sort,
+        sale,
+        price,
+        aurora_point,
+        aurora_bit,
+        sub_title,
+        description,
+        stock,
+        low_stock,
+        unit,
+        weight,
+        preview_status,
+        service_ids,
+        detail_title,
+        detail_html,
+        detail_mobile_html,
+        promotion_start_time,
+        promotion_end_time,
+        promotion_per_limit,
+        create_user_id
     </sql>
 
     <select id="selectProductListByPage" resultSets="java.util.List" resultMap="productMap">
@@ -53,13 +86,22 @@
             <include refid="Base_Column_List"/>
         from
             bms_product
-        <where>
+        where
+            delete_status = 0
             <if test="keyword != null">
                 and name like CONCAT('%',#{keyword},'%')
             </if>
-        </where>
         order by
             id
     </select>
+
+    <update id="deleteByProductId">
+        update
+            bms_product
+        set
+            delete_status = 1
+        where
+            id = #{id}
+    </update>
 
 </mapper>

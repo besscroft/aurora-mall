@@ -25,12 +25,12 @@ public class ProductSort implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "商品分类id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "商品分类id", dataType = "String")
+    private String id;
 
     /** 父id：0表示一级分类 */
-    @ApiModelProperty(value = "父id", dataType = "Long")
-    private Long parentId;
+    @ApiModelProperty(value = "父id", dataType = "String")
+    private String parentId;
 
     /** 分类名称 */
     @ApiModelProperty(value = "分类名称", dataType = "String")

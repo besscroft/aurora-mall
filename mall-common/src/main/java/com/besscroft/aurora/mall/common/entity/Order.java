@@ -28,12 +28,8 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "订单id", dataType = "Long")
-    private Long id;
-
-    /** 订单id */
     @ApiModelProperty(value = "订单id", dataType = "String")
-    private String orderId;
+    private String id;
 
     /** 订单编号 */
     @ApiModelProperty(value = "订单编号", dataType = "String")
@@ -44,8 +40,8 @@ public class Order implements Serializable {
     private Long userId;
 
     /** 优惠券id */
-    @ApiModelProperty(value = "优惠券id", dataType = "Long")
-    private Long couponId;
+    @ApiModelProperty(value = "优惠券id", dataType = "String")
+    private String couponId;
 
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -26,8 +26,8 @@ public class UpdateLog implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "日志id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "日志id", dataType = "String")
+    private String id;
 
     /** 面板的name值 */
     @ApiModelProperty(value = "面板的name值", dataType = "Long")

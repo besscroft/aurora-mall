@@ -140,7 +140,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Message } from "element-ui"
-import { listProductList } from "@/api/product/product";
+import { listProductList, delProduct } from "@/api/product/product";
 
 const defaultAdminProductList = {
   // 查询参数
@@ -270,7 +270,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(function() {
-        return delProductBrand(ids);
+        return delProduct(ids);
       }).then(response => {
         this.getList();
         Message.success(response.message);

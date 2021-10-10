@@ -27,8 +27,8 @@ public class OrderTimetask implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ApiModelProperty(value = "订单定时任务id", dataType = "Long")
-    private Long id;
+    @ApiModelProperty(value = "订单定时任务id", dataType = "String")
+    private String id;
 
     /** 任务名称 */
     @ApiModelProperty(value = "任务名称", dataType = "String")
