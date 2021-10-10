@@ -1,5 +1,8 @@
 <template>
   <div class="dashboard-container">
+
+    <github-corner class="github-corner"/>
+
     <el-card class="box-card" shadow="hover">
       <span>欢迎：{{ name }}</span>
       <i style="float: right; padding: 3px 0" class="el-icon-user-solid"></i>
@@ -35,9 +38,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import GithubCorner from '@/components/GithubCorner'
 
 export default {
   name: 'Dashboard',
+  components: {
+    GithubCorner
+  },
   computed: {
     ...mapGetters([
       'name'
@@ -50,6 +57,13 @@ export default {
 .dashboard {
   &-container {
     margin: 30px;
+    .github-corner {
+      position: absolute;
+      top: 0px;
+      border: 0;
+      right: 0;
+      z-index: 99;
+    }
   }
   &-text {
     font-size: 30px;
