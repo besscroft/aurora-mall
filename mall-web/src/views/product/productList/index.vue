@@ -210,7 +210,6 @@ export default {
     cancel() {
       this.open = false;
       this.parentFlag = false;
-      this.form = {};
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -225,42 +224,18 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.pwdFlag = true
-      this.open = true
+      this.$router.push({ path: '/product/productAdd' })
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       const id = row.id || this.ids[0];
-      console.log(id)
-      this.$router.push({ path: '/product/productUpdate', query : { "productId" : id } })
+      this.$router.push({ path: '/product/productUpdate', query : { "id" : id } })
     },
     /** 是否启用按钮监听 */
     changeSwitch(row) {
       changeSwitch(row).then(response => {
         Message.success(response.message);
       })
-    },
-    /** 提交按钮 */
-    submitForm() {
-      this.$refs["form"].validate(valid => {
-        if (valid) {
-          if (this.form.id != null) {
-            updateProductList(this.form).then(response => {
-              Message.success(response.message);
-              this.form = {};
-              this.open = false;
-              this.getList();
-            });
-          } else {
-            addProductList(this.form).then(response => {
-              Message.success(response.message);
-              this.form = {};
-              this.open = false;
-              this.getList();
-            });
-          }
-        }
-      });
     },
     /** 删除按钮操作 */
     handleDelete(row) {

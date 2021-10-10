@@ -188,6 +188,8 @@ import { Message } from "element-ui";
 import { productAdd } from '@/api/product/productAdd'
 
 const defaultProductParam = {
+  // 商品货号/编号
+  productSn: '',
   // 商品名称
   name: '',
   // 副标题
@@ -216,8 +218,6 @@ const defaultProductParam = {
   productCategoryId: '',
   // 商品分类名称
   productCategoryName: '',
-  // 商品货号/编号
-  productSn: '',
   // 上架状态：0->下架；1->上架
   pushStatus: 0,
   // 新品状态:0->不是新品；1->新品
@@ -311,7 +311,8 @@ export default {
           }
         }]
       },
-      rules: {}
+      rules: {},
+      dialogFormVisible: false
     }
   },
   created() {
@@ -320,6 +321,13 @@ export default {
       this.token.token = data.token
       console.log(this.token)
     });
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 文件上传成功 */
@@ -352,8 +360,13 @@ export default {
         } else {
           Message.error(response.message)
         }
-        this.form = Object.assign({}, defaultProductParam)
+        this.dialogFormVisible = false
       });
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultProductParam)
     }
   }
 }

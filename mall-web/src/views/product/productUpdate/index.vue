@@ -19,8 +19,20 @@ export default {
       'name'
     ])
   },
+  data() {
+    return {
+      productId: null
+    }
+  },
+  beforeCreate() {
+    if ((this.$route.query.id == undefined) || (this.$route.query.id == null)) {
+      this.$store.dispatch("tagsView/delView", this.$route)
+      this.$router.push({ path: '/product/productList' })
+    }
+    this.productId = this.$route.query.id
+  },
   mounted() {
-    console.log("当前商品id为:" + this.$route.query.productId)
+    console.log("当前商品id为:" + this.$route.query.id)
   }
 }
 </script>

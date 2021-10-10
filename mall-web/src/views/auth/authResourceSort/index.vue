@@ -142,11 +142,19 @@ export default {
         // 分页参数（条）
         pageSize: 10,
         keyword: null
-      }
+      },
+      dialogFormVisible: false
     };
   },
   created() {
     this.getList();
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 查询权限管理模块资源类别列表 */
@@ -162,6 +170,7 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
+      this.dialogFormVisible = false
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -176,18 +185,20 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.pwdFlag = true
+      this.dialogFormVisible = true
       this.open = true
       this.title = "添加权限管理模块资源类别"
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.pwdFlag = false
       const id = row.id || this.ids
       getResourceSort(id).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改权限管理模块资源类别";
+        this.$nextTick(() => {
+          this.dialogFormVisible = true
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改权限管理模块资源类别";
+        })
       });
     },
     /** 提交按钮 */
@@ -197,12 +208,14 @@ export default {
           if (this.form.id != null) {
             updateResourceSort(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
           } else {
             addResourceSort(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
@@ -234,6 +247,11 @@ export default {
     handleCurrentChange(event) {
       this.listQuery.pageNum = event
       this.getList()
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultAdminResourceSort)
     }
   }
 }

@@ -210,11 +210,19 @@ export default {
           id: 0,
           name: "默认分类"
         }
-      ]
+      ],
+      dialogFormVisible: false
     };
   },
   created() {
     this.getList();
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 查询商品管理模块商品分类列表 */
@@ -238,7 +246,7 @@ export default {
     cancel() {
       this.open = false;
       this.parentFlag = false;
-      this.form = {};
+      this.dialogFormVisible = false
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -253,13 +261,12 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.pwdFlag = true
+      this.dialogFormVisible = true
       this.open = true
       this.title = "添加商品管理模块商品分类"
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.pwdFlag = false
       const id = row.id || this.ids
       if (row.level == 0) {
         this.parentFlag = false;
@@ -267,9 +274,12 @@ export default {
         this.parentFlag = true;
       }
       getProductSort(id).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改商品管理模块商品分类";
+        this.$nextTick(() => {
+          this.dialogFormVisible = true
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改商品管理模块商品分类";
+        })
       });
     },
     /** 是否启用按钮监听 */
@@ -285,14 +295,14 @@ export default {
           if (this.form.id != null) {
             updateProductSort(this.form).then(response => {
               Message.success(response.message);
-              this.form = {};
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
           } else {
             addProductSort(this.form).then(response => {
               Message.success(response.message);
-              this.form = {};
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
@@ -336,6 +346,11 @@ export default {
       } else {
         this.parentFlag = false;
       }
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultAdminProductSort)
     }
   }
 }

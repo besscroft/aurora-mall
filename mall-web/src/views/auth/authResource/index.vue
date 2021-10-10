@@ -74,7 +74,7 @@
     <!-- 添加或修改权限管理模块资源对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" label-width="100px">
-        <el-form-item label="资源类别" prop="icon">
+        <el-form-item label="资源类别" prop="categoryId">
           <el-select v-model="form.categoryId" placeholder="请选择资源类别">
             <el-option
               v-for="item in resourceSortList"
@@ -84,13 +84,13 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="资源名" prop="icon">
+        <el-form-item label="资源名" prop="name">
           <el-input v-model="form.name" type="textarea" placeholder="请输入资源名" />
         </el-form-item>
-        <el-form-item label="资源路径" prop="email">
+        <el-form-item label="资源路径" prop="url">
           <el-input v-model="form.url" placeholder="请输入资源路径" />
         </el-form-item>
-        <el-form-item label="资源描述" prop="nickName">
+        <el-form-item label="资源描述" prop="description">
           <el-input v-model="form.description" placeholder="请输入资源描述" />
         </el-form-item>
       </el-form>
@@ -157,11 +157,19 @@ export default {
         keyword: null
       },
       // 资源类别
-      resourceSortList: []
+      resourceSortList: [],
+      dialogFormVisible: false
     };
   },
   created() {
     this.getList();
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 查询权限管理模块资源列表 */
@@ -177,6 +185,7 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
+      this.dialogFormVisible = false
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -191,40 +200,43 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.pwdFlag = true
+      this.dialogFormVisible = true
       this.open = true
       this.title = "添加权限管理模块资源"
       listResourceSort({ pageNum: 0, pageSize: 100, keyword: null }).then(response => {
         this.resourceSortList = response.data.list
       })
-      console.log(this.resourceSortList)
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.pwdFlag = false
       const id = row.id || this.ids
       listResourceSort({ pageNum: 0, pageSize: 100, keyword: null }).then(response => {
         this.resourceSortList = response.data.list
       })
       getResource(id).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改权限管理模块资源";
+        this.$nextTick(() => {
+          this.dialogFormVisible = true
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改权限管理模块资源";
+        })
       });
     },
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.id != null) {
+          if ((this.form.id != null) && (this.form.id != '')) {
             updateResource(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
           } else {
             addResource(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
@@ -256,6 +268,11 @@ export default {
     handleCurrentChange(event) {
       this.listQuery.pageNum = event
       this.getList()
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultAdminResource)
     }
   }
 }
