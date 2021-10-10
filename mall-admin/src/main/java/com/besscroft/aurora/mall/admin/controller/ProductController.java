@@ -60,8 +60,11 @@ public class ProductController {
     @ApiOperation("删除商品")
     @DeleteMapping("/productDel/{id}")
     public AjaxResult productDel(@PathVariable("id") Long id) {
-        productService.productDel(id);
-        return AjaxResult.success();
+        boolean b = productService.productDel(id);
+        if (b) {
+            return AjaxResult.success("删除成功！");
+        }
+        return AjaxResult.error("哎呀，删除失败了！");
     }
 
 }

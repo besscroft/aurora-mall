@@ -53,13 +53,22 @@
             <include refid="Base_Column_List"/>
         from
             bms_product
-        <where>
+        where
+            delete_status = 0
             <if test="keyword != null">
                 and name like CONCAT('%',#{keyword},'%')
             </if>
-        </where>
         order by
             id
     </select>
+
+    <update id="deleteByProductId">
+        update
+            bms_product
+        set
+            delete_status = 1
+        where
+            id = #{id}
+    </update>
 
 </mapper>

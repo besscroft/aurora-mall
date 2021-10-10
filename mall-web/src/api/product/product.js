@@ -14,7 +14,15 @@ export function listProductList(listQuery) {
 
 export function getProduct(id) {
   return request({
-    url:'/mall-admin/product/updateInfo/'+id,
-    method:'get',
+    url: '/mall-admin/product/updateInfo/' + id,
+    method: 'get',
+  })
+}
+
+// 删除商品
+export function delProduct(id) {
+  return request({
+    url: '/mall-admin/product/updateInfo' + id,
+    method: 'delete'
   })
 }
