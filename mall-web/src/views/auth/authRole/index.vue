@@ -243,11 +243,19 @@ export default {
         label: 'name'
       },
       // 被操作的角色id
-      roleId: 0
+      roleId: 0,
+      dialogFormVisible: false
     };
   },
   created() {
     this.getList();
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 查询权限管理模块角色列表 */
@@ -270,6 +278,7 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
+      this.dialogFormVisible = false
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -284,18 +293,20 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.pwdFlag = true
+      this.dialogFormVisible = true
       this.open = true
       this.title = "添加权限管理模块角色"
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.pwdFlag = false
       const id = row.id || this.ids
       getRole(id).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改权限管理模块角色";
+        this.$nextTick(() => {
+          this.dialogFormVisible = true
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改权限管理模块角色";
+        })
       });
     },
     /** 是否启用按钮监听 */
@@ -311,12 +322,14 @@ export default {
           if (this.form.id != null) {
             updateRole(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
           } else {
             addRole(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
@@ -382,6 +395,7 @@ export default {
       const menuTreeData = [...parentTree, ...childTree];
       updateMenuTree({ id: this.roleId, data: menuTreeData }).then(response => {
         Message.success(response.message);
+        this.dialogFormVisible = false
         this.menuDialogVisible = false;
       });
     },
@@ -390,8 +404,14 @@ export default {
       const resourceTreeData = this.$refs.tree.getCheckedKeys().filter(Boolean);
       updateResourceTree({ id: this.roleId, data: resourceTreeData }).then(response => {
         Message.success(response.message);
+        this.dialogFormVisible = false
         this.resourceDialogVisible = false;
       });
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultAdminRole)
     }
   }
 }

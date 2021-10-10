@@ -205,11 +205,19 @@ export default {
       // 编辑的用户id
       userId: 0,
       // 用户的角色数据
-      roleData: []
+      roleData: [],
+      dialogFormVisible: false
     };
   },
   created() {
     this.getList();
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 查询权限管理模块用户列表 */
@@ -232,6 +240,7 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
+      this.dialogFormVisible = false
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -247,6 +256,7 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.pwdFlag = true
+      this.dialogFormVisible = true
       this.open = true
       this.title = "添加权限管理模块用户"
     },
@@ -255,9 +265,12 @@ export default {
       this.pwdFlag = false
       const id = row.id || this.ids
       getUser(id).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改权限管理模块用户";
+        this.$nextTick(() => {
+          this.dialogFormVisible = true
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改权限管理模块用户";
+        })
       });
     },
     /** 是否启用按钮监听 */
@@ -273,12 +286,14 @@ export default {
           if (this.form.id != null) {
             updateUser(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
           } else {
             addUser(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
@@ -331,10 +346,16 @@ export default {
       if (this.form.id != null) {
         updateRoleById({userId: this.userId, roleId: this.form.id}).then(response => {
           Message.success(response.message);
+          this.dialogFormVisible = false
           this.centerDialogVisible = false;
           // this.getList();
         });
       }
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultAdminUser)
     }
   }
 }

@@ -188,19 +188,25 @@ export default {
       open: false,
       // 表单参数
       form: {},
-      // 密码框显示标识
-      pwdFlag: false,
       listQuery: {
         // 分页参数（页）
         pageNum: 0,
         // 分页参数（条）
         pageSize: 10,
         keyword: null
-      }
+      },
+      dialogFormVisible: false
     };
   },
   created() {
     this.getList();
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 查询权限管理模块菜单列表 */
@@ -223,6 +229,7 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
+      this.dialogFormVisible = false
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -237,7 +244,7 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.pwdFlag = true
+      this.dialogFormVisible = true
       this.open = true
       this.title = "添加权限管理模块菜单"
       getParentMenu().then(response => {
@@ -246,12 +253,14 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.pwdFlag = false
       const id = row.id || this.ids
       getMenu(id).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改权限管理模块菜单";
+        this.$nextTick(() => {
+          this.dialogFormVisible = true
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改权限管理模块菜单";
+        })
       });
       getParentMenu().then(response => {
         this.parentDataList = response.data;
@@ -270,12 +279,14 @@ export default {
           if (this.form.id != null) {
             updateMenu(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
           } else {
             addMenu(this.form).then(response => {
               Message.success(response.message);
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
@@ -307,6 +318,11 @@ export default {
     handleCurrentChange(event) {
       this.listQuery.pageNum = event
       this.getList()
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultAdminMenu)
     }
   }
 }

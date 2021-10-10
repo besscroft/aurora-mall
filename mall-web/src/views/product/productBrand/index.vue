@@ -167,11 +167,19 @@ export default {
         // 分页参数（条）
         pageSize: 10,
         keyword: null
-      }
+      },
+      dialogFormVisible: false
     };
   },
   created() {
     this.getList();
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 查询商品管理模块商品品牌列表 */
@@ -195,7 +203,7 @@ export default {
     cancel() {
       this.open = false;
       this.parentFlag = false;
-      this.form = {};
+      this.dialogFormVisible = false
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -210,7 +218,7 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.pwdFlag = true
+      this.dialogFormVisible = true
       this.open = true
       this.title = "添加商品管理模块商品品牌"
     },
@@ -219,9 +227,12 @@ export default {
       this.pwdFlag = false
       const id = row.id || this.ids
       getProductBrand(id).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改商品管理模块商品品牌";
+        this.$nextTick(() => {
+          this.dialogFormVisible = true
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改商品管理模块商品品牌";
+        })
       });
     },
     /** 是否启用按钮监听 */
@@ -237,14 +248,14 @@ export default {
           if (this.form.id != null) {
             updateProductBrand(this.form).then(response => {
               Message.success(response.message);
-              this.form = {};
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
           } else {
             addProductBrand(this.form).then(response => {
               Message.success(response.message);
-              this.form = {};
+              this.dialogFormVisible = false
               this.open = false;
               this.getList();
             });
@@ -276,6 +287,11 @@ export default {
     handleCurrentChange(event) {
       this.listQuery.pageNum = event
       this.getList()
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultAdminProductBrand)
     }
   }
 }
