@@ -72,11 +72,12 @@ export function delUser(id) {
 }
 
 // 导出权限管理模块用户
-export function exportUser(query) {
+export function exportUser(data) {
   return request({
     url: '/mall-admin/user/exportUser',
-    method: 'get',
-    params: query
+    method: 'post',
+    data: data,
+    responseType: 'blob'
   })
 }
 
