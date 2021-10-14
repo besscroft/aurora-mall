@@ -30,6 +30,14 @@
             :disabled="multiple"
             @click="handleDelete"
           >删除</el-button>
+          <el-button
+            type="success"
+            plain
+            icon="el-icon-plus"
+            size="mini"
+            :disabled="multiple"
+            @click="handleExport"
+          >导出</el-button>
         </el-col>
         <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
@@ -140,7 +148,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Message } from "element-ui"
-import { listProductList, delProduct } from "@/api/product/product";
+import {listProductList, delProduct, exportProduct } from "@/api/product/product";
 
 const defaultAdminProductList = {
   // 查询参数
@@ -221,6 +229,23 @@ export default {
       this.ids = selection.map(item => item.id)
       this.single = selection.length!==1
       this.multiple = !selection.length
+    },
+    /** 导出按钮操作 */
+    handleExport(row) {
+      const ids = row.id || this.ids;
+      exportProduct(ids).then(response => {
+        const blob = new Blob([response], { type: 'application/vnd.ms-excel' }) // 构造一个blob对象来处理数据
+        let date = new Date();
+        const fileName = '商品信息-' + date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + '.xlsx' // 导出文件名
+        const elink = document.createElement('a') // 创建a标签
+        elink.download = fileName // a标签添加属性
+        elink.style.display = 'none'
+        elink.href = URL.createObjectURL(blob)
+        document.body.appendChild(elink)
+        elink.click() // 执行下载
+        URL.revokeObjectURL(elink.href) // 释放URL 对象
+        document.body.removeChild(elink) // 释放标签
+      });
     },
     /** 新增按钮操作 */
     handleAdd() {
