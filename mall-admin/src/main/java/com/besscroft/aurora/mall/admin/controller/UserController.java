@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -183,6 +184,12 @@ public class UserController {
             return AjaxResult.success("添加成功！");
         }
         return AjaxResult.error("添加失败！");
+    }
+
+    @ApiOperation("导出权限管理模块用户")
+    @PostMapping("/exportUser")
+    public void export(@RequestBody List<Long> data, HttpServletResponse response) {
+        userService.export(data, response);
     }
 
 }

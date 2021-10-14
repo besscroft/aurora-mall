@@ -10,6 +10,14 @@
             size="mini"
             @click="handleAdd"
           >新增</el-button>
+          <el-button
+            type="success"
+            plain
+            icon="el-icon-plus"
+            size="mini"
+            :disabled="multiple"
+            @click="handleExport"
+          >导出</el-button>
         </el-col>
         <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
@@ -17,6 +25,10 @@
 
     <el-card class="box-card" style="margin-top: 30px" shadow="never">
       <el-table border v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="55" align="center" />
+        <el-table-column label="编号" width="100" align="center">
+          <template slot-scope="scope">{{scope.row.id}}</template>
+        </el-table-column>
         <el-table-column label="用户名" align="center" prop="username" width="150"/>
         <el-table-column label="头像" align="center" prop="icon">
           <template slot-scope="scope">
@@ -259,6 +271,23 @@ export default {
       this.dialogFormVisible = true
       this.open = true
       this.title = "添加权限管理模块用户"
+    },
+    /** 导出按钮操作 */
+    handleExport(row) {
+      const ids = row.id || this.ids;
+      exportUser(ids).then(response => {
+        const blob = new Blob([response], { type: 'application/vnd.ms-excel' }) // 构造一个blob对象来处理数据
+        let date = new Date();
+        const fileName = '用户信息-' + date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + '.xlsx' // 导出文件名
+        const elink = document.createElement('a') // 创建a标签
+        elink.download = fileName // a标签添加属性
+        elink.style.display = 'none'
+        elink.href = URL.createObjectURL(blob)
+        document.body.appendChild(elink)
+        elink.click() // 执行下载
+        URL.revokeObjectURL(elink.href) // 释放URL 对象
+        document.body.removeChild(elink) // 释放标签
+      });
     },
     /** 修改按钮操作 */
     handleUpdate(row) {

@@ -7,6 +7,7 @@ import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -118,5 +119,12 @@ public interface UserService extends IService<AuthUser> {
      * @return 所有用户集合
      */
     List<AuthUser> getUserAllList();
+
+    /**
+     * 导出选定用户数据方法
+     * @param ids 用户id
+     * @param response
+     */
+    void export(List<Long> ids, HttpServletResponse response);
 
 }

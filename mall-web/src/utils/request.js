@@ -45,8 +45,8 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     // console.log(res)
-    // 如果自定义代码不是200，则将其判断为错误。
-    if (res.code !== 200) {
+    // 如果自定义代码不是200，则将其判断为错误；如果返回 Blob 对象，则跳过！
+    if (res.code !== 200 && res.code !== undefined) {
       Message({
         message: res.message || 'Error',
         type: 'error',

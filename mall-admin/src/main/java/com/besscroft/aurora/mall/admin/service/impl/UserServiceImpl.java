@@ -3,6 +3,7 @@ package com.besscroft.aurora.mall.admin.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.dto.AdminParam;
 import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
@@ -24,7 +25,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -183,6 +189,25 @@ public class UserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> imple
     @Override
     public List<AuthUser> getUserAllList() {
         return this.baseMapper.getAllList();
+    }
+
+    @Override
+    public void export(List<Long> ids, HttpServletResponse response) {
+        List<AuthUser> userList = this.baseMapper.selectBatchIds(ids);
+        try {
+            // 这里注意 有同学反应使用 swagger 会导致各种问题，请直接用浏览器或者用 postman
+            response.setContentType("application/vnd.ms-excel");
+            // 设置返回的数据编码
+            response.setCharacterEncoding("utf-8");
+            // 这里 URLEncoder.encode 可以防止中文乱码 当然和 easyexcel 没有关系
+            String fileName = URLEncoder.encode("用户信息", "UTF-8").replaceAll("\\+", "%20");
+            response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+            EasyExcel.write(response.getOutputStream(), AuthUser.class).autoCloseStream(true).sheet("用户信息").doWrite(userList);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
