@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -65,6 +66,12 @@ public class ProductController {
             return AjaxResult.success("删除成功！");
         }
         return AjaxResult.error("哎呀，删除失败了！");
+    }
+
+    @ApiOperation("导出商品信息")
+    @PostMapping("/exportProduct")
+    public void export(@RequestBody List<String> data, HttpServletResponse response) {
+        productService.export(data, response);
     }
 
 }

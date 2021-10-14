@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * @Description
+ * @Description 管理系统用户对象拷贝接口
  * @Author Bess Croft
  * @Time 2021/10/14 10:29
  */

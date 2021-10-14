@@ -3,6 +3,7 @@ package com.besscroft.aurora.mall.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.common.entity.Product;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -35,5 +36,12 @@ public interface ProductService extends IService<Product> {
      * @return
      */
     boolean productDel(String id);
+
+    /**
+     * 导出商品信息
+     * @param ids
+     * @param response
+     */
+    void export(List<String> ids, HttpServletResponse response);
 
 }

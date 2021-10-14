@@ -26,3 +26,13 @@ export function delProduct(id) {
     method: 'delete'
   })
 }
+
+// 导出商品信息
+export function exportProduct(data) {
+  return request({
+    url: '/mall-admin/product/exportProduct',
+    method: 'post',
+    data: data,
+    responseType: 'blob'
+  })
+}
