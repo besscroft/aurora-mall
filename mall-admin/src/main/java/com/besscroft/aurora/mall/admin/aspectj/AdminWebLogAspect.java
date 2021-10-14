@@ -6,7 +6,6 @@ import cn.hutool.json.JSONUtil;
 import com.besscroft.aurora.mall.admin.service.LogService;
 import com.besscroft.aurora.mall.common.aspectj.WebLogAspect;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
-import com.besscroft.aurora.mall.common.domain.UserDto;
 import com.besscroft.aurora.mall.common.entity.WebLog;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,9 +19,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * @Author Bess Croft
