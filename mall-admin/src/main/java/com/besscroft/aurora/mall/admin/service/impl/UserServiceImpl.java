@@ -11,9 +11,11 @@ import com.besscroft.aurora.mall.admin.mapper.AuthUserMapper;
 import com.besscroft.aurora.mall.admin.service.AuthService;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
+import com.besscroft.aurora.mall.common.domain.AuthUserExcelDto;
 import com.besscroft.aurora.mall.common.domain.UserDto;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
+import com.besscroft.aurora.mall.common.mapper.UserConverterMapper;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +32,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -194,19 +195,42 @@ public class UserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> imple
     @Override
     public void export(List<Long> ids, HttpServletResponse response) {
         List<AuthUser> userList = this.baseMapper.selectBatchIds(ids);
-        try {
-            // 这里注意 有同学反应使用 swagger 会导致各种问题，请直接用浏览器或者用 postman
-            response.setContentType("application/vnd.ms-excel");
-            // 设置返回的数据编码
-            response.setCharacterEncoding("utf-8");
-            // 这里 URLEncoder.encode 可以防止中文乱码 当然和 easyexcel 没有关系
-            String fileName = URLEncoder.encode("用户信息", "UTF-8").replaceAll("\\+", "%20");
-            response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-            EasyExcel.write(response.getOutputStream(), AuthUser.class).autoCloseStream(true).sheet("用户信息").doWrite(userList);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (CollUtil.isNotEmpty(userList)) {
+            List<AuthUserExcelDto> excelDtos = UserConverterMapper.INSTANCE.authUserToAuthUserExcelListDto(userList);
+            excelDtos.forEach(excelDto -> {
+                String status = excelDto.getStatus();
+                switch (status) {
+                    case "0":
+                        excelDto.setStatus("禁用");
+                        break;
+                    case "1":
+                        excelDto.setStatus("启用");
+                        break;
+                }
+                String del = excelDto.getDel();
+                switch (del) {
+                    case "0":
+                        excelDto.setDel("已删除");
+                        break;
+                    case "1":
+                        excelDto.setDel("可用状态");
+                        break;
+                }
+            });
+            try {
+                // 这里注意 有同学反应使用 swagger 会导致各种问题，请直接用浏览器或者用 postman
+                response.setContentType("application/vnd.ms-excel");
+                // 设置返回的数据编码
+                response.setCharacterEncoding("utf-8");
+                // 这里 URLEncoder.encode 可以防止中文乱码 当然和 easyexcel 没有关系
+                String fileName = URLEncoder.encode("用户信息", "UTF-8").replaceAll("\\+", "%20");
+                response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+                EasyExcel.write(response.getOutputStream(), AuthUserExcelDto.class).autoCloseStream(true).sheet("用户信息").doWrite(excelDtos);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
