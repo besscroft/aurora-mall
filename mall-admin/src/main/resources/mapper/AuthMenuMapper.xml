@@ -110,8 +110,6 @@
         where
             u.id = #{adminId}
         and
-            m.hidden = 1
-        and
             m.parent_id = #{parentId}
         order by
             m.sort
