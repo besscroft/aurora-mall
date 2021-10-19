@@ -2,6 +2,7 @@ package com.besscroft.aurora.mall.admin.controller;
 
 import com.besscroft.aurora.mall.admin.service.ProductService;
 import com.besscroft.aurora.mall.common.annotation.WebLog;
+import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.entity.Product;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
@@ -72,6 +73,51 @@ public class ProductController {
     @PostMapping("/exportProduct")
     public void export(@RequestBody List<String> data, HttpServletResponse response) {
         productService.export(data, response);
+    }
+
+    @WebLog(description = "上架状态更新")
+    @ApiOperation("上架状态更新")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "hidden", value = "上架状态",required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "id", value = "商品id",required = true, dataType = "String")
+    })
+    @PutMapping("/changeSwitchPush")
+    public AjaxResult changeSwitchPush(@RequestParam Integer hidden, @RequestParam String id) {
+        boolean b = productService.changeSwitchPush(hidden, id);
+        if (b) {
+            return AjaxResult.success("修改成功");
+        }
+        return AjaxResult.success("修改失败");
+    }
+
+    @WebLog(description = "新品状态更新")
+    @ApiOperation("新品状态更新")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "hidden", value = "新品状态",required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "id", value = "商品id",required = true, dataType = "String")
+    })
+    @PutMapping("/changeSwitchNew")
+    public AjaxResult changeSwitchNew(@RequestParam Integer hidden, @RequestParam String id) {
+        boolean b = productService.changeSwitchNew(hidden, id);
+        if (b) {
+            return AjaxResult.success("修改成功");
+        }
+        return AjaxResult.success("修改失败");
+    }
+
+    @WebLog(description = "推荐状态更新")
+    @ApiOperation("推荐状态更新")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "hidden", value = "推荐状态",required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "id", value = "商品id",required = true, dataType = "String")
+    })
+    @PutMapping("/changeSwitchRecommend")
+    public AjaxResult changeSwitchRecommend(@RequestParam Integer hidden, @RequestParam String id) {
+        boolean b = productService.changeSwitchRecommend(hidden, id);
+        if (b) {
+            return AjaxResult.success("修改成功");
+        }
+        return AjaxResult.success("修改失败");
     }
 
 }

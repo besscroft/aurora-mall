@@ -132,4 +132,22 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         }
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean changeSwitchPush(Integer hidden, String id) {
+        return this.baseMapper.changeSwitch(hidden, null, null, id) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean changeSwitchNew(Integer hidden, String id) {
+        return this.baseMapper.changeSwitch(null, hidden, null, id) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean changeSwitchRecommend(Integer hidden, String id) {
+        return this.baseMapper.changeSwitch(null, null, hidden, id) > 0;
+    }
+
 }
