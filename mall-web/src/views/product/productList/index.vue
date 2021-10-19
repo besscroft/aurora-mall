@@ -68,10 +68,10 @@
           <template slot-scope="scope">
             <p>上架：
               <el-switch
-                @change="handlePublishStatusChange(scope.$index, scope.row)"
+                @change="handlePushStatusChange(scope.$index, scope.row)"
                 :active-value="1"
                 :inactive-value="0"
-                v-model="scope.row.publishStatus">
+                v-model="scope.row.pushStatus">
               </el-switch>
             </p>
             <p>新品：
@@ -95,9 +95,10 @@
         <el-table-column label="排序" width="100" align="center">
           <template slot-scope="scope">{{scope.row.sort}}</template>
         </el-table-column>
-        <el-table-column label="SKU库存" width="100" align="center">
+        <el-table-column label="SKU库存" width="120" align="center">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" @click="handleShowSkuEditDialog(scope.$index, scope.row)" circle></el-button>
+            <p>{{scope.row.stock}}</p>
+            <el-button type="primary" round size="mini" @click="handleShowSkuEditDialog(scope.$index, scope.row)">编辑套餐</el-button>
           </template>
         </el-table-column>
         <el-table-column label="销量" width="100" align="center">
@@ -105,7 +106,8 @@
         </el-table-column>
         <el-table-column label="审核状态" width="100" align="center">
           <template slot-scope="scope">
-            <p>{{scope.row.verifyStatus | verifyStatusFilter}}</p>
+            <p v-if="scope.row.verifyStatus == 0">未审核</p>
+            <p v-else>审核通过</p>
             <p>
               <el-button
                 type="text"
@@ -148,14 +150,16 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Message } from "element-ui"
-import {listProductList, delProduct, exportProduct } from "@/api/product/product";
+import { listProductList, delProduct, exportProduct, changeSwitchPush, changeSwitchNew, changeSwitchRecommend } from "@/api/product/product";
 
 const defaultAdminProductList = {
   // 查询参数
   id: null,
   name: null,
   logo: null,
-  showStatus: null,
+  pushStatus: null,
+  newStatus: null,
+  recommandStatus: null,
   productCount: null,
   bigPic: null,
   sort: null
@@ -256,9 +260,27 @@ export default {
       const id = row.id || this.ids[0];
       this.$router.push({ path: '/product/productUpdate', query : { "id" : id } })
     },
+    /** 编辑套餐 */
+    handleShowSkuEditDialog(index, row) {
+      const id = row.id || this.ids[0];
+      this.$router.push({ path: '/product/productSkuAdd', query : { "id" : id } })
+    },
     /** 是否启用按钮监听 */
-    changeSwitch(row) {
-      changeSwitch(row).then(response => {
+    handlePushStatusChange(index, row) {
+      console.log(row)
+      changeSwitchPush(row).then(response => {
+        Message.success(response.message);
+      })
+    },
+    handleNewStatusChange(index, row) {
+      console.log(row)
+      changeSwitchNew(row).then(response => {
+        Message.success(response.message);
+      })
+    },
+    handleRecommendStatusChange(index, row) {
+      console.log(row)
+      changeSwitchRecommend(row).then(response => {
         Message.success(response.message);
       })
     },

@@ -104,4 +104,21 @@
             id = #{id}
     </update>
 
+    <update id="changeSwitch">
+        update bms_product
+        <set>
+            <if test="pushStatus != null">
+                push_status = #{pushStatus},
+            </if>
+            <if test="newStatus != null">
+                new_status = #{newStatus},
+            </if>
+            <if test="recommandStatus != null">
+                recommand_status = #{recommandStatus},
+            </if>
+        </set>
+        where
+            id = #{id}
+    </update>
+
 </mapper>

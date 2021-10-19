@@ -44,4 +44,28 @@ public interface ProductService extends IService<Product> {
      */
     void export(List<String> ids, HttpServletResponse response);
 
+    /**
+     * 修改上架状态
+     * @param hidden 状态值
+     * @param id 商品id
+     * @return
+     */
+    boolean changeSwitchPush(Integer hidden, String id);
+
+    /**
+     * 修改新品状态
+     * @param hidden 状态值
+     * @param id 商品id
+     * @return
+     */
+    boolean changeSwitchNew(Integer hidden, String id);
+
+    /**
+     * 修改推荐状态
+     * @param hidden 状态值
+     * @param id 商品id
+     * @return
+     */
+    boolean changeSwitchRecommend(Integer hidden, String id);
+
 }

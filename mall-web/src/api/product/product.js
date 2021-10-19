@@ -36,3 +36,39 @@ export function exportProduct(data) {
     responseType: 'blob'
   })
 }
+
+// 上架状态更新
+export function changeSwitchPush(row) {
+  return request({
+    url: '/mall-admin/product/changeSwitchPush',
+    method: 'put',
+    params: {
+      hidden: row.pushStatus,
+      id: row.id
+    }
+  })
+}
+
+// 新品状态更新
+export function changeSwitchNew(row) {
+  return request({
+    url: '/mall-admin/product/changeSwitchNew',
+    method: 'put',
+    params: {
+      hidden: row.newStatus,
+      id: row.id
+    }
+  })
+}
+
+// 推荐状态更新
+export function changeSwitchRecommend(row) {
+  return request({
+    url: '/mall-admin/product/changeSwitchRecommend',
+    method: 'put',
+    params: {
+      hidden: row.recommandStatus,
+      id: row.id
+    }
+  })
+}
