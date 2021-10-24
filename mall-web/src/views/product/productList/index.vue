@@ -263,7 +263,7 @@ export default {
     /** 编辑套餐 */
     handleShowSkuEditDialog(index, row) {
       const id = row.id || this.ids[0];
-      this.$router.push({ path: '/product/productSkuAdd', query : { "id" : id } })
+      this.$router.push({ path: '/product/productSku', query : { "id" : id } })
     },
     /** 是否启用按钮监听 */
     handlePushStatusChange(index, row) {

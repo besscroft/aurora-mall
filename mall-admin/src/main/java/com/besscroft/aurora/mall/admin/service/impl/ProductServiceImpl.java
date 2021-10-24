@@ -8,7 +8,6 @@ import com.besscroft.aurora.mall.admin.mapper.AuthUserMapper;
 import com.besscroft.aurora.mall.admin.mapper.ProductMapper;
 import com.besscroft.aurora.mall.admin.service.ProductService;
 import com.besscroft.aurora.mall.admin.service.UserService;
-import com.besscroft.aurora.mall.common.domain.AuthUserExcelDto;
 import com.besscroft.aurora.mall.common.domain.ProductExcelDto;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.entity.Product;
