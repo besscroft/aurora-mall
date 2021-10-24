@@ -30,6 +30,14 @@
             :disabled="multiple"
             @click="handleDelete"
           >删除</el-button>
+          <el-button
+            type="success"
+            plain
+            icon="el-icon-plus"
+            size="mini"
+            :disabled="multiple"
+            @click="handleExport"
+          >导出</el-button>
         </el-col>
         <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
@@ -38,10 +46,30 @@
     <el-card class="box-card" style="margin-top: 30px" shadow="never">
       <el-table border v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column label="资源类别名称" align="center" prop="categoryName" width="150"/>
-        <el-table-column label="创建时间" align="center" prop="createTime" />
-        <el-table-column label="资源描述" align="center" prop="description" />
-        <el-table-column label="排序" align="center" prop="sort" />
+        <el-table-column label="套餐编码" width="100" align="center">
+          <template slot-scope="scope">{{scope.row.skuCode}}</template>
+        </el-table-column>
+        <el-table-column label="套餐价格(单位：元)" width="100" align="center">
+          <template slot-scope="scope">{{scope.row.price}}</template>
+        </el-table-column>
+        <el-table-column label="库存" width="100" align="center">
+          <template slot-scope="scope">{{scope.row.stock}}</template>
+        </el-table-column>
+        <el-table-column label="预警库存" width="100" align="center">
+          <template slot-scope="scope">{{scope.row.lowStock}}</template>
+        </el-table-column>
+        <el-table-column label="展示图片" width="100" align="center">
+          <template slot-scope="scope">{{scope.row.pic}}</template>
+        </el-table-column>
+        <el-table-column label="销量" width="100" align="center">
+          <template slot-scope="scope">{{scope.row.sale}}</template>
+        </el-table-column>
+        <el-table-column label="锁定库存" width="100" align="center">
+          <template slot-scope="scope">{{scope.row.lowStock}}</template>
+        </el-table-column>
+        <el-table-column label="商品销售属性" width="120" align="center">
+          <template slot-scope="scope">{{scope.row.spData}}></template>
+        </el-table-column>
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right" width="100">
           <template slot-scope="scope">
             <el-button
@@ -70,44 +98,29 @@
       :total="total">
     </el-pagination>
 
-    <!-- 添加或修改权限管理模块资源类别对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
-      <el-form ref="form" :model="form" label-width="100px">
-        <el-form-item label="资源类别名称" prop="icon">
-          <el-input v-model="form.categoryName" type="textarea" placeholder="请输入资源名" />
-        </el-form-item>
-        <el-form-item label="资源描述" prop="nickName">
-          <el-input v-model="form.description" placeholder="请输入资源描述" />
-        </el-form-item>
-        <el-form-item label="排序" prop="email">
-          <el-input v-model="form.sort" placeholder="请输入排序" />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
-      </div>
-    </el-dialog>
-
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { addResourceSort, delResourceSort, getResourceSort, listResourceSort, updateResourceSort} from "@/api/auth/resourceSort";
-import { Message } from "element-ui";
+import { mapGetters } from "vuex";
+import { listProductSkuList } from "@/api/product/productSku";
 
-const defaultAdminResourceSort = {
+const defaultAdminProductSkuList = {
   // 查询参数
   id: null,
-  categoryName: null,
-  createTime: null,
-  description: null,
-  sort: null
+  productId: null,
+  skuCode: null,
+  price: null,
+  stock: null,
+  lowStock: null,
+  pic: null,
+  sale: null,
+  lockStock: null,
+  spData: null
 };
 
 export default {
-  name: 'authResourceSort',
+  name: "productSku",
   computed: {
     ...mapGetters([
       'name'
@@ -115,7 +128,8 @@ export default {
   },
   data() {
     return {
-      adminResourceSort: Object.assign({}, defaultAdminResourceSort),
+      adminProductSkuList: Object.assign({}, defaultAdminProductSkuList),
+      productId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -138,29 +152,31 @@ export default {
       form: {},
       listQuery: {
         // 分页参数（页）
+        productId: '',
         pageNum: 0,
         // 分页参数（条）
         pageSize: 10,
         keyword: null
-      },
-      dialogFormVisible: false
-    };
-  },
-  created() {
-    this.getList();
-  },
-  watch: {
-    dialogFormVisible(val) {
-      if (!val) {
-        this.resetForm()
       }
-    },
+    }
+  },
+  beforeCreate() {
+    if ((this.$route.query.id == undefined) || (this.$route.query.id == null)) {
+      this.$store.dispatch("tagsView/delView", this.$route)
+      this.$router.push({ path: '/product/productList' })
+    }
+    this.productId = this.$route.query.id
+  },
+  mounted() {
+    console.log("当前商品id为:" + this.$route.query.id)
+    this.listQuery.productId = this.$route.query.id
+    this.getList()
   },
   methods: {
-    /** 查询权限管理模块资源类别列表 */
+    /** 查询商品套餐列表 */
     getList() {
       this.loading = true;
-      listResourceSort(this.listQuery).then(response => {
+      listProductSkuList(this.listQuery).then(response => {
         const data = response.data.list;
         this.dataList = data;
         this.total = response.data.total;
@@ -170,7 +186,7 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
-      this.dialogFormVisible = false
+      this.parentFlag = false;
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -183,60 +199,6 @@ export default {
       this.single = selection.length!==1
       this.multiple = !selection.length
     },
-    /** 新增按钮操作 */
-    handleAdd() {
-      this.dialogFormVisible = true
-      this.open = true
-      this.title = "添加权限管理模块资源类别"
-    },
-    /** 修改按钮操作 */
-    handleUpdate(row) {
-      const id = row.id || this.ids
-      getResourceSort(id).then(response => {
-        this.$nextTick(() => {
-          this.dialogFormVisible = true
-          this.form = response.data;
-          this.open = true;
-          this.title = "修改权限管理模块资源类别";
-        })
-      });
-    },
-    /** 提交按钮 */
-    submitForm() {
-      this.$refs["form"].validate(valid => {
-        if (valid) {
-          if (this.form.id != null) {
-            updateResourceSort(this.form).then(response => {
-              Message.success(response.message);
-              this.dialogFormVisible = false
-              this.open = false;
-              this.getList();
-            });
-          } else {
-            addResourceSort(this.form).then(response => {
-              Message.success(response.message);
-              this.dialogFormVisible = false
-              this.open = false;
-              this.getList();
-            });
-          }
-        }
-      });
-    },
-    /** 删除按钮操作 */
-    handleDelete(row) {
-      const ids = row.id || this.ids;
-      this.$confirm('是否确认删除权限管理模块类别资源编号为"' + ids + '"的数据项?', "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(function() {
-        return delResourceSort(ids);
-      }).then(response => {
-        this.getList();
-        Message.success(response.message);
-      })
-    },
     // 分页
     // 每页显示条目个数处理
     handleSizeChange(event) {
@@ -247,11 +209,6 @@ export default {
     handleCurrentChange(event) {
       this.listQuery.pageNum = event
       this.getList()
-    },
-    // 重置表单为初始值并移除校验结果
-    resetForm() {
-      this.$refs["form"].resetFields()
-      this.form = Object.assign({}, defaultAdminResourceSort)
     }
   }
 }

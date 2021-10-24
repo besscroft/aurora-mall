@@ -2,6 +2,7 @@ package com.besscroft.aurora.mall.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.besscroft.aurora.mall.common.entity.ProductType;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ProductTypeMapper extends BaseMapper<ProductType> {
      * @param keyword 关键字
      * @return 分页商品类型列表
      */
-    List<ProductType> selectProductTypeListByPage(String keyword);
+    List<ProductType> selectProductTypeListByPage(@Param("keyword") String keyword);
 
     /**
      * 新增商品类型

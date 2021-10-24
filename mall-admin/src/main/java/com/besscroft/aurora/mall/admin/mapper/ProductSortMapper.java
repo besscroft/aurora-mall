@@ -19,7 +19,7 @@ public interface ProductSortMapper extends BaseMapper<ProductSort> {
      * @param keyword 关键字
      * @return 分页商品分类列表
      */
-    List<ProductSort> selectProductSortListByPage(String keyword);
+    List<ProductSort> selectProductSortListByPage(@Param("keyword") String keyword);
 
     /**
      * 新增商品分类

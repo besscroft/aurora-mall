@@ -28,7 +28,7 @@ public interface AuthUserMapper extends BaseMapper<AuthUser> {
      * @param keyword 关键字
      * @return 分页用户列表
      */
-    List<AuthUser> selectUserListByPage(String keyword);
+    List<AuthUser> selectUserListByPage(@Param("keyword") String keyword);
 
     /**
      * 登录成功后设置登录时间
@@ -60,7 +60,7 @@ public interface AuthUserMapper extends BaseMapper<AuthUser> {
      * @param id 用户id
      * @return
      */
-    int delUser(Long id);
+    int delUser(@Param("id") Long id);
 
     /**
      * 新增用户

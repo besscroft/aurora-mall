@@ -35,7 +35,8 @@ public class ProductBrandController {
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer")
     })
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public AjaxResult list(@RequestParam("pageNum") Integer pageNum,
+                           @RequestParam("pageSize") Integer pageSize) {
         List<ProductBrand> list = productBrandService.getProductBrandPageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
@@ -90,7 +91,8 @@ public class ProductBrandController {
             @ApiImplicitParam(name = "id", value = "商品品牌id",required = true, dataType = "Long")
     })
     @PutMapping("/changeSwitch")
-    public AjaxResult changeSwitch(@RequestParam boolean showStatus, @RequestParam String id) {
+    public AjaxResult changeSwitch(@RequestParam("showStatus") boolean showStatus,
+                                   @RequestParam("id") String id) {
         boolean b = productBrandService.changeSwitch(showStatus, id);
         if (b) {
             return AjaxResult.success("修改成功");

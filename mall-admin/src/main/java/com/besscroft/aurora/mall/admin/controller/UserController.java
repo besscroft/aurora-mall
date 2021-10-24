@@ -56,7 +56,7 @@ public class UserController {
     @WebLog(description = "根据用户名获取用户信息接口")
     @ApiOperation("根据用户名获取用户信息")
     @GetMapping(value = "/loadByUsername")
-    public UserDto loadByUsername(@RequestParam String username) {
+    public UserDto loadByUsername(@RequestParam("username") String username) {
         UserDto userDto = userService.loadUserByUsername(username);
         return userDto;
     }
@@ -109,7 +109,8 @@ public class UserController {
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer")
     })
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public AjaxResult list(@RequestParam("pageNum") Integer pageNum,
+                           @RequestParam("pageSize") Integer pageSize) {
         List<AuthUser> list = userService.getUserPageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
@@ -147,7 +148,8 @@ public class UserController {
             @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "Long")
     })
     @PutMapping("/changeSwitch")
-    public AjaxResult changeSwitch(@RequestParam boolean status, @RequestParam Long id) {
+    public AjaxResult changeSwitch(@RequestParam("status") boolean status,
+                                   @RequestParam("id") Long id) {
         AuthUser currentAdmin = userService.getCurrentAdmin();
         if (currentAdmin.getId() != id && !"1".equals(id)) {
             boolean b = userService.changeSwitch(status, id);

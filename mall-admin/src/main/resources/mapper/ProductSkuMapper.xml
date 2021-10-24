@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.besscroft.aurora.mall.admin.mapper.ProductSkuMapper">
+
+    <resultMap id="productSkuMap" type="com.besscroft.aurora.mall.common.entity.ProductSku">
+        <result column="id" property="id"/>
+        <result column="product_id" property="productId"/>
+        <result column="sku_code" property="skuCode"/>
+        <result column="price" property="price"/>
+        <result column="stock" property="stock"/>
+        <result column="low_stock" property="lowStock"/>
+        <result column="pic" property="pic"/>
+        <result column="sale" property="sale"/>
+        <result column="lock_stock" property="lockStock"/>
+        <result column="sp_data" property="spData"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        product_id,
+        sku_code,
+        price,
+        stock,
+        low_stock,
+        pic,
+        sale,
+        lock_stock,
+        sp_data
+    </sql>
+
+    <select id="selectProductSkuListByPage" resultSets="java.util.List" resultMap="productSkuMap">
+        select <include refid="Base_Column_List"/>
+        from
+            bms_product_sku
+        where
+            product_id = #{productId}
+        <if test="keyword != null and keyword != ''">
+            and sp_data like CONCAT('%',#{ keyword },'%')
+        </if>
+    </select>
+
+
+</mapper>

@@ -35,7 +35,8 @@ public class ProductTypeController {
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer")
     })
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public AjaxResult list(@RequestParam("pageNum") Integer pageNum,
+                           @RequestParam("pageSize") Integer pageSize) {
         List<ProductType> list = productTypeService.getProductTypePageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }

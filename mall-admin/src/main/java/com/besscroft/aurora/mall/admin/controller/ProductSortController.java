@@ -36,7 +36,8 @@ public class ProductSortController {
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer")
     })
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public AjaxResult list(@RequestParam("pageNum") Integer pageNum,
+                           @RequestParam("pageSize") Integer pageSize) {
         List<ProductSort> list = productSortService.getProductSortPageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
@@ -99,7 +100,8 @@ public class ProductSortController {
             @ApiImplicitParam(name = "id", value = "商品分类id",required = true, dataType = "Long")
     })
     @PutMapping("/changeSwitch")
-    public AjaxResult changeSwitch(@RequestParam boolean showStatus, @RequestParam String id) {
+    public AjaxResult changeSwitch(@RequestParam("showStatus") boolean showStatus,
+                                   @RequestParam("id") String id) {
         boolean b = productSortService.changeSwitch(showStatus, id);
         if (b) {
             return AjaxResult.success("修改成功");

@@ -37,7 +37,8 @@ public class ProductController {
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer")
     })
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public AjaxResult list(@RequestParam("pageNum") Integer pageNum,
+                           @RequestParam("pageSize") Integer pageSize) {
         List<Product> list = productService.getProductPageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
@@ -82,7 +83,8 @@ public class ProductController {
             @ApiImplicitParam(name = "id", value = "商品id",required = true, dataType = "String")
     })
     @PutMapping("/changeSwitchPush")
-    public AjaxResult changeSwitchPush(@RequestParam Integer hidden, @RequestParam String id) {
+    public AjaxResult changeSwitchPush(@RequestParam("hidden") Integer hidden,
+                                       @RequestParam("id") String id) {
         boolean b = productService.changeSwitchPush(hidden, id);
         if (b) {
             return AjaxResult.success("修改成功");
@@ -97,7 +99,8 @@ public class ProductController {
             @ApiImplicitParam(name = "id", value = "商品id",required = true, dataType = "String")
     })
     @PutMapping("/changeSwitchNew")
-    public AjaxResult changeSwitchNew(@RequestParam Integer hidden, @RequestParam String id) {
+    public AjaxResult changeSwitchNew(@RequestParam("hidden") Integer hidden,
+                                      @RequestParam("id") String id) {
         boolean b = productService.changeSwitchNew(hidden, id);
         if (b) {
             return AjaxResult.success("修改成功");
@@ -112,7 +115,8 @@ public class ProductController {
             @ApiImplicitParam(name = "id", value = "商品id",required = true, dataType = "String")
     })
     @PutMapping("/changeSwitchRecommend")
-    public AjaxResult changeSwitchRecommend(@RequestParam Integer hidden, @RequestParam String id) {
+    public AjaxResult changeSwitchRecommend(@RequestParam("hidden") Integer hidden,
+                                            @RequestParam("id") String id) {
         boolean b = productService.changeSwitchRecommend(hidden, id);
         if (b) {
             return AjaxResult.success("修改成功");

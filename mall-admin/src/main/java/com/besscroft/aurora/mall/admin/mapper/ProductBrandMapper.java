@@ -19,7 +19,7 @@ public interface ProductBrandMapper extends BaseMapper<ProductBrand> {
      * @param keyword 关键字
      * @return 分页商品品牌列表
      */
-    List<ProductBrand> selectProductBrandListByPage(String keyword);
+    List<ProductBrand> selectProductBrandListByPage(@Param("keyword") String keyword);
 
     /**
      * 新增商品品牌

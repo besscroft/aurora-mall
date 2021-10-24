@@ -25,7 +25,7 @@ public interface AuthResourceMapper extends BaseMapper<AuthResource> {
      * @param keyword 关键字
      * @return 分页资源列表
      */
-    List<AuthResource> selectResourceListByPage(String keyword);
+    List<AuthResource> selectResourceListByPage(@Param("keyword") String keyword);
 
     /**
      * 新增资源
@@ -46,14 +46,14 @@ public interface AuthResourceMapper extends BaseMapper<AuthResource> {
      * @param id 角色id
      * @return 角色的资源树数组
      */
-    List<Long> selectResourceTreeById(Long id);
+    List<Long> selectResourceTreeById(@Param("id") Long id);
 
     /**
      * 根据角色id删除角色资源关系
      * @param id 角色id
      * @return
      */
-    int deleteRoleResourceRelation(Long id);
+    int deleteRoleResourceRelation(@Param("id") Long id);
 
     /**
      * 插入角色和资源对应关系
