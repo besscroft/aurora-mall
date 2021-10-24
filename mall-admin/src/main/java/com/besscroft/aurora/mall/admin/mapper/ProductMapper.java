@@ -19,7 +19,7 @@ public interface ProductMapper extends BaseMapper<Product> {
      * @param keyword 关键字
      * @return 分页商品列表
      */
-    List<Product> selectProductListByPage(String keyword);
+    List<Product> selectProductListByPage(@Param("keyword") String keyword);
 
     /**
      * 商品软删除

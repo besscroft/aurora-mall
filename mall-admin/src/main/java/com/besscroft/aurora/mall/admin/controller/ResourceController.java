@@ -36,7 +36,8 @@ public class ResourceController {
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer")
     })
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public AjaxResult list(@RequestParam("pageNum") Integer pageNum,
+                           @RequestParam("pageSize") Integer pageSize) {
         List<AuthResource> list = resourceService.getResourcePageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
@@ -107,7 +108,8 @@ public class ResourceController {
             @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
     })
     @PutMapping("/updateResourceTree")
-    public AjaxResult updateResourceTree(@RequestBody List<Long> data, @RequestParam Long id) {
+    public AjaxResult updateResourceTree(@RequestBody List<Long> data,
+                                         @RequestParam("id") Long id) {
         boolean b = resourceService.updateResourceTree(data, id);
         if (b) {
             return AjaxResult.success("更新成功！");

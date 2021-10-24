@@ -35,7 +35,8 @@ public class RoleController {
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer")
     })
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public AjaxResult list(@RequestParam("pageNum") Integer pageNum,
+                           @RequestParam("pageSize") Integer pageSize) {
         List<AuthRole> list = roleService.getRolePageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
@@ -90,7 +91,8 @@ public class RoleController {
             @ApiImplicitParam(name = "id", value = "角色id",required = true, dataType = "Long")
     })
     @PutMapping("/changeSwitch")
-    public AjaxResult changeSwitch(@RequestParam boolean status, @RequestParam Long id) {
+    public AjaxResult changeSwitch(@RequestParam("status") boolean status,
+                                   @RequestParam("id") Long id) {
         boolean b = roleService.changeSwitch(status, id);
         if (b) {
             return AjaxResult.success("状态更新成功！");
@@ -113,7 +115,8 @@ public class RoleController {
             @ApiImplicitParam(name = "roleId", value = "角色id", required = true, dataType = "Long")
     })
     @PutMapping("/updateRoleById")
-    public AjaxResult updateRoleById(@RequestParam Long userId, @RequestParam Long roleId) {
+    public AjaxResult updateRoleById(@RequestParam("userId") Long userId,
+                                     @RequestParam("roleId") Long roleId) {
         boolean b = roleService.updateRoleById(userId, roleId);
         if (b) {
             return AjaxResult.success("更新角色绑定成功！");

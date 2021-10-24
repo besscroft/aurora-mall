@@ -19,14 +19,14 @@ public interface AuthMenuMapper extends BaseMapper<AuthMenu> {
      * @param adminId 用户id
      * @return 用户的系统菜单集合
      */
-    List<AuthMenu> getListById(Long adminId);
+    List<AuthMenu> getListById(@Param("adminId") Long adminId);
 
     /**
      * 获取当前用户的父菜单
      * @param adminId 用户id
      * @return 用户的父菜单集合
      */
-    List<AuthMenu> getParentListById(Long adminId);
+    List<AuthMenu> getParentListById(@Param("adminId") Long adminId);
 
     /**
      * 获取所有父菜单
@@ -48,21 +48,21 @@ public interface AuthMenuMapper extends BaseMapper<AuthMenu> {
      * @param parentId 父菜单id
      * @return 父菜单对应的子菜单集合
      */
-    List<AuthMenu> getChildList(Long parentId);
+    List<AuthMenu> getChildList(@Param("parentId") Long parentId);
 
     /**
      * 分页查询菜单
      * @param keyword 关键字
      * @return 分页菜单集合
      */
-    List<AuthMenu> selectMenuListByPage(String keyword);
+    List<AuthMenu> selectMenuListByPage(@Param("keyword") String keyword);
 
     /**
      * 根据id获取菜单详细信息
      * @param id 菜单id
      * @return 菜单实体
      */
-    AuthMenu selectMenuById(Long id);
+    AuthMenu selectMenuById(@Param("id") Long id);
 
     /**
      * 更新菜单
@@ -78,7 +78,7 @@ public interface AuthMenuMapper extends BaseMapper<AuthMenu> {
      * @return
      */
     int changeSwitch(@Param("hidden") Integer hidden,
-                    @Param("id") Long id);
+                     @Param("id") Long id);
 
     /**
      * 添加菜单
@@ -92,14 +92,14 @@ public interface AuthMenuMapper extends BaseMapper<AuthMenu> {
      * @param id 角色id
      * @return 角色的菜单数组
      */
-    List<Long> selectMenuTreeById(Long id);
+    List<Long> selectMenuTreeById(@Param("id") Long id);
 
     /**
      * 根据角色id删除角色菜单关系
      * @param id 角色id
      * @return
      */
-    int deleteRoleMenuRelation(Long id);
+    int deleteRoleMenuRelation(@Param("id") Long id);
 
     /**
      * 插入角色和菜单对应关系

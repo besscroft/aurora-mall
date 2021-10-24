@@ -51,7 +51,8 @@ public class MenuController {
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer")
     })
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public AjaxResult list(@RequestParam("pageNum") Integer pageNum,
+                           @RequestParam("pageSize") Integer pageSize) {
         List<AuthMenu> list = menuService.getMenuPageList(pageNum, pageSize, null);
         return AjaxResult.success(CommonPage.restPage(list));
     }
@@ -91,7 +92,8 @@ public class MenuController {
             @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
     })
     @PutMapping("/changeSwitch")
-    public AjaxResult changeSwitch(@RequestParam boolean hidden, @RequestParam Long id) {
+    public AjaxResult changeSwitch(@RequestParam("hidden") boolean hidden,
+                                   @RequestParam("id") Long id) {
         AuthUser currentAdmin = userService.getCurrentAdmin();
         boolean b = menuService.changeSwitch(hidden, id, currentAdmin.getId());
         if (b) {
@@ -147,7 +149,8 @@ public class MenuController {
             @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
     })
     @PutMapping("/updateMenuTree")
-    public AjaxResult updateMenuTree(@RequestBody List<Long> data, @RequestParam Long id) {
+    public AjaxResult updateMenuTree(@RequestBody List<Long> data,
+                                     @RequestParam("id") Long id) {
         boolean b = menuService.updateMenuTree(data, id);
         if (b) {
             return AjaxResult.success("更新成功！");

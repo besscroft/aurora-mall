@@ -32,14 +32,14 @@ public interface AuthRoleMapper extends BaseMapper<AuthRole> {
      * @param keyword 关键字
      * @return 分页角色列表
      */
-    List<AuthRole> selectRoleListByPage(String keyword);
+    List<AuthRole> selectRoleListByPage(@Param("keyword") String keyword);
 
     /**
      * 根据id查询角色详细信息
      * @param id 角色id
      * @return
      */
-    AuthRole selectRoleById(Long id);
+    AuthRole selectRoleById(@Param("id") Long id);
 
     /**
      * 插入一条新角色数据
@@ -60,7 +60,7 @@ public interface AuthRoleMapper extends BaseMapper<AuthRole> {
      * @param ids 角色id集合
      * @return
      */
-    int deleteRoleById(List<Long> ids);
+    int deleteRoleById(@Param("ids") List<Long> ids);
 
     /**
      * 角色可用状态变更
@@ -76,7 +76,7 @@ public interface AuthRoleMapper extends BaseMapper<AuthRole> {
      * @param userId 用户id
      * @return
      */
-    int deleteUserRoleRelationById(Long userId);
+    int deleteUserRoleRelationById(@Param("userId") Long userId);
 
     /**
      * 更新用户和角色对应关系
@@ -85,6 +85,6 @@ public interface AuthRoleMapper extends BaseMapper<AuthRole> {
      * @return
      */
     int insertUserRoleRelation(@Param("userId") Long userId,
-                       @Param("roleId") Long roleId);
+                               @Param("roleId") Long roleId);
 
 }

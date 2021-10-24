@@ -2,6 +2,7 @@ package com.besscroft.aurora.mall.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface AuthResourceSortMapper extends BaseMapper<AuthResourceSort> {
      * @param keyword 关键字
      * @return 分页资源类别列表
      */
-    List<AuthResourceSort> selectResourceSortListByPage(String keyword);
+    List<AuthResourceSort> selectResourceSortListByPage(@Param("keyword") String keyword);
 
     /**
      * 新增资源类别
