@@ -20,7 +20,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, parent_id, create_time, title, parent_title, level, sort, name, path, icon, hidden
+        id, parent_id, create_time, title, parent_title, level, sort, name, path, icon, hidden, component
     </sql>
 
     <select id="getListById" resultSets="java.util.List" resultMap="authMenuMap">

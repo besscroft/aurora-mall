@@ -80,7 +80,7 @@
           <el-input v-model="form.description" placeholder="请输入资源描述" />
         </el-form-item>
         <el-form-item label="排序" prop="email">
-          <el-input v-model="form.sort" placeholder="请输入资源路径" />
+          <el-input v-model="form.sort" placeholder="请输入排序" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
