@@ -146,7 +146,7 @@ public class MenuController {
     @ApiOperation("更新菜单树")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "data", value = "菜单树数据",required = true, dataType = "Long"),
-            @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
+            @ApiImplicitParam(name = "id", value = "角色id",required = true, dataType = "Long")
     })
     @PutMapping("/updateMenuTree")
     public AjaxResult updateMenuTree(@RequestBody List<Long> data,
