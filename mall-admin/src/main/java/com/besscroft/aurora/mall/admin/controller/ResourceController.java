@@ -105,7 +105,7 @@ public class ResourceController {
     @ApiOperation("更新资源树")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "data", value = "资源树数据",required = true, dataType = "Long"),
-            @ApiImplicitParam(name = "id", value = "菜单id",required = true, dataType = "Long")
+            @ApiImplicitParam(name = "id", value = "角色id",required = true, dataType = "Long")
     })
     @PutMapping("/updateResourceTree")
     public AjaxResult updateResourceTree(@RequestBody List<Long> data,

@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.dto.ResourceParam;
@@ -8,10 +9,12 @@ import com.besscroft.aurora.mall.admin.mapper.AuthResourceSortMapper;
 import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
 import com.besscroft.aurora.mall.admin.mapper.RoleResourceRelationMapper;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
+import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.entity.AuthResource;
 import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
+import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.model.RoleResourceRelation;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,9 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
 
     @Value("${spring.application.name}")
     private String applicationName;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Map<String, List<String>> initRoleResourceMap() {
@@ -130,6 +136,11 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateResourceTree(List<Long> resourceIds, Long id) {
+        AuthUser currentAdmin = userService.getCurrentAdmin();
+        if (ObjectUtil.isNotEmpty(currentAdmin) && Objects.equals("admin", currentAdmin.getUsername())) {
+            // 超级管理员，默认拥有所有的权限，不允许更改！
+            return false;
+        }
         int i = this.baseMapper.deleteRoleResourceRelation(id);
         if (i > 0) {
             int relation = this.baseMapper.insertRoleResourceRelation(resourceIds, id);

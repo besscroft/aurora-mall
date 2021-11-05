@@ -1,11 +1,14 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.AuthMenuMapper;
 import com.besscroft.aurora.mall.admin.service.MenuService;
+import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.entity.AuthMenu;
+import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.model.MetaVo;
 import com.besscroft.aurora.mall.common.model.RouterVo;
 import com.github.pagehelper.PageHelper;
@@ -26,6 +29,9 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Map<String, Object> getTreeListById(Long adminId) {
@@ -165,6 +171,11 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateMenuTree(List<Long> menuIds, Long id) {
+        AuthUser currentAdmin = userService.getCurrentAdmin();
+        if (ObjectUtil.isNotEmpty(currentAdmin) && Objects.equals("admin", currentAdmin.getUsername())) {
+            // 超级管理员，默认拥有所有菜单，不允许更改！
+            return false;
+        }
         int i = this.baseMapper.deleteRoleMenuRelation(id);
         if (i > 0) {
             int j = this.baseMapper.insertRoleMenuRelation(menuIds, id);
