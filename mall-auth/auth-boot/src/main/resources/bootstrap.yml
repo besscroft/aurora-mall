@@ -1,9 +1,9 @@
 server:
-  port: 8000
+  port: 20100
 
 spring:
   application:
-    name: mall-gateway
+    name: mall-auth
   profiles:
     active: '@spring.active@'
   cloud:
@@ -17,3 +17,5 @@ spring:
         prefix: ${spring.application.name}
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yaml
+  main:
+    allow-bean-definition-overriding: true

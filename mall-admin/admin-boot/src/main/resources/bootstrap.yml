@@ -1,9 +1,9 @@
 server:
-  port: 8000
+  port: 20200
 
 spring:
   application:
-    name: mall-gateway
+    name: mall-admin
   profiles:
     active: '@spring.active@'
   cloud:
