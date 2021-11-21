@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.besscroft.aurora.mall.auth.fallback.UserFeignFallbackClient,\
+  com.besscroft.aurora.mall.auth.fallback.AdminFeignFallbackClient
