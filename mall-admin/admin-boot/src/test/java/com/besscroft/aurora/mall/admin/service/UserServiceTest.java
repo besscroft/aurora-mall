@@ -1,6 +1,6 @@
 package com.besscroft.aurora.mall.admin.service;
 
-import com.besscroft.aurora.mall.admin.dto.AdminParam;
+import com.besscroft.aurora.mall.admin.domain.param.AdminParam;
 import com.besscroft.aurora.mall.common.domain.UserDto;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.entity.AuthUser;

@@ -13,3 +13,45 @@ export function listProductSkuList(listQuery) {
     }
   })
 }
+
+// 获取商品套餐详情
+export function getProductSkuById(id) {
+  return request({
+    url: '/mall-admin/productSku/getProductSkuById/' + id,
+    method: 'get'
+  })
+}
+
+// 新增商品套餐
+export function addProductSku(data) {
+  return request({
+    url: '/mall-admin/productSku/addSku',
+    method: 'post',
+    data: {
+      productId: data.productId,
+      price: data.price,
+      stock: data.stock,
+      lowStock: data.lowStock,
+      pic: data.pic,
+      lockStock: data.lockStock,
+      spData: data.spData
+    }
+  })
+}
+
+// 修改商品套餐
+export function updateProductSku(data) {
+  return request({
+    url: '/mall-admin/productSku/updateSku',
+    method: 'put',
+    data: data
+  })
+}
+
+// 删除商品套餐
+export function deleteProductSku(id) {
+  return request({
+    url: '/mall-admin/productSku/productSkuDel/' + id,
+    method: 'delete'
+  })
+}

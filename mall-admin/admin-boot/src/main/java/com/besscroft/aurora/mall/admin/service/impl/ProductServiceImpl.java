@@ -11,7 +11,7 @@ import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.domain.ProductExcelDto;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.entity.Product;
-import com.besscroft.aurora.mall.common.mapper.ProductConverterMapper;
+import com.besscroft.aurora.mall.admin.converter.ProductConverterMapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

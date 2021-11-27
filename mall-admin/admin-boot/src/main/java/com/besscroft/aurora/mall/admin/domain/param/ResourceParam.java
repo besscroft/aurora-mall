@@ -1,4 +1,4 @@
-package com.besscroft.aurora.mall.admin.dto;
+package com.besscroft.aurora.mall.admin.domain.param;
 
 import com.besscroft.aurora.mall.common.entity.AuthResource;
 import lombok.Data;

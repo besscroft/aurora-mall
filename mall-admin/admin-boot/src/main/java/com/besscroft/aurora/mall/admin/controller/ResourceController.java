@@ -1,6 +1,6 @@
 package com.besscroft.aurora.mall.admin.controller;
 
-import com.besscroft.aurora.mall.admin.dto.ResourceParam;
+import com.besscroft.aurora.mall.admin.domain.param.ResourceParam;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
 import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.AuthResource;
