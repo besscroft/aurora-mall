@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductSortMapper;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @Author Bess Croft
@@ -67,6 +70,18 @@ public class ProductSortServiceImpl extends ServiceImpl<ProductSortMapper, Produ
             return this.baseMapper.changeSwitch(1, id) > 0;
         }
         return this.baseMapper.changeSwitch(0, id) > 0;
+    }
+
+    @Override
+    public Map<String, String> getProductSortDict() {
+        List<ProductSort> list = this.list();
+        if (CollUtil.isNotEmpty(list)) {
+            Map<String, String> map = list.stream().collect(Collectors.toMap(
+                    productSort -> productSort.getId(), productSort -> productSort.getName()
+            ));
+            return map;
+        }
+        return null;
     }
 
 }

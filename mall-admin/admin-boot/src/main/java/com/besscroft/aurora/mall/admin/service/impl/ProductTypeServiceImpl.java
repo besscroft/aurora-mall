@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.ProductTypeMapper;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @Author Bess Croft
@@ -46,6 +49,18 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
     @Transactional(rollbackFor = Exception.class)
     public boolean delProductType(List<String> ids) {
         return this.baseMapper.deleteBatchIds(ids) > 0;
+    }
+
+    @Override
+    public Map<String, String> getProductTypeDict() {
+        List<ProductType> list = this.list();
+        if (CollUtil.isNotEmpty(list)) {
+            Map<String, String> map = list.stream().collect(Collectors.toMap(
+                    productType -> productType.getId(), productType -> productType.getName()
+            ));
+            return map;
+        }
+        return null;
     }
 
 }

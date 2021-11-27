@@ -54,3 +54,11 @@ export function exportProductType(query) {
     params: query
   })
 }
+
+// 商品类型字典
+export function getProductTypeDict() {
+  return request({
+    url: '/mall-admin/productType/getProductTypeDict',
+    method: 'get'
+  })
+}

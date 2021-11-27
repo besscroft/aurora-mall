@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.common.entity.ProductSort;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台管理商品分类服务
@@ -63,5 +64,11 @@ public interface ProductSortService extends IService<ProductSort> {
      * @return
      */
     boolean changeSwitch(boolean showStatus, String id);
+
+    /**
+     * 商品分类字典
+     * @return
+     */
+    Map<String, String> getProductSortDict();
 
 }

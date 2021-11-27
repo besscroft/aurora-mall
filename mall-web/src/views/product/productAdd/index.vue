@@ -186,6 +186,9 @@ import { mapGetters } from 'vuex'
 import { getToken } from "@/api/imgUtils";
 import { Message } from "element-ui";
 import { productAdd } from '@/api/product/productAdd'
+import { getProductBrandDict } from '@/api/product/productBrand'
+import { getProductSortDict } from '@/api/product/productSort'
+import { getProductTypeDict } from '@/api/product/productType'
 
 const defaultProductParam = {
   // 商品货号/编号

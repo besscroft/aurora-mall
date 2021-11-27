@@ -74,3 +74,11 @@ export function getProductSortByParent() {
     method: 'get'
   })
 }
+
+// 商品分类字典
+export function getProductSortDict() {
+  return request({
+    url: '/mall-admin/productSort/getProductSortDict' ,
+    method: 'get'
+  })
+}

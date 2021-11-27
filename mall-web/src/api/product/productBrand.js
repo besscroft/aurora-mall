@@ -66,3 +66,11 @@ export function changeSwitch(row) {
     }
   })
 }
+
+// 商品品牌字典
+export function getProductBrandDict() {
+  return request({
+    url: '/mall-admin/productBrand/getProductBrandDict',
+    method: 'get'
+  })
+}
