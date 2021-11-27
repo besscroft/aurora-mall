@@ -30,14 +30,6 @@
             :disabled="multiple"
             @click="handleDelete"
           >删除</el-button>
-          <el-button
-            type="success"
-            plain
-            icon="el-icon-plus"
-            size="mini"
-            :disabled="multiple"
-            @click="handleExport"
-          >导出</el-button>
         </el-col>
         <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
@@ -49,7 +41,7 @@
         <el-table-column label="套餐编码" width="100" align="center">
           <template slot-scope="scope">{{scope.row.skuCode}}</template>
         </el-table-column>
-        <el-table-column label="套餐价格(单位：元)" width="100" align="center">
+        <el-table-column label="套餐价格(单位：元)" width="200" align="center">
           <template slot-scope="scope">{{scope.row.price}}</template>
         </el-table-column>
         <el-table-column label="库存" width="100" align="center">
@@ -59,16 +51,18 @@
           <template slot-scope="scope">{{scope.row.lowStock}}</template>
         </el-table-column>
         <el-table-column label="展示图片" width="100" align="center">
-          <template slot-scope="scope">{{scope.row.pic}}</template>
+          <template slot-scope="scope">
+            <img :src="scope.row.pic" class="image" style="width: 3.125rem;height: 3.125rem;" />
+          </template>
         </el-table-column>
         <el-table-column label="销量" width="100" align="center">
           <template slot-scope="scope">{{scope.row.sale}}</template>
         </el-table-column>
         <el-table-column label="锁定库存" width="100" align="center">
-          <template slot-scope="scope">{{scope.row.lowStock}}</template>
+          <template slot-scope="scope">{{scope.row.lockStock}}</template>
         </el-table-column>
-        <el-table-column label="商品销售属性" width="120" align="center">
-          <template slot-scope="scope">{{scope.row.spData}}></template>
+        <el-table-column label="商品销售属性" align="center">
+          <template slot-scope="scope">{{scope.row.spData}}</template>
         </el-table-column>
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right" width="100">
           <template slot-scope="scope">
@@ -98,12 +92,41 @@
       :total="total">
     </el-pagination>
 
+    <!-- 添加或修改商品套餐对话框 -->
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" label-width="200px">
+        <el-form-item label="套餐价格(单位：元；精确到小数点后2位)" prop="icon">
+          <el-input v-model="form.price" type="number" placeholder="请输入套餐价格" />
+        </el-form-item>
+        <el-form-item label="库存" prop="icon">
+          <el-input v-model="form.stock" type="number" placeholder="请输入库存数量" />
+        </el-form-item>
+        <el-form-item label="预警库存">
+          <el-input v-model="form.lowStock" type="number" placeholder="请输入预警库存数量" />
+        </el-form-item>
+        <el-form-item label="展示图片" prop="icon">
+          <el-input v-model="form.pic" type="textarea" placeholder="请输入展示图片" />
+        </el-form-item>
+        <el-form-item label="锁定库存" prop="icon">
+          <el-input v-model="form.lockStock" type="number" placeholder="请输入锁定库存" />
+        </el-form-item>
+        <el-form-item label="商品销售属性" prop="icon">
+          <el-input v-model="form.spData" type="textarea" placeholder="请输入商品销售属性" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { listProductSkuList } from "@/api/product/productSku";
+import { listProductSkuList, getProductSkuById, addProductSku, updateProductSku, deleteProductSku } from "@/api/product/productSku";
+import { Message } from "element-ui";
 
 const defaultAdminProductSkuList = {
   // 查询参数
@@ -157,7 +180,8 @@ export default {
         // 分页参数（条）
         pageSize: 10,
         keyword: null
-      }
+      },
+      dialogFormVisible: false
     }
   },
   beforeCreate() {
@@ -165,12 +189,18 @@ export default {
       this.$store.dispatch("tagsView/delView", this.$route)
       this.$router.push({ path: '/product/productList' })
     }
-    this.productId = this.$route.query.id
   },
   mounted() {
-    console.log("当前商品id为:" + this.$route.query.id)
     this.listQuery.productId = this.$route.query.id
+    this.productId = this.$route.query.id
     this.getList()
+  },
+  watch: {
+    dialogFormVisible(val) {
+      if (!val) {
+        this.resetForm()
+      }
+    },
   },
   methods: {
     /** 查询商品套餐列表 */
@@ -187,6 +217,7 @@ export default {
     cancel() {
       this.open = false;
       this.parentFlag = false;
+      this.dialogFormVisible = false
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -199,6 +230,63 @@ export default {
       this.single = selection.length!==1
       this.multiple = !selection.length
     },
+    /** 新增按钮操作 */
+    handleAdd() {
+      this.dialogFormVisible = true
+      this.open = true
+      this.title = "添加商品套餐"
+    },
+    /** 修改按钮操作 */
+    handleUpdate(row) {
+      this.pwdFlag = false
+      const id = row.id || this.ids
+      getProductSkuById(id).then(response => {
+        this.$nextTick(() => {
+          this.dialogFormVisible = true
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改商品套餐";
+        })
+      });
+    },
+    /** 提交按钮 */
+    submitForm() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.form.id != null) {
+            updateProductSku(this.form).then(response => {
+              Message.success(response.message);
+              this.dialogFormVisible = false
+              this.open = false;
+              this.getList();
+            });
+          } else {
+            console.log(this.$data.productId)
+            this.form.productId = this.productId
+            addProductSku(this.form).then(response => {
+              Message.success(response.message);
+              this.dialogFormVisible = false
+              this.open = false;
+              this.getList();
+            });
+          }
+        }
+      });
+    },
+    /** 删除按钮操作 */
+    handleDelete(row) {
+      const ids = row.id || this.ids;
+      this.$confirm('是否确认删除商品套餐资源编号为"' + ids + '"的数据项?', "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(function() {
+        return deleteProductSku(ids);
+      }).then(response => {
+        this.getList();
+        Message.success(response.message);
+      })
+    },
     // 分页
     // 每页显示条目个数处理
     handleSizeChange(event) {
@@ -209,6 +297,11 @@ export default {
     handleCurrentChange(event) {
       this.listQuery.pageNum = event
       this.getList()
+    },
+    // 重置表单为初始值并移除校验结果
+    resetForm() {
+      this.$refs["form"].resetFields()
+      this.form = Object.assign({}, defaultAdminProductSkuList)
     }
   }
 }

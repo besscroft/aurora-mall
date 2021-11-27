@@ -3,7 +3,7 @@ package com.besscroft.aurora.mall.admin.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.besscroft.aurora.mall.admin.dto.ResourceParam;
+import com.besscroft.aurora.mall.admin.domain.param.ResourceParam;
 import com.besscroft.aurora.mall.admin.mapper.AuthResourceMapper;
 import com.besscroft.aurora.mall.admin.mapper.AuthResourceSortMapper;
 import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
@@ -137,10 +137,6 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
     @Transactional(rollbackFor = Exception.class)
     public boolean updateResourceTree(List<Long> resourceIds, Long id) {
         AuthUser currentAdmin = userService.getCurrentAdmin();
-        if (ObjectUtil.isNotEmpty(currentAdmin) && Objects.equals("admin", currentAdmin.getUsername())) {
-            // 超级管理员，默认拥有所有的权限，不允许更改！
-            return false;
-        }
         int i = this.baseMapper.deleteRoleResourceRelation(id);
         if (i > 0) {
             int relation = this.baseMapper.insertRoleResourceRelation(resourceIds, id);

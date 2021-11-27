@@ -1,7 +1,7 @@
 package com.besscroft.aurora.mall.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.besscroft.aurora.mall.admin.dto.ResourceParam;
+import com.besscroft.aurora.mall.admin.domain.param.ResourceParam;
 import com.besscroft.aurora.mall.common.entity.AuthResource;
 
 import java.util.List;

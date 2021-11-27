@@ -1,4 +1,4 @@
-package com.besscroft.aurora.mall.common.mapper;
+package com.besscroft.aurora.mall.admin.converter;
 
 import com.besscroft.aurora.mall.common.domain.AuthUserExcelDto;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * @Description 管理系统用户对象拷贝接口
+ * @Description 管理系统用户对象转换器
  * @Author Bess Croft
  * @Time 2021/10/14 10:29
  */

@@ -1,4 +1,4 @@
-package com.besscroft.aurora.mall.common.mapper;
+package com.besscroft.aurora.mall.admin.converter;
 
 import com.besscroft.aurora.mall.common.domain.ProductExcelDto;
 import com.besscroft.aurora.mall.common.entity.Product;
@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * @Description 商品对象拷贝接口
+ * @Description 商品对象转换器
  * @Author Bess Croft
  * @Time 2021/10/14 14:28
  */

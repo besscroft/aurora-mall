@@ -2,8 +2,8 @@ package com.besscroft.aurora.mall.admin.controller;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.besscroft.aurora.mall.admin.dto.AdminParam;
-import com.besscroft.aurora.mall.admin.dto.UserLoginParam;
+import com.besscroft.aurora.mall.admin.domain.param.AdminParam;
+import com.besscroft.aurora.mall.admin.domain.param.UserLoginParam;
 import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.annotation.WebLog;

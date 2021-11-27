@@ -1,4 +1,4 @@
-package com.besscroft.aurora.mall.admin.dto;
+package com.besscroft.aurora.mall.admin.domain.param;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
