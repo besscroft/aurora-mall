@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Bess Croft
@@ -106,6 +107,14 @@ public class ProductSortController {
             return AjaxResult.success("修改成功");
         }
         return AjaxResult.success("修改失败");
+    }
+
+    @WebLog(description = "商品分类字典")
+    @ApiOperation("商品分类字典接口")
+    @GetMapping("/getProductSortDict")
+    public AjaxResult getProductSortDict() {
+        Map<String, String> map = productSortService.getProductSortDict();
+        return AjaxResult.success(map);
     }
 
 }

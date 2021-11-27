@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.besscroft.aurora.mall.common.entity.ProductType;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台管理商品类型服务
@@ -49,5 +50,11 @@ public interface ProductTypeService extends IService<ProductType> {
      * @return
      */
     boolean delProductType(List<String> ids);
+
+    /**
+     * 商品类型字典
+     * @return
+     */
+    Map<String, String> getProductTypeDict();
 
 }

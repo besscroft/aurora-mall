@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Bess Croft
@@ -98,6 +99,14 @@ public class ProductBrandController {
             return AjaxResult.success("修改成功");
         }
         return AjaxResult.success("修改失败");
+    }
+
+    @WebLog(description = "商品品牌字典查询")
+    @ApiOperation("商品品牌字典查询接口")
+    @GetMapping("/getProductBrandDict")
+    public AjaxResult getProductBrandDict() {
+        Map<String, String> map = productBrandService.getProductBrandDict();
+        return AjaxResult.success(map);
     }
 
 }
