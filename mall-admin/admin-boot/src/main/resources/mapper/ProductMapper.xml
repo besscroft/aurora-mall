@@ -28,8 +28,6 @@
         <result column="aurora_bit" property="auroraBit"/>
         <result column="sub_title" property="subTitle"/>
         <result column="description" property="description"/>
-        <result column="stock" property="stock"/>
-        <result column="low_stock" property="lowStock"/>
         <result column="unit" property="unit"/>
         <result column="weight" property="weight"/>
         <result column="preview_status" property="previewStatus"/>
@@ -66,8 +64,6 @@
         aurora_bit,
         sub_title,
         description,
-        stock,
-        low_stock,
         unit,
         weight,
         preview_status,

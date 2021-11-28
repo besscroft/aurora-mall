@@ -12,6 +12,7 @@ export function listProductList(listQuery) {
   })
 }
 
+// 获取商品信息
 export function getProduct(id) {
   return request({
     url: '/mall-admin/product/updateInfo/' + id,

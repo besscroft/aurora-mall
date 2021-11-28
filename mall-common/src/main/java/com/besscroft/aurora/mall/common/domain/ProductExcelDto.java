@@ -94,14 +94,6 @@ public class ProductExcelDto {
     @ExcelProperty("商品描述")
     private String description;
 
-    /** 库存 */
-    @ExcelProperty("库存")
-    private Long stock;
-
-    /** 库存预警值 */
-    @ExcelProperty("库存预警值")
-    private Long lowStock;
-
     /** 单位 */
     @ExcelProperty("单位")
     private String unit;
