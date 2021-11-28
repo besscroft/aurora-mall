@@ -5,7 +5,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <!--只接受程序中DEBUG级别的日志进行处理-->
             <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] %-5level %class{36} %L %M {requestId=%X{requestId}} - %msg%xEx%n"/>
         </Console>
 
         <!--处理DEBUG级别的日志，并把该日志放到logs/debug.log文件中-->
@@ -17,7 +17,7 @@
                 <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="NEUTRAL"/>
             </Filters>
             <PatternLayout
-                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M - %msg%xEx%n"/>
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M {requestId=%X{requestId}} - %msg%xEx%n"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="500 MB"/>
                 <TimeBasedTriggeringPolicy/>
@@ -33,7 +33,7 @@
                 <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
             </Filters>
             <PatternLayout
-                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M - %msg%xEx%n"/>
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M {requestId=%X{requestId}} - %msg%xEx%n"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="500 MB"/>
                 <TimeBasedTriggeringPolicy/>
@@ -48,7 +48,7 @@
                 <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
             </Filters>
             <PatternLayout
-                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M - %msg%xEx%n"/>
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M {requestId=%X{requestId}} - %msg%xEx%n"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="500 MB"/>
                 <TimeBasedTriggeringPolicy/>
@@ -60,7 +60,7 @@
                      filePattern="logs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">
             <ThresholdFilter level="ERROR"/>
             <PatternLayout
-                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M - %msg%xEx%n"/>
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M {requestId=%X{requestId}} - %msg%xEx%n"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="500 MB"/>
                 <TimeBasedTriggeringPolicy/>
@@ -70,7 +70,7 @@
         <!--druid的日志记录追加器-->
         <RollingFile name="druidSqlRollingFile" fileName="./logs/druid-sql.log"
                      filePattern="logs/$${date:yyyy-MM}/api-%d{yyyy-MM-dd}-%i.log.gz">
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %L %M - %msg%xEx%n"/>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %L %M {requestId=%X{requestId}} - %msg%xEx%n"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="500 MB"/>
                 <TimeBasedTriggeringPolicy/>
