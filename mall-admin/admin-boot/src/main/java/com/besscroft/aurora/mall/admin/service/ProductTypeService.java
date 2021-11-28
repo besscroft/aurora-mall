@@ -55,6 +55,6 @@ public interface ProductTypeService extends IService<ProductType> {
      * 商品类型字典
      * @return
      */
-    Map<String, String> getProductTypeDict();
+    List<Map<String, String>> getProductTypeDict();
 
 }

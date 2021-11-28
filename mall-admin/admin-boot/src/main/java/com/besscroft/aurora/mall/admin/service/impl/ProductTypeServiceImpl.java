@@ -10,6 +10,8 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -52,13 +54,17 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
     }
 
     @Override
-    public Map<String, String> getProductTypeDict() {
+    public List<Map<String, String>> getProductTypeDict() {
         List<ProductType> list = this.list();
         if (CollUtil.isNotEmpty(list)) {
-            Map<String, String> map = list.stream().collect(Collectors.toMap(
-                    productType -> productType.getId(), productType -> productType.getName()
-            ));
-            return map;
+            List<Map<String, String>> mapArrayList = new ArrayList<>();
+            list.forEach(productType -> {
+                Map<String, String> map = new HashMap();
+                map.put("productTypeId", productType.getId());
+                map.put("productTypeName", productType.getName());
+                mapArrayList.add(map);
+            });
+            return mapArrayList;
         }
         return null;
     }

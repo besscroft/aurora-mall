@@ -63,6 +63,6 @@ public interface ProductBrandService extends IService<ProductBrand> {
      * 商品品牌字典
      * @return
      */
-    Map<String, String> getProductBrandDict();
+    List<Map<String, String>> getProductBrandDict();
 
 }

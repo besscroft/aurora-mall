@@ -105,7 +105,7 @@ public class ProductBrandController {
     @ApiOperation("商品品牌字典查询接口")
     @GetMapping("/getProductBrandDict")
     public AjaxResult getProductBrandDict() {
-        Map<String, String> map = productBrandService.getProductBrandDict();
+        List<Map<String, String>> map = productBrandService.getProductBrandDict();
         return AjaxResult.success(map);
     }
 

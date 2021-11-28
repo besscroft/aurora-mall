@@ -113,7 +113,7 @@ public class ProductSortController {
     @ApiOperation("商品分类字典接口")
     @GetMapping("/getProductSortDict")
     public AjaxResult getProductSortDict() {
-        Map<String, String> map = productSortService.getProductSortDict();
+        List<Map<String, String>> map = productSortService.getProductSortDict();
         return AjaxResult.success(map);
     }
 

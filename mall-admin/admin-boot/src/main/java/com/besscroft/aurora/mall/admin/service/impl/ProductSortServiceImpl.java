@@ -10,10 +10,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * @Author Bess Croft
@@ -73,13 +70,17 @@ public class ProductSortServiceImpl extends ServiceImpl<ProductSortMapper, Produ
     }
 
     @Override
-    public Map<String, String> getProductSortDict() {
+    public List<Map<String, String>> getProductSortDict() {
         List<ProductSort> list = this.list();
         if (CollUtil.isNotEmpty(list)) {
-            Map<String, String> map = list.stream().collect(Collectors.toMap(
-                    productSort -> productSort.getId(), productSort -> productSort.getName()
-            ));
-            return map;
+            List<Map<String, String>> mapArrayList = new ArrayList<>();
+            list.forEach(productSort -> {
+                Map<String, String> map = new HashMap();
+                map.put("productCategoryId", productSort.getId());
+                map.put("productCategoryName", productSort.getName());
+                mapArrayList.add(map);
+            });
+            return mapArrayList;
         }
         return null;
     }

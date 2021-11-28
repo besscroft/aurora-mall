@@ -89,7 +89,7 @@ public class ProductTypeController {
     @ApiOperation("商品类型字典接口")
     @GetMapping("/getProductTypeDict")
     public AjaxResult getProductTypeDict() {
-        Map<String, String> map = productTypeService.getProductTypeDict();
+        List<Map<String, String>> map = productTypeService.getProductTypeDict();
         return AjaxResult.success(map);
     }
 

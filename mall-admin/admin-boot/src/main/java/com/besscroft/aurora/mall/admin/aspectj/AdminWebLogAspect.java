@@ -24,8 +24,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @Author Bess Croft
@@ -44,7 +43,7 @@ public class AdminWebLogAspect extends WebLogAspect {
     /** 用来记录请求进入的时间，防止多线程时出错，这里用了ThreadLocal */
     private ThreadLocal<Long> START_TIME = new ThreadLocal<>();
 
-    private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
+    private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(10);
 
     @Resource
     private LogFeignClient logFeignClient;
@@ -105,7 +104,6 @@ public class AdminWebLogAspect extends WebLogAspect {
                     logFeignClient.mallLog(webLog);
                 }
             }));
-            EXECUTOR.shutdown();
         } catch (Exception e) {
             LOGGER.error("调用 mall-log 服务失败！");
             e.printStackTrace();
