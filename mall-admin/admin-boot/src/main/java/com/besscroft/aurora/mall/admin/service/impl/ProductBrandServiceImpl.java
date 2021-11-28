@@ -10,9 +10,10 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @Author Bess Croft
@@ -61,13 +62,17 @@ public class ProductBrandServiceImpl extends ServiceImpl<ProductBrandMapper, Pro
     }
 
     @Override
-    public Map<String, String> getProductBrandDict() {
+    public List<Map<String, String>> getProductBrandDict() {
         List<ProductBrand> list = this.list();
         if (CollUtil.isNotEmpty(list)) {
-            Map<String, String> map = list.stream().collect(Collectors.toMap(
-                    productBrand -> productBrand.getId(), productBrand -> productBrand.getName()
-            ));
-            return map;
+            List<Map<String, String>> mapArrayList = new ArrayList<>();
+            list.forEach(productBrand -> {
+                Map<String, String> map = new HashMap();
+                map.put("brandId", productBrand.getId());
+                map.put("brandName", productBrand.getName());
+                mapArrayList.add(map);
+            });
+            return mapArrayList;
         }
         return null;
     }

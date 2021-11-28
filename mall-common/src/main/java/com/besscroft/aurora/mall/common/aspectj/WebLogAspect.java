@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.common.aspectj;
 
+import cn.hutool.core.lang.UUID;
 import cn.hutool.json.JSONUtil;
 import com.besscroft.aurora.mall.common.annotation.WebLog;
 import org.aspectj.lang.JoinPoint;
@@ -7,6 +8,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,6 +27,8 @@ import java.lang.reflect.Method;
 @Component
 @Order(1)
 public class WebLogAspect {
+
+    private static final String KEY = "requestId";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
@@ -57,6 +61,8 @@ public class WebLogAspect {
         LOGGER.info("Response Args:{}", JSONUtil.toJsonStr(result));
         // 执行时间
         LOGGER.info("Time Consuming:{}", System.currentTimeMillis() - START_TIME.get());
+        // 出口移除请求ID
+        MDC.remove(KEY);
         return result;
     }
 
@@ -66,6 +72,8 @@ public class WebLogAspect {
      */
     @Before("webLog()")
     public void deBefore(JoinPoint joinPoint) throws Exception {
+        // 入口传入请求ID
+        MDC.put(KEY, UUID.randomUUID().toString());
         // 获取当前请求对象
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();

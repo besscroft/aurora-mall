@@ -116,14 +116,6 @@ public class Product implements Serializable {
     @ApiModelProperty(value = "商品描述", dataType = "String")
     private String description;
 
-    /** 库存 */
-    @ApiModelProperty(value = "库存", dataType = "Long")
-    private Long stock;
-
-    /** 库存预警值 */
-    @ApiModelProperty(value = "库存预警值", dataType = "Long")
-    private Long lowStock;
-
     /** 单位 */
     @ApiModelProperty(value = "单位", dataType = "String")
     private String unit;

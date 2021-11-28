@@ -69,6 +69,6 @@ public interface ProductSortService extends IService<ProductSort> {
      * 商品分类字典
      * @return
      */
-    Map<String, String> getProductSortDict();
+    List<Map<String, String>> getProductSortDict();
 
 }

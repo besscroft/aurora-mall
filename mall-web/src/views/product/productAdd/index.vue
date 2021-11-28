@@ -324,6 +324,21 @@ export default {
       this.token.token = data.token
       console.log(this.token)
     });
+    // 获取商品品牌字典
+    getProductBrandDict().then(response => {
+      const data = response.data
+      this.brandDataList = data
+    });
+    // 获取商品分类字典
+    getProductSortDict().then(response => {
+      const data = response.data
+      this.productCategoryDataList = data
+    });
+    // 商品类型字典
+    getProductTypeDict().then(response => {
+      const data = response.data
+      this.productTypeDataList = data
+    });
   },
   watch: {
     dialogFormVisible(val) {

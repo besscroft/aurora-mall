@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,9 +30,9 @@ public class ProductBrandServiceTest {
 
     @Test
     public void getProductBrandDict() {
-        Map<String, String> map = productBrandService.getProductBrandDict();
+        List<Map<String, String>> list = productBrandService.getProductBrandDict();
         try {
-            String string = objectMapper.writeValueAsString(map);
+            String string = objectMapper.writeValueAsString(list);
             log.info("商品品牌字典:{}", string);
         } catch (JsonProcessingException e) {
             e.printStackTrace();

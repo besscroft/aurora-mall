@@ -1,6 +1,6 @@
 ## aurora-mall	极光商城
 
-[![](https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E8%BF%9B%E5%BA%A6-%E5%BC%80%E5%8F%91%E4%B8%AD-brightgreen?style=flat-square)]() [![](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://github.com/besscroft/aurora-mall/blob/master/LICENSE) [![](https://img.shields.io/badge/release-v0.0.8-orange?style=flat-square)]()
+[![](https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E8%BF%9B%E5%BA%A6-%E5%BC%80%E5%8F%91%E4%B8%AD-brightgreen?style=flat-square)]() [![](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://github.com/besscroft/aurora-mall/blob/master/LICENSE) [![](https://img.shields.io/badge/release-v0.1.0-orange?style=flat-square)]()![GitHub repo size](https://img.shields.io/github/repo-size/besscroft/aurora-mall?style=flat-square&color=328657)
 
 ### 简介
 
@@ -8,54 +8,44 @@ aurora-mall 是一个微服务商城项目，我做这个项目的目的就是�
 
 ### 预览地址
 
-预计每周末更新预览版本
+[演示站](https://mall.aurora.besscroft.com/) 预计每周末更新 `dev` 分支最新源码。
 
-https://mall.aurora.besscroft.com/
+```
+账号：admin
+密码：666666
+```
+## 文档
 
-### TODO
+> 我们安装，我们更新，我们开发
 
-- [ ] 管理平台订单模块的实现。
-- [ ] 管理平台商品模块的实现。
-- [x]  权限管理系统模块的实现。
-
-## 技术选型
-
-### 后端技术
-
-| 技术                 | 版本         | 说明                                                         | site                                            |
-| -------------------- | ------------ | ------------------------------------------------------------ | ----------------------------------------------- |
-| Spring Cloud         | 2020.0.1     | 微服务框架                                                   | https://spring.io/projects/spring-cloud         |
-| Spring Cloud Alibaba | 2021.1       | 微服务开发的一站式解决方案                                   | https://spring.io/projects/spring-cloud-alibaba |
-| Spring Boot          | 2.4.2        | *Spring Boot* — *Spring Boot*是基于Spring Framework 4.0衍生的，用于快速搭建独立的基于生产级别的Spring应用的框架，可以以最小的依赖引入来构建一个Spring应用。 | https://spring.io/projects/spring-boot          |
-| mybatis-plus         | 3.4.2        | 为简化开发而生                                               | https://baomidou.com/                           |
-| PageHelper           | starter1.3.0 | MyBatis物理分页插件                                          | http://git.oschina.net/free/Mybatis_PageHelper  |
-| Druid                | starter1.2.4 | 数据库连接池                                                 | https://github.com/alibaba/druid                |
-| Redis                |              | 分布式缓存                                                   |                                                 |
-| knife4j              | 2.0.4        | Swagger生成Api文档的增强解决方案                             | https://doc.xiaominfo.com                       |
-
-### 前端技术
-
-| 技术              | 说明                | 官网                                                    |
-| ----------------- | ------------------- | ------------------------------------------------------- |
-| Vue               | 前端框架            | https://vuejs.org/                                      |
-| Element           | 前端UI框架          | https://element.eleme.io/                               |
-| Axios             | 前端HTTP框架        | https://github.com/axios/axios                          |
-| vue-element-admin | A magical vue admin | https://panjiachen.github.io/vue-element-admin-site/zh/ |
-
+[aurora-mall 的文档](https://mall.doc.besscroft.com/)，在这里你可以找到大部分问题的解答。
 
 ## 环境搭建
 
 ### 开发环境
 
-* JDK 1.8
-* Idea 2021.1.3
-* [nodejs](https://nodejs.org/dist/latest-v12.x/) v12.20.1
+aurora-mall 的需要以下程序才能正常的安装和运行：
+
+- Git
+- MySQL 5.x
+- open/oracleJDK1.8+
+- nacos 1.4.1+
+- redis 6.0+
+- nginx 1.16+
+- elasticsearch 7+
+
+aurora-mall 支持安装在 LNMP、宝塔面板 等集成环境中, Docker、HeroKu 等容器环境中, 支持大部分能够运行 Java 的平台。
+安装教程请参阅 [文档](https://mall.doc.besscroft.com/)。
 
 ### 行为准则
 
 我们有一份 [行为准则](https://github.com/besscroft/aurora-mall/blob/main/CODE_OF_CONDUCT.md)，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
 
 ### 代码贡献
+
+[提出新想法 & 提交 Bug](https://github.com/besscroft/aurora-mall/issues/new) | [Fork & Pull Request](https://github.com/besscroft/aurora-mall/fork)
+
+aurora-mall 欢迎各种贡献，包括但不限于改进，新功能，文档和代码改进，问题和错误报告。
 
 我们有一份 [开源代码贡献小册](https://github.com/besscroft/aurora-mall/blob/main/fork-and-push.md) ，如果你还不会，可以看一下大概的思路，如果你已经会了，那么更好。
 

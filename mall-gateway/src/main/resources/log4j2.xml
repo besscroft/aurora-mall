@@ -95,6 +95,11 @@
             <appender-ref ref="druidSqlRollingFile"/>
         </logger>
 
+        <!-- 日志屏蔽-->
+        <logger name="org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator" level="OFF">
+            <appender-ref ref="RollingFileError"/>
+        </logger>
+
         <!--log4j2 自带过滤日志-->
         <Logger name="org.apache.catalina.startup.DigesterFactory" level="error" />
         <Logger name="org.apache.catalina.util.LifecycleBase" level="error" />
