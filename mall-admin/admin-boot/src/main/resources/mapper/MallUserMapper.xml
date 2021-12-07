@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.besscroft.aurora.mall.admin.mapper.MallUserMapper">
+
+    <resultMap id="userInfoMap" type="com.besscroft.aurora.mall.common.entity.UserInfo">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="avatar" property="avatar"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="city" property="city"/>
+        <result column="job" property="job"/>
+        <result column="personalized_signature" property="personalizedSignature"/>
+        <result column="source_type" property="sourceType"/>
+        <result column="aurora_point" property="auroraPoint"/>
+        <result column="aurora_bit" property="auroraBit"/>
+    </resultMap>
+
+    <sql id="selectUserInfoVo">
+        select
+            id, username, password, nickname, phone, status, create_time, avatar, gender, birthday, city, job, personalized_signature, source_type, aurora_point, aurora_bit
+        from
+            bms_user_info
+    </sql>
+
+    <select id="selectUserList" resultSets="java.util.List" resultMap="userInfoMap">
+        select
+            id, username, nickname, phone, status, create_time, avatar, gender, birthday, city, job, personalized_signature, source_type, aurora_point, aurora_bit
+        from
+            bms_user_info
+    </select>
+
+</mapper>
