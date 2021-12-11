@@ -1,6 +1,7 @@
 package com.besscroft.aurora.mall.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.besscroft.aurora.mall.admin.domain.dto.UserInfoDetailDto;
 import com.besscroft.aurora.mall.common.entity.UserInfo;
 
 import java.util.List;
@@ -19,5 +20,12 @@ public interface MallUserService extends IService<UserInfo> {
      * @return
      */
     List<UserInfo> getUserList(Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询用户的详情信息
+     * @param userId 用户id
+     * @return
+     */
+    UserInfoDetailDto getUserDetail(String userId);
 
 }

@@ -110,13 +110,32 @@
       :total="total">
     </el-pagination>
 
+    <el-dialog
+      title="用户详情"
+      :visible.sync="detailDialogVisible"
+      width="30%"
+      center>
+      <div :data="detailData" class="text">
+        <span>用户名：{{detailData.username}}</span><br />
+        <span>昵称：{{detailData.nickname}}</span><br />
+        <span>手机号码：{{detailData.phone}}</span><br />
+        <span>创建时间：{{detailData.createTime}}</span><br />
+        <span>个性签名：{{detailData.personalizedSignature}}</span><br />
+        <span>极光值：{{detailData.auroraPoint}}</span><br />
+        <span>极光币：{{detailData.auroraBit}}</span><br />
+      </div>
+      <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="detailDialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { Message } from "element-ui"
-import { delUser, getUserList } from "@/api/user/user";
+import {delUser, getUserDetail, getUserList} from "@/api/user/user";
 
 const defaultUserInfoList = {
   // 查询参数
@@ -162,6 +181,8 @@ export default {
       total: 0,
       // 表格数据
       dataList: [],
+      // 详情数据
+      detailData: {},
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -173,7 +194,9 @@ export default {
         pageNum: 0,
         // 分页参数（条）
         pageSize: 10
-      }
+      },
+      // 用户详情弹窗判断标识
+      detailDialogVisible: false
     };
   },
   created() {
@@ -188,6 +211,16 @@ export default {
         this.dataList = data;
         this.total = response.data.total;
         this.loading = false;
+      });
+    },
+    /** 用户详情 */
+    handleDetail(row) {
+      this.loading = true;
+      getUserDetail(row.id).then(response => {
+        const data = response.data;
+        this.detailData = data;
+        this.loading = false;
+        this.detailDialogVisible = true;
       });
     },
     // 取消按钮

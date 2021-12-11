@@ -12,6 +12,17 @@ export function getUserList(listQuery) {
   })
 }
 
+// 获取用户详情
+export function getUserDetail(id) {
+  return request({
+    url: '/mall-admin/mall/user/detail',
+    method: 'get',
+    params: {
+      id
+    }
+  })
+}
+
 // 删除用户（软删除）
 export function delUser(id) {
   return request({
