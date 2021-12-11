@@ -1,5 +1,6 @@
 package com.besscroft.aurora.mall.admin.controller;
 
+import com.besscroft.aurora.mall.admin.domain.dto.UserInfoDetailDto;
 import com.besscroft.aurora.mall.admin.service.MallUserService;
 import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.UserInfo;
@@ -41,6 +42,15 @@ public class MallUserController {
                               @RequestParam("pageSize") Integer pageSize) {
         List<UserInfo> list = mallUserService.getUserList(pageNum, pageSize);
         return AjaxResult.success(CommonPage.restPage(list));
+    }
+
+    @WebLog(description = "用户详情信息")
+    @ApiOperation("用户详情信息")
+    @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "String")
+    @GetMapping("/detail")
+    public AjaxResult getInfo(@RequestParam("id") String id) {
+        UserInfoDetailDto userDetail = mallUserService.getUserDetail(id);
+        return AjaxResult.success(userDetail);
     }
 
 }
