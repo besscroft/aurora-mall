@@ -95,9 +95,9 @@
           <el-select v-model="form.parentId" placeholder="请选择父菜单">
             <el-option
               v-for="item in parentDataList"
-              :key="item.parentId"
+              :key="item.id"
               :label="item.title"
-              :value="item.parentId">
+              :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
