@@ -117,4 +117,12 @@ public class ResourceController {
         return AjaxResult.error("哎呀，更新失败了呢！");
     }
 
+    @WebLog(description = "初始化资源角色规则")
+    @ApiOperation("初始化资源角色规则")
+    @GetMapping("/initRoleResourceMap")
+    public AjaxResult initRoleResourceMap() {
+        resourceService.initRoleResourceMap();
+        return AjaxResult.success("初始化成功！");
+    }
+
 }

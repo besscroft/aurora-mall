@@ -1,6 +1,5 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.domain.param.ResourceParam;
@@ -17,6 +16,7 @@ import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.model.RoleResourceRelation;
 import com.github.pagehelper.PageHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -25,12 +25,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
  * @Author Bess Croft
  * @Date 2021/3/17 15:49
  */
+@Slf4j
 @Service
 public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthResource> implements ResourceService {
 
@@ -77,6 +79,9 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
         }
         redisTemplate.delete(AuthConstants.PERMISSION_RULES_KEY);
         redisTemplate.opsForHash().putAll(AuthConstants.PERMISSION_RULES_KEY, RoleResourceMap);
+        // 设置过期时间
+        Boolean expire = redisTemplate.expire(AuthConstants.PERMISSION_RULES_KEY, 60 * 60, TimeUnit.SECONDS);
+        log.info("权限初始化结果:{}", expire);
         return RoleResourceMap;
     }
 
