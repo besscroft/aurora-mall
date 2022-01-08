@@ -48,9 +48,6 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
-    private ResourceServiceImpl resourceServiceImpl;
-
     @Value("${spring.application.name}")
     private String applicationName;
 
@@ -145,7 +142,7 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
         int i = this.baseMapper.deleteRoleResourceRelation(id);
         if (i > 0) {
             int relation = this.baseMapper.insertRoleResourceRelation(resourceIds, id);
-            resourceServiceImpl.initRoleResourceMap();
+            initRoleResourceMap();
             return relation > 0;
         }
         return false;

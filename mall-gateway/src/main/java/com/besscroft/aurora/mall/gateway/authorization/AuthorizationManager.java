@@ -5,16 +5,10 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.gateway.config.IgnoreUrlsConfig;
-import com.besscroft.aurora.mall.gateway.service.AdminFeignClient;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
@@ -27,8 +21,6 @@ import org.springframework.util.PathMatcher;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * @Author Bess Croft
@@ -43,9 +35,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
     @Autowired
     private IgnoreUrlsConfig ignoreUrlsConfig;
-    
-    @Autowired
-    private AdminFeignClient adminFeignClient;
+
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
@@ -85,10 +75,9 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
         // 从Redis获取资源角色关系列表（即角色能访问的对应接口）
         Map<Object, Object> roleResourceMap = redisTemplate.opsForHash().entries(AuthConstants.PERMISSION_RULES_KEY);
-        if (CollUtil.isEmpty(roleResourceMap)) {
-            adminFeignClient.initRoleResourceMap();
-            roleResourceMap = redisTemplate.opsForHash().entries(AuthConstants.PERMISSION_RULES_KEY);
-        }
+//        if (CollUtil.isEmpty(roleResourceMap)) {
+//            roleResourceMap = redisTemplate.opsForHash().entries(AuthConstants.PERMISSION_RULES_KEY);
+//        }
         Iterator<Object> iterator = roleResourceMap.keySet().iterator();
 
         // 接口需要的角色权限集合authorities统计
