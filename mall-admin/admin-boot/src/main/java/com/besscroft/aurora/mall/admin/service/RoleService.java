@@ -52,7 +52,7 @@ public interface RoleService extends IService<AuthRole> {
 
     /**
      * 角色是否可用状态更新
-     * @param status 可以状态
+     * @param status 可用状态
      * @param id 角色id
      * @return
      */

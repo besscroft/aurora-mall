@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 /**
  * @Author Bess Croft
  * @Time 2021/9/5 17:50
@@ -26,8 +28,9 @@ public class UpdateLogServiceTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void getUpdateLogList() throws Exception {
+    void getUpdateLogList() throws Exception {
         List<UpdateLog> list = updateLogService.getUpdateLogList();
+        assertNotNull(list, "获取版本日志列表失败！");
         LOGGER.info("所有的版本日志:{}", objectMapper.writeValueAsString(list));
     }
 
