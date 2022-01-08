@@ -34,7 +34,7 @@ public class UserServiceTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void login() throws Exception {
+    void login() throws Exception {
         String username = "admin";
         String password = "666666";
         AjaxResult result = userService.login(username, password);
@@ -42,28 +42,29 @@ public class UserServiceTest {
     }
 
     @Test
-    public void logout() throws Exception {
+    void logout() throws Exception {
         Long adminId = 1L;
         boolean b = userService.logout(adminId);
         assertTrue(b, "退出登录操作失败！");
     }
 
     @Test
-    public void setLoginTime() throws Exception {
+    void setLoginTime() throws Exception {
         Long adminId = 1L;
         boolean b = userService.setLoginTime(LocalDateTime.now(), adminId);
         assertTrue(b, "登录成功后设置登录时间操作失败！");
     }
 
     @Test
-    public void loadUserByUsername() throws Exception {
+    void loadUserByUsername() throws Exception {
         String username = "admin";
         UserDto dto = userService.loadUserByUsername(username);
+        assertNotNull(dto, "获取当前用户信息失败！");
         LOGGER.info("当前用户的信息:{}", objectMapper.writeValueAsString(dto));
     }
 
     @Test
-    public void register() throws Exception {
+    void register() throws Exception {
         AdminParam param = new AdminParam();
         param.setUsername("test001");
         param.setPassword("666666");
@@ -73,33 +74,36 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getCurrentAdmin() throws Exception {
+    void getCurrentAdmin() throws Exception {
         AuthUser currentAdmin = userService.getCurrentAdmin();
-        assertNotNull(currentAdmin, "获取当前用户失败！");
+        assertNotNull(currentAdmin, "获取当前登录用户失败！");
     }
 
     @Test
-    public void getRoleList() throws Exception {
+    void getRoleList() throws Exception {
         Long adminId = 1L;
         List<AuthRole> roleList = userService.getRoleList(adminId);
+        assertNotNull(roleList, "获取用户角色列表失败！");
         LOGGER.info("用户对应的角色列表:{}", objectMapper.writeValueAsString(roleList));
     }
 
     @Test
-    public void getUserPageList() throws Exception {
+    void getUserPageList() throws Exception {
         List<AuthUser> userPageList = userService.getUserPageList(1, 10, "");
+        assertNotNull(userPageList, "获取用户列表失败！");
         LOGGER.info("用户列表:{}", objectMapper.writeValueAsString(userPageList));
     }
 
     @Test
-    public void getUserById() throws Exception {
+    void getUserById() throws Exception {
         Long adminId = 1L;
         AuthUser user = userService.getUserById(adminId);
+        assertNotNull(user, "获取用户详细信息失败！");
         LOGGER.info("用户详细信息:{}", objectMapper.writeValueAsString(user));
     }
 
     @Test
-    public void updateUser() throws Exception {
+    void updateUser() throws Exception {
         AuthUser user = AuthUser.builder().build();
         user.setId(3L);
         user.setNickName("测试");
@@ -108,21 +112,21 @@ public class UserServiceTest {
     }
 
     @Test
-    public void changeSwitch() throws Exception {
+    void changeSwitch() throws Exception {
         Long adminId = 1L;
         boolean b = userService.changeSwitch(true, adminId);
         assertTrue(b, "更新账号启用状态失败！");
     }
 
     @Test
-    public void delUser() throws Exception {
+    void delUser() throws Exception {
         Long adminId = 10L;
         boolean b = userService.delUser(adminId);
         assertTrue(b, "删除用户失败，可能该用户不存在！");
     }
 
     @Test
-    public void addUser() throws Exception {
+    void addUser() throws Exception {
         AuthUser user = AuthUser.builder().build();
         user.setUsername("test666");
         user.setPassword("666666");
@@ -131,8 +135,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getUserAllList() throws Exception {
+    void getUserAllList() throws Exception {
         List<AuthUser> userAllList = userService.getUserAllList();
+        assertNotNull(userAllList, "获取所有用户信息失败！");
         LOGGER.info("所有用户:{}", objectMapper.writeValueAsString(userAllList));
     }
 
