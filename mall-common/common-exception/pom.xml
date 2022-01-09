@@ -9,13 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.besscroft.aurora.mall</groupId>
-    <artifactId>mall-common</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>common-exception</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>common-core</module>
-        <module>common-exception</module>
-    </modules>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.besscroft.aurora.mall</groupId>
+            <artifactId>common-core</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

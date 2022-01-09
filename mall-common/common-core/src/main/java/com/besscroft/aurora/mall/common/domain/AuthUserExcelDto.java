@@ -3,7 +3,6 @@ package com.besscroft.aurora.mall.common.domain;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.besscroft.aurora.mall.common.converter.LocalDateTimeConverter;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

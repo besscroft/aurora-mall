@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>com.besscroft.aurora.mall</groupId>
-            <artifactId>mall-common</artifactId>
+            <artifactId>common-core</artifactId>
             <version>1.0</version>
             <exclusions>
                 <exclusion>
