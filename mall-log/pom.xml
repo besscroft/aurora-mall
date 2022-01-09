@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>com.besscroft.aurora.mall</groupId>
-            <artifactId>mall-common</artifactId>
+            <artifactId>common-core</artifactId>
             <version>1.0</version>
             <exclusions>
                 <exclusion>
@@ -30,6 +30,16 @@
                     <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.besscroft.aurora.mall</groupId>
+            <artifactId>common-exception</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.besscroft.aurora.mall</groupId>
+            <artifactId>common-log</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

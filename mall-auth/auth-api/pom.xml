@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.besscroft.aurora.mall</groupId>
-            <artifactId>mall-common</artifactId>
+            <artifactId>common-core</artifactId>
             <version>1.0</version>
             <exclusions>
                 <exclusion>
@@ -29,6 +29,11 @@
                     <artifactId>pagehelper-spring-boot-starter</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.besscroft.aurora.mall</groupId>
+            <artifactId>common-exception</artifactId>
+            <version>1.0</version>
         </dependency>
         <!-- openfeign依赖 1. http客户端选择okhttp 2. loadbalancer替换ribbon -->
         <dependency>
