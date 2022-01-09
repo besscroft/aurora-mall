@@ -13,7 +13,7 @@ import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.entity.AuthResource;
 import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
-import com.besscroft.aurora.mall.common.entity.AuthUser;
+import com.besscroft.aurora.mall.common.exception.NotPermissionException;
 import com.besscroft.aurora.mall.common.model.RoleResourceRelation;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -138,7 +138,10 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateResourceTree(List<Long> resourceIds, Long id) {
-        AuthUser currentAdmin = userService.getCurrentAdmin();
+        if (Objects.equals(id, 1L)) {
+            // 超级管理员，默认拥有所有权限，不允许更改！(给演示环境做的保护)
+            throw new NotPermissionException("演示环境不允许更改超级管理员的权限！");
+        }
         int i = this.baseMapper.deleteRoleResourceRelation(id);
         if (i > 0) {
             int relation = this.baseMapper.insertRoleResourceRelation(resourceIds, id);

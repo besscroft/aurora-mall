@@ -9,6 +9,7 @@ import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.entity.AuthMenu;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
+import com.besscroft.aurora.mall.common.exception.NotPermissionException;
 import com.besscroft.aurora.mall.common.model.MetaVo;
 import com.besscroft.aurora.mall.common.model.RouterVo;
 import com.github.pagehelper.PageHelper;
@@ -171,10 +172,9 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateMenuTree(List<Long> menuIds, Long id) {
-        AuthUser currentAdmin = userService.getCurrentAdmin();
-        if (ObjectUtil.isNotEmpty(currentAdmin) && Objects.equals("admin", currentAdmin.getUsername())) {
-            // 超级管理员，默认拥有所有菜单，不允许更改！
-            return false;
+        if (Objects.equals(id, 1L)) {
+            // 超级管理员，默认拥有所有菜单，不允许更改！(给演示环境做的保护)
+            throw new NotPermissionException("演示环境不允许更改超级管理员的菜单！");
         }
         int i = this.baseMapper.deleteRoleMenuRelation(id);
         if (i > 0) {

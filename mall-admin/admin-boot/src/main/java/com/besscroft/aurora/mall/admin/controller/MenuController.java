@@ -5,6 +5,7 @@ import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.entity.AuthMenu;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
+import com.besscroft.aurora.mall.common.exception.NotPermissionException;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
 import io.swagger.annotations.Api;
@@ -155,7 +156,7 @@ public class MenuController {
         if (b) {
             return AjaxResult.success("更新成功！");
         }
-        return AjaxResult.error("哎呀，更新失败了呢！");
+        throw new NotPermissionException();
     }
 
 }
