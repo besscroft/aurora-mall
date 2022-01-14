@@ -10,7 +10,7 @@
 
     <groupId>com.besscroft.aurora.mall</groupId>
     <artifactId>admin-boot</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <name>admin-boot</name>
     <packaging>jar</packaging>
 
