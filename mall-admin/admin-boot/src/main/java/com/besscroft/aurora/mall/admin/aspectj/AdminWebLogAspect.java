@@ -95,19 +95,19 @@ public class AdminWebLogAspect extends WebLogAspect {
         LOGGER.info("Response Args:{}", JSONUtil.toJsonStr(result));
         // 执行时间
         LOGGER.info("Time Consuming:{}", System.currentTimeMillis() - START_TIME.get());
-        try {
-            // 异步线程池打印日志，用MDCRunnable装饰Runnable
-            EXECUTOR.execute(new MDCRunnable(new Runnable() {
-                @Override
-                public void run() {
-                    // 将日志信息存入数据库
+        // 异步线程池打印日志，用MDCRunnable装饰Runnable
+        EXECUTOR.execute(new MDCRunnable(new Runnable() {
+            @Override
+            public void run() {
+                // 将日志信息存入数据库
+                try {
                     logFeignClient.mallLog(webLog);
+                } catch (Exception e) {
+                    LOGGER.error("调用 mall-log 服务失败！");
+                    e.printStackTrace();
                 }
-            }));
-        } catch (Exception e) {
-            LOGGER.error("调用 mall-log 服务失败！");
-            e.printStackTrace();
-        }
+            }
+        }));
         // 出口移除请求ID
         MDC.remove(KEY);
         return result;
