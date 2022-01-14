@@ -66,13 +66,6 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ServletException.class)
-    public AjaxResult processException(ServletException e) {
-        log.error(e.getMessage(), e);
-        return AjaxResult.error(e.getMessage());
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ValidationException.class)
     public AjaxResult processException(ValidationException e) {
         log.error("参数校验失败，异常原因:{}", e.getMessage(), e);

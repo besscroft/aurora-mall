@@ -5,12 +5,12 @@
     <parent>
         <artifactId>aurora-mall</artifactId>
         <groupId>com.besscroft.aurora.mall</groupId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>com.besscroft.aurora.mall.elasticsearch</groupId>
     <artifactId>mall-elasticsearch</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <name>mall-elasticsearch</name>
     <description>elasticsearch中心</description>
     <packaging>jar</packaging>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.besscroft.aurora.mall</groupId>
             <artifactId>common-core</artifactId>
-            <version>1.0</version>
+            <version>1.0.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.besscroft.aurora.mall</groupId>
             <artifactId>common-log</artifactId>
-            <version>1.0</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

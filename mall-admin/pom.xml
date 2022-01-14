@@ -5,12 +5,12 @@
     <parent>
         <artifactId>aurora-mall</artifactId>
         <groupId>com.besscroft.aurora.mall</groupId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>com.besscroft.aurora.mall</groupId>
     <artifactId>mall-admin</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <name>mall-admin</name>
     <description>管理平台</description>
     <packaging>pom</packaging>
