@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.besscroft.aurora.mall</groupId>
         <artifactId>mall-auth</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>com.besscroft.aurora.mall</groupId>
     <artifactId>auth-boot</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <name>auth-boot</name>
     <description>统一认证中心</description>
     <packaging>jar</packaging>
@@ -23,12 +23,7 @@
         <dependency>
             <groupId>com.besscroft.aurora.mall</groupId>
             <artifactId>auth-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.besscroft.aurora.mall</groupId>
-            <artifactId>common-log</artifactId>
-            <version>1.0</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

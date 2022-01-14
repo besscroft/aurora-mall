@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.besscroft.aurora.mall</groupId>
         <artifactId>mall-admin</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>com.besscroft.aurora.mall</groupId>
     <artifactId>admin-api</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <name>admin-api</name>
     <packaging>jar</packaging>
 
@@ -22,12 +22,12 @@
         <dependency>
             <groupId>com.besscroft.aurora.mall</groupId>
             <artifactId>common-core</artifactId>
-            <version>1.0</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.besscroft.aurora.mall</groupId>
-            <artifactId>common-exception</artifactId>
-            <version>1.0</version>
+            <artifactId>common-log</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <!-- openfeign依赖 1. http客户端选择okhttp 2. loadbalancer替换ribbon -->
         <dependency>

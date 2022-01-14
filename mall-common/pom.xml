@@ -5,7 +5,7 @@
     <parent>
         <artifactId>aurora-mall</artifactId>
         <groupId>com.besscroft.aurora.mall</groupId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,7 +15,6 @@
 
     <modules>
         <module>common-core</module>
-        <module>common-exception</module>
         <module>common-log</module>
     </modules>
 
