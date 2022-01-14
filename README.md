@@ -18,7 +18,7 @@ aurora-mall 是一个微服务商城项目，我做这个项目的目的就是�
 
 > 我们安装，我们更新，我们开发
 
-[aurora-mall 的文档](https://mall.doc.besscroft.com/)，在这里你可以找到大部分问题的解答。
+[aurora-mall 的文档](https://mall.doc.besscroft.com/) ，在这里你可以找到大部分问题的解答。
 
 ## 环境搭建
 
@@ -31,15 +31,14 @@ aurora-mall 的需要以下程序才能正常的安装和运行：
 - open/oracleJDK1.8+
 - nacos 1.4.1+
 - redis 6.0+
-- nginx 1.16+
 - elasticsearch 7+
 
 aurora-mall 支持安装在 LNMP、宝塔面板 等集成环境中, Docker、HeroKu 等容器环境中, 支持大部分能够运行 Java 的平台。
-安装教程请参阅 [文档](https://mall.doc.besscroft.com/)。
+安装教程请参阅 [文档](https://mall.doc.besscroft.com/) 。
 
 ### 行为准则
 
-我们有一份 [行为准则](https://github.com/besscroft/aurora-mall/blob/main/CODE_OF_CONDUCT.md)，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
+我们有一份 [行为准则](https://github.com/besscroft/aurora-mall/blob/main/CODE_OF_CONDUCT.md) ，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
 
 ### 代码贡献
 
@@ -60,26 +59,10 @@ aurora-mall 欢迎各种贡献，包括但不限于改进，新功能，文档�
 ```
 $ git clone https://github.com/besscroft/aurora-mall.git
 ```
-### 项目构建（管理平台的前端）
+### 前端项目
 
-其实我更推荐[yarn](https://github.com/yarnpkg/yarn)
+已经将管理平台的前端项目拆分出去 👉 [aurora-mall-web](https://github.com/besscroft/aurora-mall-web)
 
-```bash
-# 克隆项目
-git clone https://github.com/besscroft/aurora-mall.git
-
-# 进入项目目录
-cd aurora-mall/mall-web
-
-# 安装依赖
-npm install
-
-# 建议不要用 cnpm 安装 会有各种诡异的bug 可以通过如下操作解决 npm 下载速度慢的问题
-npm install --registry=https://registry.npm.taobao.org
-
-# 本地开发 启动项目
-npm run dev
-```
 
 #### 联系我
 
