@@ -10,7 +10,7 @@
 
     <groupId>com.besscroft.aurora.mall</groupId>
     <artifactId>mall-gateway</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <name>mall-gateway</name>
     <description>极光商城gateway网关</description>
     <packaging>jar</packaging>
