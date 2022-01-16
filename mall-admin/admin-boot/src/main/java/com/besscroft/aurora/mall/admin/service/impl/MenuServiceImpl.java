@@ -1,19 +1,19 @@
 package com.besscroft.aurora.mall.admin.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.AuthMenuMapper;
 import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.admin.service.UserService;
+import com.besscroft.aurora.mall.common.constant.SystemConstants;
 import com.besscroft.aurora.mall.common.entity.AuthMenu;
-import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.exception.NotPermissionException;
 import com.besscroft.aurora.mall.common.model.MetaVo;
 import com.besscroft.aurora.mall.common.model.RouterVo;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +33,9 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
 
     @Autowired
     private UserService userService;
+
+    @Value("${spring.profiles.active}")
+    private String env;
 
     @Override
     public Map<String, Object> getTreeListById(Long adminId) {
@@ -172,7 +175,7 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateMenuTree(List<Long> menuIds, Long id) {
-        if (Objects.equals(id, 1L)) {
+        if (Objects.equals(id, 1L) && SystemConstants.SYSTEM_PROD_ENV.equals(env)) {
             // 超级管理员，默认拥有所有菜单，不允许更改！(给演示环境做的保护)
             throw new NotPermissionException("演示环境不允许更改超级管理员的菜单！");
         }

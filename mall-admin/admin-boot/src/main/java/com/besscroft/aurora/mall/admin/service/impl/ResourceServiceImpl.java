@@ -10,6 +10,7 @@ import com.besscroft.aurora.mall.admin.mapper.RoleResourceRelationMapper;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
+import com.besscroft.aurora.mall.common.constant.SystemConstants;
 import com.besscroft.aurora.mall.common.entity.AuthResource;
 import com.besscroft.aurora.mall.common.entity.AuthResourceSort;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
@@ -35,6 +36,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthResource> implements ResourceService {
+
+    @Value("${spring.profiles.active}")
+    private String env;
 
     @Autowired
     private AuthRoleMapper authRoleMapper;
@@ -138,7 +142,7 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateResourceTree(List<Long> resourceIds, Long id) {
-        if (Objects.equals(id, 1L)) {
+        if (Objects.equals(id, 1L) && SystemConstants.SYSTEM_PROD_ENV.equals(env)) {
             // 超级管理员，默认拥有所有权限，不允许更改！(给演示环境做的保护)
             throw new NotPermissionException("演示环境不允许更改超级管理员的权限！");
         }

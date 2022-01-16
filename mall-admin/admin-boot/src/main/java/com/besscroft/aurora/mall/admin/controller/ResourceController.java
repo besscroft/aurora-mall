@@ -3,6 +3,7 @@ package com.besscroft.aurora.mall.admin.controller;
 import com.besscroft.aurora.mall.admin.domain.param.ResourceParam;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
 import com.besscroft.aurora.mall.common.annotation.WebLog;
+import com.besscroft.aurora.mall.common.constant.SystemConstants;
 import com.besscroft.aurora.mall.common.entity.AuthResource;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
@@ -16,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @Author Bess Croft
@@ -71,7 +71,7 @@ public class ResourceController {
     @ApiOperation("更新资源")
     @PutMapping("/updateResource")
     public AjaxResult updateResource(@RequestBody AuthResource authResource) {
-        if (Objects.equals(env, "prod")) {
+        if (SystemConstants.SYSTEM_PROD_ENV.equals(env)) {
             return AjaxResult.error("演示环境禁止修改！");
         }
         boolean b = resourceService.updateResource(authResource);
@@ -86,7 +86,7 @@ public class ResourceController {
     @ApiImplicitParam(name = "id", value = "资源id",required = true, dataType = "Long")
     @DeleteMapping("/delResource/{id}")
     public AjaxResult delResource(@PathVariable("id") List<Long> ids) {
-        if (Objects.equals(env, "prod")) {
+        if (SystemConstants.SYSTEM_PROD_ENV.equals(env)) {
             return AjaxResult.error("演示环境禁止删除！");
         }
         boolean b = resourceService.delResource(ids);
@@ -121,9 +121,6 @@ public class ResourceController {
     @PutMapping("/updateResourceTree")
     public AjaxResult updateResourceTree(@RequestBody List<Long> data,
                                          @RequestParam("id") Long id) {
-        if (Objects.equals(env, "prod")) {
-            return AjaxResult.error("演示环境禁止修改！");
-        }
         boolean b = resourceService.updateResourceTree(data, id);
         if (b) {
             return AjaxResult.success("更新成功！");
