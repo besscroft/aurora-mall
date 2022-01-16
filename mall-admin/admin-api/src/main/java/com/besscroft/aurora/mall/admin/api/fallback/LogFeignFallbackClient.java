@@ -21,4 +21,10 @@ public class LogFeignFallbackClient implements LogFeignClient {
         return AjaxResult.error(5001, "系统功能降级");
     }
 
+    @Override
+    public AjaxResult getWebLogList(Integer pageNum, Integer pageSize, String keyword) {
+        log.error("feign远程调用系统用户服务异常后的降级方法");
+        return AjaxResult.error(5001, "系统功能降级");
+    }
+
 }

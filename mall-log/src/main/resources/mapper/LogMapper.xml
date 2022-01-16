@@ -7,6 +7,7 @@
     <resultMap id="updateLogMap" type="com.besscroft.aurora.mall.common.entity.WebLog">
         <result column="id" property="id"/>
         <result column="username" property="username"/>
+        <result column="description" property="description"/>
         <result column="url" property="url"/>
         <result column="http_method" property="httpMethod"/>
         <result column="class_method" property="classMethod"/>
@@ -16,5 +17,20 @@
         <result column="start_time" property="startTime"/>
         <result column="spend_time" property="spendTime"/>
     </resultMap>
+
+    <sql id="Base_Column_List">
+        id, username, description, url, http_method, class_method, ip, request_args, response_args, start_time, spend_time
+    </sql>
+
+    <select id="selectListByDescription" resultSets="java.util.List" resultMap="updateLogMap">
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM
+            web_log
+        <if test="description != null and description != ''">
+            WHERE
+            description LIKE CONCAT('%', #{description} ,'%')
+        </if>
+    </select>
 
 </mapper>

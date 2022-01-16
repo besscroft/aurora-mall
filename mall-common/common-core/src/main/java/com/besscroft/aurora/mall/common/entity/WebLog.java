@@ -1,11 +1,9 @@
 package com.besscroft.aurora.mall.common.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,13 +18,11 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "web_log")
 @ApiModel(value = "日志对象")
 public class WebLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
     @ApiModelProperty(value = "id", dataType = "String")
     private String id;
 

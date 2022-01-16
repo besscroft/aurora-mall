@@ -11,7 +11,7 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 11/12/2021 17:47:31
+ Date: 16/01/2022 16:36:37
 */
 
 SET NAMES utf8mb4;
@@ -3119,7 +3119,7 @@ CREATE TABLE `bms_auth_menu`  (
   `hidden` int(1) NULL DEFAULT 1 COMMENT '显示状态：0->不显示；1->显示',
   `component` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组件路径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 101 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块菜单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块菜单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_menu
@@ -3154,6 +3154,7 @@ INSERT INTO `bms_auth_menu` VALUES (43, 4, '2021-03-30 10:53:21', '广告管理'
 INSERT INTO `bms_auth_menu` VALUES (50, 5, '2021-03-30 10:55:06', '会员列表', '会员管理', 2, 0, 'userList', '/user/userList', 'el-icon-user', 1, '/user/userList/index');
 INSERT INTO `bms_auth_menu` VALUES (51, 6, '2021-04-10 10:39:32', '版本日志', '系统管理', 2, 0, 'version', '/system/version', 'el-icon-s-promotion', 1, '/system/version/index');
 INSERT INTO `bms_auth_menu` VALUES (100, 0, '2021-08-12 10:30:46', '首页', NULL, 1, 0, 'Dashboard', '/dashboard', 'el-icon-s-platform', 1, 'Layout');
+INSERT INTO `bms_auth_menu` VALUES (101, 6, '2022-01-16 15:22:50', '访问日志', '系统管理', 2, 2, 'weblog', '/system/weblog', 'el-icon-location-information', 1, '/system/weblog/index');
 
 -- ----------------------------
 -- Table structure for bms_auth_permission
@@ -3189,7 +3190,7 @@ CREATE TABLE `bms_auth_resource`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `category_id` bigint(20) NULL DEFAULT NULL COMMENT '资源类别ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 82 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_resource
@@ -3274,6 +3275,7 @@ INSERT INTO `bms_auth_resource` VALUES (77, '订单详情', '/order/detail/**', 
 INSERT INTO `bms_auth_resource` VALUES (78, '删除订单', '/order/delete/**', '删除订单', '2021-11-28 17:15:35', 8);
 INSERT INTO `bms_auth_resource` VALUES (79, '商城会员列表', '/mall/user/list', '商城会员列表查询', '2021-12-07 21:46:14', 21);
 INSERT INTO `bms_auth_resource` VALUES (80, '用户详情', '/mall/user/detail', '用户详情', '2021-12-11 17:24:30', 21);
+INSERT INTO `bms_auth_resource` VALUES (81, '访问日志列表', '/weblog/list', '访问日志列表查询', '2022-01-16 15:54:25', 24);
 
 -- ----------------------------
 -- Table structure for bms_auth_resource_sort
@@ -3286,7 +3288,7 @@ CREATE TABLE `bms_auth_resource_sort`  (
   `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '资源描述',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源类别管理表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块资源类别管理表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_resource_sort
@@ -3314,6 +3316,7 @@ INSERT INTO `bms_auth_resource_sort` VALUES (20, '秒杀管理', '2021-04-16 15:
 INSERT INTO `bms_auth_resource_sort` VALUES (21, '会员列表', '2021-04-16 15:25:43', '会员列表', 5);
 INSERT INTO `bms_auth_resource_sort` VALUES (22, '版本日志', '2021-04-17 21:42:33', '版本日志', 6);
 INSERT INTO `bms_auth_resource_sort` VALUES (23, '商品套餐管理', '2021-10-24 20:44:39', '商品套餐管理', 2);
+INSERT INTO `bms_auth_resource_sort` VALUES (24, '系统管理', '2022-01-16 15:53:50', '系统管理', 1);
 
 -- ----------------------------
 -- Table structure for bms_auth_role
@@ -3348,58 +3351,65 @@ CREATE TABLE `bms_auth_role_menu_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 555 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色菜单关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 639 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色菜单关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_menu_relation
 -- ----------------------------
-INSERT INTO `bms_auth_role_menu_relation` VALUES (358, 2, 3);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (359, 2, 4);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (360, 2, 2);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (361, 2, 20);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (362, 2, 21);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (363, 2, 22);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (364, 2, 23);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (365, 2, 30);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (366, 2, 31);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (367, 2, 32);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (368, 2, 33);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (369, 2, 43);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (370, 2, 5);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (371, 2, 50);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (372, 2, 6);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (373, 2, 51);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (374, 2, 100);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (525, 1, 1);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (526, 1, 10);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (527, 1, 11);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (528, 1, 12);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (529, 1, 13);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (530, 1, 14);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (531, 1, 15);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (532, 1, 2);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (533, 1, 20);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (534, 1, 21);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (535, 1, 22);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (536, 1, 23);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (537, 1, 3);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (538, 1, 30);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (539, 1, 31);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (540, 1, 32);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (541, 1, 33);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (542, 1, 34);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (543, 1, 35);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (544, 1, 36);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (545, 1, 4);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (546, 1, 40);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (547, 1, 41);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (548, 1, 42);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (549, 1, 43);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (550, 1, 5);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (551, 1, 50);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (552, 1, 6);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (553, 1, 51);
-INSERT INTO `bms_auth_role_menu_relation` VALUES (554, 1, 100);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (555, 2, 2);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (556, 2, 20);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (557, 2, 21);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (558, 2, 22);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (559, 2, 23);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (560, 2, 3);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (561, 2, 30);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (562, 2, 31);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (563, 2, 32);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (564, 2, 33);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (565, 2, 34);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (566, 2, 35);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (567, 2, 36);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (568, 2, 4);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (569, 2, 40);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (570, 2, 41);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (571, 2, 42);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (572, 2, 43);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (573, 2, 5);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (574, 2, 50);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (575, 2, 6);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (576, 2, 51);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (577, 2, 100);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (608, 1, 1);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (609, 1, 10);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (610, 1, 11);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (611, 1, 12);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (612, 1, 13);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (613, 1, 14);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (614, 1, 15);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (615, 1, 2);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (616, 1, 20);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (617, 1, 21);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (618, 1, 22);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (619, 1, 23);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (620, 1, 3);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (621, 1, 30);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (622, 1, 31);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (623, 1, 32);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (624, 1, 33);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (625, 1, 34);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (626, 1, 35);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (627, 1, 36);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (628, 1, 4);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (629, 1, 40);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (630, 1, 41);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (631, 1, 42);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (632, 1, 43);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (633, 1, 5);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (634, 1, 50);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (635, 1, 6);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (636, 1, 51);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (637, 1, 101);
+INSERT INTO `bms_auth_role_menu_relation` VALUES (638, 1, 100);
 
 -- ----------------------------
 -- Table structure for bms_auth_role_permission_relation
@@ -3425,96 +3435,98 @@ CREATE TABLE `bms_auth_role_resource_relation`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `resource_id` bigint(20) NULL DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1390 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1273 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限管理模块角色资源关系表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bms_auth_role_resource_relation
 -- ----------------------------
-INSERT INTO `bms_auth_role_resource_relation` VALUES (603, 2, 3);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (604, 2, 5);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (605, 2, 6);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (606, 2, 7);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (607, 2, 8);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (608, 2, 9);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1311, 1, 10);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1312, 1, 11);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1313, 1, 12);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1314, 1, 13);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1315, 1, 14);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1316, 1, 15);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1317, 1, 16);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1318, 1, 31);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1319, 1, 32);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1320, 1, 35);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1321, 1, 1);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1322, 1, 2);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1323, 1, 3);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1324, 1, 4);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1325, 1, 5);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1326, 1, 6);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1327, 1, 7);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1328, 1, 8);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1329, 1, 9);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1330, 1, 37);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1331, 1, 38);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1332, 1, 39);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1333, 1, 40);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1334, 1, 41);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1335, 1, 23);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1336, 1, 24);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1337, 1, 25);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1338, 1, 26);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1339, 1, 27);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1340, 1, 33);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1341, 1, 34);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1342, 1, 36);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1343, 1, 17);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1344, 1, 18);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1345, 1, 19);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1346, 1, 20);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1347, 1, 21);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1348, 1, 22);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1349, 1, 28);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1350, 1, 29);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1351, 1, 30);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1352, 1, 76);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1353, 1, 77);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1354, 1, 50);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1355, 1, 51);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1356, 1, 52);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1357, 1, 53);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1358, 1, 54);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1359, 1, 75);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1360, 1, 55);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1361, 1, 56);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1362, 1, 57);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1363, 1, 58);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1364, 1, 59);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1365, 1, 60);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1366, 1, 73);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1367, 1, 62);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1368, 1, 43);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1369, 1, 44);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1370, 1, 45);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1371, 1, 46);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1372, 1, 47);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1373, 1, 48);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1374, 1, 49);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1375, 1, 74);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1376, 1, 61);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1377, 1, 63);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1378, 1, 64);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1379, 1, 65);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1380, 1, 66);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1381, 1, 67);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1382, 1, 79);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1383, 1, 80);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1384, 1, 42);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1385, 1, 68);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1386, 1, 69);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1387, 1, 70);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1388, 1, 71);
-INSERT INTO `bms_auth_role_resource_relation` VALUES (1389, 1, 72);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1186, 2, 3);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1187, 2, 5);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1188, 2, 6);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1189, 2, 7);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1190, 2, 8);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1191, 2, 9);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1192, 1, 10);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1193, 1, 11);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1194, 1, 12);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1195, 1, 13);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1196, 1, 14);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1197, 1, 15);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1198, 1, 16);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1199, 1, 31);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1200, 1, 32);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1201, 1, 35);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1202, 1, 1);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1203, 1, 2);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1204, 1, 3);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1205, 1, 4);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1206, 1, 5);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1207, 1, 6);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1208, 1, 7);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1209, 1, 8);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1210, 1, 9);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1211, 1, 37);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1212, 1, 38);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1213, 1, 39);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1214, 1, 40);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1215, 1, 41);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1216, 1, 23);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1217, 1, 24);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1218, 1, 25);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1219, 1, 26);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1220, 1, 27);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1221, 1, 33);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1222, 1, 34);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1223, 1, 36);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1224, 1, 17);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1225, 1, 18);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1226, 1, 19);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1227, 1, 20);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1228, 1, 21);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1229, 1, 22);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1230, 1, 28);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1231, 1, 29);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1232, 1, 30);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1233, 1, 76);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1234, 1, 77);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1235, 1, 78);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1236, 1, 50);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1237, 1, 51);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1238, 1, 52);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1239, 1, 53);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1240, 1, 54);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1241, 1, 75);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1242, 1, 55);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1243, 1, 56);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1244, 1, 57);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1245, 1, 58);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1246, 1, 59);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1247, 1, 60);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1248, 1, 73);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1249, 1, 62);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1250, 1, 43);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1251, 1, 44);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1252, 1, 45);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1253, 1, 46);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1254, 1, 47);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1255, 1, 48);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1256, 1, 49);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1257, 1, 74);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1258, 1, 61);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1259, 1, 63);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1260, 1, 64);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1261, 1, 65);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1262, 1, 66);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1263, 1, 67);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1264, 1, 79);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1265, 1, 80);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1266, 1, 42);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1267, 1, 68);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1268, 1, 69);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1269, 1, 70);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1270, 1, 71);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1271, 1, 72);
+INSERT INTO `bms_auth_role_resource_relation` VALUES (1272, 1, 81);
 
 -- ----------------------------
 -- Table structure for bms_auth_user
@@ -3539,7 +3551,7 @@ CREATE TABLE `bms_auth_user`  (
 -- ----------------------------
 -- Records of bms_auth_user
 -- ----------------------------
-INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2021-12-11 17:37:51', 1, 1);
+INSERT INTO `bms_auth_user` VALUES (1, 'admin', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'admin@qq.com', '12345678901', '管理员', '管理员', '2021-02-24 21:22:48', '2022-01-16 15:32:35', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (2, 'test', '$2a$10$E0A60hzJ.yBHJhyZ970Oze205OGuu4LIrjDSPQvcGBDl40O0oaiqC', 'https://www.besscroft.com/uploads/avatar.png', 'test@qq.com', '12345678902', '测试员', '测试员', '2021-03-21 13:42:10', '2021-04-24 12:45:54', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (3, 'user1', '$2a$10$U9qlXI22XmUjzAgZiH0kMOalOkBTM23LvmAownM1GNXNQTRhO4Mtu', 'https://www.besscroft.com/uploads/avatar.png', 'user1@qq.com', '111', '普通用户1', '普通用户1', '2021-04-04 18:18:44', '2021-04-04 18:18:44', 1, 1);
 INSERT INTO `bms_auth_user` VALUES (4, 'user2', '$2a$10$qbw14yY1.sHYGb/dytzdSeSSR78KXjoHG3XQImP/iqh7iGjCc.TZK', 'https://www.besscroft.com/uploads/avatar.png', 'user2@qq.com', '112', '普通用户2', '普通用户2', '2021-04-04 18:37:01', '2021-04-04 18:37:01', 1, 1);
@@ -4626,29 +4638,6 @@ CREATE TABLE `ums_car_item`  (
 
 -- ----------------------------
 -- Records of ums_car_item
--- ----------------------------
-
--- ----------------------------
--- Table structure for web_log
--- ----------------------------
-DROP TABLE IF EXISTS `web_log`;
-CREATE TABLE `web_log`  (
-  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作用户',
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志描述信息',
-  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求地址',
-  `http_method` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法',
-  `class_method` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法路径:全限定名+方法名',
-  `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求者ip地址',
-  `request_args` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '请求入参',
-  `response_args` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '响应出参',
-  `start_time` datetime NULL DEFAULT NULL COMMENT '请求时间',
-  `spend_time` bigint(20) NULL DEFAULT NULL COMMENT '消耗时间(毫秒)',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '日志表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of web_log
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
