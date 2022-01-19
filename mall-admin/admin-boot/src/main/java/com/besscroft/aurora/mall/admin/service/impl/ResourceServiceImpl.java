@@ -80,9 +80,6 @@ public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthRes
         }
         redisTemplate.delete(AuthConstants.PERMISSION_RULES_KEY);
         redisTemplate.opsForHash().putAll(AuthConstants.PERMISSION_RULES_KEY, RoleResourceMap);
-        // 设置过期时间
-        Boolean expire = redisTemplate.expire(AuthConstants.PERMISSION_RULES_KEY, 60 * 60, TimeUnit.SECONDS);
-        log.info("权限初始化结果:{}", expire);
         return RoleResourceMap;
     }
 
