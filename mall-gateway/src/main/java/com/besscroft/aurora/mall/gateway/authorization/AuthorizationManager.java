@@ -1,6 +1,5 @@
 package com.besscroft.aurora.mall.gateway.authorization;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
@@ -35,7 +34,6 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
     @Autowired
     private IgnoreUrlsConfig ignoreUrlsConfig;
-
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
@@ -75,9 +73,8 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
         // 从Redis获取资源角色关系列表（即角色能访问的对应接口）
         Map<Object, Object> roleResourceMap = redisTemplate.opsForHash().entries(AuthConstants.PERMISSION_RULES_KEY);
-//        if (CollUtil.isEmpty(roleResourceMap)) {
-//            roleResourceMap = redisTemplate.opsForHash().entries(AuthConstants.PERMISSION_RULES_KEY);
-//        }
+        // todo 权限关系列表为空时，做一些处理
+
         Iterator<Object> iterator = roleResourceMap.keySet().iterator();
 
         // 接口需要的角色权限集合authorities统计
