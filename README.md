@@ -6,19 +6,11 @@
 
 aurora-mall 是一个微服务商城项目，我做这个项目的目的就是为了以`项目驱动学习`，同时查阅了大量文档和资料，也在看不少的书 。我一直有写作的习惯（不仅限于博客），如果在练习这个项目的同时，还能够整理出相关的学习笔记那是再好不过了😀**目前还在开发中！**
 
-### 预览地址
-
-[演示站](https://mall.aurora.besscroft.com/) 预计每周末更新 `dev` 分支最新源码。
-
-```
-账号：admin
-密码：666666
-```
 ## 文档
 
 > 我们安装，我们更新，我们开发
 
-[aurora-mall 的文档](https://mall.doc.besscroft.com/) ，在这里你可以找到大部分问题的解答。
+[aurora-mall 的文档](https://developer.besscroft.com/aurora-mall/) ，在这里你可以找到大部分问题的解答。
 
 ## 环境搭建
 
@@ -34,7 +26,7 @@ aurora-mall 的需要以下程序才能正常的安装和运行：
 - elasticsearch 7+
 
 aurora-mall 支持安装在 LNMP、宝塔面板 等集成环境中, Docker、HeroKu 等容器环境中, 支持大部分能够运行 Java 的平台。
-安装教程请参阅 [文档](https://mall.doc.besscroft.com/) 。
+安装教程请参阅 [文档](https://developer.besscroft.com/aurora-mall/) 。
 
 ### 行为准则
 
