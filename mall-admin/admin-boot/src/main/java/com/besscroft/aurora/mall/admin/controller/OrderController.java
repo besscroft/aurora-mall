@@ -9,7 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,11 +21,11 @@ import java.util.List;
  */
 @Api(tags = "订单管理")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/order")
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
 
     @WebLog(description = "获取订单列表")
     @ApiOperation("获取订单列表")

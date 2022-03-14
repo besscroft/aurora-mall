@@ -11,17 +11,16 @@ import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.entity.WebLog;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.concurrent.*;
@@ -31,6 +30,7 @@ import java.util.concurrent.*;
  * @Time 2021/7/18 18:25
  */
 @Component
+@RequiredArgsConstructor
 public class AdminWebLogAspect extends WebLogAspect {
 
     private static final String KEY = "requestId";
@@ -41,15 +41,12 @@ public class AdminWebLogAspect extends WebLogAspect {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     /** 用来记录请求进入的时间，防止多线程时出错，这里用了ThreadLocal */
-    private ThreadLocal<Long> START_TIME = new ThreadLocal<>();
+    private final ThreadLocal<Long> START_TIME = new ThreadLocal<>();
 
     private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(10);
 
-    @Resource
-    private LogFeignClient logFeignClient;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final LogFeignClient logFeignClient;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
@@ -85,27 +82,20 @@ public class AdminWebLogAspect extends WebLogAspect {
         webLog.setIp(request.getRemoteAddr());
         // 请求入参
         webLog.setRequestArgs(JSONUtil.toJsonStr(proceedingJoinPoint.getArgs()));
-        // 响应出参
-        webLog.setResponseArgs(JSONUtil.toJsonStr(result));
         // 请求时间
         webLog.setStartTime(LocalDateTime.now());
         // 消耗时间
         webLog.setSpendTime(System.currentTimeMillis() - START_TIME.get());
-        // 打印响应参数
-        LOGGER.info("Response Args:{}", JSONUtil.toJsonStr(result));
         // 执行时间
         LOGGER.info("Time Consuming:{}", System.currentTimeMillis() - START_TIME.get());
         // 异步线程池打印日志，用MDCRunnable装饰Runnable
-        EXECUTOR.execute(new MDCRunnable(new Runnable() {
-            @Override
-            public void run() {
-                // 将日志信息存入数据库
-                try {
-                    logFeignClient.mallLog(webLog);
-                } catch (Exception e) {
-                    LOGGER.error("调用 mall-log 服务失败！");
-                    e.printStackTrace();
-                }
+        EXECUTOR.execute(new MDCRunnable(() -> {
+            // 将日志信息存入数据库
+            try {
+                logFeignClient.mallLog(webLog);
+            } catch (Exception e) {
+                LOGGER.error("调用 mall-log 服务失败！");
+                e.printStackTrace();
             }
         }));
         // 出口移除请求ID

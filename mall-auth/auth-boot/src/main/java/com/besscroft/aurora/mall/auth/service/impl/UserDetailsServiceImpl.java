@@ -6,7 +6,7 @@ import com.besscroft.aurora.mall.auth.domain.User;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.constant.MessageConstant;
 import com.besscroft.aurora.mall.common.domain.UserDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
@@ -25,16 +25,12 @@ import javax.servlet.http.HttpServletRequest;
  * @Date 2021/2/17 21:01
  */
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private AdminFeignClient adminFeignClient;
-
-    @Autowired
-    private UserFeignClient userFeignClient;
-
-    @Autowired
-    private HttpServletRequest request;
+    private final AdminFeignClient adminFeignClient;
+    private final UserFeignClient userFeignClient;
+    private final HttpServletRequest request;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -5,14 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.besscroft.aurora.mall.admin.mapper.AuthMenuMapper;
 import com.besscroft.aurora.mall.admin.service.MenuService;
-import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.constant.SystemConstants;
 import com.besscroft.aurora.mall.common.entity.AuthMenu;
 import com.besscroft.aurora.mall.common.exception.NotPermissionException;
 import com.besscroft.aurora.mall.common.model.MetaVo;
 import com.besscroft.aurora.mall.common.model.RouterVo;
 import com.github.pagehelper.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,19 +19,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author Bess Croft
  * @Date 2021/3/21 19:15
  */
 @Service
+@RequiredArgsConstructor
 public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> implements MenuService {
 
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    private UserService userService;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Value("${spring.profiles.active}")
     private String env;
@@ -44,39 +41,11 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
             synchronized (this) {
                 data = (Map<String, Object>) redisTemplate.boundHashOps("admin").get("user:tree:" + adminId);
                 if (CollUtil.isEmpty(data)) {
-                    List<AuthMenu> menuList = this.baseMapper.getParentListById(adminId);
-                    menuList.forEach(menu -> {
-                        List<AuthMenu> childListById = this.baseMapper.getChildListById(adminId, menu.getId());
-                        menu.setChildren(childListById);
-                    });
-                    List<RouterVo> routerVoList = new LinkedList<>();
-                    menuList.forEach(menu -> {
-                        RouterVo routerVo = new RouterVo();
-                        routerVo.setName(menu.getName());
-                        routerVo.setPath(menu.getPath());
-                        routerVo.setHidden(menu.getHidden() != 0);
-                        routerVo.setComponent(menu.getComponent());
-                        routerVo.setMeta(new MetaVo(menu.getTitle(), menu.getIcon(), false));
-                        List<RouterVo> list = new ArrayList<>();
-                        if (menu.getChildren().size() > 0 && !menu.getChildren().isEmpty()) {
-                            routerVo.setAlwaysShow(true);
-                            routerVo.setRedirect("noRedirect");
-                            menu.getChildren().forEach(child -> {
-                                RouterVo router = new RouterVo();
-                                router.setPath(child.getPath());
-                                router.setName(child.getName());
-                                router.setComponent(child.getComponent());
-                                router.setMeta(new MetaVo(child.getTitle(), child.getIcon(), false));
-                                router.setHidden(child.getHidden() != 0);
-                                list.add(router);
-                            });
-                            routerVo.setChildren(list);
-                        }
-                        routerVoList.add(routerVo);
-                    });
+                    List<AuthMenu> menuList = this.baseMapper.getListById(adminId);
+                    List<AuthMenu> menus = getMenus(menuList);
+                    List<RouterVo> routerVoList = getRouter(menus);
                     data = new HashMap<>();
                     data.put("menus", routerVoList);
-//                    redisTemplate.boundHashOps("admin").delete("user:tree:" + adminId);
                     redisTemplate.boundHashOps("admin").put("user:tree:" + adminId, data);
                 }
             }
@@ -91,12 +60,8 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
             synchronized (this) {
                 menuList = (List<AuthMenu>) redisTemplate.opsForValue().get("admin:menu:user:" + adminId);
                 if (CollUtil.isEmpty(menuList)) {
-                    menuList = this.baseMapper.getParentListById(adminId);
-                    menuList.forEach(menu -> {
-                        List<AuthMenu> childListById = this.baseMapper.getChildListById(adminId, menu.getId());
-                        menu.setChildren(childListById);
-                    });
-//                    redisTemplate.delete("admin:menu:user:" + adminId);
+                    menuList = this.baseMapper.getListById(adminId);
+                    List<AuthMenu> menus = getMenus(menuList);
                     redisTemplate.opsForValue().set("admin:menu:user:" + adminId, menuList);
                 }
             }
@@ -106,7 +71,7 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
 
     @Override
     public List<AuthMenu> getMenuAllList() {
-        return this.baseMapper.selectList(new QueryWrapper<AuthMenu>());
+        return this.baseMapper.selectList(new QueryWrapper<>());
     }
 
     @Override
@@ -186,6 +151,84 @@ public class MenuServiceImpl extends ServiceImpl<AuthMenuMapper, AuthMenu> imple
             return j > 0;
         }
         return false;
+    }
+
+    /**
+     * 菜单层级处理
+     * @param menuList 菜单
+     * @return 菜单
+     */
+    private List<AuthMenu> getMenus(List<AuthMenu> menuList) {
+        List<AuthMenu> parentMenus = menuList.stream().filter(menu -> menu.getParentId() == 0).collect(Collectors.toList());
+        List<AuthMenu> menus = menuList.stream().filter(menu -> menu.getParentId() != 0).collect(Collectors.toList());
+        parentMenus.forEach(menu -> {
+            List<AuthMenu> childMenu = getChildMenu(menu.getId(), menus);
+            menu.setChildren(childMenu);
+        });
+        return parentMenus;
+    }
+
+    /**
+     * 菜单递归
+     * @param menuId 菜单id
+     * @param menuList 子菜单集合
+     * @return 菜单
+     */
+    private List<AuthMenu> getChildMenu(Long menuId, List<AuthMenu> menuList) {
+        List<AuthMenu> menus = menuList.stream().filter(menu -> menu.getParentId() == menuId).collect(Collectors.toList());
+        menus.forEach(menu -> {
+            List<AuthMenu> childMenu = getChildMenu(menu.getId(), menuList);
+            menu.setChildren(childMenu);
+        });
+        return menus;
+    }
+
+    /**
+     * 获取路由信息
+     * @param menuList 菜单
+     * @return 路由
+     */
+    private List<RouterVo> getRouter(List<AuthMenu> menuList) {
+        List<RouterVo> routerVoList = new LinkedList<>();
+        menuList.forEach(menuDto -> {
+            RouterVo routerVo = new RouterVo();
+            routerVo.setName(menuDto.getName());
+            routerVo.setPath(menuDto.getPath());
+            routerVo.setHidden(menuDto.getHidden() != 0);
+            routerVo.setComponent(menuDto.getComponent());
+            routerVo.setMeta(new MetaVo(menuDto.getTitle(), menuDto.getIcon(), false));
+            if (menuDto.getChildren().size() > 0 && !menuDto.getChildren().isEmpty()) {
+                routerVo.setAlwaysShow(true);
+                routerVo.setRedirect("noRedirect");
+                List<RouterVo> childRouter = getChildRouter(menuDto.getChildren());
+                routerVo.setChildren(childRouter);
+            }
+            routerVoList.add(routerVo);
+        });
+        return routerVoList;
+    }
+
+    /**
+     * 子路由处理
+     * @param menuList 子菜单
+     * @return 子路由
+     */
+    private List<RouterVo> getChildRouter(List<AuthMenu> menuList) {
+        List<RouterVo> list = new ArrayList<>();
+        menuList.forEach(child -> {
+            RouterVo router = new RouterVo();
+            router.setPath(child.getPath());
+            router.setName(child.getName());
+            router.setComponent(child.getComponent());
+            router.setMeta(new MetaVo(child.getTitle(), child.getIcon(), false));
+            router.setHidden(child.getHidden() != 0);
+            if (child.getChildren().size() > 0 && !child.getChildren().isEmpty()) {
+                List<RouterVo> childRouter = getChildRouter(child.getChildren());
+                router.setChildren(childRouter);
+            }
+            list.add(router);
+        });
+        return list;
     }
 
 }

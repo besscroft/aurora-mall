@@ -2,7 +2,7 @@ package com.besscroft.aurora.mall.gateway.filter;
 
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.gateway.config.IgnoreUrlsConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -22,10 +22,10 @@ import java.util.List;
  * @Date 2021/2/4 20:32
  */
 @Component
+@RequiredArgsConstructor
 public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
 
-    @Autowired
-    private IgnoreUrlsConfig ignoreUrlsConfig;
+    private final IgnoreUrlsConfig ignoreUrlsConfig;
 
     @Override
     public Mono<Void> filter(ServerWebExchange serverWebExchange, WebFilterChain webFilterChain) {

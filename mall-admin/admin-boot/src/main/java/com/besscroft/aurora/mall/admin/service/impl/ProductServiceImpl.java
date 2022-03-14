@@ -13,13 +13,13 @@ import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.entity.Product;
 import com.besscroft.aurora.mall.admin.converter.ProductConverterMapper;
 import com.github.pagehelper.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -27,14 +27,13 @@ import java.util.List;
  * @Author Bess Croft
  * @Date 2021/5/15 19:26
  */
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements ProductService {
 
-    @Autowired
-    private AuthUserMapper authUserMapper;
-
-    @Autowired
-    private UserService userService;
+    private final AuthUserMapper authUserMapper;
+    private final UserService userService;
 
     @Override
     public List<Product> getProductPageList(Integer pageNum, Integer pageSize, String keyword) {
@@ -43,7 +42,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean productAdd(Product product) {
         // 获取当前用户
         AuthUser currentAdmin = userService.getCurrentAdmin();
@@ -55,7 +54,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean productDel(String id) {
         return this.baseMapper.deleteByProductId(id) > 0;
     }
@@ -123,10 +122,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 String fileName = URLEncoder.encode("商品信息", "UTF-8").replaceAll("\\+", "%20");
                 response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
                 EasyExcel.write(response.getOutputStream(), ProductExcelDto.class).autoCloseStream(true).sheet("商品信息").doWrite(productExcelDtos);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("excel 导出失败.", e);
             }
         }
     }

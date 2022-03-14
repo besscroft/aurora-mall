@@ -34,11 +34,8 @@ import java.util.List;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-
     private final AuthenticationManager authenticationManager;
-
     private final UserDetailsServiceImpl userDetailsService;
-
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
     /**
@@ -67,7 +64,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         List<TokenEnhancer> tokenEnhancers = new ArrayList<>();
         tokenEnhancers.add(jwtTokenEnhancer);
@@ -81,7 +78,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer security) {
         security.allowFormAuthenticationForClients();
     }
 

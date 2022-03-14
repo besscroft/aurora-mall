@@ -8,7 +8,6 @@ import com.besscroft.aurora.mall.admin.mapper.AuthResourceSortMapper;
 import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
 import com.besscroft.aurora.mall.admin.mapper.RoleResourceRelationMapper;
 import com.besscroft.aurora.mall.admin.service.ResourceService;
-import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.constant.SystemConstants;
 import com.besscroft.aurora.mall.common.entity.AuthResource;
@@ -17,8 +16,8 @@ import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.exception.NotPermissionException;
 import com.besscroft.aurora.mall.common.model.RoleResourceRelation;
 import com.github.pagehelper.PageHelper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -35,28 +33,19 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ResourceServiceImpl extends ServiceImpl<AuthResourceMapper, AuthResource> implements ResourceService {
 
     @Value("${spring.profiles.active}")
     private String env;
 
-    @Autowired
-    private AuthRoleMapper authRoleMapper;
-
-    @Autowired
-    private RoleResourceRelationMapper roleResourceRelationMapper;
-
-    @Autowired
-    private AuthResourceSortMapper authResourceSortMapper;
-
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
-
     @Value("${spring.application.name}")
     private String applicationName;
 
-    @Autowired
-    private UserService userService;
+    private final AuthRoleMapper authRoleMapper;
+    private final RoleResourceRelationMapper roleResourceRelationMapper;
+    private final AuthResourceSortMapper authResourceSortMapper;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public Map<String, List<String>> initRoleResourceMap() {

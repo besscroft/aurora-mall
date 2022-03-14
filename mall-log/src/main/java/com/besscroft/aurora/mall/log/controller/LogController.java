@@ -9,8 +9,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +23,11 @@ import java.util.List;
 @Slf4j
 @Api(tags = "日志服务内部接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/log")
 public class LogController {
 
-    @Autowired
-    private LogService logService;
+    private final LogService logService;
 
     @ApiOperation(value = "新增日志接口")
     @PostMapping(value = "/mallLog")
@@ -42,7 +42,7 @@ public class LogController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "第几页",required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "pageSize", value = "多少条",required = true, dataType = "Integer"),
-            @ApiImplicitParam(name = "keyword", value = "关键字",required = false, dataType = "String")
+            @ApiImplicitParam(name = "keyword", value = "关键字", dataType = "String")
     })
     public AjaxResult list(@RequestParam(value = "pageNum") Integer pageNum,
                            @RequestParam(value = "pageSize") Integer pageSize,

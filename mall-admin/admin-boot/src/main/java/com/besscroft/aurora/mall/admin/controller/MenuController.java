@@ -12,8 +12,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,14 +26,12 @@ import java.util.List;
 @Slf4j
 @Api(tags = "管理系统菜单接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/menu")
 public class MenuController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private MenuService menuService;
+    private final UserService userService;
+    private final MenuService menuService;
 
     @WebLog(description = "获取当前用户管理系统菜单")
     @ApiOperation(value = "获取当前用户管理系统菜单")

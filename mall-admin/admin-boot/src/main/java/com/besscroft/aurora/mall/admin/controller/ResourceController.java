@@ -11,8 +11,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +25,14 @@ import java.util.List;
 @Slf4j
 @Api(tags = "管理系统资源接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/resource")
 public class ResourceController {
 
     @Value("${spring.profiles.active}")
     private String env;
 
-    @Autowired
-    private ResourceService resourceService;
+    private final ResourceService resourceService;
 
     @WebLog(description = "查询后台管理资源列表")
     @ApiOperation("查询后台管理资源列表")

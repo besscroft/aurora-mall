@@ -5,7 +5,7 @@ import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
 import com.besscroft.aurora.mall.admin.service.RoleService;
 import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.github.pagehelper.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +17,10 @@ import java.util.List;
  * @Date 2021/4/10 9:42
  */
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl extends ServiceImpl<AuthRoleMapper, AuthRole> implements RoleService {
 
-    @Autowired
-    private ResourceServiceImpl resourceServiceImpl;
+    private final ResourceServiceImpl resourceServiceImpl;
 
     @Override
     public List<AuthRole> getRolePageList(Integer pageNum, Integer pageSize, String keyword) {
