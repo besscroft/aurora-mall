@@ -22,13 +22,6 @@ public interface AuthMenuMapper extends BaseMapper<AuthMenu> {
     List<AuthMenu> getListById(@Param("adminId") Long adminId);
 
     /**
-     * 获取当前用户的父菜单
-     * @param adminId 用户id
-     * @return 用户的父菜单集合
-     */
-    List<AuthMenu> getParentListById(@Param("adminId") Long adminId);
-
-    /**
      * 获取所有父菜单
      * @return 所有父菜单集合
      */

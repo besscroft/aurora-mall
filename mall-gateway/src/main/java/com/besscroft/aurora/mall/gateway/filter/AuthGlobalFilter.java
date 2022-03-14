@@ -33,10 +33,6 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getHeaders().getFirst(AuthConstants.JWT_TOKEN_HEADER);
-//        if (exchange.getRequest().getURI().getPath().contains("/v2/api-docs")) {
-//            // 放行
-//            return chain.filter(exchange);
-//        }
         log.info("请求进来了，打印token：{}", token);
         // hasEmpty只判断是否为null或者空字符串（""），hasBlank则会把不可见字符也算做空，isEmpty和isBlank同理。
         if (StrUtil.isBlank(token)) {

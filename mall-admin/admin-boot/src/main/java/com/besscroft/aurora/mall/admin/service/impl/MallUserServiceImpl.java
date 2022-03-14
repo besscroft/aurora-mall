@@ -30,8 +30,7 @@ public class MallUserServiceImpl extends ServiceImpl<MallUserMapper, UserInfo> i
     @Override
     public UserInfoDetailDto getUserDetail(String userId) {
         UserInfo userInfo = this.baseMapper.selectById(userId);
-        UserInfoDetailDto userInfoDetailDto = UserInfoConverterMapper.INSTANCE.userInfoToUserInfoDetailDto(userInfo);
-        return userInfoDetailDto;
+        return UserInfoConverterMapper.INSTANCE.userInfoToUserInfoDetailDto(userInfo);
     }
 
 }

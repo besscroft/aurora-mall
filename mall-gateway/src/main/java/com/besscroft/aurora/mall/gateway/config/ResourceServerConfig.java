@@ -6,7 +6,7 @@ import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.gateway.authorization.AuthorizationManager;
 import com.besscroft.aurora.mall.gateway.filter.IgnoreUrlsRemoveJwtFilter;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -36,15 +36,13 @@ import java.nio.charset.Charset;
  * @Author Bess Croft
  * @Date 2021/2/4 17:41
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Configuration
 @EnableWebFluxSecurity
 public class ResourceServerConfig {
 
     private final AuthorizationManager authorizationManager;
-
     private final IgnoreUrlsConfig ignoreUrlsConfig;
-
     private final IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
 
     @Bean

@@ -7,7 +7,7 @@ import com.besscroft.aurora.mall.admin.mapper.UpdateLogMapper;
 import com.besscroft.aurora.mall.admin.service.UpdateLogService;
 import com.besscroft.aurora.mall.common.entity.UpdateLog;
 import com.besscroft.aurora.mall.common.entity.UpdateLogDetail;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +17,10 @@ import java.util.List;
  * @Date 2021/4/17 21:33
  */
 @Service
+@RequiredArgsConstructor
 public class UpdateLogServiceImpl extends ServiceImpl<UpdateLogMapper, UpdateLog> implements UpdateLogService {
 
-    @Autowired
-    private UpdateLogDetailMapper updateLogDetailMapper;
+    private final UpdateLogDetailMapper updateLogDetailMapper;
 
     @Override
     public List<UpdateLog> getUpdateLogList() {

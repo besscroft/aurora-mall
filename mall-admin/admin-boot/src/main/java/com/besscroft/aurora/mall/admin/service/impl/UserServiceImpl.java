@@ -9,6 +9,7 @@ import com.besscroft.aurora.mall.admin.api.AuthFeignClient;
 import com.besscroft.aurora.mall.admin.domain.param.AdminParam;
 import com.besscroft.aurora.mall.admin.mapper.AuthRoleMapper;
 import com.besscroft.aurora.mall.admin.mapper.AuthUserMapper;
+import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.common.domain.AuthUserExcelDto;
@@ -18,9 +19,9 @@ import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.admin.converter.UserConverterMapper;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.github.pagehelper.PageHelper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -43,19 +43,14 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> implements UserService {
 
-    @Autowired
-    private AuthFeignClient authFeignClient;
-
-    @Autowired
-    private AuthRoleMapper authRoleMapper;
-
-    @Autowired
-    private HttpServletRequest request;
-
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private final AuthFeignClient authFeignClient;
+    private final AuthRoleMapper authRoleMapper;
+    private final MenuService menuService;
+    private final HttpServletRequest request;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public AjaxResult login(String username, String password) {
@@ -135,12 +130,27 @@ public class UserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> imple
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String, Object> getUserInfo() {
+        AuthUser currentAdmin = getCurrentAdmin();
+        Map<String, Object> data = menuService.getTreeListById(currentAdmin.getId());
+        data.put("username", currentAdmin.getNickName());
+        data.put("icon", currentAdmin.getIcon());
+        List<AuthRole> roleList = getRoleList(currentAdmin.getId());
+        if (CollUtil.isNotEmpty(roleList)) {
+            List<String> roles = roleList.stream().map(AuthRole::getName).collect(Collectors.toList());
+            data.put("roles", roles);
+        }
+        // 设置登录时间
+        setLoginTime(LocalDateTime.now(), currentAdmin.getId());
+        return data;
+    }
+
+    @Override
     public List<AuthUser> getUserPageList(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum, pageSize);
         List<AuthUser> users = this.baseMapper.selectUserListByPage(keyword);
-        users.forEach(user -> {
-            user.setPassword("");
-        });
+        users.forEach(user -> user.setPassword(""));
         return users;
     }
 
@@ -158,8 +168,8 @@ public class UserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> imple
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean changeSwitch(boolean flag, Long id) {
-        Integer status = 0;
-        if (flag == true) {
+        int status;
+        if (flag) {
             status = 1;
         } else {
             status = 0;
@@ -226,10 +236,8 @@ public class UserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> imple
                 String fileName = URLEncoder.encode("用户信息", "UTF-8").replaceAll("\\+", "%20");
                 response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
                 EasyExcel.write(response.getOutputStream(), AuthUserExcelDto.class).autoCloseStream(true).sheet("用户信息").doWrite(excelDtos);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("excel 导出失败.", e);
             }
         }
     }

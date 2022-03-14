@@ -9,8 +9,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,11 +22,11 @@ import java.util.List;
 @Slf4j
 @Api(tags = "管理系统角色接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/role")
 public class RoleController {
 
-    @Autowired
-    private RoleService roleService;
+    private final RoleService roleService;
 
     @WebLog(description = "查询后台管理角色列表")
     @ApiOperation("查询后台管理角色列表")

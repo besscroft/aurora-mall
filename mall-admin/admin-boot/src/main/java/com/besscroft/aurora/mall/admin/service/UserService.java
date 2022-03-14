@@ -10,6 +10,7 @@ import com.besscroft.aurora.mall.common.result.AjaxResult;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台管理用户服务
@@ -68,6 +69,12 @@ public interface UserService extends IService<AuthUser> {
      * @return 用户的角色列表
      */
     List<AuthRole> getRoleList(Long adminId);
+
+    /**
+     * 获取认证后的用户信息
+     * @return
+     */
+    Map<String, Object> getUserInfo();
 
     /**
      * 分页查询用户

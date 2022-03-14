@@ -5,7 +5,7 @@ import com.besscroft.aurora.mall.common.result.AjaxResult;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @Time 2022/1/16 15:34
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/weblog")
 public class WebLogController {
 
-    @Autowired
-    private LogFeignClient logFeignClient;
+    private final LogFeignClient logFeignClient;
 
     @ApiOperation(value = "访问日志列表接口")
     @GetMapping(value = "/list")

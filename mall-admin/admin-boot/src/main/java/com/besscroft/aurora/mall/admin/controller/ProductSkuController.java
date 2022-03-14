@@ -11,7 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,11 +24,11 @@ import java.util.List;
  */
 @Api(tags = "管理系统商品套餐管理接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/productSku")
 public class ProductSkuController {
 
-    @Autowired
-    private ProductSkuService productSkuService;
+    private final ProductSkuService productSkuService;
 
     @WebLog(description = "查询商品对应的理商品套餐列表")
     @ApiOperation("查询商品对应的理商品套餐列表")

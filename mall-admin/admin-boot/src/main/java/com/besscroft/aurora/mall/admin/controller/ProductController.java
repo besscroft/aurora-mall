@@ -9,8 +9,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,11 +23,11 @@ import java.util.List;
 @Slf4j
 @Api(tags = "管理系统商品分类接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     @WebLog(description = "查询后台管理商品列表")
     @ApiOperation("查询后台管理商品列表")

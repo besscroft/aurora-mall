@@ -1,14 +1,11 @@
 package com.besscroft.aurora.mall.admin.controller;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.besscroft.aurora.mall.admin.domain.param.AdminParam;
 import com.besscroft.aurora.mall.admin.domain.param.UserLoginParam;
-import com.besscroft.aurora.mall.admin.service.MenuService;
 import com.besscroft.aurora.mall.admin.service.UserService;
 import com.besscroft.aurora.mall.common.annotation.WebLog;
 import com.besscroft.aurora.mall.common.domain.UserDto;
-import com.besscroft.aurora.mall.common.entity.AuthRole;
 import com.besscroft.aurora.mall.common.entity.AuthUser;
 import com.besscroft.aurora.mall.common.result.AjaxResult;
 import com.besscroft.aurora.mall.common.util.CommonPage;
@@ -16,16 +13,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @Author Bess Croft
@@ -34,14 +29,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @Api(tags = "管理系统用户接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private MenuService menuService;
+    private final UserService userService;
 
     @WebLog(description = "登录接口")
     @ApiOperation(value = "登录并返回token")
@@ -57,8 +49,7 @@ public class UserController {
     @ApiOperation("根据用户名获取用户信息")
     @GetMapping(value = "/loadByUsername")
     public UserDto loadByUsername(@RequestParam("username") String username) {
-        UserDto userDto = userService.loadUserByUsername(username);
-        return userDto;
+        return userService.loadUserByUsername(username);
     }
 
     @WebLog(description = "超级管理员添加后台管理系统用户接口")
@@ -77,18 +68,8 @@ public class UserController {
     @ApiOperation(value = "获取当前后台系统登录用户的一些信息")
     @GetMapping("/info")
     public AjaxResult getInfo() {
-        AuthUser currentAdmin = userService.getCurrentAdmin();
-        Map<String, Object> data = menuService.getTreeListById(currentAdmin.getId());
-        data.put("username", currentAdmin.getNickName());
-        data.put("icon", currentAdmin.getIcon());
-        List<AuthRole> roleList = userService.getRoleList(currentAdmin.getId());
-        if (CollUtil.isNotEmpty(roleList)) {
-            List<String> roles = roleList.stream().map(AuthRole::getName).collect(Collectors.toList());
-            data.put("roles", roles);
-        }
-        // 设置登录时间
-        userService.setLoginTime(LocalDateTime.now(), currentAdmin.getId());
-        return AjaxResult.success(data);
+        Map<String, Object> userInfo = userService.getUserInfo();
+        return AjaxResult.success(userInfo);
     }
 
     @WebLog(description = "后台管理系统登出功能")
@@ -129,16 +110,12 @@ public class UserController {
     @ApiOperation("修改权限管理模块用户")
     @PutMapping("/updateUser")
     public AjaxResult updateUser(@Validated @RequestBody AuthUser authUser) {
-        AuthUser currentAdmin = userService.getCurrentAdmin();
-        if (!"1".equals(authUser.getId()) || ("1".equals(authUser.getId()) && "1".equals(currentAdmin.getId()))) {
-            boolean b = userService.updateUser(authUser);
-            if (b) {
-                return AjaxResult.success("更新成功！");
-            } else {
-                return AjaxResult.error("更新失败！");
-            }
+        boolean b = userService.updateUser(authUser);
+        if (b) {
+            return AjaxResult.success("更新成功！");
+        } else {
+            return AjaxResult.error("更新失败！");
         }
-        return AjaxResult.error("Unauthorized");
     }
 
     @WebLog(description = "用户账户启用状态更新")
@@ -150,14 +127,11 @@ public class UserController {
     @PutMapping("/changeSwitch")
     public AjaxResult changeSwitch(@RequestParam("status") boolean status,
                                    @RequestParam("id") Long id) {
-        AuthUser currentAdmin = userService.getCurrentAdmin();
-        if (currentAdmin.getId() != id && !"1".equals(id)) {
-            boolean b = userService.changeSwitch(status, id);
-            if (b && status == true) {
-                return AjaxResult.success("启用成功");
-            } else if (b && status == false) {
-                return AjaxResult.success("禁用成功");
-            }
+        boolean b = userService.changeSwitch(status, id);
+        if (b && status) {
+            return AjaxResult.success("启用成功");
+        } else if (b) {
+            return AjaxResult.success("禁用成功");
         }
         return AjaxResult.error("哎呀，更新失败了！");
     }
@@ -167,12 +141,9 @@ public class UserController {
     @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "Long")
     @DeleteMapping("/delUser/{id}")
     public AjaxResult delUser(@PathVariable("id") Long id) {
-        AuthUser currentAdmin = userService.getCurrentAdmin();
-        if (!"1".equals(id) || currentAdmin.getId() != id) {
-            boolean b = userService.delUser(id);
-            if (b) {
-                return AjaxResult.success("删除成功！");
-            }
+        boolean b = userService.delUser(id);
+        if (b) {
+            return AjaxResult.success("删除成功！");
         }
         return AjaxResult.error("哎呀，删除失败了！");
     }

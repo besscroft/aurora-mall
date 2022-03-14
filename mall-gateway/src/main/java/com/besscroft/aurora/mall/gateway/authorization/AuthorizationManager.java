@@ -4,8 +4,8 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.besscroft.aurora.mall.common.constant.AuthConstants;
 import com.besscroft.aurora.mall.gateway.config.IgnoreUrlsConfig;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -27,13 +27,11 @@ import java.util.*;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    private IgnoreUrlsConfig ignoreUrlsConfig;
+    private final RedisTemplate<String, Object> redisTemplate;
+    private final IgnoreUrlsConfig ignoreUrlsConfig;
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
