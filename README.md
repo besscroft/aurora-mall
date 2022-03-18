@@ -53,7 +53,7 @@ $ git clone https://github.com/besscroft/aurora-mall.git
 ```
 ### 前端项目
 
-已经将管理平台的前端项目拆分出去 👉 [aurora-mall-web](https://github.com/besscroft/aurora-mall-web)
+👉 [mall-web](https://github.com/besscroft/aurora-mall/mall-web/README.md)
 
 
 #### 联系我
