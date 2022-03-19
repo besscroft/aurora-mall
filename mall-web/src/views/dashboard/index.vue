@@ -20,7 +20,7 @@
             <br />
             <br />
             <a href="https://github.com/besscroft/aurora-mall/blob/main/fork-and-push.md" target="_blank">--> 贡献项目 <--</a>
-            <a href="https://mall.doc.besscroft.com/" target="_blank">--> 阅读文档 <--</a>
+            <a href="https://developer.besscroft.com/" target="_blank">--> 阅读文档 <--</a>
             <a @click="updateLog()">--> 版本日志 <--</a>
           </div>
         </el-card>
